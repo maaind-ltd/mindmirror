@@ -1,19 +1,16 @@
-import React, { useEffect } from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-} from 'react-native';
+import React, {useEffect} from 'react';
+import {SafeAreaView, StatusBar} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import WigglyLineContainer from '../components/WigglyLineContainer';
-import { EmotionStateWithNone } from '../constants/emotionState';
+import {EmotionStateWithNone} from '../constants/emotionState';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
-import { useStackNavigation } from '../reducers/combinedReducer';
+import {useStackNavigation} from '../reducers/combinedReducer';
 import Screens from '../constants/screens';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
 
-const App: () => Node = () => {
-	const {width, height} = useWindowDimensions();
+const App: () => JSX.Element = () => {
+  const {width, height} = useWindowDimensions();
   const navigator = useStackNavigation();
 
   useEffect(() => {
@@ -25,20 +22,20 @@ const App: () => Node = () => {
   return (
     <StyledSafeAreaView>
       <StatusBar barStyle={'light-content'} />
-        <BackgroundView>
-          <AppTextContainer height={height}>
-            <AppText>MindMirror</AppText>
-            <BarContainer>
-              <Bar color={Colors.Mellow}></Bar>
-              <Bar color={Colors.Flow}></Bar>
-              <Bar color={Colors.GoGoGo}></Bar>
-            </BarContainer>
-          </AppTextContainer>
-          <OuterLineContainer width={width} height={height}>
-            <WigglyLineContainer baseColor={EmotionStateWithNone.NoEmotion} />
-          </OuterLineContainer>
-          <FooterText>powered by{"\n"}Maaind</FooterText>
-        </BackgroundView>
+      <BackgroundView>
+        <AppTextContainer height={height}>
+          <AppText>MindMirror</AppText>
+          <BarContainer>
+            <Bar color={Colors.Mellow}></Bar>
+            <Bar color={Colors.Flow}></Bar>
+            <Bar color={Colors.GoGoGo}></Bar>
+          </BarContainer>
+        </AppTextContainer>
+        <OuterLineContainer width={width} height={height}>
+          <WigglyLineContainer baseColor={EmotionStateWithNone.NoEmotion} />
+        </OuterLineContainer>
+        <FooterText>powered by{'\n'}Maaind</FooterText>
+      </BackgroundView>
     </StyledSafeAreaView>
   );
 };
@@ -55,8 +52,8 @@ const BackgroundView = styled.View`
 const AppTextContainer = styled.View`
   display: flex;
   flex-direction: column;
-  height: ${(props) => props.height * 0.6}px;
-  padding-top: ${(props) => props.height * 0.2}px;
+  height: ${props => props.height * 0.6}px;
+  padding-top: ${props => props.height * 0.2}px;
 `;
 
 const BarContainer = styled.View`
@@ -68,7 +65,7 @@ const BarContainer = styled.View`
 const Bar = styled.View`
   height: 6px;
   flex-grow: 1;
-  background-color: ${(props) => props.color}
+  background-color: ${props => props.color}
   margin: 4px 2px;
 `;
 
@@ -85,8 +82,8 @@ const FooterText = styled.Text`
 
 const OuterLineContainer = styled.View`
   position: relative;
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height * 0.2}px;
+  width: ${props => props.width}px;
+  height: ${props => props.height * 0.2}px;
 `;
 
 export default App;

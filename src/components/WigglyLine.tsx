@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import { useWindowDimensions } from 'react-native';
 import Svg, {Path} from 'react-native-svg';
 
-const WigglyLine: ({color: string, scale: number}) => Node = ({color, scale}) => {
+const WigglyLine: ({color: string, scale: number}) => JSX.Element = ({color, scale}) => {
 	const {width, height} = useWindowDimensions();
 	const w = width;
 	const h = height / 10;

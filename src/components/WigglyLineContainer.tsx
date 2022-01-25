@@ -8,7 +8,7 @@ import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimen
 import Easing from 'react-native/Libraries/Animated/Easing';
 
 
-const WigglyLineContainer: ({baseColor: EmotionStateWithNone}) => Node = ({baseColor}) => {
+const WigglyLineContainer: ({baseColor: EmotionStateWithNone}) => JSX.Element = ({baseColor}) => {
 	const {width, height} = useWindowDimensions();
   const progressAnimation = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
 

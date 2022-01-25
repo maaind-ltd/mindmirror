@@ -23,7 +23,7 @@ const Colors = {
 	NoEmotionBlurred: '#F9F9F9',
 	Font: '#566E88',
 	LightGreyAccent: '#D6D6D6',
-	PrimaryAccent: '#4C7FBA'
+	PrimaryAccent: '#4C7FBA',
 }
 
 export default Colors;
