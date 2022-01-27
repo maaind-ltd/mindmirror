@@ -11,6 +11,7 @@ import {useStackNavigation} from '../reducers/combinedReducer';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
 import {useAppDispatch, useCombinedStore} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
+import Icons from '../constants/icons';
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -49,8 +50,8 @@ const MirrorScreen: () => JSX.Element = () => {
               )
             }>
             <ExplanationText>
-              Currently, there is no data to gauge your mood.{'\n'}Try a
-              suggestion or a voice check-in.
+              Currently, there is no data to gauge your mood.{'\n'}Please do a
+              voice check-in.
             </ExplanationText>
           </TopTextContainer>
         )}
@@ -61,9 +62,11 @@ const MirrorScreen: () => JSX.Element = () => {
         <CheckInButtonContainer
           onPress={() => navigator.push(Screens.VoiceCheckinScreen)}>
           <CheckInButton>
-            <CheckInCircleBorder />
+            <CheckInCircleBorder></CheckInCircleBorder>
             <CheckInButtonText color={currentMood}>Check-in</CheckInButtonText>
-            <CheckInCircleBackground color={currentMood} />
+            <CheckInCircleBackground color={currentMood}>
+              <Icons.VoiceCheckin width="58px" height="58px" />
+            </CheckInCircleBackground>
           </CheckInButton>
         </CheckInButtonContainer>
       </MirrorContainer>
@@ -173,7 +176,7 @@ const CheckInButtonText = styled.Text`
   border-radius: 20px;
   border: 1px solid ${Colors.LightGreyAccent};
   position: relative;
-  top: 11px;
+  top: 13px;
   left: 35px;
   text-align: center;
   width: 110px;
@@ -193,10 +196,10 @@ const CheckInCircleBorder = styled.View`
 
 const CheckInCircleBackground = styled.View`
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 56px;
-  height: 56px;
+  top: 1px;
+  left: 1px;
+  width: 58px;
+  height: 58px;
   border-radius: 30px;
   background-color: ${props => Colors[`${props.color}Blurred`]};
 `;

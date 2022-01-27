@@ -2,22 +2,26 @@ import React from 'react';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import {Pressable} from 'react-native';
+import Icons from '../constants/icons';
 
 export interface SuggestionListEntryData {
   key: string;
-  icon: string;
+  icon: keyof typeof Icons;
   title: string;
   description: string;
   meta?: string;
 }
 
 const SuggestionListEntry: ({data: SuggestionListEntryData}) => JSX.Element = ({
-  data: {title, description, meta},
+  data: {title, description, meta, icon},
 }) => {
+  const IconElement = Icons[icon];
   return (
     <BorderProvider>
       <EntryContainer>
-        <IconContainer></IconContainer>
+        <IconContainer>
+          <IconElement />
+        </IconContainer>
         <TextContainer>
           <TitleText>{title}</TitleText>
           <DescriptionText>{description}</DescriptionText>
@@ -46,7 +50,6 @@ const EntryContainer = styled(Pressable)`
 `;
 
 const IconContainer = styled.View`
-  background-color: ${Colors.LightGreyAccent};
   border-radius: 32px;
   width: 64px;
   height: 64px;

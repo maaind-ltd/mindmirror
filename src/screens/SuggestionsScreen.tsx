@@ -11,6 +11,7 @@ import {useCombinedStore} from '../store/combinedStore';
 import SuggestionsListEntry, {
   SuggestionListEntryData,
 } from '../components/SuggestionListEntry';
+import Icons from '../constants/icons';
 
 interface MoodBasedSuggestionEntries {
   breathing: SuggestionListEntryData[];
@@ -28,7 +29,7 @@ const Suggestions: SuggestionList = {
     breathing: [
       {
         key: 'breathing-mellow',
-        icon: 'breathing-mellow',
+        icon: 'Breathing',
         title: 'Mellow Breathing',
         description: 'Slow, methodic breathing',
         meta: '7 minutes',
@@ -37,7 +38,7 @@ const Suggestions: SuggestionList = {
     sound: [
       {
         key: 'spotify-mellow',
-        icon: 'spotify',
+        icon: 'Spotify',
         title: 'Mellow Playlist',
         description: 'Mellow songs from...',
       },
@@ -47,7 +48,7 @@ const Suggestions: SuggestionList = {
     breathing: [
       {
         key: 'breathing-flow',
-        icon: 'breathing-flow',
+        icon: 'Breathing',
         title: 'Flow Breathing',
         description: 'Steady, rythmical breathing',
         meta: '7 minutes',
@@ -56,7 +57,7 @@ const Suggestions: SuggestionList = {
     sound: [
       {
         key: 'spotify-flow',
-        icon: 'spotify',
+        icon: 'Spotify',
         title: 'Flow Playlist',
         description: 'Flow songs from...',
       },
@@ -66,7 +67,7 @@ const Suggestions: SuggestionList = {
     breathing: [
       {
         key: 'breathing-gogogo',
-        icon: 'breathing-gogogo',
+        icon: 'Breathing',
         title: 'GoGoGo Breathing',
         description: 'Fast, quickening breathing',
         meta: '7 minutes',
@@ -75,7 +76,7 @@ const Suggestions: SuggestionList = {
     sound: [
       {
         key: 'spotify-gogogo',
-        icon: 'spotify',
+        icon: 'Spotify',
         title: 'GoGoGo Playlist',
         description: 'GoGoGo songs from...',
       },
@@ -97,7 +98,9 @@ const SuggestionsScreen: () => JSX.Element = () => {
         <TopNavigation height={height} color={targetMood}>
           <ArrowBackContainer>
             <Pressable onPress={() => navigator.push(Screens.MirrorScreen)}>
-              <ArrowBackText>{'<'}</ArrowBackText>
+              <ArrowBackIcon>
+                <Icons.BackArrow />
+              </ArrowBackIcon>
             </Pressable>
           </ArrowBackContainer>
           <TextContainer>
@@ -106,7 +109,9 @@ const SuggestionsScreen: () => JSX.Element = () => {
           </TextContainer>
           <QuestionMarkContainer>
             <Pressable>
-              <QuestionText>{'?'}</QuestionText>
+              <QuestionIcon>
+                <Icons.Help />
+              </QuestionIcon>
             </Pressable>
           </QuestionMarkContainer>
         </TopNavigation>
@@ -164,14 +169,12 @@ const ArrowBackContainer = styled.View`
   align-items: center;
 `;
 
-const ArrowBackText = styled.Text`
-  font-size: 18px;
+const ArrowBackIcon = styled.View`
   padding: 8px;
   border-radius: 24px;
 `;
 
-const QuestionText = styled.Text`
-  font-size: 18px;
+const QuestionIcon = styled.Text`
   padding: 8px;
   border-radius: 24px;
 `;

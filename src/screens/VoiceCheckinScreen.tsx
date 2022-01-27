@@ -11,6 +11,7 @@ import StyledSafeAreaView from '../components/StyledSafeAreaView';
 import Easing from 'react-native/Libraries/Animated/Easing';
 import {useAppDispatch, useCombinedStore} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
+import Icons from '../constants/icons';
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -94,7 +95,19 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
             }}>
             {currentStep !== VoiceCheckinStep.Listening ? (
               <CheckInButton>
-                <CheckInCircleBackground color={currentMood} width={width} />
+                <CheckInCircleBackground color={currentMood} width={width}>
+                  {currentStep === VoiceCheckinStep.Instruction ? (
+                    <Icons.VoiceCheckin
+                      width={width * 0.5 - 4}
+                      height={width * 0.5 - 4}
+                    />
+                  ) : (
+                    <Icons.VoiceCheckinDone
+                      width={width * 0.5 - 4}
+                      height={width * 0.5 - 4}
+                    />
+                  )}
+                </CheckInCircleBackground>
               </CheckInButton>
             ) : (
               <></>
