@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MindMirror</string>
+    <string name="appwidget_text">MindMirror</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">See your measured emotion state on your home screen</string>
 </resources>
