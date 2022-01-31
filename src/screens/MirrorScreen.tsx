@@ -12,6 +12,7 @@ import StyledSafeAreaView from '../components/StyledSafeAreaView';
 import {useAppDispatch, useCombinedStore} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
 import Icons from '../constants/icons';
+import MoodButtonList from '../components/MoodButtonList';
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -27,6 +28,7 @@ const MirrorScreen: () => JSX.Element = () => {
   const {currentMood, targetMood} = useCombinedStore(store => store.mood);
   const currentColor = Colors[currentMood];
   const navigator = useStackNavigation();
+  const {width} = useWindowDimensions();
 
   return (
     <StyledSafeAreaView>
@@ -57,7 +59,13 @@ const MirrorScreen: () => JSX.Element = () => {
         )}
         <AvatarSectionContainer>
           <WigglyLineContainer baseColor={currentMood} />
-          <Avatar currentMood={currentMood} targetMood={targetMood}></Avatar>
+          <Avatar
+            currentMood={currentMood}
+            targetMood={targetMood}
+            onPress={() => {
+              navigator.push(Screens.ProfileScreen);
+            }}
+          />
         </AvatarSectionContainer>
         <CheckInButtonContainer
           onPress={() => navigator.push(Screens.VoiceCheckinScreen)}>
@@ -70,38 +78,14 @@ const MirrorScreen: () => JSX.Element = () => {
           </CheckInButton>
         </CheckInButtonContainer>
       </MirrorContainer>
-      <ButtonContainer>
-        <Button
-          color={Colors.Mellow}
-          onPress={() => {
-            dispatch(moodSlice.actions.setTargetMood(EmotionState.Mellow));
-            setTimeout(() => {
-              navigator.push(Screens.SuggestionsScreen);
-            }, NAVIGATION_TIMEOUT);
-          }}>
-          <ButtonText>Mellow</ButtonText>
-        </Button>
-        <Button
-          color={Colors.Flow}
-          onPress={() => {
-            dispatch(moodSlice.actions.setTargetMood(EmotionState.Flow));
-            setTimeout(() => {
-              navigator.push(Screens.SuggestionsScreen);
-            }, NAVIGATION_TIMEOUT);
-          }}>
-          <ButtonText>Flow</ButtonText>
-        </Button>
-        <Button
-          color={Colors.GoGoGo}
-          onPress={() => {
-            dispatch(moodSlice.actions.setTargetMood(EmotionState.GoGoGo));
-            setTimeout(() => {
-              navigator.push(Screens.SuggestionsScreen);
-            }, NAVIGATION_TIMEOUT);
-          }}>
-          <ButtonText>GoGoGo</ButtonText>
-        </Button>
-      </ButtonContainer>
+      <MoodButtonList
+        onPress={emotion => {
+          dispatch(moodSlice.actions.setTargetMood(EmotionState.Mellow));
+          setTimeout(() => {
+            navigator.push(Screens.SuggestionsScreen);
+          }, NAVIGATION_TIMEOUT);
+        }}
+      />
     </StyledSafeAreaView>
   );
 };
@@ -133,29 +117,6 @@ const StateText = styled.Text`
   font-size: 24px;
   color: ${Colors.Font};
   text-align: center;
-`;
-
-const ButtonContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-`;
-
-const Button = styled(Pressable)`
-  height: 90px;
-  flex-grow: 1;
-  flex-basis: 1px;
-  background-color: ${props => props.color};
-  border: 1px solid ${Colors.LightGreyAccent};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ButtonText = styled.Text`
-  font-size: 18px;
-  font-weight: bold;
-  color: ${Colors.Font};
 `;
 
 const AvatarSectionContainer = styled.View`

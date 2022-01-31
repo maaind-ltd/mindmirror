@@ -12,6 +12,7 @@ import Easing from 'react-native/Libraries/Animated/Easing';
 import {useAppDispatch, useCombinedStore} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
 import Icons from '../constants/icons';
+import MoodButtonList from '../components/MoodButtonList';
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -115,7 +116,7 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
           </CheckInButtonContainer>
         </CenterContentContainer>
         {currentStep === VoiceCheckinStep.Instruction ? (
-          <ExplanationLink>What is a voice checkin?</ExplanationLink>
+          <ExplanationLink>What is a voice check-in?</ExplanationLink>
         ) : (
           <></>
         )}
@@ -168,38 +169,14 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
         )}
       </ScreenContainer>
       {currentStep === VoiceCheckinStep.Result ? (
-        <ButtonContainer>
-          <Button
-            color={Colors.Mellow}
-            onPress={() => {
-              dispatch(moodSlice.actions.setTargetMood(EmotionState.Mellow));
-              setTimeout(() => {
-                navigator.push(Screens.SuggestionsScreen);
-              }, NAVIGATION_TIMEOUT);
-            }}>
-            <ButtonText>Mellow</ButtonText>
-          </Button>
-          <Button
-            color={Colors.Flow}
-            onPress={() => {
-              dispatch(moodSlice.actions.setTargetMood(EmotionState.Flow));
-              setTimeout(() => {
-                navigator.push(Screens.SuggestionsScreen);
-              }, NAVIGATION_TIMEOUT);
-            }}>
-            <ButtonText>Flow</ButtonText>
-          </Button>
-          <Button
-            color={Colors.GoGoGo}
-            onPress={() => {
-              dispatch(moodSlice.actions.setTargetMood(EmotionState.GoGoGo));
-              setTimeout(() => {
-                navigator.push(Screens.SuggestionsScreen);
-              }, NAVIGATION_TIMEOUT);
-            }}>
-            <ButtonText>GoGoGo</ButtonText>
-          </Button>
-        </ButtonContainer>
+        <MoodButtonList
+          onPress={emotion => {
+            dispatch(moodSlice.actions.setTargetMood(emotion));
+            setTimeout(() => {
+              navigator.push(Screens.SuggestionsScreen);
+            }, NAVIGATION_TIMEOUT);
+          }}
+        />
       ) : (
         <></>
       )}
@@ -233,35 +210,6 @@ const ExplanationText = styled.Text`
   color: ${Colors.Font};
   padding: 0 24px;
   text-align: center;
-`;
-
-const StateText = styled.Text`
-  font-size: 24px;
-  color: ${Colors.Font};
-  text-align: center;
-`;
-
-const ButtonContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-`;
-
-const Button = styled(Pressable)`
-  height: 90px;
-  flex-grow: 1;
-  flex-basis: 1px;
-  background-color: ${props => props.color};
-  border: 1px solid ${Colors.LightGreyAccent};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ButtonText = styled.Text`
-  font-size: 18px;
-  font-weight: bold;
-  color: ${Colors.Font};
 `;
 
 const CenterContentContainer = styled.View`

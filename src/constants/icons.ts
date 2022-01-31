@@ -1,4 +1,5 @@
 import BackArrow from '../images/icons/icon_backarrow.svg';
+import BackArrowPrimary from '../images/icons/icon_backarrow_primary.svg';
 import Breathing from '../images/icons/icon_breathing1.svg';
 import Help from '../images/icons/icon_help.svg';
 import Loudspeaker from '../images/icons/icon_loudspeaker.svg';
@@ -8,6 +9,7 @@ import VoiceCheckinDone from '../images/icons/icon_voicecheckin_done.svg';
 
 const Icons = {
   BackArrow: BackArrow,
+  BackArrowPrimary: BackArrowPrimary,
   Breathing: Breathing,
   Spotify: Breathing,
   Help: Help,

@@ -1,18 +1,25 @@
 import React from 'react';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
-import {useWindowDimensions} from 'react-native';
+import {useWindowDimensions, Pressable} from 'react-native';
 import Svg, {Circle, Defs, RadialGradient, Stop} from 'react-native-svg';
-import EmotionState from '../constants/emotionState';
+import EmotionState, {EmotionStateWithNone} from '../constants/emotionState';
 import AvatarImages from '../constants/avatarImages';
 
-const Avatar: ({
-  currentMood: EmotionStateWithNone,
-  targetMood: EmotionState,
-}) => JSX.Element = ({currentMood, targetMood}) => {
+export interface AvatarProps {
+  currentMood: EmotionStateWithNone;
+  targetMood: EmotionState;
+  onPress?: () => void;
+}
+
+const Avatar: (props: AvatarProps) => JSX.Element = ({
+  currentMood,
+  targetMood,
+  onPress,
+}) => {
   const {width} = useWindowDimensions();
   return (
-    <OuterContainer width={width}>
+    <OuterContainer width={width} onPress={onPress || (() => undefined)}>
       <GradientContainer>
         <Svg height={width} width={width} viewBox="0 0 100 100">
           <Defs>
@@ -37,17 +44,17 @@ const Avatar: ({
           <BroadRing baseColor={targetMood}>
             <ThinRing baseColor={targetMood}>
               <AvatarContainer width={width}>
-                {currentMood === EmotionState.Mellow ? (
+                {currentMood === EmotionStateWithNone.Mellow ? (
                   <AvatarImages.MellowFemale
                     width={width * 0.45}
                     height={width * 0.45}
                   />
-                ) : currentMood === EmotionState.GoGoGo ? (
+                ) : currentMood === EmotionStateWithNone.GoGoGo ? (
                   <AvatarImages.GoGoGoFemale
                     width={width * 0.47}
                     height={width * 0.47}
                   />
-                ) : currentMood === EmotionState.Flow ? (
+                ) : currentMood === EmotionStateWithNone.Flow ? (
                   <AvatarImages.FlowFemale
                     width={width * 0.45}
                     height={width * 0.45}
@@ -67,7 +74,7 @@ const Avatar: ({
   );
 };
 
-const OuterContainer = styled.View`
+const OuterContainer = styled(Pressable)`
   display: flex;
   position: relative;
   width: ${props => props.width}px;

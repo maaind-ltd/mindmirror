@@ -1,8 +1,11 @@
 const enum Screens {
-	SplashScreen = 'SplashScreen',
-	MirrorScreen = 'MirrorScreen',
-	SuggestionsScreen = 'SuggestionsScreen',
-	VoiceCheckinScreen = 'VoiceCheckinScreen'
-};
+  SplashScreen = 'SplashScreen',
+  OnboardingScreen = 'OnboardingScreen',
+  MirrorScreen = 'MirrorScreen',
+  SuggestionsScreen = 'SuggestionsScreen',
+  VoiceCheckinScreen = 'VoiceCheckinScreen',
+  ProfileScreen = 'ProfileScreen',
+  ExplanationScreen = 'ExplanationScreen',
+}
 
 export default Screens;

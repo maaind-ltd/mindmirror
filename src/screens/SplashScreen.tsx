@@ -8,14 +8,18 @@ import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimen
 import {useStackNavigation} from '../reducers/combinedReducer';
 import Screens from '../constants/screens';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
+import {useCombinedStore} from '../store/combinedStore';
 
 const App: () => JSX.Element = () => {
   const {width, height} = useWindowDimensions();
   const navigator = useStackNavigation();
+  const {onboardingFinished} = useCombinedStore(store => store.settings);
 
   useEffect(() => {
     setTimeout(() => {
-      navigator.replace(Screens.MirrorScreen);
+      navigator.replace(
+        onboardingFinished ? Screens.MirrorScreen : Screens.OnboardingScreen,
+      );
     }, 2000);
   }, []);
 

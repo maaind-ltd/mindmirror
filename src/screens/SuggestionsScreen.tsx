@@ -9,13 +9,13 @@ import {useStackNavigation} from '../reducers/combinedReducer';
 import EmotionState from '../constants/emotionState';
 import {useCombinedStore} from '../store/combinedStore';
 import SuggestionsListEntry, {
-  SuggestionListEntryData,
-} from '../components/SuggestionListEntry';
+  ItemListEntryData,
+} from '../components/ItemListEntry';
 import Icons from '../constants/icons';
 
 interface MoodBasedSuggestionEntries {
-  breathing: SuggestionListEntryData[];
-  sound: SuggestionListEntryData[];
+  breathing: ItemListEntryData[];
+  sound: ItemListEntryData[];
 }
 
 interface SuggestionList {
@@ -132,7 +132,7 @@ const SuggestionsScreen: () => JSX.Element = () => {
             ? Suggestions[targetMood].breathing
             : Suggestions[targetMood].sound
           ).map(data => (
-            <SuggestionsListEntry key={data.key} data={data} />
+            <SuggestionsListEntry key={data.key} {...data} />
           ))}
         </SuggestionsList>
       </BackgroundView>
