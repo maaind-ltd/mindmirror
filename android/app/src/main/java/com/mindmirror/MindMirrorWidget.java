@@ -41,7 +41,7 @@ public class MindMirrorWidget extends AppWidgetProvider {
             views.setInt(R.id.WidgetLayout, "setBackgroundColor", bgColor);
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            views.setTextViewText(R.id.textView, e.getLocalizedMessage());
         }
 
         Intent configIntent = new Intent(context, MainActivity.class);
