@@ -40,6 +40,7 @@ export type MainStackParams = {
 const MainStack = createStackNavigator<MainStackParams>();
 
 export default function App(props: any): JSX.Element {
+  console.log(props);
   return (
     <Provider store={store}>
       <Root />
@@ -47,7 +48,7 @@ export default function App(props: any): JSX.Element {
   );
 }
 
-const Root: () => JSX.Element = () => {
+const Root: (props: any) => JSX.Element = props => {
   return (
     <NavigationContainer>
       <MainStack.Navigator
