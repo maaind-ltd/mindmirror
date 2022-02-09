@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StatusBar, Pressable} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import Avatar from '../components/Avatar';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 import WigglyLineContainer from '../components/WigglyLineContainer';
-import EmotionState, {EmotionStateWithNone} from '../constants/emotionState';
+import {EmotionStateWithNone} from '../constants/emotionState';
 import Screens from '../constants/screens';
 import {useStackNavigation} from '../reducers/combinedReducer';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
@@ -13,6 +13,9 @@ import {useAppDispatch, useCombinedStore} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
 import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
+
+import {NativeModules} from 'react-native';
+const {UniqueIdReader} = NativeModules;
 
 const NAVIGATION_TIMEOUT = 600;
 

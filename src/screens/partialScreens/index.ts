@@ -2,6 +2,7 @@ import AboutMindMirror from './AboutMindMirror';
 import HowToUse from './HowToUse';
 import AvatarExplanation from './AvatarExplanation';
 import ColorExplanation from './ColorExplanation';
+import SpotifyIntegration from './SpotifyIntegration';
 
 export interface OnboardingScreensProps {
   component: () => JSX.Element;
@@ -16,6 +17,7 @@ export interface PartialScreensProps {
 export const OnboardingScreens = {
   0: ColorExplanation,
   1: AvatarExplanation,
+  2: SpotifyIntegration,
 };
 
 export const PartialScreens: {[name: string]: PartialScreensProps} = {

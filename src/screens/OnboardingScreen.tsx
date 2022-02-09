@@ -14,7 +14,7 @@ import {useAppDispatch} from '../store/combinedStore';
 import settingsSlice from '../store/settingsSlice';
 import IndicatorDots from '../components/IndicatorDots';
 
-const ONBOARDING_PAGES = 2;
+const ONBOARDING_PAGES = 3;
 
 export interface ExplanationScreenProps
   extends Stack.StackScreenProps<MainStackParams> {}

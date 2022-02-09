@@ -41,6 +41,8 @@ const Suggestions: SuggestionList = {
         icon: 'Spotify',
         title: 'Mellow Playlist',
         description: 'Mellow songs from...',
+        spotifyURI:
+          'https://open.spotify.com/playlist/6RGKHL5iSqwJ8xv1zDj228?si=0a4381784a624ed5',
       },
     ],
   },
@@ -60,6 +62,8 @@ const Suggestions: SuggestionList = {
         icon: 'Spotify',
         title: 'Flow Playlist',
         description: 'Flow songs from...',
+        spotifyURI:
+          'https://open.spotify.com/playlist/3T1kp5kcXWmCeJzaROv7nN?si=4001b629273d47ba',
       },
     ],
   },
@@ -79,6 +83,8 @@ const Suggestions: SuggestionList = {
         icon: 'Spotify',
         title: 'GoGoGo Playlist',
         description: 'GoGoGo songs from...',
+        spotifyURI:
+          'https://open.spotify.com/playlist/3Q17QWx3JKZxNOTCjTIIJX?si=27dac1c9986c44b6',
       },
     ],
   },

@@ -9,6 +9,7 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
 } from 'react-native-gesture-handler';
+import {openSpotifyURI} from '../helpers/spotifyHelpers';
 
 export interface ItemListEntryData {
   key?: string;
@@ -19,6 +20,7 @@ export interface ItemListEntryData {
   color?: string;
   onPress?: () => void;
   hasChivron?: boolean;
+  spotifyURI?: string;
 }
 
 const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
@@ -29,11 +31,23 @@ const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
   color,
   onPress,
   hasChivron,
+  spotifyURI,
 }) => {
   const {width} = useWindowDimensions();
   const IconElement = Icons[icon];
   return (
-    <BorderProvider width={width} onPress={onPress || (() => undefined)}>
+    <BorderProvider
+      width={width}
+      onPress={
+        spotifyURI
+          ? () => {
+              if (onPress) {
+                onPress();
+              }
+              openSpotifyURI(spotifyURI);
+            }
+          : onPress || (() => undefined)
+      }>
       <EntryContainer>
         {icon ? (
           <IconContainer>

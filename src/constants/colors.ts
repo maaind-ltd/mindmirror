@@ -25,6 +25,8 @@ const Colors = {
   LightGreyAccent: '#D6D6D6',
   LighterGreyAccent: '#F0F0F0',
   PrimaryAccent: '#4C7FBA',
+  SpotifyGreen: '#00ac11',
+  SpotifyBlack: '#0b0008',
 };
 
 export const ColorsRgb = {

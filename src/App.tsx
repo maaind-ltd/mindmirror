@@ -19,37 +19,61 @@ import {
 import ExplanationScreen from './screens/ExplanationScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import {setCustomText} from 'react-native-global-props';
+import {NativeModules} from 'react-native';
+import {playSong} from './helpers/spotifyHelpers';
+const {UniqueIdReader} = NativeModules;
 
-import {
-  auth as SpotifyAuth,
-  remote as SpotifyRemote,
-  ApiScope,
-  ApiConfig,
-} from 'react-native-spotify-remote';
+// const playSong = (token: string) => {
+//   fetch('https://api.spotify.com/v1/me/player/play', {
+//     method: 'PUT',
+//     headers: {
+//       Accept: 'application/json',
+//       'Content-Type': 'application/json',
+//       Authorization: `Bearer ${token}`,
+//     },
+//     body: JSON.stringify({
+//       context_uri: 'spotify:album:5ht7ItJgpBH7W6vJ5BqpPr',
+//     }),
+//   }).then(response => {
+//     console.log(response);
+//   });
+// };
+
+// import {
+//   auth as SpotifyAuth,
+//   remote as SpotifyRemote,
+//   ApiScope,
+//   ApiConfig,
+// } from 'react-native-spotify-remote';
 
 // Api Config object, replace with your own applications client id and urls
-const spotifyConfig: ApiConfig = {
-  clientID: '00e4806b0bb742a9a187df9ca1ac0a6a',
-  redirectURL: 'com.mindmirror://callback',
-  tokenRefreshURL: 'http://192.168.1.112:3000/refresh',
-  tokenSwapURL: 'http://192.168.1.112:3000/swap',
-  showDialog: true,
-  authType: 'TOKEN',
-  scopes: [ApiScope.AppRemoteControlScope], //, ApiScope.UserFollowReadScope
-};
+// const spotifyConfig: ApiConfig = {
+//   clientID: '00e4806b0bb742a9a187df9ca1ac0a6a',
+//   redirectURL: 'com.mindmirror://callback',
+//   tokenRefreshURL: 'http://192.168.1.112:3000/refresh',
+//   tokenSwapURL: 'http://192.168.1.112:3000/swap',
+//   showDialog: true,
+//   authType: 'TOKEN',
+//   scopes: [ApiScope.AppRemoteControlScope], //, ApiScope.UserFollowReadScope
+// };
 
 // Initialize the library and connect the Remote
 // then play an epic song
-async function playEpicSong() {
-  try {
-    // const session = await SpotifyAuth.authorize(spotifyConfig);
-    // await SpotifyRemote.connect(session.accessToken);
-    // await SpotifyRemote.playUri('spotify:track:6IA8E2Q5ttcpbuahIejO74');
-    // await SpotifyRemote.seek(58000);
-  } catch (err) {
-    console.error("Couldn't authorize with or connect to Spotify", err);
-  }
-}
+// async function printCurrentState() {
+//   let hasStartedSong = false;
+//   setInterval(() => {
+//     UniqueIdReader.getSpotifyToken((text: string, error: string) => {
+//       console.log(text);
+//       if (!hasStartedSong && text.startsWith('Token:')) {
+//         console.log('Playing song.');
+//         const token = text.substring('Token:'.length);
+
+//         playSong(token);
+//         hasStartedSong = true;
+//       }
+//     });
+//   }, 2000);
+// }
 
 export interface OnboardingScreenParams {
   onboardingIndex: keyof typeof OnboardingScreens;
@@ -80,9 +104,9 @@ const customTextProps = {
 setCustomText(customTextProps);
 
 export default function App(props: any): JSX.Element {
-  useEffect(() => {
-    playEpicSong();
-  }, []);
+  // useEffect(() => {
+  //   printCurrentState();
+  // }, []);
   console.log(props);
   return (
     <Provider store={store}>

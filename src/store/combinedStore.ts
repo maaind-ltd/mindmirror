@@ -26,14 +26,16 @@ const persistConfig = {
   storage: AsyncStorage,
 };
 
-const reducers = combineReducers({
+const reducers = {
   mood: moodSlice.reducer,
   settings: settingsSlice.reducer,
-});
+};
+
+const combinedReducers = combineReducers(reducers);
 
 type ReducersType = typeof reducers;
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+const persistedReducer = persistReducer(persistConfig, combinedReducers);
 
 export type CombinedStore = {
   [P in keyof ReducersType]: ReturnType<ReducersType[P]>;
