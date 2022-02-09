@@ -74,6 +74,11 @@ public class MindMirrorWidget extends AppWidgetProvider {
 
         views.setOnClickPendingIntent(R.id.WidgetLayout, mirrorScreenPendingIntent);
 
+//        Intent spottifyIntent = new Intent(context, LoginActivity.class);
+//
+//        PendingIntent spottifyPendingIntent = PendingIntent.getActivity(context, 0, spottifyIntent, 0);
+//        views.setOnClickPendingIntent(R.id.WidgetLayout, spottifyPendingIntent);
+
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

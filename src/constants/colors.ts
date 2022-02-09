@@ -23,6 +23,7 @@ const Colors = {
   NoEmotionBlurred: '#F9F9F9',
   Font: '#566E88',
   LightGreyAccent: '#D6D6D6',
+  LighterGreyAccent: '#F0F0F0',
   PrimaryAccent: '#4C7FBA',
 };
 

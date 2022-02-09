@@ -80,7 +80,7 @@ const MirrorScreen: () => JSX.Element = () => {
       </MirrorContainer>
       <MoodButtonList
         onPress={emotion => {
-          dispatch(moodSlice.actions.setTargetMood(EmotionState.Mellow));
+          dispatch(moodSlice.actions.setTargetMood(emotion));
           setTimeout(() => {
             navigator.push(Screens.SuggestionsScreen);
           }, NAVIGATION_TIMEOUT);

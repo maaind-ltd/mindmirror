@@ -36,7 +36,10 @@ const App: () => JSX.Element = () => {
           </BarContainer>
         </AppTextContainer>
         <OuterLineContainer width={width} height={height}>
-          <WigglyLineContainer baseColor={EmotionStateWithNone.NoEmotion} />
+          <WigglyLineContainer
+            baseColor={EmotionStateWithNone.NoEmotion}
+            multiColor={true}
+          />
         </OuterLineContainer>
         <FooterText>powered by{'\n'}Maaind</FooterText>
       </BackgroundView>

@@ -228,11 +228,11 @@ const SuggestionTypeButton = styled(Pressable)`
   justify-content: center;
   align-items: center;
   background-color: ${props =>
-    props.active ? Colors.Background : Colors.LightGreyAccent};
+    props.active ? Colors.Background : Colors.LighterGreyAccent};
 `;
 
 const SuggestionTypeButtonText = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   color: ${Colors.Font};
   text-align: center;
 `;

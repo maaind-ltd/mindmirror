@@ -47,7 +47,7 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
         style={{
           backgroundColor: fadeAnim.interpolate({
             inputRange: [0, 1],
-            outputRange: [Colors[previousMood], Colors[currentMood]],
+            outputRange: [Colors.Background, Colors[currentMood]],
           }),
         }}>
         <TopTextContainer>
@@ -122,7 +122,8 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
         )}
         <BottomContainer>
           {currentStep === VoiceCheckinStep.Instruction ? (
-            <NoThanksButton onPress={() => navigator.pop()}>
+            <NoThanksButton
+              onPress={() => navigator.replace(Screens.MirrorScreen)}>
               <NoThanksText>No, thanks!</NoThanksText>
             </NoThanksButton>
           ) : currentStep === VoiceCheckinStep.Listening ? (

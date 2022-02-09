@@ -53,7 +53,7 @@ const ArticleContent = styled.View`
 `;
 
 const FreeFloatingText = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   color: ${Colors.Primary};
   margin: ${props =>
     `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px ${
@@ -68,7 +68,7 @@ const MoodHeaderText = styled.Text`
 `;
 
 const MoodDescriptionText = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   color: ${Colors.Primary};
 `;
 

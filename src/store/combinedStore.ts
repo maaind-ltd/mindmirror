@@ -1,21 +1,52 @@
-import {createSlice, configureStore} from '@reduxjs/toolkit';
+import {
+  createSlice,
+  configureStore,
+  combineReducers,
+  getDefaultMiddleware,
+} from '@reduxjs/toolkit';
 import {useDispatch, useSelector} from 'react-redux';
 import moodSlice from './moodSlice';
 import settingsSlice from './settingsSlice';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+// import storage from 'redux-persist/lib/storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const reducers = {
-  mood: moodSlice.reducer,
-  settings: settingsSlice.reducer,
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage: AsyncStorage,
 };
 
+const reducers = combineReducers({
+  mood: moodSlice.reducer,
+  settings: settingsSlice.reducer,
+});
+
 type ReducersType = typeof reducers;
+
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 export type CombinedStore = {
   [P in keyof ReducersType]: ReturnType<ReducersType[P]>;
 };
 
 const store = configureStore({
-  reducer: reducers,
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware({
+    serializableCheck: {
+      /* ignore persistance actions */
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
 });
 
 export type AppDispatch = typeof store.dispatch;
