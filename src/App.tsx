@@ -21,6 +21,7 @@ import OnboardingScreen from './screens/OnboardingScreen';
 import {setCustomText} from 'react-native-global-props';
 import {NativeModules} from 'react-native';
 import {playSong} from './helpers/spotifyHelpers';
+import { Platform } from 'react-native';
 const {UniqueIdReader} = NativeModules;
 
 // const playSong = (token: string) => {
@@ -75,6 +76,12 @@ const {UniqueIdReader} = NativeModules;
 //   }, 2000);
 // }
 
+if (Platform.OS === 'android') {
+  var fontFamily = 'Raleway'
+} else {
+  var fontFamily = "Arial"
+}
+
 export interface OnboardingScreenParams {
   onboardingIndex: keyof typeof OnboardingScreens;
 }
@@ -97,8 +104,8 @@ const MainStack = createStackNavigator<MainStackParams>();
 
 const customTextProps = {
   style: {
-    fontFamily: 'Raleway',
-  },
+    fontFamily: fontFamily
+  }
 };
 
 setCustomText(customTextProps);
