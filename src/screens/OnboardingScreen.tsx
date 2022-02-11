@@ -36,7 +36,7 @@ const OnboardingScreen: (
       <BackgroundView>
         <ExplanationContent>
           <ScrollView contentInsetAdjustmentBehavior="automatic">
-            <ScreenContentContainer screenHeight={height}>
+            <ScreenContentContainer screenHeight={height-100}>
               <ScreenContent />
               <SpacingElement />
               <NextButton

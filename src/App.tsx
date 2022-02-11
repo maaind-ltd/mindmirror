@@ -79,7 +79,7 @@ const {UniqueIdReader} = NativeModules;
 if (Platform.OS === 'android') {
   var fontFamily = 'Raleway'
 } else {
-  var fontFamily = "Arial"
+  var fontFamily = "Helvetica"
 }
 
 export interface OnboardingScreenParams {
