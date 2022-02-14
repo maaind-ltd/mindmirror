@@ -26,6 +26,7 @@ const Colors = {
   LighterGreyAccent: '#F0F0F0',
   PrimaryAccent: '#4C7FBA',
   SpotifyGreen: '#00ac11',
+  SpotifyRed: '#ffac11',
   SpotifyBlack: '#0b0008',
 };
 

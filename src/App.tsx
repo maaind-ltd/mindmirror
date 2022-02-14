@@ -10,7 +10,7 @@ import SuggestionsScreen from './screens/SuggestionsScreen';
 import VoiceCheckinScreen from './screens/VoiceCheckinScreen';
 import Screens from './constants/screens';
 import {Provider} from 'react-redux';
-import store from './store/combinedStore';
+import store, {persistor} from './store/combinedStore';
 import ProfileScreen from './screens/ProfileScreen';
 import {
   PartialScreens,
@@ -19,9 +19,7 @@ import {
 import ExplanationScreen from './screens/ExplanationScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import {setCustomText} from 'react-native-global-props';
-import {NativeModules} from 'react-native';
-import {playSong} from './helpers/spotifyHelpers';
-const {UniqueIdReader} = NativeModules;
+import {PersistGate} from 'redux-persist/integration/react';
 
 // const playSong = (token: string) => {
 //   fetch('https://api.spotify.com/v1/me/player/play', {
@@ -110,7 +108,9 @@ export default function App(props: any): JSX.Element {
   console.log(props);
   return (
     <Provider store={store}>
-      <Root targetScreen={props.target_screen} />
+      <PersistGate loading={null} persistor={persistor}>
+        <Root targetScreen={props.target_screen} />
+      </PersistGate>
     </Provider>
   );
 }

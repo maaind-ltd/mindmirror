@@ -9,7 +9,8 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
 } from 'react-native-gesture-handler';
-import {openSpotifyURI} from '../helpers/spotifyHelpers';
+import {openSpotifyPlaylistForMood} from '../helpers/spotifyHelpers';
+import EmotionState from '../constants/emotionState';
 
 export interface ItemListEntryData {
   key?: string;
@@ -20,7 +21,7 @@ export interface ItemListEntryData {
   color?: string;
   onPress?: () => void;
   hasChivron?: boolean;
-  spotifyURI?: string;
+  spotifyMood?: EmotionState;
 }
 
 const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
@@ -31,7 +32,7 @@ const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
   color,
   onPress,
   hasChivron,
-  spotifyURI,
+  spotifyMood,
 }) => {
   const {width} = useWindowDimensions();
   const IconElement = Icons[icon];
@@ -39,12 +40,12 @@ const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
     <BorderProvider
       width={width}
       onPress={
-        spotifyURI
+        spotifyMood
           ? () => {
               if (onPress) {
                 onPress();
               }
-              openSpotifyURI(spotifyURI);
+              openSpotifyPlaylistForMood(spotifyMood);
             }
           : onPress || (() => undefined)
       }>

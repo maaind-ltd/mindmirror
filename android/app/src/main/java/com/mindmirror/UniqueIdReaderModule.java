@@ -108,8 +108,13 @@ public class UniqueIdReaderModule extends ReactContextBaseJavaModule {
         AuthorizationRequest.Builder builder =
                 new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI);
 
-        builder.setScopes(new String[]{"streaming","app-remote-control"});
-            AuthorizationRequest request = builder.build();
+        builder.setScopes(new String[]{
+            "streaming",
+            "app-remote-control",
+            "playlist-modify-private",
+            "playlist-modify-public"
+        });
+        AuthorizationRequest request = builder.build();
 
         AuthorizationClient.openLoginInBrowser(this.nativeContext.getCurrentActivity(), request);
 
@@ -164,7 +169,12 @@ public class UniqueIdReaderModule extends ReactContextBaseJavaModule {
         AuthorizationRequest.Builder builder =
                 new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI);
 
-        builder.setScopes(new String[]{"streaming","app-remote-control"});
+        builder.setScopes(new String[]{
+            "streaming",
+            "app-remote-control",
+            "playlist-modify-private",
+            "playlist-modify-public"
+        });
         AuthorizationRequest request = builder.build();
 
         AuthorizationClient.openLoginInBrowser(this.nativeContext.getCurrentActivity(), request);

@@ -9,13 +9,15 @@ const ColorExplanation: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
   const navigator = useStackNavigation();
 
-  const {currentMood, targetMood} = useCombinedStore(store => store.mood);
+  const {currentMood, targetMood, randomId} = useCombinedStore(
+    store => store.mood,
+  );
 
   return (
     <ArticleContent>
       <FreeFloatingText screenWidth={width}>
-        MindMirror offers three different moods for you to achieve, represented
-        by three different colours.
+        {randomId} MindMirror offers three different moods for you to achieve,
+        represented by three different colours.
       </FreeFloatingText>
       <MoodBlock>
         <MoodColorBlock color={Colors.Mellow} screenWidth={width} />

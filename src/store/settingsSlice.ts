@@ -9,6 +9,7 @@ const settingsSlice = createSlice({
   reducers: {
     setOnboardingFinished: (state, action: PayloadAction<boolean>) => {
       state.onboardingFinished = action.payload;
+      console.log(`Onboarding set to ${action.payload}`);
     },
   },
 });

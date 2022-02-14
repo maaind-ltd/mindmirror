@@ -17,6 +17,7 @@ const App: () => JSX.Element = () => {
 
   useEffect(() => {
     setTimeout(() => {
+      console.log(`Onboarding finished?: ${onboardingFinished}`);
       navigator.replace(
         onboardingFinished ? Screens.MirrorScreen : Screens.OnboardingScreen,
       );

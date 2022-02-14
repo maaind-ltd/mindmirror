@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {StatusBar, Pressable, Animated} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
@@ -13,6 +13,7 @@ import {useAppDispatch, useCombinedStore} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
 import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
+import {checkPermission, startVoiceRecording} from '../helpers/audio';
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -32,8 +33,21 @@ let previousMood: EmotionStateWithNone = EmotionStateWithNone.NoEmotion;
 
 const VoiceCheckinScreen: () => JSX.Element = () => {
   const dispatch = useAppDispatch();
-  const {currentMood, targetMood} = useCombinedStore(store => store.mood);
+  const {currentMood, isRecording} = useCombinedStore(store => store.mood);
   const [currentStep, setCurrentStep] = useState(VoiceCheckinStep.Instruction);
+
+  useEffect(() => {
+    if (currentStep === VoiceCheckinStep.Listening && !isRecording) {
+      setCurrentStep(VoiceCheckinStep.Result);
+      Animated.timing(fadeAnim, {
+        easing: Easing.linear,
+        fromValue: 0,
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [isRecording]);
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
   // const currentColor = Colors[currentMood];
@@ -75,28 +89,21 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
             onPress={() => {
               if (currentStep === VoiceCheckinStep.Instruction) {
                 setCurrentStep(VoiceCheckinStep.Listening);
-                timeoutId = setTimeout(() => {
-                  Animated.timing(fadeAnim, {
-                    easing: Easing.linear,
-                    fromValue: 0,
-                    toValue: 1,
-                    duration: 1000,
-                    useNativeDriver: false,
-                  }).start();
-                  previousMood = currentMood;
-                  dispatch(
-                    moodSlice.actions.setCurrentMood(
-                      EmotionStateWithNone.GoGoGo,
-                    ),
-                  );
-                  setCurrentStep(VoiceCheckinStep.Result);
-                  timeoutId = undefined;
-                }, 10000);
+                checkPermission().then(() => {
+                  dispatch(moodSlice.actions.startRecording());
+                  startVoiceRecording();
+                });
               }
             }}>
             {currentStep !== VoiceCheckinStep.Listening ? (
               <CheckInButton>
-                <CheckInCircleBackground color={currentMood} width={width}>
+                <CheckInCircleBackground
+                  color={
+                    currentStep === VoiceCheckinStep.Instruction
+                      ? EmotionStateWithNone.NoEmotion
+                      : currentMood
+                  }
+                  width={width}>
                   {currentStep === VoiceCheckinStep.Instruction ? (
                     <Icons.VoiceCheckin
                       width={width * 0.5 - 4}
