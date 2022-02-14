@@ -22,12 +22,14 @@ const Colors = {
   NoEmotionBright: '#E0E0E0',
   NoEmotionBlurred: '#F9F9F9',
   Font: '#566E88',
+  FontDark: '#3C4F63',
   LightGreyAccent: '#D6D6D6',
   LighterGreyAccent: '#F0F0F0',
   PrimaryAccent: '#4C7FBA',
   SpotifyGreen: '#00ac11',
   SpotifyRed: '#ffac11',
   SpotifyBlack: '#0b0008',
+  Warning: '#FF8800',
 };
 
 export const ColorsRgb = {

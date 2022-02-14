@@ -6,6 +6,7 @@ const enum Screens {
   VoiceCheckinScreen = 'VoiceCheckinScreen',
   ProfileScreen = 'ProfileScreen',
   ExplanationScreen = 'ExplanationScreen',
+  BreathingSuggestionScreen = 'BreathingSuggestionScreen',
 }
 
 export default Screens;

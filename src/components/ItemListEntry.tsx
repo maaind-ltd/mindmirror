@@ -10,6 +10,10 @@ import {
   TouchableOpacity,
 } from 'react-native-gesture-handler';
 import {openSpotifyPlaylistForMood} from '../helpers/spotifyHelpers';
+import EmotionStaste from '../constants/emotionState';
+import {BreathingType} from '../helpers/audio';
+import {useStackNavigation} from '../reducers/combinedReducer';
+import Screens from '../constants/screens';
 import EmotionState from '../constants/emotionState';
 
 export interface ItemListEntryData {
@@ -22,6 +26,7 @@ export interface ItemListEntryData {
   onPress?: () => void;
   hasChivron?: boolean;
   spotifyMood?: EmotionState;
+  breathingType?: BreathingType;
 }
 
 const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
@@ -33,9 +38,12 @@ const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
   onPress,
   hasChivron,
   spotifyMood,
+  breathingType,
 }) => {
+  const navigator = useStackNavigation();
   const {width} = useWindowDimensions();
   const IconElement = Icons[icon];
+
   return (
     <BorderProvider
       width={width}
@@ -46,6 +54,15 @@ const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
                 onPress();
               }
               openSpotifyPlaylistForMood(spotifyMood);
+            }
+          : breathingType
+          ? () => {
+              if (onPress) {
+                onPress();
+              }
+              navigator.push(Screens.BreathingSuggestionScreen, {
+                breathingType: breathingType,
+              });
             }
           : onPress || (() => undefined)
       }>

@@ -20,58 +20,8 @@ import ExplanationScreen from './screens/ExplanationScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import {setCustomText} from 'react-native-global-props';
 import {PersistGate} from 'redux-persist/integration/react';
-
-// const playSong = (token: string) => {
-//   fetch('https://api.spotify.com/v1/me/player/play', {
-//     method: 'PUT',
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${token}`,
-//     },
-//     body: JSON.stringify({
-//       context_uri: 'spotify:album:5ht7ItJgpBH7W6vJ5BqpPr',
-//     }),
-//   }).then(response => {
-//     console.log(response);
-//   });
-// };
-
-// import {
-//   auth as SpotifyAuth,
-//   remote as SpotifyRemote,
-//   ApiScope,
-//   ApiConfig,
-// } from 'react-native-spotify-remote';
-
-// Api Config object, replace with your own applications client id and urls
-// const spotifyConfig: ApiConfig = {
-//   clientID: '00e4806b0bb742a9a187df9ca1ac0a6a',
-//   redirectURL: 'com.mindmirror://callback',
-//   tokenRefreshURL: 'http://192.168.1.112:3000/refresh',
-//   tokenSwapURL: 'http://192.168.1.112:3000/swap',
-//   showDialog: true,
-//   authType: 'TOKEN',
-//   scopes: [ApiScope.AppRemoteControlScope], //, ApiScope.UserFollowReadScope
-// };
-
-// Initialize the library and connect the Remote
-// then play an epic song
-// async function printCurrentState() {
-//   let hasStartedSong = false;
-//   setInterval(() => {
-//     UniqueIdReader.getSpotifyToken((text: string, error: string) => {
-//       console.log(text);
-//       if (!hasStartedSong && text.startsWith('Token:')) {
-//         console.log('Playing song.');
-//         const token = text.substring('Token:'.length);
-
-//         playSong(token);
-//         hasStartedSong = true;
-//       }
-//     });
-//   }, 2000);
-// }
+import {BreathingType} from './helpers/audio';
+import BreathingSuggestionScreen from './screens/BreathingSuggestionScreen';
 
 export interface OnboardingScreenParams {
   onboardingIndex: keyof typeof OnboardingScreens;
@@ -79,6 +29,10 @@ export interface OnboardingScreenParams {
 
 export interface ExplanationScreenParams {
   subScreen: keyof typeof PartialScreens;
+}
+
+export interface BreathingScreenParams {
+  breathingType: BreathingType;
 }
 
 export type MainStackParams = {
@@ -89,6 +43,7 @@ export type MainStackParams = {
   ProfileScreen: undefined;
   ExplanationScreen: ExplanationScreenParams;
   OnboardingScreen: OnboardingScreenParams;
+  BreathingSuggestionScreen: BreathingScreenParams;
 };
 
 const MainStack = createStackNavigator<MainStackParams>();
@@ -161,6 +116,10 @@ const Root: (props: {
         <MainStack.Screen
           name={Screens.ExplanationScreen}
           component={ExplanationScreen}
+        />
+        <MainStack.Screen
+          name={Screens.BreathingSuggestionScreen}
+          component={BreathingSuggestionScreen}
         />
       </MainStack.Navigator>
     </NavigationContainer>

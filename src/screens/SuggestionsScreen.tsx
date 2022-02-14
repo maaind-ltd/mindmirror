@@ -12,6 +12,7 @@ import SuggestionsListEntry, {
   ItemListEntryData,
 } from '../components/ItemListEntry';
 import Icons from '../constants/icons';
+import {BreathingType} from '../helpers/audio';
 
 interface MoodBasedSuggestionEntries {
   breathing: ItemListEntryData[];
@@ -33,6 +34,7 @@ const Suggestions: SuggestionList = {
         title: 'Mellow Breathing',
         description: 'Slow, methodic breathing',
         meta: '7 minutes',
+        breathingType: BreathingType.CLASSIC,
       },
     ],
     sound: [
@@ -53,6 +55,7 @@ const Suggestions: SuggestionList = {
         title: 'Flow Breathing',
         description: 'Steady, rythmical breathing',
         meta: '7 minutes',
+        breathingType: BreathingType.CLASSIC,
       },
     ],
     sound: [
@@ -73,6 +76,7 @@ const Suggestions: SuggestionList = {
         title: 'GoGoGo Breathing',
         description: 'Fast, quickening breathing',
         meta: '7 minutes',
+        breathingType: BreathingType.PURSEDLIP,
       },
     ],
     sound: [

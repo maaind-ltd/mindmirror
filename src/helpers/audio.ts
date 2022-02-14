@@ -6,6 +6,11 @@ import {uniqueId} from 'lodash';
 import {fetchEmotionScoreForAudioFileContent} from './voiceCheckinHelpers';
 import store from '../store/combinedStore';
 
+export enum BreathingType {
+  PURSEDLIP,
+  CLASSIC,
+}
+
 export enum SoundResource {
   // tslint:disable: no-var-requires
   BREATHING_PURSEDLIP = require('../audio/breathing_pursedlip.mp3'),
