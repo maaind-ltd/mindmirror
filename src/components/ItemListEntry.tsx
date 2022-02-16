@@ -1,18 +1,12 @@
 import React from 'react';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
-import {Pressable} from 'react-native';
 import Icons from '../constants/icons';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
-import {
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
+import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 import {openSpotifyPlaylistForMood} from '../helpers/spotifyHelpers';
-import EmotionStaste from '../constants/emotionState';
-import {BreathingType} from '../helpers/audio';
-import {useStackNavigation} from '../reducers/combinedReducer';
+import {BreathingType, SoundSuggestionType} from '../helpers/audio';
+import {useStackNavigation} from '../store/combinedStore';
 import Screens from '../constants/screens';
 import EmotionState from '../constants/emotionState';
 
@@ -27,6 +21,7 @@ export interface ItemListEntryData {
   hasChivron?: boolean;
   spotifyMood?: EmotionState;
   breathingType?: BreathingType;
+  soundSuggestionType?: SoundSuggestionType;
 }
 
 const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
@@ -39,6 +34,7 @@ const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
   hasChivron,
   spotifyMood,
   breathingType,
+  soundSuggestionType,
 }) => {
   const navigator = useStackNavigation();
   const {width} = useWindowDimensions();
@@ -62,6 +58,15 @@ const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
               }
               navigator.push(Screens.BreathingSuggestionScreen, {
                 breathingType: breathingType,
+              });
+            }
+          : soundSuggestionType
+          ? () => {
+              if (onPress) {
+                onPress();
+              }
+              navigator.push(Screens.SoundSuggestionScreen, {
+                soundSuggestionType: soundSuggestionType,
               });
             }
           : onPress || (() => undefined)

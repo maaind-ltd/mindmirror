@@ -4,14 +4,9 @@ import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimen
 import Colors from '../../constants/colors';
 import {NativeModules, Pressable} from 'react-native';
 import {useCombinedStore} from '../../store/combinedStore';
-import spotifySlice from '../../store/spotifySlice';
-import {useDispatch} from 'react-redux';
-import {
-  getUserId,
-  createPlaylist,
-  setupSpotifyIntegration,
-} from '../../helpers/spotifyHelpers';
-import {number} from 'yargs';
+import {setupSpotifyIntegration} from '../../helpers/spotifyHelpers';
+import ImageResources from '../../constants/imageResources';
+
 const {UniqueIdReader} = NativeModules;
 
 let intervalId: ReturnType<typeof setInterval> | undefined;
@@ -26,7 +21,6 @@ const enum ProcessingState {
 const SpotifyIntegration: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
   const spotifyToken = useCombinedStore(store => store.spotify.token);
-  const dispatch = useDispatch();
   const [processingState, setProcessingState] = useState<ProcessingState>(
     ProcessingState.NOT_STARTED,
   );
@@ -42,17 +36,13 @@ const SpotifyIntegration: () => JSX.Element = () => {
 
   const connectToSpotify = () => {
     setProcessingState(ProcessingState.STARTED);
-    UniqueIdReader.startSpotifyAuthentication((innerText: string) => {
-      console.log('Starting playlist worked? ' + innerText);
-    });
+    UniqueIdReader.startSpotifyAuthentication((innerText: string) => {});
     if (intervalId) {
       clearInterval(intervalId);
     }
     intervalId = setInterval(() => {
       UniqueIdReader.getSpotifyToken((text: string, error: string) => {
-        console.log(text);
         if (text.startsWith('Token:')) {
-          console.log('Token received.');
           const token = text.substring('Token:'.length);
           setupSpotifyIntegration(token, false)
             .then(() => {
@@ -70,11 +60,16 @@ const SpotifyIntegration: () => JSX.Element = () => {
 
   return (
     <ArticleContent>
-      <HeaderText screenWidth={width}>Spotify Integration</HeaderText>
+      <SpotifyLogoContainer>
+        <ImageResources.Spotify
+          width={width * 0.6}
+          height={width * 0.6 * 0.3024}
+        />
+      </SpotifyLogoContainer>
       {!spotifyToken ? (
         <>
           <FreeFloatingText screenWidth={width}>
-            Click below to connect MindMirror with your Spotify account.
+            MindMirror uses Spotify to play the mood playlists.
           </FreeFloatingText>
 
           <ConnectWithSpotifyButton
@@ -93,7 +88,7 @@ const SpotifyIntegration: () => JSX.Element = () => {
                 ? `Retry`
                 : processingState === ProcessingState.STARTED
                 ? 'Connecting'
-                : `Connect`}
+                : `Connect to your Account`}
             </ConnectWithSpotifyButtonText>
           </ConnectWithSpotifyButton>
 
@@ -103,9 +98,11 @@ const SpotifyIntegration: () => JSX.Element = () => {
           </FreeFloatingText>
         </>
       ) : (
-        <FreeFloatingText screenWidth={width}>
-          Connection established
-        </FreeFloatingText>
+        <TextCenteringContainer>
+          <FreeFloatingText screenWidth={width}>
+            Connection established
+          </FreeFloatingText>
+        </TextCenteringContainer>
       )}
     </ArticleContent>
   );
@@ -113,6 +110,20 @@ const SpotifyIntegration: () => JSX.Element = () => {
 
 const ArticleContent = styled.View`
   flex-grow: 1;
+`;
+
+const TextCenteringContainer = styled.View`
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const SpotifyLogoContainer = styled.View`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
 `;
 
 const ConnectWithSpotifyButton = styled(Pressable)<{

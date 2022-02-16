@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import WigglyLineContainer from '../components/WigglyLineContainer';
 import {EmotionStateWithNone} from '../constants/emotionState';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
-import {useStackNavigation} from '../reducers/combinedReducer';
+import {useStackNavigation} from '../store/combinedStore';
 import Screens from '../constants/screens';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
 import {useCombinedStore} from '../store/combinedStore';

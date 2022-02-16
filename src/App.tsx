@@ -20,8 +20,9 @@ import ExplanationScreen from './screens/ExplanationScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import {setCustomText} from 'react-native-global-props';
 import {PersistGate} from 'redux-persist/integration/react';
-import {BreathingType} from './helpers/audio';
+import {BreathingType, SoundSuggestionType} from './helpers/audio';
 import BreathingSuggestionScreen from './screens/BreathingSuggestionScreen';
+import SoundSuggestionScreen from './screens/SoundSuggestionScreen';
 
 export interface OnboardingScreenParams {
   onboardingIndex: keyof typeof OnboardingScreens;
@@ -35,6 +36,10 @@ export interface BreathingScreenParams {
   breathingType: BreathingType;
 }
 
+export interface SoundScreenParams {
+  soundSuggestionType: SoundSuggestionType;
+}
+
 export type MainStackParams = {
   SplashScreen: undefined;
   MirrorScreen: undefined;
@@ -44,6 +49,7 @@ export type MainStackParams = {
   ExplanationScreen: ExplanationScreenParams;
   OnboardingScreen: OnboardingScreenParams;
   BreathingSuggestionScreen: BreathingScreenParams;
+  SoundSuggestionScreen: SoundScreenParams;
 };
 
 const MainStack = createStackNavigator<MainStackParams>();
@@ -120,6 +126,10 @@ const Root: (props: {
         <MainStack.Screen
           name={Screens.BreathingSuggestionScreen}
           component={BreathingSuggestionScreen}
+        />
+        <MainStack.Screen
+          name={Screens.SoundSuggestionScreen}
+          component={SoundSuggestionScreen}
         />
       </MainStack.Navigator>
     </NavigationContainer>

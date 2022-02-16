@@ -3,7 +3,7 @@ import {StatusBar, Text, Pressable} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
-import {useStackNavigation} from '../reducers/combinedReducer';
+import {useStackNavigation} from '../store/combinedStore';
 import IconButton from '../components/IconButton';
 import Stack from '@react-navigation/stack';
 import {MainStackParams, BreathingScreenParams} from '../App';
@@ -16,12 +16,12 @@ import {
   stopSound,
 } from '../helpers/audio';
 import {useCombinedStore} from '../store/combinedStore';
-import Icons from '../constants/icons';
 import {
   getBreathCircleVolume,
   BreathingTiming,
   getBreathingText,
 } from '../helpers/breathing';
+import {TopNavigation} from '../components/TopNavigation';
 
 const REFRESH_RATE_MS = 50;
 
@@ -77,24 +77,12 @@ const BreathingSuggestionScreen: (
     <StyledSafeAreaView>
       <StatusBar barStyle={'light-content'} />
       <BackgroundView>
-        <TopNavigation>
-          <ArrowBackContainer>
-            <IconButton
-              onPress={() => navigator.pop()}
-              icon="BackArrowPrimary"
-            />
-          </ArrowBackContainer>
-          <TextContainer>
-            <StateText>{title}</StateText>
-          </TextContainer>
-          <QuestionMarkContainer>
-            <Pressable>
-              <QuestionIcon>
-                <Icons.Help />
-              </QuestionIcon>
-            </Pressable>
-          </QuestionMarkContainer>
-        </TopNavigation>
+        <TopNavigation
+          usePrimaryColor={true}
+          title={title}
+          onPress={() => navigator.pop()}
+          showHelpIcon={true}
+        />
         <MainContentContainer>
           <OuterRing color={targetMood} screenWidth={width}>
             <InnerRing color={targetMood} screenWidth={width}>
@@ -136,48 +124,6 @@ const BackgroundView = styled.View`
   align-items: center;
 `;
 
-const TopNavigation = styled.View`
-  display: flex;
-  flex-direction: row;
-  flex-grow: 0;
-  flex-shrink: 0;
-  height: 72px;
-  width: 100%;
-  background-color: ${Colors.Background};
-  border-bottom: 1px solid ${Colors.Primary};
-`;
-
-const ArrowBackContainer = styled.View`
-  height: 100%;
-  flex-grow: 0;
-  flex-basis: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const QuestionIcon = styled.Text`
-  padding: 8px;
-  border-radius: 24px;
-`;
-
-const QuestionMarkContainer = styled.View`
-  height: 100%;
-  flex-grow: 0;
-  flex-basis: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const TextContainer = styled.View`
-  height: 100%;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
 const MainContentContainer = styled.View`
   padding-top: 1px;
   flex-grow: 1;
@@ -200,19 +146,6 @@ const OuterRing = styled.View`
 
 const InnerRing = styled.View`
   background-color: ${Colors.Background};
-  border-radius: ${props => props.screenWidth * 0.4}px;
-  width: ${props => props.screenWidth * 0.72}px;
-  height: ${props => props.screenWidth * 0.72}px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: ${props => props.screenWidth * 0.04}px;
-  left: ${props => props.screenWidth * 0.04}px;
-`;
-
-const InnerRingWhite = styled.View`
-  background-color: ${Colors.Background}99;
   border-radius: ${props => props.screenWidth * 0.4}px;
   width: ${props => props.screenWidth * 0.72}px;
   height: ${props => props.screenWidth * 0.72}px;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
-import {useStackNavigation} from '../../reducers/combinedReducer';
+import {useStackNavigation} from '../../store/combinedStore';
 import Colors from '../../constants/colors';
 import {useCombinedStore} from '../../store/combinedStore';
 

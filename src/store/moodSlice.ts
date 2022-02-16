@@ -28,13 +28,17 @@ const moodSlice = createSlice({
         state.lastScores.reduce((sum, score) => sum + score, 0) /
         (state.lastScores.length || 1);
       state.lastScores = [];
-      if (state.currentScore < 0.33) {
+      if (state.currentScore < 0.3) {
         state.currentMood = EmotionStateWithNone.Mellow;
-      } else if (state.currentScore < 0.67) {
+      } else if (state.currentScore < 0.45) {
         state.currentMood = EmotionStateWithNone.Flow;
       } else {
         state.currentMood = EmotionStateWithNone.GoGoGo;
       }
+      state.isRecording = false;
+    },
+    cancelRecording: state => {
+      state.lastScores = [];
       state.isRecording = false;
     },
     setCurrentMood: (state, action: PayloadAction<EmotionStateWithNone>) => {

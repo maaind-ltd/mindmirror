@@ -1,9 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {StatusBar, Text, Pressable} from 'react-native';
+import React from 'react';
 import styled from 'styled-components/native';
-import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
-import {TouchableNativeFeedback} from 'react-native-gesture-handler';
-import {useStackNavigation} from '../../reducers/combinedReducer';
+import {useStackNavigation} from '../../store/combinedStore';
 import ItemListEntry from '../../components/ItemListEntry';
 import Colors from '../../constants/colors';
 import Screens from '../../constants/screens';

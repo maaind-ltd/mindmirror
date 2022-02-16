@@ -7,7 +7,7 @@ import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimen
 import WigglyLineContainer from '../components/WigglyLineContainer';
 import {EmotionStateWithNone} from '../constants/emotionState';
 import Screens from '../constants/screens';
-import {useStackNavigation} from '../reducers/combinedReducer';
+import {useStackNavigation} from '../store/combinedStore';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
 import {useAppDispatch, useCombinedStore} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
@@ -29,6 +29,7 @@ const nextEmotion = {
 const MirrorScreen: () => JSX.Element = () => {
   const dispatch = useAppDispatch();
   const {currentMood, targetMood} = useCombinedStore(store => store.mood);
+  const avatarType = useCombinedStore(store => store.settings.avatarType);
   const currentColor = Colors[currentMood];
   const navigator = useStackNavigation();
   const {width} = useWindowDimensions();
@@ -65,6 +66,7 @@ const MirrorScreen: () => JSX.Element = () => {
           <Avatar
             currentMood={currentMood}
             targetMood={targetMood}
+            avatarType={avatarType}
             onPress={() => {
               navigator.push(Screens.ProfileScreen);
             }}

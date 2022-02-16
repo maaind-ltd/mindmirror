@@ -1,21 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StatusBar, Pressable} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
 import Screens from '../constants/screens';
-import {useStackNavigation} from '../reducers/combinedReducer';
+import {useCombinedStore, useStackNavigation} from '../store/combinedStore';
 import AvatarImages from '../constants/avatarImages';
 import ItemListEntry from '../components/ItemListEntry';
 import IconButton from '../components/IconButton';
 import settingsSlice from '../store/settingsSlice';
 import {useAppDispatch} from '../store/combinedStore';
+import {AvatarImage} from '../components/AvatarImage';
+import {useDispatch} from 'react-redux';
+import {TextInput} from 'react-native-gesture-handler';
+import {AvatarSelectionModal} from '../modals/AvatarSelectionModal';
 
 const ProfileScreen: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
   const navigator = useStackNavigation();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
+  const {userName, avatarType} = useCombinedStore(store => store.settings);
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <StyledSafeAreaView>
@@ -30,19 +36,31 @@ const ProfileScreen: () => JSX.Element = () => {
           </TextContainer>
           <QuestionMarkContainer />
         </TopNavigation>
-        <ProfileAvatarContainer
-          onLongPress={() => {
-            dispatch(settingsSlice.actions.setOnboardingFinished(false));
-            navigator.replace(Screens.OnboardingScreen);
-          }}>
-          <AvatarContainer height={width}>
-            <AvatarImages.Female height={width * 0.4} width={width * 0.4} />
+        <ProfileAvatarContainer>
+          <AvatarContainer screenWidth={width}>
+            <AvatarImage
+              width={width * 0.9}
+              avatarType={avatarType}
+              onPress={() => {
+                setModalVisible(true);
+              }}
+              onLongPress={() => {
+                dispatch(settingsSlice.actions.setOnboardingFinished(false));
+                navigator.replace(Screens.OnboardingScreen);
+              }}
+              noMargin={true}
+            />
           </AvatarContainer>
           <ProfileTextContainer height={width * 0.4}>
             <MindMirrorHeader>MindMirror</MindMirrorHeader>
             <BottomTextContainer>
-              <NameText>Jane Doe</NameText>
-              <AgeText>28 years old</AgeText>
+              <NicknameInput
+                screenWidth={width}
+                onChangeText={userName => {
+                  dispatch(settingsSlice.actions.setUserName(userName));
+                }}>
+                {userName}
+              </NicknameInput>
             </BottomTextContainer>
           </ProfileTextContainer>
         </ProfileAvatarContainer>
@@ -72,6 +90,10 @@ const ProfileScreen: () => JSX.Element = () => {
           <ItemListEntry color={Colors.Primary} title="Request a Feature" />
         </ArticleList>
       </BackgroundView>
+      <AvatarSelectionModal
+        visible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
     </StyledSafeAreaView>
   );
 };
@@ -144,11 +166,12 @@ const ProfileAvatarContainer = styled(Pressable)`
 `;
 
 const AvatarContainer = styled.View`
-  width: ${props => props.height * 0.4}px;
-  height: ${props => props.height * 0.4}px;
-  border-radius: ${props => props.height * 0.2}px;
-  background-color: ${Colors.Background};
-  margin-right: ${props => props.height * 0.05}px;
+  width: ${props => props.screenWidth * 0.45}px;
+  height: ${props => props.screenWidth * 0.45}px;
+  margin-right: ${props => props.screenWidth * 0.05}px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 `;
 
 const ProfileTextContainer = styled.View`
@@ -166,14 +189,15 @@ const MindMirrorHeader = styled.Text`
   font-size: 28px;
 `;
 
-const NameText = styled.Text`
+const NicknameInput = styled(TextInput)`
+  font-size: 20px;
   color: ${Colors.Background};
-  font-size: 18px;
-`;
-
-const AgeText = styled.Text`
-  color: ${Colors.Background};
-  font-size: 18px;
+  text-align: left;
+  width: ${props => props.screenWidth * 0.4}px;
+  border: 1px solid ${Colors.Background};
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
 `;
 
 export default ProfileScreen;

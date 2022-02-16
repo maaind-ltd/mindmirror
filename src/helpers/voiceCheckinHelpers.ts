@@ -1,6 +1,6 @@
 import {NativeModules, Pressable} from 'react-native';
 import {ID_TOKEN, UrlVoice} from '../constants/urls';
-import store from '../store/combinedStore';
+import store, {getTypedState} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
 const {UniqueIdReader} = NativeModules;
 
@@ -23,7 +23,7 @@ export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
         console.log('Got body ', responseBody);
         if (responseBody && responseBody.contains_speech === 1) {
           store.dispatch(moodSlice.actions.addCurrentScore(responseBody.calm));
-          if (store.getState().mood.lastScores.length > 5) {
+          if (getTypedState().mood.lastScores.length > 5) {
             store.dispatch(moodSlice.actions.stopRecording());
           }
         }

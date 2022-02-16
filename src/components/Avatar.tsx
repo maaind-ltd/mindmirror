@@ -4,17 +4,20 @@ import styled from 'styled-components/native';
 import {useWindowDimensions, Pressable} from 'react-native';
 import Svg, {Circle, Defs, RadialGradient, Stop} from 'react-native-svg';
 import EmotionState, {EmotionStateWithNone} from '../constants/emotionState';
-import AvatarImages from '../constants/avatarImages';
+import {AvatarImage} from './AvatarImage';
+import {AvatarType} from '../constants/avatarImages';
 
 export interface AvatarProps {
   currentMood: EmotionStateWithNone;
   targetMood: EmotionState;
+  avatarType?: AvatarType;
   onPress?: () => void;
 }
 
 const Avatar: (props: AvatarProps) => JSX.Element = ({
   currentMood,
   targetMood,
+  avatarType,
   onPress,
 }) => {
   const {width} = useWindowDimensions();
@@ -43,29 +46,12 @@ const Avatar: (props: AvatarProps) => JSX.Element = ({
         <ThinRing baseColor={targetMood}>
           <BroadRing baseColor={targetMood}>
             <ThinRing baseColor={targetMood}>
-              <AvatarContainer width={width}>
-                {currentMood === EmotionStateWithNone.Mellow ? (
-                  <AvatarImages.MellowFemale
-                    width={width * 0.45}
-                    height={width * 0.45}
-                  />
-                ) : currentMood === EmotionStateWithNone.GoGoGo ? (
-                  <AvatarImages.GoGoGoFemale
-                    width={width * 0.47}
-                    height={width * 0.47}
-                  />
-                ) : currentMood === EmotionStateWithNone.Flow ? (
-                  <AvatarImages.FlowFemale
-                    width={width * 0.45}
-                    height={width * 0.45}
-                  />
-                ) : (
-                  <AvatarImages.Female
-                    width={width * 0.45}
-                    height={width * 0.45}
-                  />
-                )}
-              </AvatarContainer>
+              <AvatarImage
+                width={width}
+                currentMood={currentMood}
+                avatarType={avatarType}
+                onPress={onPress}
+              />
             </ThinRing>
           </BroadRing>
         </ThinRing>
@@ -105,18 +91,6 @@ const ThinRing = styled.View`
 const BroadRing = styled.View`
   border-radius: 600px;
   border: 8px solid ${props => Colors[`${props.baseColor}Dark`]};
-`;
-
-const AvatarContainer = styled.View`
-  border-radius: 600px;
-  margin: ${props => props.width * 0.08}px;
-  background-color: white;
-  border: 1px solid ${Colors.LightGreyAccent};
-  width: ${props => props.width * 0.45}px;
-  height: ${props => props.width * 0.45}px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 export default Avatar;

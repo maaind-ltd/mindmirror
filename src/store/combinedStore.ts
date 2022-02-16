@@ -1,11 +1,9 @@
 import {
-  createSlice,
   configureStore,
   combineReducers,
   getDefaultMiddleware,
   Reducer,
   AnyAction,
-  createStore,
   Store,
 } from '@reduxjs/toolkit';
 import {useDispatch, useSelector} from 'react-redux';
@@ -21,10 +19,11 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
 import AsyncStorage from '@react-native-community/async-storage';
 import spotifySlice from './spotifySlice';
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 const persistConfig = {
   key: 'v1',
@@ -68,8 +67,15 @@ export const persistor = persistStore(store);
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
+// Persist somehow messes up the getState typing, this allows us to use it properly typed
+export const getTypedState = () => store.getState() as unknown as CombinedStore;
+
 export function useCombinedStore<T>(selector: (store: CombinedStore) => T): T {
   return useSelector<CombinedStore, T>(selector);
+}
+
+export function useStackNavigation() {
+  return useNavigation() as StackNavigationProp<any>;
 }
 
 export default store;

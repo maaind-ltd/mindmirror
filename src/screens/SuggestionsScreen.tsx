@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {StatusBar, Text, Pressable} from 'react-native';
+import React, {useState} from 'react';
+import {StatusBar, Pressable} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
 import Screens from '../constants/screens';
-import {useStackNavigation} from '../reducers/combinedReducer';
+import {useStackNavigation} from '../store/combinedStore';
 import EmotionState from '../constants/emotionState';
 import {useCombinedStore} from '../store/combinedStore';
 import SuggestionsListEntry, {
   ItemListEntryData,
 } from '../components/ItemListEntry';
 import Icons from '../constants/icons';
-import {BreathingType} from '../helpers/audio';
+import {BreathingType, SoundSuggestionType} from '../helpers/audio';
 
 interface MoodBasedSuggestionEntries {
   breathing: ItemListEntryData[];
@@ -33,7 +33,7 @@ const Suggestions: SuggestionList = {
         icon: 'Breathing',
         title: 'Mellow Breathing',
         description: 'Slow, methodic breathing',
-        meta: '7 minutes',
+        meta: '3 minutes',
         breathingType: BreathingType.CLASSIC,
       },
     ],
@@ -45,6 +45,14 @@ const Suggestions: SuggestionList = {
         description: 'Mellow songs on Spotify',
         spotifyMood: EmotionState.Mellow,
       },
+      {
+        key: 'binaural-mellow',
+        icon: 'Loudspeaker',
+        title: 'Mellow Binaural Sounds',
+        description: 'Mellow Binaural Sounds',
+        soundSuggestionType: SoundSuggestionType.MELLOW,
+        meta: '15 minutes',
+      },
     ],
   },
   [EmotionState.Flow]: {
@@ -54,7 +62,7 @@ const Suggestions: SuggestionList = {
         icon: 'Breathing',
         title: 'Flow Breathing',
         description: 'Steady, rythmical breathing',
-        meta: '7 minutes',
+        meta: '3 minutes',
         breathingType: BreathingType.CLASSIC,
       },
     ],
@@ -66,6 +74,14 @@ const Suggestions: SuggestionList = {
         description: 'Flow songs on Spotify',
         spotifyMood: EmotionState.Flow,
       },
+      {
+        key: 'binaural-flow',
+        icon: 'Loudspeaker',
+        title: 'Flow Binaural Sounds',
+        description: 'Flow Binaural Sounds',
+        soundSuggestionType: SoundSuggestionType.FLOW,
+        meta: '3 minutes',
+      },
     ],
   },
   [EmotionState.GoGoGo]: {
@@ -74,8 +90,8 @@ const Suggestions: SuggestionList = {
         key: 'breathing-gogogo',
         icon: 'Breathing',
         title: 'GoGoGo Breathing',
-        description: 'Fast, quickening breathing',
-        meta: '7 minutes',
+        description: 'Energizing pursed-lip breathing',
+        meta: '3 minutes',
         breathingType: BreathingType.PURSEDLIP,
       },
     ],
@@ -86,6 +102,14 @@ const Suggestions: SuggestionList = {
         title: 'GoGoGo Playlist',
         description: 'GoGoGo songs on Spotify',
         spotifyMood: EmotionState.GoGoGo,
+      },
+      {
+        key: 'binaural-gogogo',
+        icon: 'Loudspeaker',
+        title: 'GoGoGo Binaural Sounds',
+        description: 'GoGoGo Binaural Sounds',
+        soundSuggestionType: SoundSuggestionType.GOGOGO,
+        meta: '30 minutes',
       },
     ],
   },

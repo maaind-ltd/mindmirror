@@ -4,17 +4,32 @@ import RNFS from 'react-native-fs';
 import Permissions from 'react-native-permissions';
 import {uniqueId} from 'lodash';
 import {fetchEmotionScoreForAudioFileContent} from './voiceCheckinHelpers';
-import store from '../store/combinedStore';
+import {getTypedState} from '../store/combinedStore';
 
 export enum BreathingType {
-  PURSEDLIP,
-  CLASSIC,
+  PURSEDLIP = 'PURSEDLIP',
+  CLASSIC = 'CLASSIC',
+}
+
+export enum SoundSuggestionType {
+  FLOW = 'FLOW',
+  MELLOW = 'MELLOW',
+  GOGOGO = 'GOGOGO',
+}
+
+export enum SoundSuggestionDurationsSecond {
+  FLOW = 160,
+  MELLOW = 910,
+  GOGOGO = 1800,
 }
 
 export enum SoundResource {
   // tslint:disable: no-var-requires
   BREATHING_PURSEDLIP = require('../audio/breathing_pursedlip.mp3'),
   BREATHING_CLASSIC = require('../audio/breathing_classic.mp3'),
+  FLOW_SOUND = require('../audio/flow_sound.mp3'),
+  MELLOW_SOUND = require('../audio/mellow_sound.mp3'),
+  GOGOGO_SOUND = require('../audio/gogogo_sound.mp3'),
 }
 
 export const SoundData = {
@@ -190,7 +205,7 @@ export const stopRecording = async () => {
     console.log(errorOnStop);
   } finally {
     isDeliveringData = false;
-    if (store.getState().mood.isRecording) {
+    if (getTypedState().mood.isRecording) {
       AudioRecord.start();
     }
   }
