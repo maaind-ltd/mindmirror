@@ -46,6 +46,8 @@ const ProfileScreen: () => JSX.Element = () => {
               }}
               onLongPress={() => {
                 dispatch(settingsSlice.actions.setOnboardingFinished(false));
+                dispatch(settingsSlice.actions.regenerateUserToken());
+                dispatch(settingsSlice.actions.clearPairingCode());
                 navigator.replace(Screens.OnboardingScreen);
               }}
               noMargin={true}

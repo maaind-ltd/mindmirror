@@ -2,12 +2,13 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 import Colors from '../../constants/colors';
-import {NativeModules, Pressable} from 'react-native';
+import {NativeModules, Pressable, Linking} from 'react-native';
 import {useCombinedStore} from '../../store/combinedStore';
 import {setupSpotifyIntegration} from '../../helpers/spotifyHelpers';
 import settingsSlice from '../../store/settingsSlice';
 import {useDispatch} from 'react-redux';
 import {TextInput} from 'react-native-gesture-handler';
+import {PairingDeepLink} from '../../constants/urls';
 
 const {UniqueIdReader} = NativeModules;
 
@@ -22,97 +23,38 @@ const enum ProcessingState {
 
 const FitbitIntegration: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
-  const dispatch = useDispatch();
-  const userToken = useCombinedStore(store => store.settings.userToken);
-  const [processingState, setProcessingState] = useState<ProcessingState>(
-    ProcessingState.NOT_STARTED,
-  );
-
-  // useEffect(
-  //   () => () => {
-  //     if (intervalId) {
-  //       clearInterval(intervalId);
-  //     }
-  //   },
-  //   [],
-  // );
-
-  // const connectToFitbit = () => {
-  //   setProcessingState(ProcessingState.STARTED);
-  //   UniqueIdReader.startSpotifyAuthentication((innerText: string) => {
-  //     console.log('Starting playlist worked? ' + innerText);
-  //   });
-  //   if (intervalId) {
-  //     clearInterval(intervalId);
-  //   }
-  //   intervalId = setInterval(() => {
-  //     UniqueIdReader.getSpotifyToken((text: string, error: string) => {
-  //       console.log(text);
-  //       if (text.startsWith('Token:')) {
-  //         console.log('Token received.');
-  //         const token = text.substring('Token:'.length);
-  //         setupSpotifyIntegration(token, false)
-  //           .then(() => {
-  //             setProcessingState(ProcessingState.FINISHED);
-  //           })
-  //           .catch(error => {
-  //             console.error(error);
-  //             setProcessingState(ProcessingState.FAILED);
-  //           });
-  //         clearInterval(intervalId);
-  //       }
-  //     });
-  //   }, 1000);
-  // };
+  const pairingCode = useCombinedStore(store => store.settings.pairingCode);
 
   return (
     <ArticleContent>
       <HeaderText screenWidth={width}>Fitbit Integration</HeaderText>
 
-      <PairingCodeContainer>
-        <PairingCodeText>Pairing Code</PairingCodeText>
-        <PairingCodeInput
-          screenWidth={width}
-          onChangeText={userToken => {
-            dispatch(settingsSlice.actions.setUserToken(userToken));
-          }}>
-          {userToken}
-        </PairingCodeInput>
-      </PairingCodeContainer>
-      <TestConnectionButton>
-        <TextConnectionButtonText>Test Connection</TextConnectionButtonText>
-      </TestConnectionButton>
+      {!pairingCode ? (
+        <>
+          <FreeFloatingText screenWidth={width}>
+            You can connect your Fitbit Versa with MindMirror. To do so, please
+            install the MindMirror Fitbit Companion app and click on connect in
+            the settings screen.
+          </FreeFloatingText>
+
+          <TestConnectionButton
+            onPress={() => {
+              Linking.openURL(`${PairingDeepLink}/1234-my-funny-uuid`);
+            }}>
+            <TextConnectionButtonText>Fake connection</TextConnectionButtonText>
+          </TestConnectionButton>
+        </>
+      ) : (
+        <FreeFloatingText screenWidth={width}>
+          Your Fitbit is now set up.
+        </FreeFloatingText>
+      )}
     </ArticleContent>
   );
 };
 
 const ArticleContent = styled.View`
   flex-grow: 1;
-`;
-
-const ConnectWithSpotifyButton = styled(Pressable)<{
-  screenWidth: number;
-  state: ProcessingState;
-}>`
-  border-radius: ${props => `${props.screenWidth * 0.6}px`};
-  height: ${props => `${props.screenWidth * 0.6}px`};
-  width: ${props => `${props.screenWidth * 0.6}px`};
-  margin: ${props =>
-    `${props.screenWidth * 0.1}px ${props.screenWidth * 0.2}px`};
-  background-color: ${props =>
-    props.state === ProcessingState.NOT_STARTED
-      ? Colors.SpotifyGreen
-      : props.state === ProcessingState.FAILED
-      ? Colors.SpotifyRed
-      : Colors.LightGreyAccent};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ConnectWithSpotifyButtonText = styled.Text`
-  font-size: 28px;
-  color: ${Colors.SpotifyBlack};
 `;
 
 const HeaderText = styled.Text`
@@ -133,37 +75,19 @@ const FreeFloatingText = styled.Text`
     }px`};
 `;
 
-const PairingCodeContainer = styled.View`
+const TestConnectionButton = styled(Pressable)`
   margin: 36px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const PairingCodeText = styled.Text`
-  font-size: 18px;
-  color: ${Colors.Primary};
-  text-align: center;
-`;
-
-const PairingCodeInput = styled(TextInput)`
-  font-size: 24px;
-  color: ${Colors.Primary};
-  text-align: center;
-  width: ${props => props.screenWidth * 0.6}px;
-  border: 1px solid ${Colors.Primary};
-  border-top-width: 0;
-  border-left-width: 0;
-  border-right-width: 0;
-`;
-
-const TestConnectionButton = styled.View`
-  margin: 36px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 42px;
+  width: 70%;
+  margin-left: 15%;
+  background-color: white;
+  border-radius: 24px;
+  margin-bottom: 24px;
+  border: 1px solid ${Colors.LightGreyAccent};
 `;
 
 const TextConnectionButtonText = styled.Text`

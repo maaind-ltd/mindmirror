@@ -16,7 +16,7 @@ import IndicatorDots from '../components/IndicatorDots';
 import {generateUid} from '../helpers/accessoryFunctions';
 import {useStore} from 'react-redux';
 
-const ONBOARDING_PAGES = 5;
+const ONBOARDING_PAGES = Object.keys(OnboardingScreens).length;
 
 export interface ExplanationScreenProps
   extends Stack.StackScreenProps<MainStackParams> {}

@@ -1,5 +1,5 @@
 import {NativeModules, Pressable} from 'react-native';
-import {ID_TOKEN, UrlVoice} from '../constants/urls';
+import {UrlVoice} from '../constants/urls';
 import store, {getTypedState} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
 const {UniqueIdReader} = NativeModules;
@@ -10,10 +10,11 @@ const {UniqueIdReader} = NativeModules;
  * @param fileContent base64 encoded .wav audio data
  */
 export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
+  const {userToken, pairingCode} = getTypedState().settings;
   UniqueIdReader.performPostRequest(
     UrlVoice,
     JSON.stringify({
-      token: ID_TOKEN,
+      token: pairingCode || userToken,
       raw_audio: fileContent,
     }),
     (err: any, data: string) => {

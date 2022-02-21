@@ -8,7 +8,8 @@ const settingsSlice = createSlice({
     onboardingFinished: false,
     userName: '',
     avatarType: AvatarType.Cat,
-    userToken: '',
+    userToken: generateUid(),
+    pairingCode: '',
   },
   reducers: {
     setOnboardingFinished: (state, action: PayloadAction<boolean>) => {
@@ -22,6 +23,15 @@ const settingsSlice = createSlice({
     },
     setUserToken: (state, action: PayloadAction<string>) => {
       state.userToken = action.payload;
+    },
+    regenerateUserToken: state => {
+      state.userToken = generateUid();
+    },
+    setPairingCode: (state, action: PayloadAction<string>) => {
+      state.pairingCode = action.payload;
+    },
+    clearPairingCode: state => {
+      state.pairingCode = '';
     },
   },
 });

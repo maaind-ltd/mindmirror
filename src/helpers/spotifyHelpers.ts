@@ -2,12 +2,13 @@ import {Alert, Button, Linking, StyleSheet, View} from 'react-native';
 import EmotionState from '../constants/emotionState';
 import store from '../store/combinedStore';
 import spotifySlice, {MasterPlaylistIds} from '../store/spotifySlice';
+import {getTypedState} from '../store/combinedStore';
 
 const BASE_SPOTIFY_URL = `https://open.spotify.com/playlist`;
 
 export const openSpotifyPlaylistForMood = async (spotifyMood: EmotionState) => {
   const storeIdKey = `${spotifyMood.toLowerCase()}PlaylistId`;
-  const moodPlaylistId = store.getState().spotify[storeIdKey];
+  const moodPlaylistId = getTypedState().spotify[storeIdKey];
   const uri = `${BASE_SPOTIFY_URL}/${moodPlaylistId}`;
   const supported = await Linking.canOpenURL(uri);
 

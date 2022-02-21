@@ -1,5 +1,5 @@
 import React from 'react';
-import {StatusBar, Pressable} from 'react-native';
+import {StatusBar, Pressable, Linking} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import Avatar from '../components/Avatar';

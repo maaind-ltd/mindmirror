@@ -23,6 +23,9 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {BreathingType, SoundSuggestionType} from './helpers/audio';
 import BreathingSuggestionScreen from './screens/BreathingSuggestionScreen';
 import SoundSuggestionScreen from './screens/SoundSuggestionScreen';
+import {Linking} from 'react-native';
+import {PairingDeepLink} from './constants/urls';
+import settingsSlice from './store/settingsSlice';
 
 export interface OnboardingScreenParams {
   onboardingIndex: keyof typeof OnboardingScreens;
@@ -63,9 +66,23 @@ const customTextProps = {
 setCustomText(customTextProps);
 
 export default function App(props: any): JSX.Element {
-  // useEffect(() => {
-  //   printCurrentState();
-  // }, []);
+  useEffect(() => {
+    const onPairingCodeReceived = ({url}: {url: string}) => {
+      if (url.startsWith(PairingDeepLink)) {
+        const pairingCode = url.substring(PairingDeepLink.length + 1);
+        if (pairingCode) {
+          console.log(`Received pairing Code ${pairingCode}`);
+          store.dispatch(settingsSlice.actions.setPairingCode(pairingCode));
+        } else {
+          console.log(`Empty pairing code received.`);
+        }
+      }
+    };
+    Linking.addEventListener('url', onPairingCodeReceived);
+    return () => {
+      Linking.removeListener('url', onPairingCodeReceived);
+    };
+  }, []);
   console.log(props);
   return (
     <Provider store={store}>

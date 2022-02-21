@@ -8,8 +8,8 @@ export function capAt0to100(input: any): number {
 
 const allowedCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 export function generateUid() {
-  let uid = '';
-  for (let i = 0; i < 8; i++) {
+  let uid = 'DI-';
+  for (let i = 0; i < 29; i++) {
     const charIndex = Math.floor(Math.random() * allowedCharacters.length);
     uid += allowedCharacters[charIndex];
   }
