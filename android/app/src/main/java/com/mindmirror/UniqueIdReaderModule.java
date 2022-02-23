@@ -95,15 +95,6 @@ public class UniqueIdReaderModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void getUniqueId(Callback cb) {
-        try {
-            cb.invoke(null, this.androidId);
-        } catch (Exception e) {
-            cb.invoke(e.toString(), null);
-        }
-    }
-
-    @ReactMethod
     public void startSpotifyAuthentication(Callback cb) {
         AuthorizationRequest.Builder builder =
                 new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI);
@@ -131,55 +122,6 @@ public class UniqueIdReaderModule extends ReactContextBaseJavaModule {
             }
         },1000);
     }
-
-
-    @ReactMethod
-    public void startSpotifyPlaylist(Callback cb) {
-        MainActivity.spotifyPlaybackResult = "Starting playback call";
-
-        ConnectionParams connectionParams =
-            new ConnectionParams.Builder(CLIENT_ID)
-                .setRedirectUri(REDIRECT_URI)
-                .showAuthView(true)
-                .build();
-
-        SpotifyAppRemote.connect(this.nativeContext.getCurrentActivity(), connectionParams,
-            new Connector.ConnectionListener() {
-
-                @Override
-                public void onConnected(SpotifyAppRemote spotifyAppRemote) {
-                    mSpotifyAppRemote = spotifyAppRemote;
-                    Log.d("MindMirrorSpotify", "Connected! Yay!");
-
-                    MainActivity.spotifyPlaybackResult = "Connected! Yay!";
-                    // Now you can start interacting with App Remote
-
-                    mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:37i9dQZF1DX2sUQwD7tbmL");
-                }
-
-                @Override
-                public void onFailure(Throwable throwable) {
-                    Log.e("MindMirrorSpotify", throwable.getMessage(), throwable);
-
-                    MainActivity.spotifyPlaybackResult = throwable.getMessage();
-
-                    // Something went wrong when attempting to connect! Handle errors here
-                }
-            });
-        AuthorizationRequest.Builder builder =
-                new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI);
-
-        builder.setScopes(new String[]{
-            "streaming",
-            "app-remote-control",
-            "playlist-modify-private",
-            "playlist-modify-public"
-        });
-        AuthorizationRequest request = builder.build();
-
-        AuthorizationClient.openLoginInBrowser(this.nativeContext.getCurrentActivity(), request);
-    }
-
 
     @ReactMethod
     public void getSpotifyToken(Callback cb) {

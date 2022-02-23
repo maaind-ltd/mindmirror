@@ -26,6 +26,8 @@ import SoundSuggestionScreen from './screens/SoundSuggestionScreen';
 import {Linking} from 'react-native';
 import {PairingDeepLink} from './constants/urls';
 import settingsSlice from './store/settingsSlice';
+import moodSlice from './store/moodSlice';
+import {fetchHrvData} from './helpers/hrvHelpers';
 
 export interface OnboardingScreenParams {
   onboardingIndex: keyof typeof OnboardingScreens;
@@ -83,7 +85,20 @@ export default function App(props: any): JSX.Element {
       Linking.removeListener('url', onPairingCodeReceived);
     };
   }, []);
-  console.log(props);
+
+  useEffect(() => {
+    const regularUpdateInterval = setInterval(() => {
+      fetchHrvData().finally(() => {
+        store.dispatch(moodSlice.actions.recalculateMood());
+      });
+    }, 60000);
+    return () => {
+      if (regularUpdateInterval) {
+        clearInterval(regularUpdateInterval);
+      }
+    };
+  }, []);
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
