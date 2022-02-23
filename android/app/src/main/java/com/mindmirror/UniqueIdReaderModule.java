@@ -95,7 +95,7 @@ public class UniqueIdReaderModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void startSpotifyAuthentication(Callback cb) {
+    public void startSpotifyAuthentication() {
         AuthorizationRequest.Builder builder =
                 new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI);
 
