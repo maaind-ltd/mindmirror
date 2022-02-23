@@ -11,26 +11,31 @@ const {UniqueIdReader} = NativeModules;
  */
 export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
   const {userToken, pairingCode} = getTypedState().settings;
-  UniqueIdReader.performPostRequest(
-    UrlVoice,
-    JSON.stringify({
-      token: pairingCode || userToken,
-      raw_audio: fileContent,
-    }),
-    (err: any, data: string) => {
-      // if (data && !err) {
-      try {
-        const responseBody = JSON.parse(data);
-        console.log('Got body ', responseBody);
-        if (responseBody && responseBody.contains_speech === 1) {
-          store.dispatch(moodSlice.actions.addCurrentScore(responseBody.calm));
-          if (getTypedState().mood.lastScores.length > 5) {
-            store.dispatch(moodSlice.actions.stopRecording());
+
+  if (Platform.OS === 'android') {
+    UniqueIdReader.performPostRequest(
+      UrlVoice,
+      JSON.stringify({
+        token: pairingCode || userToken,
+        raw_audio: fileContent,
+      }),
+      (err: any, data: string) => {
+        // if (data && !err) {
+        try {
+          const responseBody = JSON.parse(data);
+          console.log('Got body ', responseBody);
+          if (responseBody && responseBody.contains_speech === 1) {
+            store.dispatch(moodSlice.actions.addCurrentScore(responseBody.calm));
+            if (getTypedState().mood.lastScores.length > 5) {
+              store.dispatch(moodSlice.actions.stopRecording());
+            }
           }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    },
-  );
+      },
+    );
+  } else {
+    
+  }
 }

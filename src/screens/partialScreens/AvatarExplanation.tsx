@@ -27,7 +27,9 @@ const AvatarExplanation: () => JSX.Element = () => {
         bottom of the mirror screen.
       </FreeFloatingText>
 
-      <MoodButtonList />
+      <BottomSpaceProvider>
+        <MoodButtonList />
+      </BottomSpaceProvider>
     </ArticleContent>
   );
 };
@@ -48,6 +50,10 @@ const FreeFloatingText = styled.Text`
 const AvatarSectionContainer = styled.View`
   height: ${props => props.screenWidth * 0.85}px;
   margin-top: -${props => props.screenWidth * 0.2}px;
+`;
+
+const BottomSpaceProvider = styled.View`
+  margin-bottom: 48px;
 `;
 
 export default AvatarExplanation;

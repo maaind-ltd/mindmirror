@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <React/RCTLog.h>
 #import "RCTUniqueIdModule.h"
 
 @implementation RCTUniqueIdModule

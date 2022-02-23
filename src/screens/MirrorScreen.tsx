@@ -76,7 +76,9 @@ const MirrorScreen: () => JSX.Element = () => {
           onPress={() => navigator.push(Screens.VoiceCheckinScreen)}>
           <CheckInButton>
             <CheckInCircleBorder></CheckInCircleBorder>
-            <CheckInButtonText color={currentMood}>Check-in</CheckInButtonText>
+            <CheckInButtonTextContainer color={currentMood}>
+              <CheckInButtonText color={currentMood}>Check-in</CheckInButtonText>
+            </CheckInButtonTextContainer>
             <CheckInCircleBackground color={currentMood}>
               <Icons.VoiceCheckin width="58px" height="58px" />
             </CheckInCircleBackground>
@@ -136,17 +138,20 @@ const CheckInButtonContainer = styled(Pressable)`
 
 const CheckInButton = styled.View``;
 
-const CheckInButtonText = styled.Text`
+const CheckInButtonTextContainer = styled.View`
   padding: 8px;
   background-color: ${props => Colors[`${props.color}Blurred`]};
   border-radius: 20px;
   border: 1px solid ${Colors.LightGreyAccent};
   position: relative;
-  top: 13px;
+  top: 14px;
   left: 35px;
-  text-align: center;
   width: 110px;
   padding-right: 2px;
+`;
+
+const CheckInButtonText = styled.Text`
+  text-align: center;
   color: ${Colors.Font};
 `;
 
