@@ -20,7 +20,7 @@ const WigglyLineContainer: (props: {
         easing: Easing.linear,
         toValue: -width * 4 * 0.8,
         duration: 18000,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ).start();
   }, [progressAnimation]);
@@ -33,7 +33,7 @@ const WigglyLineContainer: (props: {
     <Container height={height}>
       <Animated.View
         style={{
-          translateX: Animated.modulo(
+          left: Animated.modulo(
             Animated.divide(progressAnimation, 4),
             width * 0.8,
           ),
@@ -42,7 +42,7 @@ const WigglyLineContainer: (props: {
       </Animated.View>
       <Animated.View
         style={{
-          translateX: Animated.modulo(
+          left: Animated.modulo(
             Animated.divide(progressAnimation, 2),
             width * 0.8,
           ),
@@ -51,7 +51,7 @@ const WigglyLineContainer: (props: {
       </Animated.View>
       <Animated.View
         style={{
-          translateX: Animated.modulo(progressAnimation, width * 0.8),
+          left: Animated.modulo(progressAnimation, width * 0.8),
         }}>
         <WigglyLine color={thirdColor} scale={1} />
       </Animated.View>
