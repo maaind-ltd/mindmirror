@@ -43,6 +43,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="mirror.maind" />
+                <data android:scheme="https" android:host="mirror.maaind.com" />
+                <data android:scheme="http" android:host="mirror.maaind.com" />
+            </intent-filter>
         </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>

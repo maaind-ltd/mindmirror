@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {StatusBar, Text, Pressable} from 'react-native';
+import React from 'react';
+import {StatusBar} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
-import {useStackNavigation} from '../reducers/combinedReducer';
 import IconButton from '../components/IconButton';
 import Stack from '@react-navigation/stack';
 import {ExplanationScreenParams, MainStackParams} from '../App';
 import {PartialScreens} from './partialScreens/index';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useStackNavigation} from '../store/combinedStore';
+import {TopNavigation} from '../components/TopNavigation';
 
 export interface ExplanationScreenProps
   extends Stack.StackScreenProps<MainStackParams> {}
@@ -27,18 +28,12 @@ const ExplanationScreen: (
     <StyledSafeAreaView>
       <StatusBar barStyle={'light-content'} />
       <BackgroundView>
-        <TopNavigation>
-          <ArrowBackContainer>
-            <IconButton
-              onPress={() => navigator.pop()}
-              icon="BackArrowPrimary"
-            />
-          </ArrowBackContainer>
-          <TextContainer>
-            <StateText>{screenTitle}</StateText>
-          </TextContainer>
-          <QuestionMarkContainer />
-        </TopNavigation>
+        <TopNavigation
+          usePrimaryColor={true}
+          title={screenTitle}
+          onPress={() => navigator.pop()}
+          showHelpIcon={false}
+        />
         <ExplanationContentBorderProvider>
           <ExplanationContent>
             <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -60,43 +55,6 @@ const BackgroundView = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-`;
-
-const TopNavigation = styled.View`
-  display: flex;
-  flex-direction: row;
-  flex-grow: 0;
-  flex-shrink: 0;
-  height: 72px;
-  width: 100%;
-  background-color: ${Colors.Background};
-  border-bottom: 1px solid ${Colors.Primary};
-`;
-
-const ArrowBackContainer = styled.View`
-  height: 100%;
-  flex-grow: 0;
-  flex-basis: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const QuestionMarkContainer = styled.View`
-  height: 100%;
-  flex-grow: 0;
-  flex-basis: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const TextContainer = styled.View`
-  height: 100%;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 `;
 
 const ExplanationContentBorderProvider = styled.View`

@@ -4,7 +4,11 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '11.0'
 
 target 'MindMirror' do
+  
   config = use_native_modules!
+
+  permissions_path = '../node_modules/react-native-permissions/ios'
+   pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone"
 
   use_react_native!(
     :path => config[:reactNativePath],

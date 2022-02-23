@@ -3,7 +3,7 @@ import {StatusBar, Pressable} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
-import {useStackNavigation} from '../reducers/combinedReducer';
+import {useCombinedStore, useStackNavigation} from '../store/combinedStore';
 import Stack from '@react-navigation/stack';
 import {MainStackParams, OnboardingScreenParams} from '../App';
 import {OnboardingScreens} from './partialScreens/index';
@@ -13,8 +13,10 @@ import Screens from '../constants/screens';
 import {useAppDispatch} from '../store/combinedStore';
 import settingsSlice from '../store/settingsSlice';
 import IndicatorDots from '../components/IndicatorDots';
+import {generateUid} from '../helpers/accessoryFunctions';
+import {useStore} from 'react-redux';
 
-const ONBOARDING_PAGES = 3;
+const ONBOARDING_PAGES = Object.keys(OnboardingScreens).length;
 
 export interface ExplanationScreenProps
   extends Stack.StackScreenProps<MainStackParams> {}
@@ -25,6 +27,7 @@ const OnboardingScreen: (
   const navigator = useStackNavigation();
   const dispatch = useAppDispatch();
   const {height} = useWindowDimensions();
+  const userToken = useCombinedStore(state => state.settings.userToken);
 
   const onboardingIndex =
     (props.route?.params as OnboardingScreenParams | undefined)
@@ -43,6 +46,12 @@ const OnboardingScreen: (
                 onPress={() => {
                   if (onboardingIndex === ONBOARDING_PAGES - 1) {
                     dispatch(settingsSlice.actions.setOnboardingFinished(true));
+                    if (userToken) {
+                      dispatch(
+                        settingsSlice.actions.setUserToken(generateUid()),
+                      );
+                    }
+                    console.log(generateUid());
                     navigator.replace(Screens.MirrorScreen);
                   } else {
                     navigator.push(Screens.OnboardingScreen, {

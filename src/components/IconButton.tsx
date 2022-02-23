@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 import Icons from '../constants/icons';

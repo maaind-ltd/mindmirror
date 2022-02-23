@@ -10,7 +10,7 @@ import SuggestionsScreen from './screens/SuggestionsScreen';
 import VoiceCheckinScreen from './screens/VoiceCheckinScreen';
 import Screens from './constants/screens';
 import {Provider} from 'react-redux';
-import store from './store/combinedStore';
+import store, {persistor} from './store/combinedStore';
 import ProfileScreen from './screens/ProfileScreen';
 import {
   PartialScreens,
@@ -19,62 +19,13 @@ import {
 import ExplanationScreen from './screens/ExplanationScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import {setCustomText} from 'react-native-global-props';
-import {NativeModules} from 'react-native';
-import {playSong} from './helpers/spotifyHelpers';
-import { Platform } from 'react-native';
-const {UniqueIdReader} = NativeModules;
-
-// const playSong = (token: string) => {
-//   fetch('https://api.spotify.com/v1/me/player/play', {
-//     method: 'PUT',
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${token}`,
-//     },
-//     body: JSON.stringify({
-//       context_uri: 'spotify:album:5ht7ItJgpBH7W6vJ5BqpPr',
-//     }),
-//   }).then(response => {
-//     console.log(response);
-//   });
-// };
-
-// import {
-//   auth as SpotifyAuth,
-//   remote as SpotifyRemote,
-//   ApiScope,
-//   ApiConfig,
-// } from 'react-native-spotify-remote';
-
-// Api Config object, replace with your own applications client id and urls
-// const spotifyConfig: ApiConfig = {
-//   clientID: '00e4806b0bb742a9a187df9ca1ac0a6a',
-//   redirectURL: 'com.mindmirror://callback',
-//   tokenRefreshURL: 'http://192.168.1.112:3000/refresh',
-//   tokenSwapURL: 'http://192.168.1.112:3000/swap',
-//   showDialog: true,
-//   authType: 'TOKEN',
-//   scopes: [ApiScope.AppRemoteControlScope], //, ApiScope.UserFollowReadScope
-// };
-
-// Initialize the library and connect the Remote
-// then play an epic song
-// async function printCurrentState() {
-//   let hasStartedSong = false;
-//   setInterval(() => {
-//     UniqueIdReader.getSpotifyToken((text: string, error: string) => {
-//       console.log(text);
-//       if (!hasStartedSong && text.startsWith('Token:')) {
-//         console.log('Playing song.');
-//         const token = text.substring('Token:'.length);
-
-//         playSong(token);
-//         hasStartedSong = true;
-//       }
-//     });
-//   }, 2000);
-// }
+import {PersistGate} from 'redux-persist/integration/react';
+import {BreathingType, SoundSuggestionType} from './helpers/audio';
+import BreathingSuggestionScreen from './screens/BreathingSuggestionScreen';
+import SoundSuggestionScreen from './screens/SoundSuggestionScreen';
+import {Linking} from 'react-native';
+import {PairingDeepLink} from './constants/urls';
+import settingsSlice from './store/settingsSlice';
 
 if (Platform.OS === 'android') {
   var fontFamily = 'Raleway'
@@ -90,6 +41,14 @@ export interface ExplanationScreenParams {
   subScreen: keyof typeof PartialScreens;
 }
 
+export interface BreathingScreenParams {
+  breathingType: BreathingType;
+}
+
+export interface SoundScreenParams {
+  soundSuggestionType: SoundSuggestionType;
+}
+
 export type MainStackParams = {
   SplashScreen: undefined;
   MirrorScreen: undefined;
@@ -98,6 +57,8 @@ export type MainStackParams = {
   ProfileScreen: undefined;
   ExplanationScreen: ExplanationScreenParams;
   OnboardingScreen: OnboardingScreenParams;
+  BreathingSuggestionScreen: BreathingScreenParams;
+  SoundSuggestionScreen: SoundScreenParams;
 };
 
 const MainStack = createStackNavigator<MainStackParams>();
@@ -111,13 +72,29 @@ const customTextProps = {
 setCustomText(customTextProps);
 
 export default function App(props: any): JSX.Element {
-  // useEffect(() => {
-  //   printCurrentState();
-  // }, []);
+  useEffect(() => {
+    const onPairingCodeReceived = ({url}: {url: string}) => {
+      if (url.startsWith(PairingDeepLink)) {
+        const pairingCode = url.substring(PairingDeepLink.length + 1);
+        if (pairingCode) {
+          console.log(`Received pairing Code ${pairingCode}`);
+          store.dispatch(settingsSlice.actions.setPairingCode(pairingCode));
+        } else {
+          console.log(`Empty pairing code received.`);
+        }
+      }
+    };
+    Linking.addEventListener('url', onPairingCodeReceived);
+    return () => {
+      Linking.removeListener('url', onPairingCodeReceived);
+    };
+  }, []);
   console.log(props);
   return (
     <Provider store={store}>
-      <Root targetScreen={props.target_screen} />
+      <PersistGate loading={null} persistor={persistor}>
+        <Root targetScreen={props.target_screen} />
+      </PersistGate>
     </Provider>
   );
 }
@@ -168,6 +145,14 @@ const Root: (props: {
         <MainStack.Screen
           name={Screens.ExplanationScreen}
           component={ExplanationScreen}
+        />
+        <MainStack.Screen
+          name={Screens.BreathingSuggestionScreen}
+          component={BreathingSuggestionScreen}
+        />
+        <MainStack.Screen
+          name={Screens.SoundSuggestionScreen}
+          component={SoundSuggestionScreen}
         />
       </MainStack.Navigator>
     </NavigationContainer>

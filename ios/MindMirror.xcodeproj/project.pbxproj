@@ -32,6 +32,8 @@
 		43E7A3B427B720260045879F /* MindMirrorCompanionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E7A3B327B720260045879F /* MindMirrorCompanionUITestsLaunchTests.swift */; };
 		43E7A3B727B720260045879F /* MindMirrorCompanion.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 43E7A38127B720230045879F /* MindMirrorCompanion.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		DBCAEBDB27C6368100927F25 /* RTCUniqueIdModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCAEBDA27C6368100927F25 /* RTCUniqueIdModule.m */; };
+		DBCAEBDC27C6368100927F25 /* RTCUniqueIdModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCAEBDA27C6368100927F25 /* RTCUniqueIdModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +155,8 @@
 		778E34A49021551226DBE135 /* Pods-MindMirror-MindMirrorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMirror-MindMirrorTests.release.xcconfig"; path = "Target Support Files/Pods-MindMirror-MindMirrorTests/Pods-MindMirror-MindMirrorTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MindMirror/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A48DC30BDE34BF64A10A35F /* libPods-MindMirror-MindMirrorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MindMirror-MindMirrorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBCAEBD927C3EDE800927F25 /* RCTUniqueIdModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTUniqueIdModule.h; sourceTree = "<group>"; };
+		DBCAEBDA27C6368100927F25 /* RTCUniqueIdModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTCUniqueIdModule.m; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F8D021F37CDBAE94EF506F14 /* libPods-MindMirror.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MindMirror.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB5FB738B5EAC86EF96D2CC7 /* Pods-MindMirror-MindMirrorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMirror-MindMirrorTests.debug.xcconfig"; path = "Target Support Files/Pods-MindMirror-MindMirrorTests/Pods-MindMirror-MindMirrorTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +238,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				DBCAEBD927C3EDE800927F25 /* RCTUniqueIdModule.h */,
+				DBCAEBDA27C6368100927F25 /* RTCUniqueIdModule.m */,
 			);
 			name = MindMirror;
 			sourceTree = "<group>";
@@ -769,6 +775,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* MindMirrorTests.m in Sources */,
+				DBCAEBDC27C6368100927F25 /* RTCUniqueIdModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +783,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBCAEBDB27C6368100927F25 /* RTCUniqueIdModule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);

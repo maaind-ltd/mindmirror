@@ -1,18 +1,24 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {StatusBar, Pressable, Animated} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 import WigglyLineContainer from '../components/WigglyLineContainer';
-import EmotionState, {EmotionStateWithNone} from '../constants/emotionState';
+import {EmotionStateWithNone} from '../constants/emotionState';
 import Screens from '../constants/screens';
-import {useStackNavigation} from '../reducers/combinedReducer';
+import {useStackNavigation} from '../store/combinedStore';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
 import Easing from 'react-native/Libraries/Animated/Easing';
 import {useAppDispatch, useCombinedStore} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
 import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
+import {
+  checkPermission,
+  startVoiceRecording,
+  stopRecordingAndDiscardAudio,
+} from '../helpers/audio';
+import CircleGraph from '../components/CircleGraph';
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -32,8 +38,30 @@ let previousMood: EmotionStateWithNone = EmotionStateWithNone.NoEmotion;
 
 const VoiceCheckinScreen: () => JSX.Element = () => {
   const dispatch = useAppDispatch();
-  const {currentMood, targetMood} = useCombinedStore(store => store.mood);
+  const {currentMood, isRecording, lastScores} = useCombinedStore(
+    store => store.mood,
+  );
   const [currentStep, setCurrentStep] = useState(VoiceCheckinStep.Instruction);
+
+  useEffect(() => {
+    if (currentStep === VoiceCheckinStep.Listening && !isRecording) {
+      setCurrentStep(VoiceCheckinStep.Result);
+      Animated.timing(fadeAnim, {
+        easing: Easing.linear,
+        fromValue: 0,
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [isRecording]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(moodSlice.actions.cancelRecording());
+      stopRecordingAndDiscardAudio();
+    };
+  }, []);
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
   // const currentColor = Colors[currentMood];
@@ -75,28 +103,21 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
             onPress={() => {
               if (currentStep === VoiceCheckinStep.Instruction) {
                 setCurrentStep(VoiceCheckinStep.Listening);
-                timeoutId = setTimeout(() => {
-                  Animated.timing(fadeAnim, {
-                    easing: Easing.linear,
-                    fromValue: 0,
-                    toValue: 1,
-                    duration: 1000,
-                    useNativeDriver: false,
-                  }).start();
-                  previousMood = currentMood;
-                  dispatch(
-                    moodSlice.actions.setCurrentMood(
-                      EmotionStateWithNone.GoGoGo,
-                    ),
-                  );
-                  setCurrentStep(VoiceCheckinStep.Result);
-                  timeoutId = undefined;
-                }, 10000);
+                checkPermission().then(() => {
+                  dispatch(moodSlice.actions.startRecording());
+                  startVoiceRecording();
+                });
               }
             }}>
             {currentStep !== VoiceCheckinStep.Listening ? (
               <CheckInButton>
-                <CheckInCircleBackground color={currentMood} width={width}>
+                <CheckInCircleBackground
+                  color={
+                    currentStep === VoiceCheckinStep.Instruction
+                      ? EmotionStateWithNone.NoEmotion
+                      : currentMood
+                  }
+                  width={width}>
                   {currentStep === VoiceCheckinStep.Instruction ? (
                     <Icons.VoiceCheckin
                       width={width * 0.5 - 4}
@@ -139,7 +160,16 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
             </ResultText>
           )}
           {currentStep === VoiceCheckinStep.Listening ? (
-            <CountdownContainer></CountdownContainer>
+            <CountdownContainer>
+              <CircleGraph value={lastScores.length * 16.67} />
+              <StopButton
+                onPress={() => {
+                  setCurrentStep(VoiceCheckinStep.Instruction);
+                  dispatch(moodSlice.actions.cancelRecording());
+                  stopRecordingAndDiscardAudio();
+                }}
+              />
+            </CountdownContainer>
           ) : (
             <></>
           )}
@@ -153,6 +183,8 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
                   timeoutId = undefined;
                 }
                 setCurrentStep(VoiceCheckinStep.Instruction);
+                dispatch(moodSlice.actions.cancelRecording());
+                stopRecordingAndDiscardAudio();
               }}>
               <ResetText>Restart</ResetText>
             </ResetButton>
@@ -161,7 +193,7 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
         {currentStep === VoiceCheckinStep.Result ? (
           <BackButton
             onPress={() => {
-              navigator.pop();
+              navigator.replace(Screens.MirrorScreen);
             }}>
             <BackText>Back</BackText>
           </BackButton>
@@ -353,9 +385,19 @@ const CountdownContainer = styled(Pressable)`
   border-radius: 64px;
   width: 64px;
   height: 64px;
-  border: 2px solid red;
   margin-bottom: 48px;
   background-color: ${Colors.Background};
+`;
+
+const StopButton = styled(Pressable)`
+  display: flex;
+  flex-direction: column;
+  margin: 24px 0 0 0;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  flex-shrink: 0;
+  flex-grow: 0;
 `;
 
 export default VoiceCheckinScreen;

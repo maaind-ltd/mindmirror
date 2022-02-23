@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
-import {useStackNavigation} from '../../reducers/combinedReducer';
+import {useStackNavigation} from '../../store/combinedStore';
 import Colors from '../../constants/colors';
 import {useCombinedStore} from '../../store/combinedStore';
 
@@ -9,7 +9,9 @@ const ColorExplanation: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
   const navigator = useStackNavigation();
 
-  const {currentMood, targetMood} = useCombinedStore(store => store.mood);
+  const {currentMood, targetMood, randomId} = useCombinedStore(
+    store => store.mood,
+  );
 
   return (
     <ArticleContent>

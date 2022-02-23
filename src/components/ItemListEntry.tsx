@@ -1,15 +1,14 @@
 import React from 'react';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
-import {Pressable} from 'react-native';
 import Icons from '../constants/icons';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
-import {
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
-import {openSpotifyURI} from '../helpers/spotifyHelpers';
+import {TouchableNativeFeedback} from 'react-native-gesture-handler';
+import {openSpotifyPlaylistForMood} from '../helpers/spotifyHelpers';
+import {BreathingType, SoundSuggestionType} from '../helpers/audio';
+import {useStackNavigation} from '../store/combinedStore';
+import Screens from '../constants/screens';
+import EmotionState from '../constants/emotionState';
 
 export interface ItemListEntryData {
   key?: string;
@@ -20,7 +19,9 @@ export interface ItemListEntryData {
   color?: string;
   onPress?: () => void;
   hasChivron?: boolean;
-  spotifyURI?: string;
+  spotifyMood?: EmotionState;
+  breathingType?: BreathingType;
+  soundSuggestionType?: SoundSuggestionType;
 }
 
 const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
@@ -31,20 +32,42 @@ const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
   color,
   onPress,
   hasChivron,
-  spotifyURI,
+  spotifyMood,
+  breathingType,
+  soundSuggestionType,
 }) => {
+  const navigator = useStackNavigation();
   const {width} = useWindowDimensions();
   const IconElement = Icons[icon];
+
   return (
     <BorderProvider
       width={width}
       onPress={
-        spotifyURI
+        spotifyMood
           ? () => {
               if (onPress) {
                 onPress();
               }
-              openSpotifyURI(spotifyURI);
+              openSpotifyPlaylistForMood(spotifyMood);
+            }
+          : breathingType
+          ? () => {
+              if (onPress) {
+                onPress();
+              }
+              navigator.push(Screens.BreathingSuggestionScreen, {
+                breathingType: breathingType,
+              });
+            }
+          : soundSuggestionType
+          ? () => {
+              if (onPress) {
+                onPress();
+              }
+              navigator.push(Screens.SoundSuggestionScreen, {
+                soundSuggestionType: soundSuggestionType,
+              });
             }
           : onPress || (() => undefined)
       }>

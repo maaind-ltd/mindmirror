@@ -74,6 +74,10 @@ PODS:
   - glog (0.3.5)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.180)
+  - Permission-LocationAlways (3.2.0):
+    - RNPermissions
+  - Permission-LocationWhenInUse (3.2.0):
+    - RNPermissions
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -339,13 +343,24 @@ PODS:
     - React-jsi (= 0.66.4)
     - React-logger (= 0.66.4)
     - React-perflogger (= 0.66.4)
-  - RNCAsyncStorage (1.15.17):
+  - RNAudioRecord (0.2.2):
+    - React
+  - RNCAsyncStorage (1.12.1):
     - React-Core
+  - RNFS (2.18.0):
+    - React
   - RNGestureHandler (2.1.1):
+    - React-Core
+  - RNPermissions (3.2.0):
     - React-Core
   - RNScreens (3.10.1):
     - React-Core
     - React-RCTImage
+  - RNSound (0.11.2):
+    - React-Core
+    - RNSound/Core (= 0.11.2)
+  - RNSound/Core (0.11.2):
+    - React-Core
   - RNSVG (12.1.1):
     - React
   - Yoga (1.14.0)
@@ -379,6 +394,8 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.99.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.99.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - Permission-LocationAlways (from `../node_modules/react-native-permissions/ios/LocationAlways/Permission-LocationAlways.podspec`)
+  - Permission-LocationWhenInUse (from `../node_modules/react-native-permissions/ios/LocationWhenInUse/Permission-LocationWhenInUse.podspec`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -406,9 +423,13 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - RNAudioRecord (from `../node_modules/react-native-audio-record`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
+  - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNSound (from `../node_modules/react-native-sound`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -440,6 +461,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  Permission-LocationAlways:
+    :path: "../node_modules/react-native-permissions/ios/LocationAlways/Permission-LocationAlways.podspec"
+  Permission-LocationWhenInUse:
+    :path: "../node_modules/react-native-permissions/ios/LocationWhenInUse/Permission-LocationWhenInUse.podspec"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -490,12 +515,20 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNAudioRecord:
+    :path: "../node_modules/react-native-audio-record"
   RNCAsyncStorage:
-    :path: "../node_modules/@react-native-async-storage/async-storage"
+    :path: "../node_modules/@react-native-community/async-storage"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSound:
+    :path: "../node_modules/react-native-sound"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   Yoga:
@@ -520,6 +553,8 @@ SPEC CHECKSUMS:
   glog: 5337263514dd6f09803962437687240c5dc39aa4
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
+  Permission-LocationAlways: 012fd2c1f610068c5f9a7b48bc908ea41edd0c43
+  Permission-LocationWhenInUse: 13de9a01e006cb53a6ac3c9f8d1ab6cc98318d9c
   RCT-Folly: a21c126816d8025b547704b777a2ba552f3d9fa9
   RCTRequired: 4bf86c70714490bca4bf2696148638284622644b
   RCTTypeSafety: c475a7059eb77935fa53d2c17db299893f057d5d
@@ -545,13 +580,17 @@ SPEC CHECKSUMS:
   React-RCTVibration: e3ffca672dd3772536cb844274094b0e2c31b187
   React-runtimeexecutor: dec32ee6f2e2a26e13e58152271535fadff5455a
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
-  RNCAsyncStorage: 6bd5a7ba3dde1c3facba418aa273f449bdc5437a
+  RNAudioRecord: 162fee3b8fb628773ec704bf0333823125be2ed7
+  RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
+  RNFS: 3ab21fa6c56d65566d1fb26c2228e2b6132e5e32
   RNGestureHandler: e1ad51d31a580755079d5124d3ab66f0fcaa8311
+  RNPermissions: f7ebe52db07c00901127966ca080b4ec6a6ceb0a
   RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e
+  RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: f7fff6fdd3dd2efcc10bfff1d6b9ffaa74884d07
+PODFILE CHECKSUM: e6e93505c9fabbbef0382680cf4ae3d2fe855e61
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

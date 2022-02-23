@@ -1,6 +1,7 @@
 import BackArrow from '../images/icons/icon_backarrow.svg';
 import BackArrowPrimary from '../images/icons/icon_backarrow_primary.svg';
 import Breathing from '../images/icons/icon_breathing1.svg';
+import Spotify from '../images/icons/icon_spotify.svg';
 import Help from '../images/icons/icon_help.svg';
 import Loudspeaker from '../images/icons/icon_loudspeaker.svg';
 import MenuArrow from '../images/icons/icon_menuarrow.svg';
@@ -11,7 +12,7 @@ const Icons = {
   BackArrow: BackArrow,
   BackArrowPrimary: BackArrowPrimary,
   Breathing: Breathing,
-  Spotify: Breathing,
+  Spotify: Spotify,
   Help: Help,
   Loudspeaker: Loudspeaker,
   MenuArrow: MenuArrow,
