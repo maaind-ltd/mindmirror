@@ -5,8 +5,8 @@ import {ColorsRgb} from '../constants/colors';
 import {uniqueId} from 'lodash';
 const SharedStorage = NativeModules.SharedStorage;
 
-const HRV_MAX_OLDNESS = 60 * 30 * 1000;
-const VOICE_MAX_OLDNESS = 60 * 30 * 1000;
+const HRV_MAX_OLDNESS_MS = 60 * 30 * 1000;
+const VOICE_MAX_OLDNESS_MS = 60 * 30 * 1000;
 
 const moodSlice = createSlice({
   name: 'mood',
@@ -48,14 +48,14 @@ const moodSlice = createSlice({
 
       if (
         state.currentHrvScore >= 0 &&
-        state.hrvScoreTimestamp > Date.now() - HRV_MAX_OLDNESS
+        state.hrvScoreTimestamp > Date.now() - HRV_MAX_OLDNESS_MS
       ) {
         scores.push(state.currentHrvScore);
       }
 
       if (
         state.currentVoiceScore >= 0 &&
-        state.voiceScoreTimestamp > Date.now() - VOICE_MAX_OLDNESS
+        state.voiceScoreTimestamp > Date.now() - VOICE_MAX_OLDNESS_MS
       ) {
         scores.push(state.currentHrvScore);
       }

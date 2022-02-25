@@ -36,13 +36,6 @@ const FitbitIntegration: () => JSX.Element = () => {
             install the MindMirror Fitbit Companion app and click on connect in
             the settings screen.
           </FreeFloatingText>
-
-          <TestConnectionButton
-            onPress={() => {
-              Linking.openURL(`${PairingDeepLink}/1234-my-funny-uuid`);
-            }}>
-            <TextConnectionButtonText>Fake connection</TextConnectionButtonText>
-          </TestConnectionButton>
         </>
       ) : (
         <FreeFloatingText screenWidth={width}>
