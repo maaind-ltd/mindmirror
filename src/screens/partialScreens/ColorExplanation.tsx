@@ -23,9 +23,7 @@ const ColorExplanation: () => JSX.Element = () => {
         <MoodColorBlock color={Colors.Mellow} screenWidth={width} />
         <MoodTextBlock screenWidth={width}>
           <MoodHeaderText>Mellow</MoodHeaderText>
-          <MoodDescriptionText>
-            Calming moood to decrease stress.
-          </MoodDescriptionText>
+          <MoodDescriptionText>Calming mood to relax.</MoodDescriptionText>
         </MoodTextBlock>
       </MoodBlock>
       <MoodBlock>
