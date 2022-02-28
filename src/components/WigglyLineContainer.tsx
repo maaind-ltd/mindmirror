@@ -20,7 +20,7 @@ const WigglyLineContainer: (props: {
         easing: Easing.linear,
         toValue: -width * 4 * 0.8,
         duration: 18000,
-        useNativeDriver: false,
+        useNativeDriver: true,
       }),
     ).start();
   }, [progressAnimation]);
@@ -32,27 +32,51 @@ const WigglyLineContainer: (props: {
   return (
     <Container height={height}>
       <Animated.View
-        style={{
-          left: Animated.modulo(
-            Animated.divide(progressAnimation, 4),
-            width * 0.8,
-          ),
-        }}>
+        style={
+          Platform.OS === 'android'
+            ? {
+                translateX: Animated.modulo(
+                  Animated.divide(progressAnimation, 4),
+                  width * 0.8,
+                ),
+              }
+            : {
+                left: Animated.modulo(
+                  Animated.divide(progressAnimation, 4),
+                  width * 0.8,
+                ),
+              }
+        }>
         <WigglyLine color={firstColor} scale={0.4} />
       </Animated.View>
       <Animated.View
-        style={{
-          left: Animated.modulo(
-            Animated.divide(progressAnimation, 2),
-            width * 0.8,
-          ),
-        }}>
+        style={
+          Platform.OS === 'android'
+            ? {
+                translateX: Animated.modulo(
+                  Animated.divide(progressAnimation, 2),
+                  width * 0.8,
+                ),
+              }
+            : {
+                left: Animated.modulo(
+                  Animated.divide(progressAnimation, 2),
+                  width * 0.8,
+                ),
+              }
+        }>
         <WigglyLine color={secondColor} scale={0.6} />
       </Animated.View>
       <Animated.View
-        style={{
-          left: Animated.modulo(progressAnimation, width * 0.8),
-        }}>
+        style={
+          Platform.OS === 'android'
+            ? {
+                translateX: Animated.modulo(progressAnimation, width * 0.8),
+              }
+            : {
+                left: Animated.modulo(progressAnimation, width * 0.8),
+              }
+        }>
         <WigglyLine color={thirdColor} scale={1} />
       </Animated.View>
     </Container>
