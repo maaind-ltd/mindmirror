@@ -20,7 +20,7 @@ const WigglyLineContainer: (props: {
         easing: Easing.linear,
         toValue: -width * 4 * 0.8,
         duration: 18000,
-        useNativeDriver: true,
+        useNativeDriver: Platform.OS === 'android',
       }),
     ).start();
   }, [progressAnimation]);
