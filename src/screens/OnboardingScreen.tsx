@@ -42,34 +42,36 @@ const OnboardingScreen: (
             <ScreenContentContainer screenHeight={height}>
               <ScreenContent />
               <SpacingElement />
-              <NextButton
-                onPress={() => {
-                  if (onboardingIndex === ONBOARDING_PAGES - 1) {
-                    dispatch(settingsSlice.actions.setOnboardingFinished(true));
-                    if (userToken) {
-                      dispatch(
-                        settingsSlice.actions.setUserToken(generateUid()),
-                      );
+              <BottomContent>
+                <NextButton
+                  onPress={() => {
+                    if (onboardingIndex === ONBOARDING_PAGES - 1) {
+                      dispatch(settingsSlice.actions.setOnboardingFinished(true));
+                      if (userToken) {
+                        dispatch(
+                          settingsSlice.actions.setUserToken(generateUid()),
+                        );
+                      }
+                      console.log(generateUid());
+                      navigator.replace(Screens.MirrorScreen);
+                    } else {
+                      navigator.push(Screens.OnboardingScreen, {
+                        onboardingIndex: onboardingIndex + 1,
+                      });
                     }
-                    console.log(generateUid());
-                    navigator.replace(Screens.MirrorScreen);
-                  } else {
-                    navigator.push(Screens.OnboardingScreen, {
-                      onboardingIndex: onboardingIndex + 1,
-                    });
-                  }
-                }}>
-                <NextButtonText>
-                  {onboardingIndex === ONBOARDING_PAGES - 1
-                    ? 'Done'
-                    : 'Continue'}
-                </NextButtonText>
-              </NextButton>
-              <IndicatorDots
-                vertical={false}
-                numberOfDots={ONBOARDING_PAGES}
-                currentDot={onboardingIndex}
-              />
+                  }}>
+                    <NextButtonText>
+                      {onboardingIndex === ONBOARDING_PAGES - 1
+                        ? 'Done'
+                        : 'Continue'}
+                    </NextButtonText>
+                  </NextButton>
+                  <IndicatorDots
+                    vertical={false}
+                    numberOfDots={ONBOARDING_PAGES}
+                    currentDot={onboardingIndex}
+                  />
+              </BottomContent>
             </ScreenContentContainer>
           </ScrollView>
         </ExplanationContent>
@@ -121,6 +123,10 @@ const ScreenContentContainer = styled.View`
   flex-grow: 1;
   min-height: ${props => props.screenHeight}px;
   padding-top: 24px;
+`;
+
+const BottomContent = styled.View`
+  margin-bottom: 48px;
 `;
 
 export default OnboardingScreen;

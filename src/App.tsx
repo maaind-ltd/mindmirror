@@ -29,6 +29,12 @@ import settingsSlice from './store/settingsSlice';
 import moodSlice from './store/moodSlice';
 import {fetchHrvData} from './helpers/hrvHelpers';
 
+if (Platform.OS === 'android') {
+  var fontFamily = 'Raleway'
+} else {
+  var fontFamily = "Helvetica"
+}
+
 export interface OnboardingScreenParams {
   onboardingIndex: keyof typeof OnboardingScreens;
 }
@@ -61,8 +67,8 @@ const MainStack = createStackNavigator<MainStackParams>();
 
 const customTextProps = {
   style: {
-    fontFamily: 'Raleway',
-  },
+    fontFamily: fontFamily
+  }
 };
 
 setCustomText(customTextProps);

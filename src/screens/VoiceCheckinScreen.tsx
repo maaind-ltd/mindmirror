@@ -223,7 +223,6 @@ const ScreenContainer = styled(Animated.View)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  /* background-color: ${props => props.color}; */
   padding: 16px 0;
 `;
 
@@ -358,7 +357,7 @@ const QuoteText = styled.Text`
 `;
 
 const QuoteBefore = styled.Text`
-  font-family: serif;
+  font-family: ${Platform.OS === "android" ? 'serif' : 'Courier'};
   font-size: 48px;
   color: ${Colors.Font};
   transform: rotate(-12deg);
@@ -368,7 +367,7 @@ const QuoteBefore = styled.Text`
 `;
 
 const QuoteAfter = styled.Text`
-  font-family: serif;
+  font-family: ${Platform.OS === "android" ? 'serif' : 'Courier'};
   font-size: 48px;
   color: ${Colors.Font};
   transform: rotate(12deg);

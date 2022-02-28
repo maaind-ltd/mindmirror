@@ -84,7 +84,9 @@ const moodSlice = createSlice({
         colors: ColorsRgb[state.currentMood as keyof typeof ColorsRgb],
       });
       console.log(sharedJsonString);
-      SharedStorage.set(sharedJsonString);
+      if (Platform.OS === 'android') {
+        SharedStorage.set(sharedJsonString);
+      }
     },
     cancelRecording: state => {
       state.lastScores = [];
@@ -100,7 +102,9 @@ const moodSlice = createSlice({
         colors: ColorsRgb[action.payload as keyof typeof ColorsRgb],
       });
       console.log(sharedJsonString);
-      SharedStorage.set(sharedJsonString);
+      if (Platform.OS === 'android') {
+        SharedStorage.set(sharedJsonString);
+      }
     },
     setTargetMood: (state, action: PayloadAction<EmotionState>) => {
       state.targetMood = action.payload;
