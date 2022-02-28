@@ -3,6 +3,8 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <React/RCTLog.h>
+#import <React/RCTLinkingManager.h>
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -57,6 +59,25 @@ static void InitializeFlipper(UIApplication *application) {
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *, id> *) options {
+  RCTLogInfo(@"getting spotify token");
+ if ([self.authorizationFlowManagerDelegate resumeExternalUserAgentFlowWithURL:url]) {
+   return YES;
+ }
+ return [RCTLinkingManager application:app openURL:url options:options];
+}
+
+-(BOOL)application:(UIApplication *)app continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
+  RCTLogInfo(@"getting spotify token");
+  if (self.authorizationFlowManagerDelegate) {
+    BOOL resumeAuth = [self.authorizationFlowManagerDelegate resumeExternalUserAgentFlowWithURL:userActivity.webpageURL];
+    if (resumeAuth) {
+      return YES;
+    }
+  }
+  return [RCTLinkingManager application:app continueUserActivity:userActivity restorationHandler:restorationHandler];
 }
 
 @end
