@@ -114,9 +114,7 @@ public class UniqueIdReaderModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
 
-                if (MainActivity.connectionSuccessful) {
-                    cb.invoke("Finished authorization", null);
-                } else {
+                if (!MainActivity.connectionSuccessful) {
                     handler.postDelayed(this, 1000);
                 }
             }

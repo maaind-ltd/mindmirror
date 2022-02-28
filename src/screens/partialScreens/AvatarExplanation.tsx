@@ -5,6 +5,7 @@ import Colors from '../../constants/colors';
 import {useCombinedStore} from '../../store/combinedStore';
 import Avatar from '../../components/Avatar';
 import MoodButtonList from '../../components/MoodButtonList';
+import {EmotionStateWithNone} from '../../constants/emotionState';
 
 const AvatarExplanation: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
@@ -19,7 +20,10 @@ const AvatarExplanation: () => JSX.Element = () => {
       </FreeFloatingText>
 
       <AvatarSectionContainer screenWidth={width}>
-        <Avatar currentMood={currentMood} targetMood={targetMood} />
+        <Avatar
+          currentMood={EmotionStateWithNone.GoGoGo}
+          targetMood={targetMood}
+        />
       </AvatarSectionContainer>
 
       <FreeFloatingText screenWidth={width}>

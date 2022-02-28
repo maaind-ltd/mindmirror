@@ -48,7 +48,7 @@ const SpotifyIntegration: () => JSX.Element = () => {
             setProcessingState(ProcessingState.FAILED);
           }); 
     });
-    // UniqueIdReader.startSpotifyAuthentication((innerText: string) => {});
+    // UniqueIdReader.startSpotifyAuthentication();
     // if (intervalId) {
     //   clearInterval(intervalId);
     // }
@@ -142,25 +142,27 @@ const ConnectWithSpotifyButton = styled(Pressable)<{
   screenWidth: number;
   state: ProcessingState;
 }>`
-  border-radius: ${props => `${props.screenWidth * 0.6}px`};
-  height: ${props => `${props.screenWidth * 0.6}px`};
-  width: ${props => `${props.screenWidth * 0.6}px`};
-  margin: ${props =>
-    `${props.screenWidth * 0.1}px ${props.screenWidth * 0.2}px`};
+  margin: ${props => `48px 15% 48px`};
+  display: flex;
+  height: 42px;
+  width: 70%;
+  margin-left: 15%;
+  border-radius: 24px;
+  justify-content: center;
+  align-items: center;
+
   background-color: ${props =>
     props.state === ProcessingState.NOT_STARTED
       ? Colors.SpotifyGreen
       : props.state === ProcessingState.FAILED
       ? Colors.SpotifyRed
       : Colors.LightGreyAccent};
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const ConnectWithSpotifyButtonText = styled.Text`
-  font-size: 28px;
-  color: ${Colors.SpotifyBlack};
+  font-size: 20px;
+  color: ${Colors.Background};
+  margin-bottom: 2px;
 `;
 
 const HeaderText = styled.Text`

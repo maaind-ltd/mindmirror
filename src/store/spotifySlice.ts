@@ -5,9 +5,9 @@ import {ColorsRgb} from '../constants/colors';
 const SharedStorage = NativeModules.SharedStorage;
 
 export const MasterPlaylistIds = {
-  [EmotionState.Mellow]: '0qFEG3AbQQpkmy8jMifGWL',
-  [EmotionState.Flow]: '45mJsrRl6BRpNe20ZWWmm4',
-  [EmotionState.GoGoGo]: '71pEoL8bNR9FPAiNX8kJHJ',
+  [EmotionState.Mellow]: '7CgSpnKvsQEzjL8xMPaWxk',
+  [EmotionState.Flow]: '3BtMqXExrfYmKTBESU4RSA',
+  [EmotionState.GoGoGo]: '3qV8M4EfWbHgsW81CtyIjt',
 };
 
 const spotifySlice = createSlice({
