@@ -40,7 +40,7 @@ export const VoiceCheckinExplanationModal: (
 
         <LearnMoreButton
           onPress={() =>
-            navigator.push(Screens.ExplanationScreen, {
+            navigator.replace(Screens.ExplanationScreen, {
               subScreen: 'ScienceAndTechnology',
             })
           }>
