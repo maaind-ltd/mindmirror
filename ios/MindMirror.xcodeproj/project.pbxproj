@@ -8,11 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* MindMirrorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MindMirrorTests.m */; };
-		0898DE10921A0530BD9CA2B4 /* libPods-MindMirror-MindMirrorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A48DC30BDE34BF64A10A35F /* libPods-MindMirror-MindMirrorTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1BA04F2FD65D7AADD110DC64 /* libPods-MindMirror.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D021F37CDBAE94EF506F14 /* libPods-MindMirror.a */; };
 		43A5917227B6DF2D0060DB34 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A5917127B6DF2D0060DB34 /* WidgetKit.framework */; };
 		43A5917427B6DF2D0060DB34 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A5917327B6DF2D0060DB34 /* SwiftUI.framework */; };
 		43A5917727B6DF2D0060DB34 /* MindMirrorWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A5917627B6DF2D0060DB34 /* MindMirrorWidget.swift */; };
@@ -31,7 +29,9 @@
 		43E7A3B227B720260045879F /* MindMirrorCompanionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E7A3B127B720260045879F /* MindMirrorCompanionUITests.swift */; };
 		43E7A3B427B720260045879F /* MindMirrorCompanionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E7A3B327B720260045879F /* MindMirrorCompanionUITestsLaunchTests.swift */; };
 		43E7A3B727B720260045879F /* MindMirrorCompanion.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 43E7A38127B720230045879F /* MindMirrorCompanion.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		546A5818DAF597EE43F274DE /* libPods-MindMirror-MindMirrorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D400DD3758FD472DEF3A47B /* libPods-MindMirror-MindMirrorTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		A050A9276FF1D6D219D35637 /* libPods-MindMirror.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C1F6F1B71B0D1286F43C03 /* libPods-MindMirror.a */; };
 		DBCAEBDB27C6368100927F25 /* RTCUniqueIdModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCAEBDA27C6368100927F25 /* RTCUniqueIdModule.m */; };
 		DBCAEBDC27C6368100927F25 /* RTCUniqueIdModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCAEBDA27C6368100927F25 /* RTCUniqueIdModule.m */; };
 /* End PBXBuildFile section */
@@ -118,6 +118,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00C056069BE3CA8668A51392 /* Pods-MindMirror.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMirror.debug.xcconfig"; path = "Target Support Files/Pods-MindMirror/Pods-MindMirror.debug.xcconfig"; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* MindMirrorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MindMirrorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* MindMirrorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MindMirrorTests.m; sourceTree = "<group>"; };
@@ -127,6 +128,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MindMirror/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MindMirror/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MindMirror/main.m; sourceTree = "<group>"; };
+		253D5BA624884936E76BD422 /* Pods-MindMirror-MindMirrorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMirror-MindMirrorTests.release.xcconfig"; path = "Target Support Files/Pods-MindMirror-MindMirrorTests/Pods-MindMirror-MindMirrorTests.release.xcconfig"; sourceTree = "<group>"; };
+		2A6A66B0DE89C3FB0301AA60 /* Pods-MindMirror-MindMirrorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMirror-MindMirrorTests.debug.xcconfig"; path = "Target Support Files/Pods-MindMirror-MindMirrorTests/Pods-MindMirror-MindMirrorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		43A5917027B6DF2D0060DB34 /* MindMirrorWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MindMirrorWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A5917127B6DF2D0060DB34 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		43A5917327B6DF2D0060DB34 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -150,16 +153,13 @@
 		43E7A3AD27B720260045879F /* MindMirrorCompanionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MindMirrorCompanionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43E7A3B127B720260045879F /* MindMirrorCompanionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindMirrorCompanionUITests.swift; sourceTree = "<group>"; };
 		43E7A3B327B720260045879F /* MindMirrorCompanionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindMirrorCompanionUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		455BC8CA26D8A0516B9C3601 /* Pods-MindMirror.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMirror.debug.xcconfig"; path = "Target Support Files/Pods-MindMirror/Pods-MindMirror.debug.xcconfig"; sourceTree = "<group>"; };
-		45BBDE09078DE4627E4F80A4 /* Pods-MindMirror.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMirror.release.xcconfig"; path = "Target Support Files/Pods-MindMirror/Pods-MindMirror.release.xcconfig"; sourceTree = "<group>"; };
-		778E34A49021551226DBE135 /* Pods-MindMirror-MindMirrorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMirror-MindMirrorTests.release.xcconfig"; path = "Target Support Files/Pods-MindMirror-MindMirrorTests/Pods-MindMirror-MindMirrorTests.release.xcconfig"; sourceTree = "<group>"; };
+		69C1F6F1B71B0D1286F43C03 /* libPods-MindMirror.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MindMirror.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MindMirror/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9A48DC30BDE34BF64A10A35F /* libPods-MindMirror-MindMirrorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MindMirror-MindMirrorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D400DD3758FD472DEF3A47B /* libPods-MindMirror-MindMirrorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MindMirror-MindMirrorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCAEBD927C3EDE800927F25 /* RCTUniqueIdModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTUniqueIdModule.h; sourceTree = "<group>"; };
 		DBCAEBDA27C6368100927F25 /* RTCUniqueIdModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTCUniqueIdModule.m; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F8D021F37CDBAE94EF506F14 /* libPods-MindMirror.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MindMirror.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FB5FB738B5EAC86EF96D2CC7 /* Pods-MindMirror-MindMirrorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMirror-MindMirrorTests.debug.xcconfig"; path = "Target Support Files/Pods-MindMirror-MindMirrorTests/Pods-MindMirror-MindMirrorTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F80AC8A3923C526C34895CD4 /* Pods-MindMirror.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMirror.release.xcconfig"; path = "Target Support Files/Pods-MindMirror/Pods-MindMirror.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +167,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0898DE10921A0530BD9CA2B4 /* libPods-MindMirror-MindMirrorTests.a in Frameworks */,
+				546A5818DAF597EE43F274DE /* libPods-MindMirror-MindMirrorTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BA04F2FD65D7AADD110DC64 /* libPods-MindMirror.a in Frameworks */,
+				A050A9276FF1D6D219D35637 /* libPods-MindMirror.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +203,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		43E7A3AA27B720260045879F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9F8284C3ED2C4910DC11D74 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -248,10 +255,10 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				F8D021F37CDBAE94EF506F14 /* libPods-MindMirror.a */,
-				9A48DC30BDE34BF64A10A35F /* libPods-MindMirror-MindMirrorTests.a */,
 				43A5917127B6DF2D0060DB34 /* WidgetKit.framework */,
 				43A5917327B6DF2D0060DB34 /* SwiftUI.framework */,
+				69C1F6F1B71B0D1286F43C03 /* libPods-MindMirror.a */,
+				9D400DD3758FD472DEF3A47B /* libPods-MindMirror-MindMirrorTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -359,10 +366,10 @@
 		8AD3FB642A96670082D8CBB5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				455BC8CA26D8A0516B9C3601 /* Pods-MindMirror.debug.xcconfig */,
-				45BBDE09078DE4627E4F80A4 /* Pods-MindMirror.release.xcconfig */,
-				FB5FB738B5EAC86EF96D2CC7 /* Pods-MindMirror-MindMirrorTests.debug.xcconfig */,
-				778E34A49021551226DBE135 /* Pods-MindMirror-MindMirrorTests.release.xcconfig */,
+				00C056069BE3CA8668A51392 /* Pods-MindMirror.debug.xcconfig */,
+				F80AC8A3923C526C34895CD4 /* Pods-MindMirror.release.xcconfig */,
+				2A6A66B0DE89C3FB0301AA60 /* Pods-MindMirror-MindMirrorTests.debug.xcconfig */,
+				253D5BA624884936E76BD422 /* Pods-MindMirror-MindMirrorTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -374,12 +381,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "MindMirrorTests" */;
 			buildPhases = (
-				0255F4B5714651301400385D /* [CP] Check Pods Manifest.lock */,
+				0829F37BB30B4272043E2459 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				3B932E900D13FD0AC4BC96DF /* [CP] Embed Pods Frameworks */,
-				7C0FC91A6953CE7A658B63A4 /* [CP] Copy Pods Resources */,
+				0B536D8E4BF8546344847E96 /* [CP] Embed Pods Frameworks */,
+				248C431ED5D417A036F10E1F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -395,16 +402,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "MindMirror" */;
 			buildPhases = (
-				9DC764F9F6B232D99DC52482 /* [CP] Check Pods Manifest.lock */,
+				30BC6A99472801B67A536E54 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				EEC01ADCE07AED5632E36022 /* [CP] Embed Pods Frameworks */,
-				EB15ADDA75CF57223F2D72A2 /* [CP] Copy Pods Resources */,
 				43A5917E27B6DF2F0060DB34 /* Embed App Extensions */,
 				43E7A3B827B720260045879F /* Embed Watch Content */,
+				054727F067BC082BECF44B65 /* [CP] Embed Pods Frameworks */,
+				D3CA7BE7DE2FFB90C21243F7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -440,6 +447,7 @@
 			buildPhases = (
 				43E7A37F27B720230045879F /* Resources */,
 				43E7A3BB27B720260045879F /* Embed App Extensions */,
+				D9F8284C3ED2C4910DC11D74 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -636,7 +644,24 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		0255F4B5714651301400385D /* [CP] Check Pods Manifest.lock */ = {
+		054727F067BC082BECF44B65 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MindMirror/Pods-MindMirror-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MindMirror/Pods-MindMirror-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MindMirror/Pods-MindMirror-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0829F37BB30B4272043E2459 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -658,7 +683,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3B932E900D13FD0AC4BC96DF /* [CP] Embed Pods Frameworks */ = {
+		0B536D8E4BF8546344847E96 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -675,7 +700,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MindMirror-MindMirrorTests/Pods-MindMirror-MindMirrorTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7C0FC91A6953CE7A658B63A4 /* [CP] Copy Pods Resources */ = {
+		248C431ED5D417A036F10E1F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -692,7 +717,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MindMirror-MindMirrorTests/Pods-MindMirror-MindMirrorTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9DC764F9F6B232D99DC52482 /* [CP] Check Pods Manifest.lock */ = {
+		30BC6A99472801B67A536E54 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -714,7 +739,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EB15ADDA75CF57223F2D72A2 /* [CP] Copy Pods Resources */ = {
+		D3CA7BE7DE2FFB90C21243F7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -729,23 +754,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MindMirror/Pods-MindMirror-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EEC01ADCE07AED5632E36022 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MindMirror/Pods-MindMirror-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MindMirror/Pods-MindMirror-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MindMirror/Pods-MindMirror-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -864,10 +872,10 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FB5FB738B5EAC86EF96D2CC7 /* Pods-MindMirror-MindMirrorTests.debug.xcconfig */;
+			baseConfigurationReference = 2A6A66B0DE89C3FB0301AA60 /* Pods-MindMirror-MindMirrorTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -884,7 +892,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.maaind.mindmirror.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "maaind.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MindMirror.app/MindMirror";
 			};
@@ -892,11 +900,12 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 778E34A49021551226DBE135 /* Pods-MindMirror-MindMirrorTests.release.xcconfig */;
+			baseConfigurationReference = 253D5BA624884936E76BD422 /* Pods-MindMirror-MindMirrorTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"BUNDLE_LOADER[arch=*]" = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				INFOPLIST_FILE = MindMirrorTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -909,7 +918,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.maaind.mindmirror.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "maaind.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MindMirror.app/MindMirror";
 			};
@@ -917,26 +926,31 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 455BC8CA26D8A0516B9C3601 /* Pods-MindMirror.debug.xcconfig */;
+			baseConfigurationReference = 00C056069BE3CA8668A51392 /* Pods-MindMirror.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MindMirror/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.mindmirror.MindMirror;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp;
 				PRODUCT_NAME = MindMirror;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -945,25 +959,30 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 45BBDE09078DE4627E4F80A4 /* Pods-MindMirror.release.xcconfig */;
+			baseConfigurationReference = F80AC8A3923C526C34895CD4 /* Pods-MindMirror.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				INFOPLIST_FILE = MindMirror/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.mindmirror.MindMirror;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp;
 				PRODUCT_NAME = MindMirror;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -981,24 +1000,25 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MindMirrorWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MindMirrorWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "MindMirror needs to access your microphone for estimating your state of mind from listening to your voice.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.mindmirror.MindMirrorWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp.MindMirrorWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1022,23 +1042,24 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MindMirrorWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MindMirrorWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "MindMirror needs to access your microphone for estimating your state of mind from listening to your voice.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.mindmirror.MindMirrorWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp.MindMirrorWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1055,27 +1076,30 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = MindMirrorCompanion_WatchKit_Extension;
 				INFOPLIST_KEY_CFBundleDisplayName = MindMirrorCompanion;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.maaind.mindmirror.MindMirror;
-				MARKETING_VERSION = 1.0;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.maaind.MindMirrorApp;
+				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.mindmirror.MindMirror.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1093,27 +1117,30 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = MindMirrorCompanion_WatchKit_Extension;
 				INFOPLIST_KEY_CFBundleDisplayName = MindMirrorCompanion;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.maaind.mindmirror.MindMirror;
-				MARKETING_VERSION = 1.0;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.maaind.MindMirrorApp;
+				MARKETING_VERSION = 1;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.mindmirror.MindMirror.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1136,10 +1163,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_ASSET_PATHS = "\"MindMirrorCompanion WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1152,10 +1179,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.mindmirror.MindMirror.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1180,10 +1207,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"MindMirrorCompanion WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1196,9 +1223,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.mindmirror.MindMirror.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1225,7 +1252,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1236,7 +1263,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.mindmirror.MindMirror.MindMirrorCompanionTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp.MindMirrorCompanionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1264,7 +1291,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1274,7 +1301,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.mindmirror.MindMirror.MindMirrorCompanionTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp.MindMirrorCompanionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1299,7 +1326,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1310,7 +1337,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.mindmirror.MindMirror.MindMirrorCompanionUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp.MindMirrorCompanionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1336,7 +1363,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = MKXMWG39LP;
+				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1346,7 +1373,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.mindmirror.MindMirror.MindMirrorCompanionUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp.MindMirrorCompanionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1408,7 +1435,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -1467,7 +1494,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
