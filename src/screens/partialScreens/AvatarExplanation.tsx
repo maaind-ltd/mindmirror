@@ -8,7 +8,7 @@ import MoodButtonList from '../../components/MoodButtonList';
 import {EmotionStateWithNone} from '../../constants/emotionState';
 
 const AvatarExplanation: () => JSX.Element = () => {
-  const {width} = useWindowDimensions();
+  const {height, width} = useWindowDimensions();
 
   const {currentMood, targetMood} = useCombinedStore(store => store.mood);
 
@@ -19,10 +19,11 @@ const AvatarExplanation: () => JSX.Element = () => {
         Your avatar helps represent your measured mood.
       </FreeFloatingText>
 
-      <AvatarSectionContainer screenWidth={width}>
+      <AvatarSectionContainer screenWidth={width} screenHeight={height}>
         <Avatar
           currentMood={EmotionStateWithNone.GoGoGo}
           targetMood={targetMood}
+          width={Math.min(height * 0.4, width)}
         />
       </AvatarSectionContainer>
 
@@ -32,7 +33,7 @@ const AvatarExplanation: () => JSX.Element = () => {
       </FreeFloatingText>
 
       <BottomSpaceProvider>
-        <MoodButtonList />
+        <MoodButtonList maxHeight={Math.min(height * 0.1, 90)} />
       </BottomSpaceProvider>
     </ArticleContent>
   );
@@ -52,8 +53,12 @@ const FreeFloatingText = styled.Text`
 `;
 
 const AvatarSectionContainer = styled.View`
-  height: ${props => props.screenWidth * 0.85}px;
-  margin-top: -${props => props.screenWidth * 0.2}px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: ${props => Math.min(props.screenHeight * 0.4, props.screenWidth * 0.85)}px;
+  margin-top: -${props => Math.min(props.screenHeight * 0.4, props.screenWidth * 0.85) * 0.2}px;
+  margin-bottom: -${props => Math.min(props.screenHeight * 0.4, props.screenWidth * 0.85) * 0.15}px;
 `;
 
 const BottomSpaceProvider = styled.View`

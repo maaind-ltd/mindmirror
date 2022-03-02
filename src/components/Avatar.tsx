@@ -12,15 +12,20 @@ export interface AvatarProps {
   targetMood: EmotionState;
   avatarType?: AvatarType;
   onPress?: () => void;
+  width?: number;
 }
 
-const Avatar: (props: AvatarProps) => JSX.Element = ({
-  currentMood,
-  targetMood,
-  avatarType,
-  onPress,
-}) => {
-  const {width} = useWindowDimensions();
+const Avatar: (props: AvatarProps) => JSX.Element = (props) => {
+  const {
+    currentMood,
+    targetMood,
+    avatarType,
+    onPress,
+  } = props;
+  let {width} = useWindowDimensions();
+  if (props.width) {
+    width = props.width;
+  }
   return (
     <OuterContainer width={width} onPress={onPress || (() => undefined)}>
       <GradientContainer>

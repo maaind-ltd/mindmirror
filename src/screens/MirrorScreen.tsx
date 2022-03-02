@@ -77,7 +77,9 @@ const MirrorScreen: () => JSX.Element = () => {
           <CheckInButton>
             <CheckInCircleBorder></CheckInCircleBorder>
             <CheckInButtonTextContainer color={currentMood}>
-              <CheckInButtonText color={currentMood}>Check-in</CheckInButtonText>
+              <CheckInButtonText color={currentMood}>
+                Check-in
+              </CheckInButtonText>
             </CheckInButtonTextContainer>
             <CheckInCircleBackground color={currentMood}>
               <Icons.VoiceCheckin width="58px" height="58px" />
@@ -144,7 +146,7 @@ const CheckInButtonTextContainer = styled.View`
   border-radius: 20px;
   border: 1px solid ${Colors.LightGreyAccent};
   position: relative;
-  top: 14px;
+  top: 13px;
   left: 35px;
   width: 110px;
   padding-right: 2px;

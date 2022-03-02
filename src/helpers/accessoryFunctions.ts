@@ -15,3 +15,5 @@ export function generateUid() {
   }
   return uid;
 }
+
+export const isAndroid = Platform.OS === 'android';

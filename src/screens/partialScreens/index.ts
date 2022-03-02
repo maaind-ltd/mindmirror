@@ -6,6 +6,7 @@ import SpotifyIntegration from './SpotifyIntegration';
 import InternalTesterWarning from './InternalTesterWarning';
 import Personalisation from './Personalisation';
 import FitbitIntegration from './FitbitIntegration';
+import WearableIntegration from './WearableIntegration';
 
 export interface OnboardingScreensProps {
   component: () => JSX.Element;
@@ -23,7 +24,7 @@ export const OnboardingScreens = {
   2: ColorExplanation,
   3: AvatarExplanation,
   4: SpotifyIntegration,
-  5: FitbitIntegration,
+  5: WearableIntegration,
 };
 
 export const PartialScreens: {[name: string]: PartialScreensProps} = {

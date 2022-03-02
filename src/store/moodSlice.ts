@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import EmotionState, {EmotionStateWithNone} from '../constants/emotionState';
 import {NativeModules} from 'react-native';
 import {ColorsRgb} from '../constants/colors';
-import {uniqueId} from 'lodash';
+import {isAndroid} from '../helpers/accessoryFunctions';
 const SharedStorage = NativeModules.SharedStorage;
 
 const HRV_MAX_OLDNESS_MS = 60 * 30 * 1000;
@@ -67,6 +67,7 @@ const moodSlice = createSlice({
         state.currentScore = Math.round(
           scores.reduce((sum, score) => sum + score, 0) / 2,
         );
+        console.log(`Calculated score: ${state.currentScore}`);
         if (state.currentScore < 0.3) {
           state.currentMood = EmotionStateWithNone.Mellow;
         } else if (state.currentScore < 0.45) {
@@ -83,8 +84,7 @@ const moodSlice = createSlice({
             : state.currentMood,
         colors: ColorsRgb[state.currentMood as keyof typeof ColorsRgb],
       });
-      console.log(sharedJsonString);
-      if (Platform.OS === 'android') {
+      if (isAndroid) {
         SharedStorage.set(sharedJsonString);
       }
     },
@@ -101,8 +101,7 @@ const moodSlice = createSlice({
             : action.payload,
         colors: ColorsRgb[action.payload as keyof typeof ColorsRgb],
       });
-      console.log(sharedJsonString);
-      if (Platform.OS === 'android') {
+      if (isAndroid) {
         SharedStorage.set(sharedJsonString);
       }
     },

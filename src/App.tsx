@@ -23,16 +23,17 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {BreathingType, SoundSuggestionType} from './helpers/audio';
 import BreathingSuggestionScreen from './screens/BreathingSuggestionScreen';
 import SoundSuggestionScreen from './screens/SoundSuggestionScreen';
-import {Linking} from 'react-native';
+import {Linking, Platform} from 'react-native';
 import {PairingDeepLink} from './constants/urls';
 import settingsSlice from './store/settingsSlice';
 import moodSlice from './store/moodSlice';
 import {fetchHrvData} from './helpers/hrvHelpers';
+import {isAndroid} from './helpers/accessoryFunctions';
 
-if (Platform.OS === 'android') {
-  var fontFamily = 'Raleway'
+if (isAndroid) {
+  var fontFamily = 'Raleway';
 } else {
-  var fontFamily = "Helvetica"
+  var fontFamily = 'Helvetica';
 }
 
 export interface OnboardingScreenParams {
@@ -67,8 +68,8 @@ const MainStack = createStackNavigator<MainStackParams>();
 
 const customTextProps = {
   style: {
-    fontFamily: fontFamily
-  }
+    fontFamily: fontFamily,
+  },
 };
 
 setCustomText(customTextProps);

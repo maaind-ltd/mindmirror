@@ -122,7 +122,7 @@ const ScreenContentContainer = styled.View`
   justify-content: flex-start;
   flex-grow: 1;
   min-height: ${props => props.screenHeight}px;
-  padding-top: 24px;
+  padding-top: 8px;
 `;
 
 const BottomContent = styled.View`

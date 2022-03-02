@@ -19,6 +19,8 @@ import {
   stopRecordingAndDiscardAudio,
 } from '../helpers/audio';
 import CircleGraph from '../components/CircleGraph';
+import {isAndroid} from '../helpers/accessoryFunctions';
+import {VoiceCheckinExplanationModal} from '../modals/VoiceCheckinExplanationModal';
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -42,6 +44,7 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
     store => store.mood,
   );
   const [currentStep, setCurrentStep] = useState(VoiceCheckinStep.Instruction);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     if (currentStep === VoiceCheckinStep.Listening && !isRecording) {
@@ -75,7 +78,7 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
         style={{
           backgroundColor: fadeAnim.interpolate({
             inputRange: [0, 1],
-            outputRange: [Colors.Background, Colors[currentMood]],
+            outputRange: [Colors.NoEmotion, Colors[currentMood]],
           }),
         }}>
         <TopTextContainer>
@@ -137,7 +140,11 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
           </CheckInButtonContainer>
         </CenterContentContainer>
         {currentStep === VoiceCheckinStep.Instruction ? (
-          <ExplanationLink>What is a voice check-in?</ExplanationLink>
+          <ExplanationButton onPress={() => setModalVisible(true)}>
+            <ExplanationButtonText>
+              What is a voice check-in?
+            </ExplanationButtonText>
+          </ExplanationButton>
         ) : (
           <></>
         )}
@@ -164,9 +171,9 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
               <CircleGraph value={lastScores.length * 16.67} />
               <StopButton
                 onPress={() => {
-                  setCurrentStep(VoiceCheckinStep.Instruction);
                   dispatch(moodSlice.actions.cancelRecording());
                   stopRecordingAndDiscardAudio();
+                  navigator.replace(Screens.MirrorScreen);
                 }}
               />
             </CountdownContainer>
@@ -213,6 +220,10 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
       ) : (
         <></>
       )}
+      <VoiceCheckinExplanationModal
+        visible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
     </StyledSafeAreaView>
   );
 };
@@ -229,7 +240,6 @@ const ScreenContainer = styled(Animated.View)`
 const TopTextContainer = styled(Pressable)`
   display: flex;
   flex-direction: column;
-  margin: 24px 0 0 0;
   justify-content: center;
   align-items: center;
   height: 120px;
@@ -287,7 +297,11 @@ const BottomContainer = styled.View`
   align-items: center;
 `;
 
-const ExplanationLink = styled.Text`
+const ExplanationButton = styled(Pressable)`
+  text-align: center; ;
+`;
+
+const ExplanationButtonText = styled.Text`
   margin-top: 24px;
   text-decoration: underline;
   color: ${Colors.Font};
@@ -357,7 +371,7 @@ const QuoteText = styled.Text`
 `;
 
 const QuoteBefore = styled.Text`
-  font-family: ${Platform.OS === "android" ? 'serif' : 'Courier'};
+  font-family: ${isAndroid ? 'serif' : 'Courier'};
   font-size: 48px;
   color: ${Colors.Font};
   transform: rotate(-12deg);
@@ -367,7 +381,7 @@ const QuoteBefore = styled.Text`
 `;
 
 const QuoteAfter = styled.Text`
-  font-family: ${Platform.OS === "android" ? 'serif' : 'Courier'};
+  font-family: ${isAndroid ? 'serif' : 'Courier'};
   font-size: 48px;
   color: ${Colors.Font};
   transform: rotate(12deg);
@@ -389,14 +403,15 @@ const CountdownContainer = styled(Pressable)`
 `;
 
 const StopButton = styled(Pressable)`
-  display: flex;
-  flex-direction: column;
-  margin: 24px 0 0 0;
-  justify-content: center;
-  align-items: center;
-  height: 120px;
-  flex-shrink: 0;
-  flex-grow: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -15px;
+  margin-top: -15px;
+  border-radius: 4px;
+  background-color: #d22929;
+  width: 30px;
+  height: 30px;
 `;
 
 export default VoiceCheckinScreen;

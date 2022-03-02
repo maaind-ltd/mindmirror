@@ -8,7 +8,7 @@ import {AvatarSelectionModal} from '../../modals/AvatarSelectionModal';
 import {TextInput} from 'react-native-gesture-handler';
 import settingsSlice from '../../store/settingsSlice';
 import {useDispatch} from 'react-redux';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const Personalisation: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
@@ -29,11 +29,12 @@ const Personalisation: () => JSX.Element = () => {
           value={userName}
           onChangeText={userName => {
             dispatch(settingsSlice.actions.setUserName(userName));
-          }} />
+          }}
+        />
       </NicknameContainer>
       <AvatarContainer screenWidth={width}>
         <AvatarImage
-          width={width}
+          width={width * 0.8}
           avatarType={avatarType}
           onPress={() => {
             setModalVisible(true);
@@ -70,13 +71,11 @@ const CenterText = styled.Text`
   color: ${Colors.Primary};
   text-align: center;
   margin: ${props =>
-    `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px ${
-      props.screenWidth * 0.08
-    }px`};
+    `24px ${props.screenWidth * 0.08}px 24px ${props.screenWidth * 0.08}px`};
 `;
 
 const NicknameContainer = styled.View`
-  margin: 36px 0;
+  margin: 0 0 16px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,7 +83,7 @@ const NicknameContainer = styled.View`
 `;
 
 const NicknameText = styled.Text`
-  font-size: 18px;
+  font-size: 22px;
   color: ${Colors.Primary};
   text-align: center;
 `;
@@ -103,8 +102,9 @@ const NicknameInput = styled(TextInput)`
 `;
 
 const AvatarContainer = styled.View`
-  height: ${props => props.screenWidth * 0.85}px;
+  height: ${props => props.screenWidth * 0.7}px;
   margin-top: -${props => props.screenWidth * 0.2}px;
+  margin-bottom: -${props => props.screenWidth * 0.2}px;
   display: flex;
   justify-content: center;
   align-items: center;
