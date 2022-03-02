@@ -23,7 +23,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {BreathingType, SoundSuggestionType} from './helpers/audio';
 import BreathingSuggestionScreen from './screens/BreathingSuggestionScreen';
 import SoundSuggestionScreen from './screens/SoundSuggestionScreen';
-import {Linking} from 'react-native';
+import {Linking, Platform} from 'react-native';
 import {PairingDeepLink} from './constants/urls';
 import settingsSlice from './store/settingsSlice';
 import moodSlice from './store/moodSlice';
