@@ -22,6 +22,11 @@ const ProfileScreen: () => JSX.Element = () => {
         hasChivron={true}
         color={Colors.Primary}
         title="Science and Technlogy"
+        onPress={() =>
+          navigator.push(Screens.ExplanationScreen, {
+            subScreen: 'ScienceAndTechnology',
+          })
+        }
       />
       <ItemListEntry
         hasChivron={true}

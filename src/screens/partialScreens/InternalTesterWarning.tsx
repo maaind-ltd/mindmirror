@@ -30,6 +30,7 @@ const FreeFloatingText = styled.Text`
     `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px ${
       props.screenWidth * 0.08
     }px`};
+  text-align: center;
 `;
 
 const WarningText = styled.Text`
@@ -40,6 +41,7 @@ const WarningText = styled.Text`
     `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px ${
       props.screenWidth * 0.08
     }px`};
+  text-align: center;
 `;
 
 export default InternalTesterWarning;

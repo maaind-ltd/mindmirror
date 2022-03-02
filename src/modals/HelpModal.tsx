@@ -3,7 +3,6 @@ import {Pressable} from 'react-native';
 import styled from 'styled-components/native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 import Colors from '../constants/colors';
-import {useDispatch} from 'react-redux';
 import {BaseModal, ModalVisibilityProps} from './BaseModal';
 
 export interface HelpModalProps extends ModalVisibilityProps {

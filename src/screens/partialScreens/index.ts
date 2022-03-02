@@ -7,6 +7,7 @@ import InternalTesterWarning from './InternalTesterWarning';
 import Personalisation from './Personalisation';
 import FitbitIntegration from './FitbitIntegration';
 import WearableIntegration from './WearableIntegration';
+import ScienceAndTechnology from './ScienceAndTechnology';
 
 export interface OnboardingScreensProps {
   component: () => JSX.Element;
@@ -35,5 +36,9 @@ export const PartialScreens: {[name: string]: PartialScreensProps} = {
   HowToUse: {
     title: 'How to use MindMirror',
     component: HowToUse,
+  },
+  ScienceAndTechnology: {
+    title: 'Science and Technology',
+    component: ScienceAndTechnology,
   },
 };
