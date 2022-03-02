@@ -3,6 +3,7 @@ import EmotionState from '../constants/emotionState';
 import store from '../store/combinedStore';
 import spotifySlice, {MasterPlaylistIds} from '../store/spotifySlice';
 import {getTypedState} from '../store/combinedStore';
+import {authorize} from 'react-native-app-auth';
 
 const BASE_SPOTIFY_URL = `https://open.spotify.com/playlist`;
 
@@ -202,5 +203,33 @@ export const setupSpotifyIntegration: (
     store.dispatch(spotifySlice.actions.setToken(token));
   } else {
     console.error('Failed to receive user data');
+  }
+};
+
+export const loginOnSpotify = async () => {
+  try {
+    const result = await authorize(spotifyAuthConfig);
+    console.log(`Received result: ${JSON.stringify(result)}`);
+    return result.accessToken;
+  } catch (error) {
+    console.log(`authorization failed: ${error}`);
+  }
+
+};
+
+const spotifyAuthConfig = {
+  clientId: '00e4806b0bb742a9a187df9ca1ac0a6a',
+  redirectUrl: 'com.mindmirror:/callback',
+  scopes: [
+    'playlist-read-private',
+    'playlist-modify-public',
+    'playlist-modify-private',
+    'user-library-read',
+    'user-library-modify',
+    'user-top-read'
+  ],
+  serviceConfiguration: {
+    authorizationEndpoint: 'https://accounts.spotify.com/authorize',
+    tokenEndpoint: 'https://accounts.spotify.com/api/token'
   }
 };

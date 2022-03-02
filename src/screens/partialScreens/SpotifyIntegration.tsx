@@ -4,7 +4,7 @@ import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimen
 import Colors from '../../constants/colors';
 import {NativeModules, Pressable} from 'react-native';
 import {useCombinedStore} from '../../store/combinedStore';
-import {setupSpotifyIntegration} from '../../helpers/spotifyHelpers';
+import {loginOnSpotify, setupSpotifyIntegration} from '../../helpers/spotifyHelpers';
 import ImageResources from '../../constants/imageResources';
 
 const {UniqueIdReader} = NativeModules;
@@ -36,26 +36,38 @@ const SpotifyIntegration: () => JSX.Element = () => {
 
   const connectToSpotify = () => {
     setProcessingState(ProcessingState.STARTED);
-    UniqueIdReader.startSpotifyAuthentication();
-    if (intervalId) {
-      clearInterval(intervalId);
-    }
-    intervalId = setInterval(() => {
-      UniqueIdReader.getSpotifyToken((text: string, error: string) => {
-        if (text.startsWith('Token:')) {
-          const token = text.substring('Token:'.length);
-          setupSpotifyIntegration(token, false)
-            .then(() => {
-              setProcessingState(ProcessingState.FINISHED);
-            })
-            .catch(error => {
-              console.error(error);
-              setProcessingState(ProcessingState.FAILED);
-            });
-          clearInterval(intervalId);
-        }
-      });
-    }, 1000);
+    
+    loginOnSpotify().then((token) => {
+      console.log(`Result for spotify login came back: ${token}.`);
+        setupSpotifyIntegration(token, false)
+          .then(() => {
+            setProcessingState(ProcessingState.FINISHED);
+          })
+          .catch(error => {
+            console.error(error);
+            setProcessingState(ProcessingState.FAILED);
+          }); 
+    });
+    // UniqueIdReader.startSpotifyAuthentication();
+    // if (intervalId) {
+    //   clearInterval(intervalId);
+    // }
+    // intervalId = setInterval(() => {
+    //   UniqueIdReader.getSpotifyToken((text: string, error: string) => {
+    //     if (text.startsWith('Token:')) {
+    //       const token = text.substring('Token:'.length);
+    //       setupSpotifyIntegration(token, false)
+    //         .then(() => {
+    //           setProcessingState(ProcessingState.FINISHED);
+    //         })
+    //         .catch(error => {
+    //           console.error(error);
+    //           setProcessingState(ProcessingState.FAILED);
+    //         });
+    //       clearInterval(intervalId);
+    //     }
+    //   });
+    // }, 1000);
   };
 
   return (
