@@ -80,13 +80,23 @@ const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
           <></>
         )}
         <TextContainer>
-          <TitleText color={color}>{title}</TitleText>
+          <TitleText color={color} screenWidth={width}>
+            {title}
+          </TitleText>
           {description ? (
-            <DescriptionText color={color}>{description}</DescriptionText>
+            <DescriptionText color={color} screenWidth={width}>
+              {description}
+            </DescriptionText>
           ) : (
             <></>
           )}
-          {meta ? <MetaText color={color}>{meta}</MetaText> : <></>}
+          {meta ? (
+            <MetaText color={color} screenWidth={width}>
+              {meta}
+            </MetaText>
+          ) : (
+            <></>
+          )}
         </TextContainer>
         {hasChivron ? <ChivronText color={color}>{'>'}</ChivronText> : <></>}
       </EntryContainer>
@@ -126,17 +136,17 @@ const TextContainer = styled.View`
 `;
 
 const TitleText = styled.Text`
-  font-size: 24px;
+  font-size: ${props => Math.min(props.screenWidth * 0.055, 24)}px;
   color: ${props => props.color || Colors.Font};
 `;
 
 const DescriptionText = styled.Text`
-  font-size: 16px;
+  font-size: ${props => Math.min(props.screenWidth * 0.04, 16)}px;
   color: ${props => props.color || Colors.Font};
 `;
 
 const MetaText = styled.Text`
-  font-size: 14px;
+  font-size: ${props => Math.min(props.screenWidth * 0.035, 14)}px;
   color: ${Colors.LightGreyAccent};
   margin-top: 2px;
 `;

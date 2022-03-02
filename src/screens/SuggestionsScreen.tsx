@@ -13,6 +13,7 @@ import SuggestionsListEntry, {
 } from '../components/ItemListEntry';
 import Icons from '../constants/icons';
 import {BreathingType, SoundSuggestionType} from '../helpers/audio';
+import {HelpModal} from '../modals/HelpModal';
 
 interface MoodBasedSuggestionEntries {
   breathing: ItemListEntryData[];
@@ -119,8 +120,9 @@ const SuggestionsScreen: () => JSX.Element = () => {
   const [isBreathingActive, setBreathingActive] = useState(true);
 
   const {targetMood} = useCombinedStore(store => store.mood);
-  const {height} = useWindowDimensions();
+  const {width, height} = useWindowDimensions();
   const navigator = useStackNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <StyledSafeAreaView>
@@ -139,7 +141,7 @@ const SuggestionsScreen: () => JSX.Element = () => {
             <ExplanationText>suggestions</ExplanationText>
           </TextContainer>
           <QuestionMarkContainer>
-            <Pressable>
+            <Pressable onPress={() => setModalVisible(true)}>
               <QuestionIcon>
                 <Icons.Help />
               </QuestionIcon>
@@ -166,6 +168,13 @@ const SuggestionsScreen: () => JSX.Element = () => {
             <SuggestionsListEntry key={data.key} {...data} />
           ))}
         </SuggestionsList>
+        <HelpModal visible={modalVisible} setModalVisible={setModalVisible}>
+          <HelpTextContainer>
+            <HelpText screenWidth={width}>
+              Suggestions help you get into your target mood.
+            </HelpText>
+          </HelpTextContainer>
+        </HelpModal>
       </BackgroundView>
     </StyledSafeAreaView>
   );
@@ -266,6 +275,19 @@ const SuggestionTypeButtonText = styled.Text`
   font-size: 18px;
   color: ${Colors.Font};
   text-align: center;
+`;
+
+const HelpTextContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 48px 24px;
+`;
+
+const HelpText = styled.Text`
+  font-size: 18px;
+  color: ${Colors.Primary};
 `;
 
 export default SuggestionsScreen;

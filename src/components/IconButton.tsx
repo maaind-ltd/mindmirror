@@ -3,6 +3,7 @@ import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 import Icons from '../constants/icons';
 import {Pressable} from 'react-native';
+import {isAndroid} from '../helpers/accessoryFunctions';
 
 export interface IconButtonProps {
   onPress: () => void;
@@ -16,15 +17,14 @@ const IconButton: (props: IconButtonProps) => JSX.Element = ({
   const IconElement = Icons[icon];
   return (
     <IconContainer>
-      {Platform.OS === "android" ? (
-      <InnerButton
-        onPress={onPress}
-        background={TouchableNativeFeedback.Ripple('#00000033', true, 24)}>
-        <IconElement />
-      </InnerButton>
+      {isAndroid ? (
+        <InnerButton
+          onPress={onPress}
+          background={TouchableNativeFeedback.Ripple('#00000033', true, 24)}>
+          <IconElement />
+        </InnerButton>
       ) : (
-        <InnerButtonIos
-          onPress={onPress}>
+        <InnerButtonIos onPress={onPress}>
           <IconElement />
         </InnerButtonIos>
       )}

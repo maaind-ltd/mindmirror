@@ -6,6 +6,7 @@ import {EmotionStateWithNone} from '../constants/emotionState';
 import {Animated} from 'react-native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 import Easing from 'react-native/Libraries/Animated/Easing';
+import {isAndroid} from '../helpers/accessoryFunctions';
 
 const WigglyLineContainer: (props: {
   baseColor: EmotionStateWithNone;
@@ -20,7 +21,7 @@ const WigglyLineContainer: (props: {
         easing: Easing.linear,
         toValue: -width * 4 * 0.8,
         duration: 18000,
-        useNativeDriver: Platform.OS === 'android',
+        useNativeDriver: isAndroid,
       }),
     ).start();
   }, [progressAnimation]);
@@ -33,7 +34,7 @@ const WigglyLineContainer: (props: {
     <Container height={height}>
       <Animated.View
         style={
-          Platform.OS === 'android'
+          isAndroid
             ? {
                 translateX: Animated.modulo(
                   Animated.divide(progressAnimation, 4),
@@ -51,7 +52,7 @@ const WigglyLineContainer: (props: {
       </Animated.View>
       <Animated.View
         style={
-          Platform.OS === 'android'
+          isAndroid
             ? {
                 translateX: Animated.modulo(
                   Animated.divide(progressAnimation, 2),
@@ -69,7 +70,7 @@ const WigglyLineContainer: (props: {
       </Animated.View>
       <Animated.View
         style={
-          Platform.OS === 'android'
+          isAndroid
             ? {
                 translateX: Animated.modulo(progressAnimation, width * 0.8),
               }

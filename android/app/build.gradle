@@ -188,6 +188,12 @@ android {
 
         }
     }
+
+  defaultConfig {
+    manifestPlaceholders = [
+      appAuthRedirectScheme: 'com.mindmirror.auth'
+    ]
+  }
 }
 
 dependencies {

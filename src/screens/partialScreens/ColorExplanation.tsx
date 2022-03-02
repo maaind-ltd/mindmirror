@@ -77,7 +77,7 @@ const MoodBlock = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-bottom: 24px;
+  margin-bottom: 48px;
 `;
 
 const MoodColorBlock = styled.View`

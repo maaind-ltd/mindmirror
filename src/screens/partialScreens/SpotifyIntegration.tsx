@@ -4,8 +4,12 @@ import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimen
 import Colors from '../../constants/colors';
 import {NativeModules, Pressable} from 'react-native';
 import {useCombinedStore} from '../../store/combinedStore';
-import {loginOnSpotify, setupSpotifyIntegration} from '../../helpers/spotifyHelpers';
+import {
+  loginOnSpotify,
+  setupSpotifyIntegration,
+} from '../../helpers/spotifyHelpers';
 import ImageResources from '../../constants/imageResources';
+import {isAndroid} from '../../helpers/accessoryFunctions';
 
 const {UniqueIdReader} = NativeModules;
 
@@ -36,38 +40,45 @@ const SpotifyIntegration: () => JSX.Element = () => {
 
   const connectToSpotify = () => {
     setProcessingState(ProcessingState.STARTED);
-    
-    loginOnSpotify().then((token) => {
-      console.log(`Result for spotify login came back: ${token}.`);
-        setupSpotifyIntegration(token, false)
-          .then(() => {
-            setProcessingState(ProcessingState.FINISHED);
-          })
-          .catch(error => {
-            console.error(error);
-            setProcessingState(ProcessingState.FAILED);
-          }); 
-    });
-    // UniqueIdReader.startSpotifyAuthentication();
-    // if (intervalId) {
-    //   clearInterval(intervalId);
-    // }
-    // intervalId = setInterval(() => {
-    //   UniqueIdReader.getSpotifyToken((text: string, error: string) => {
-    //     if (text.startsWith('Token:')) {
-    //       const token = text.substring('Token:'.length);
-    //       setupSpotifyIntegration(token, false)
-    //         .then(() => {
-    //           setProcessingState(ProcessingState.FINISHED);
-    //         })
-    //         .catch(error => {
-    //           console.error(error);
-    //           setProcessingState(ProcessingState.FAILED);
-    //         });
-    //       clearInterval(intervalId);
-    //     }
-    //   });
-    // }, 1000);
+
+    if (isAndroid) {
+      UniqueIdReader.startSpotifyAuthentication();
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      intervalId = setInterval(() => {
+        UniqueIdReader.getSpotifyToken((text: string, error: string) => {
+          if (text.startsWith('Token:')) {
+            const token = text.substring('Token:'.length);
+            setupSpotifyIntegration(token, false)
+              .then(() => {
+                setProcessingState(ProcessingState.FINISHED);
+              })
+              .catch(error => {
+                console.error(error);
+                setProcessingState(ProcessingState.FAILED);
+              });
+            clearInterval(intervalId);
+          }
+        });
+      }, 1000);
+    } else {
+      loginOnSpotify().then(token => {
+        if (token) {
+          console.log(`Result for spotify login came back: ${token}.`);
+          setupSpotifyIntegration(token, false)
+            .then(() => {
+              setProcessingState(ProcessingState.FINISHED);
+            })
+            .catch(error => {
+              console.error(error);
+              setProcessingState(ProcessingState.FAILED);
+            });
+        }
+        console.error(`Failed to login. Token was ${token}.`);
+        setProcessingState(ProcessingState.FAILED);
+      });
+    }
   };
 
   return (
@@ -88,12 +99,7 @@ const SpotifyIntegration: () => JSX.Element = () => {
             screenWidth={width}
             state={processingState}
             onPress={() => {
-              if (
-                processingState === ProcessingState.NOT_STARTED ||
-                processingState === ProcessingState.FAILED
-              ) {
-                connectToSpotify();
-              }
+              connectToSpotify();
             }}>
             <ConnectWithSpotifyButtonText>
               {processingState === ProcessingState.FAILED

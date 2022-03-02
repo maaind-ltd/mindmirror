@@ -87,7 +87,7 @@ export default function CircleGraph(props: CircleGraphProps): JSX.Element {
   const {
     onPress,
     filledColour = Colors.LightGreyAccent,
-    remainderColour = 'red',
+    remainderColour = '#d22929',
     value,
     showRemainder = true,
     size = 64,

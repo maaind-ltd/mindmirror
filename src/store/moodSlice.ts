@@ -3,6 +3,7 @@ import EmotionState, {EmotionStateWithNone} from '../constants/emotionState';
 import {NativeModules} from 'react-native';
 import {ColorsRgb} from '../constants/colors';
 import {uniqueId} from 'lodash';
+import {isAndroid} from '../helpers/accessoryFunctions';
 const SharedStorage = NativeModules.SharedStorage;
 
 const HRV_MAX_OLDNESS_MS = 60 * 30 * 1000;
@@ -84,7 +85,7 @@ const moodSlice = createSlice({
         colors: ColorsRgb[state.currentMood as keyof typeof ColorsRgb],
       });
       console.log(sharedJsonString);
-      if (Platform.OS === 'android') {
+      if (isAndroid) {
         SharedStorage.set(sharedJsonString);
       }
     },
@@ -102,7 +103,7 @@ const moodSlice = createSlice({
         colors: ColorsRgb[action.payload as keyof typeof ColorsRgb],
       });
       console.log(sharedJsonString);
-      if (Platform.OS === 'android') {
+      if (isAndroid) {
         SharedStorage.set(sharedJsonString);
       }
     },

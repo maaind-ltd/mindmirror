@@ -71,13 +71,11 @@ const CenterText = styled.Text`
   color: ${Colors.Primary};
   text-align: center;
   margin: ${props =>
-    `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px ${
-      props.screenWidth * 0.08
-    }px`};
+    `24px ${props.screenWidth * 0.08}px 24px ${props.screenWidth * 0.08}px`};
 `;
 
 const NicknameContainer = styled.View`
-  margin: 36px 0;
+  margin: 16px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -106,6 +104,7 @@ const NicknameInput = styled(TextInput)`
 const AvatarContainer = styled.View`
   height: ${props => props.screenWidth * 0.85}px;
   margin-top: -${props => props.screenWidth * 0.2}px;
+  margin-bottom: -${props => props.screenWidth * 0.2}px;
   display: flex;
   justify-content: center;
   align-items: center;
