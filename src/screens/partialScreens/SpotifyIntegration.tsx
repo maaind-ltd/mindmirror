@@ -39,14 +39,17 @@ const SpotifyIntegration: () => JSX.Element = () => {
     
     loginOnSpotify().then((token) => {
       console.log(`Result for spotify login came back: ${token}.`);
-        setupSpotifyIntegration(token, false)
-          .then(() => {
-            setProcessingState(ProcessingState.FINISHED);
-          })
-          .catch(error => {
-            console.error(error);
-            setProcessingState(ProcessingState.FAILED);
-          }); 
+      setupSpotifyIntegration(token, false)
+        .then(() => {
+          setProcessingState(ProcessingState.FINISHED);
+        })
+        .catch(error => {
+          console.error(error);
+          setProcessingState(ProcessingState.FAILED);
+        }); 
+    }).catch((error) => {
+      console.log(`Failed to login on spotify ${error}`);
+      setProcessingState(ProcessingState.FAILED);
     });
     // UniqueIdReader.startSpotifyAuthentication();
     // if (intervalId) {
