@@ -8,7 +8,7 @@ import {AvatarSelectionModal} from '../../modals/AvatarSelectionModal';
 import {TextInput} from 'react-native-gesture-handler';
 import settingsSlice from '../../store/settingsSlice';
 import {useDispatch} from 'react-redux';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const Personalisation: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
@@ -29,7 +29,8 @@ const Personalisation: () => JSX.Element = () => {
           value={userName}
           onChangeText={userName => {
             dispatch(settingsSlice.actions.setUserName(userName));
-          }} />
+          }}
+        />
       </NicknameContainer>
       <AvatarContainer screenWidth={width}>
         <AvatarImage
@@ -84,7 +85,7 @@ const NicknameContainer = styled.View`
 `;
 
 const NicknameText = styled.Text`
-  font-size: 18px;
+  font-size: 22px;
   color: ${Colors.Primary};
   text-align: center;
 `;
