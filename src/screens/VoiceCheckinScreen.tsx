@@ -240,7 +240,6 @@ const ScreenContainer = styled(Animated.View)`
 const TopTextContainer = styled(Pressable)`
   display: flex;
   flex-direction: column;
-  margin: 24px 0 0 0;
   justify-content: center;
   align-items: center;
   height: 120px;
@@ -348,15 +347,15 @@ const NoThanksButton = styled(Pressable)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  border: 1px solid ${Colors.LightGreyAccent};
+  background-color: ${Colors.Background};
+  border-radius: 24px;
 `;
 
 const NoThanksText = styled.Text`
   font-size: 20px;
   color: ${Colors.Font};
   padding: 4px 72px;
-  border: 1px solid ${Colors.LightGreyAccent};
-  background-color: ${Colors.Background};
-  border-radius: 24px;
 `;
 
 const QuoteContainer = styled.View`

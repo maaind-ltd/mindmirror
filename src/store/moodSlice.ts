@@ -2,7 +2,6 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import EmotionState, {EmotionStateWithNone} from '../constants/emotionState';
 import {NativeModules} from 'react-native';
 import {ColorsRgb} from '../constants/colors';
-import {uniqueId} from 'lodash';
 import {isAndroid} from '../helpers/accessoryFunctions';
 const SharedStorage = NativeModules.SharedStorage;
 
@@ -32,6 +31,7 @@ const moodSlice = createSlice({
       state.lastScores = [...state.lastScores, action.payload];
     },
     stopRecording: state => {
+      console.log(`Received scores are ${state.lastScores}`);
       state.currentVoiceScore =
         state.lastScores.reduce((sum, score) => sum + score, 0) /
         (state.lastScores.length || 1);
@@ -48,29 +48,30 @@ const moodSlice = createSlice({
       const scores: Array<number> = [];
 
       if (
-        state.currentHrvScore >= 0 &&
+        state.currentHrvScore > 0 &&
         state.hrvScoreTimestamp > Date.now() - HRV_MAX_OLDNESS_MS
       ) {
         scores.push(state.currentHrvScore);
       }
 
       if (
-        state.currentVoiceScore >= 0 &&
+        state.currentVoiceScore > 0 &&
         state.voiceScoreTimestamp > Date.now() - VOICE_MAX_OLDNESS_MS
       ) {
-        scores.push(state.currentHrvScore);
+        scores.push(state.currentVoiceScore);
       }
 
       if (scores.length === 0) {
         state.currentScore = -1;
         state.currentMood = EmotionStateWithNone.NoEmotion;
       } else {
-        state.currentScore = Math.round(
-          scores.reduce((sum, score) => sum + score, 0) / 2,
-        );
+        console.log(scores);
+        state.currentScore = 
+          scores.reduce((sum, score) => sum + score, 0) / scores.length;
+        console.log(`Calculated score: ${state.currentScore}`);
         if (state.currentScore < 0.3) {
           state.currentMood = EmotionStateWithNone.Mellow;
-        } else if (state.currentScore < 0.45) {
+        } else if (state.currentScore < 0.42) {
           state.currentMood = EmotionStateWithNone.Flow;
         } else {
           state.currentMood = EmotionStateWithNone.GoGoGo;
@@ -84,7 +85,6 @@ const moodSlice = createSlice({
             : state.currentMood,
         colors: ColorsRgb[state.currentMood as keyof typeof ColorsRgb],
       });
-      console.log(sharedJsonString);
       if (isAndroid) {
         SharedStorage.set(sharedJsonString);
       }
@@ -102,7 +102,6 @@ const moodSlice = createSlice({
             : action.payload,
         colors: ColorsRgb[action.payload as keyof typeof ColorsRgb],
       });
-      console.log(sharedJsonString);
       if (isAndroid) {
         SharedStorage.set(sharedJsonString);
       }

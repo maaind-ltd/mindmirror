@@ -62,6 +62,7 @@ const ExplanationContentBorderProvider = styled.View`
   background-color: ${Colors.Primary};
   flex-grow: 1;
   display: flex;
+  width: 100%;
 `;
 
 const ExplanationContent = styled.View`

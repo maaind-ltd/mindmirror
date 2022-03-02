@@ -27,7 +27,7 @@ export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
         try {
           const responseBody = JSON.parse(data);
           console.log('Got body ', responseBody);
-          if (responseBody && responseBody.contains_speech === 1) {
+          if (responseBody && responseBody.contains_speech === 1 && responseBody.calm) {
             store.dispatch(
               moodSlice.actions.addCurrentScore(responseBody.calm),
             );

@@ -34,7 +34,7 @@ const Personalisation: () => JSX.Element = () => {
       </NicknameContainer>
       <AvatarContainer screenWidth={width}>
         <AvatarImage
-          width={width}
+          width={width * 0.8}
           avatarType={avatarType}
           onPress={() => {
             setModalVisible(true);
@@ -75,7 +75,7 @@ const CenterText = styled.Text`
 `;
 
 const NicknameContainer = styled.View`
-  margin: 16px 0;
+  margin: 0 0 16px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -102,7 +102,7 @@ const NicknameInput = styled(TextInput)`
 `;
 
 const AvatarContainer = styled.View`
-  height: ${props => props.screenWidth * 0.85}px;
+  height: ${props => props.screenWidth * 0.7}px;
   margin-top: -${props => props.screenWidth * 0.2}px;
   margin-bottom: -${props => props.screenWidth * 0.1}px;
   display: flex;
