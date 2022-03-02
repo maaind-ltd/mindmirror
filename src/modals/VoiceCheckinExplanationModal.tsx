@@ -39,10 +39,12 @@ export const VoiceCheckinExplanationModal: (
         </ContentContainer>
 
         <LearnMoreButton
-          onPress={() =>
-            navigator.replace(Screens.ExplanationScreen, {
-              subScreen: 'ScienceAndTechnology',
-            })
+          onPress={() => {
+              props.setModalVisible(false);
+              navigator.replace(Screens.ExplanationScreen, {
+                subScreen: 'ScienceAndTechnology',
+              })
+            }
           }>
           <LearnMoreButtonText>Learn more</LearnMoreButtonText>
         </LearnMoreButton>
