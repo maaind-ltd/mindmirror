@@ -5,10 +5,13 @@ import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimen
 import Colors from '../constants/colors';
 import CircleGraph from '../components/CircleGraph';
 import {BaseModal, ModalVisibilityProps} from './BaseModal';
+import Screens from '../constants/screens';
+import {useStackNavigation} from '../store/combinedStore';
 
 export const VoiceCheckinExplanationModal: (
   props: ModalVisibilityProps,
 ) => JSX.Element = props => {
+  const navigator = useStackNavigation();
   const {height, width} = useWindowDimensions();
 
   return (
@@ -35,7 +38,12 @@ export const VoiceCheckinExplanationModal: (
           </CountdownContainer>
         </ContentContainer>
 
-        <LearnMoreButton>
+        <LearnMoreButton
+          onPress={() =>
+            navigator.replace(Screens.ExplanationScreen, {
+              subScreen: 'ScienceAndTechnology',
+            })
+          }>
           <LearnMoreButtonText>Learn more</LearnMoreButtonText>
         </LearnMoreButton>
       </BorderContainer>

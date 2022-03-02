@@ -104,7 +104,7 @@ const NicknameInput = styled(TextInput)`
 const AvatarContainer = styled.View`
   height: ${props => props.screenWidth * 0.7}px;
   margin-top: -${props => props.screenWidth * 0.2}px;
-  margin-bottom: -${props => props.screenWidth * 0.2}px;
+  margin-bottom: -${props => props.screenWidth * 0.1}px;
   display: flex;
   justify-content: center;
   align-items: center;

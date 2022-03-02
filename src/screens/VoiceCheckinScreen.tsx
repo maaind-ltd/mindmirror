@@ -339,6 +339,7 @@ const ResultText = styled.Text`
   font-size: 22px;
   color: ${Colors.Font};
   margin: 24px;
+  text-align: center;
 `;
 
 const NoThanksButton = styled(Pressable)`

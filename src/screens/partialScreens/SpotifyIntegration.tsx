@@ -170,15 +170,6 @@ const ConnectWithSpotifyButtonText = styled.Text`
   margin-bottom: 2px;
 `;
 
-const HeaderText = styled.Text`
-  font-size: 24px;
-  color: ${Colors.Primary};
-  margin: ${props =>
-    `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px ${
-      props.screenWidth * 0.08
-    }px`};
-`;
-
 const FreeFloatingText = styled.Text`
   font-size: 18px;
   color: ${Colors.Primary};
@@ -186,6 +177,7 @@ const FreeFloatingText = styled.Text`
     `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px ${
       props.screenWidth * 0.08
     }px`};
+  text-align: center;
 `;
 
 export default SpotifyIntegration;

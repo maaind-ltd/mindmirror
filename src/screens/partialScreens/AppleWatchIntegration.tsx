@@ -57,6 +57,7 @@ const HeaderText = styled.Text`
     `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px ${
       props.screenWidth * 0.08
     }px`};
+  text-align: center;
 `;
 
 const FreeFloatingText = styled.Text`
@@ -66,26 +67,6 @@ const FreeFloatingText = styled.Text`
     `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px ${
       props.screenWidth * 0.08
     }px`};
-`;
-
-const TestConnectionButton = styled(Pressable)`
-  margin: 36px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 42px;
-  width: 70%;
-  margin-left: 15%;
-  background-color: white;
-  border-radius: 24px;
-  margin-bottom: 24px;
-  border: 1px solid ${Colors.LightGreyAccent};
-`;
-
-const TextConnectionButtonText = styled.Text`
-  font-size: 18px;
-  color: ${Colors.Primary};
   text-align: center;
 `;
 
