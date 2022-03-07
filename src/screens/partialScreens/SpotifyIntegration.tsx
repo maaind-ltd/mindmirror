@@ -39,7 +39,6 @@ const SpotifyIntegration: () => JSX.Element = () => {
   );
 
   const connectToSpotify = () => {
-    setProcessingState(ProcessingState.STARTED);
     if (isAndroid) {
       UniqueIdReader.startSpotifyAuthentication();
       if (intervalId) {

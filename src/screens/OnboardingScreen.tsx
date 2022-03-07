@@ -14,7 +14,7 @@ import {useAppDispatch} from '../store/combinedStore';
 import settingsSlice from '../store/settingsSlice';
 import IndicatorDots from '../components/IndicatorDots';
 import {generateUid} from '../helpers/accessoryFunctions';
-import {useStore} from 'react-redux';
+import {setupNotifications} from '../helpers/notificationHelpers';
 
 const ONBOARDING_PAGES = Object.keys(OnboardingScreens).length;
 
@@ -46,7 +46,10 @@ const OnboardingScreen: (
                 <NextButton
                   onPress={() => {
                     if (onboardingIndex === ONBOARDING_PAGES - 1) {
-                      dispatch(settingsSlice.actions.setOnboardingFinished(true));
+                      dispatch(
+                        settingsSlice.actions.setOnboardingFinished(true),
+                      );
+                      setupNotifications();
                       if (userToken) {
                         dispatch(
                           settingsSlice.actions.setUserToken(generateUid()),
@@ -60,17 +63,17 @@ const OnboardingScreen: (
                       });
                     }
                   }}>
-                    <NextButtonText>
-                      {onboardingIndex === ONBOARDING_PAGES - 1
-                        ? 'Done'
-                        : 'Continue'}
-                    </NextButtonText>
-                  </NextButton>
-                  <IndicatorDots
-                    vertical={false}
-                    numberOfDots={ONBOARDING_PAGES}
-                    currentDot={onboardingIndex}
-                  />
+                  <NextButtonText>
+                    {onboardingIndex === ONBOARDING_PAGES - 1
+                      ? 'Done'
+                      : 'Continue'}
+                  </NextButtonText>
+                </NextButton>
+                <IndicatorDots
+                  vertical={false}
+                  numberOfDots={ONBOARDING_PAGES}
+                  currentDot={onboardingIndex}
+                />
               </BottomContent>
             </ScreenContentContainer>
           </ScrollView>
