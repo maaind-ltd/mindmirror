@@ -9,6 +9,7 @@ import {TextInput} from 'react-native-gesture-handler';
 import settingsSlice from '../../store/settingsSlice';
 import {useDispatch} from 'react-redux';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {FreeFloatingText} from '../../components/FreeFloatingText';
 
 const Personalisation: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
@@ -18,7 +19,7 @@ const Personalisation: () => JSX.Element = () => {
 
   return (
     <ArticleContent>
-      <FreeFloatingText screenWidth={width}>
+      <FreeFloatingText>
         MindMirrow allows you to track your emotion and stess levels using
         integrated technology and varied suggestions.
       </FreeFloatingText>
@@ -55,15 +56,6 @@ const Personalisation: () => JSX.Element = () => {
 
 const ArticleContent = styled.View`
   flex-grow: 1;
-`;
-
-const FreeFloatingText = styled.Text`
-  font-size: 18px;
-  color: ${Colors.Primary};
-  margin: ${props =>
-    `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px ${
-      props.screenWidth * 0.08
-    }px`};
 `;
 
 const CenterText = styled.Text`

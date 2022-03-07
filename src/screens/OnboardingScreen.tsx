@@ -14,8 +14,7 @@ import {useAppDispatch} from '../store/combinedStore';
 import settingsSlice from '../store/settingsSlice';
 import IndicatorDots from '../components/IndicatorDots';
 import {generateUid} from '../helpers/accessoryFunctions';
-import {useStore} from 'react-redux';
-// import {setupNotifications} from '../helpers/notificationHelpers';
+import {setupNotifications} from '../helpers/notificationHelpers';
 
 const ONBOARDING_PAGES = Object.keys(OnboardingScreens).length;
 
@@ -50,7 +49,7 @@ const OnboardingScreen: (
                       dispatch(
                         settingsSlice.actions.setOnboardingFinished(true),
                       );
-                      // setupNotifications();
+                      setupNotifications();
                       if (userToken) {
                         dispatch(
                           settingsSlice.actions.setUserToken(generateUid()),
