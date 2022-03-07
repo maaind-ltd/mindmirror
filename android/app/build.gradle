@@ -131,6 +131,9 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
+        // configurations.all {
+        //     resolutionStrategy { force 'androidx.core:core:1.6.0' }
+        // }
         applicationId "com.mindmirror"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
