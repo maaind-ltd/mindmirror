@@ -6,22 +6,25 @@ import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimen
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
 import Screens from '../constants/screens';
 import {useCombinedStore, useStackNavigation} from '../store/combinedStore';
-import AvatarImages from '../constants/avatarImages';
 import ItemListEntry from '../components/ItemListEntry';
 import IconButton from '../components/IconButton';
 import settingsSlice from '../store/settingsSlice';
-import {useAppDispatch} from '../store/combinedStore';
+import {HelpModal} from '../modals/HelpModal';
 import {AvatarImage} from '../components/AvatarImage';
 import {useDispatch} from 'react-redux';
 import {TextInput} from 'react-native-gesture-handler';
 import {AvatarSelectionModal} from '../modals/AvatarSelectionModal';
+import {setupNotifications} from '../helpers/notificationHelpers';
 
 const ProfileScreen: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
   const navigator = useStackNavigation();
   const dispatch = useDispatch();
-  const {userName, avatarType} = useCombinedStore(store => store.settings);
+  const {userName, avatarType, showNotifications} = useCombinedStore(
+    store => store.settings,
+  );
   const [modalVisible, setModalVisible] = useState(false);
+  const [featureModalVisible, setFeatureModalVisible] = useState(false);
 
   return (
     <StyledSafeAreaView>
@@ -72,7 +75,6 @@ const ProfileScreen: () => JSX.Element = () => {
             color={Colors.Primary}
             title="About MindMirror"
             onPress={() => {
-              console.log('Changing route.');
               navigator.push(Screens.ExplanationScreen, {
                 subScreen: 'AboutMindMirror',
               });
@@ -81,21 +83,45 @@ const ProfileScreen: () => JSX.Element = () => {
           <ItemListEntry
             hasChivron={true}
             color={Colors.Primary}
-            title="Spotify playlists"
+            title="Spotify Playlists"
+            onPress={() => {
+              navigator.push(Screens.ExplanationScreen, {
+                subScreen: 'SpotifyPlaylists',
+              });
+            }}
           />
           <ItemListEntry
-            hasChivron={true}
+            isToggle={true}
+            toggleValue={showNotifications}
+            onValueChange={value => {
+              dispatch(settingsSlice.actions.setShowNotifications(value));
+
+              setupNotifications();
+            }}
             color={Colors.Primary}
             title="Notifications"
           />
-          <ItemListEntry color={Colors.Primary} title="Previous Suggestions" />
-          <ItemListEntry color={Colors.Primary} title="Request a Feature" />
+          <ItemListEntry
+            color={Colors.Primary}
+            title="Request a Feature"
+            onPress={() => setFeatureModalVisible(true)}
+          />
         </ArticleList>
       </BackgroundView>
       <AvatarSelectionModal
         visible={modalVisible}
         setModalVisible={setModalVisible}
       />
+      <HelpModal
+        visible={featureModalVisible}
+        setModalVisible={setFeatureModalVisible}>
+        <HelpTextContainer>
+          <HelpText screenWidth={width}>
+            This will open the App Store page for MindMirror once it is publicy
+            visible.
+          </HelpText>
+        </HelpTextContainer>
+      </HelpModal>
     </StyledSafeAreaView>
   );
 };
@@ -200,6 +226,19 @@ const NicknameInput = styled(TextInput)`
   border-top-width: 0;
   border-left-width: 0;
   border-right-width: 0;
+`;
+
+const HelpTextContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 48px 24px;
+`;
+
+const HelpText = styled.Text`
+  font-size: 18px;
+  color: ${Colors.Primary};
 `;
 
 export default ProfileScreen;

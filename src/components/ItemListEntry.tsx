@@ -3,7 +3,7 @@ import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import Icons from '../constants/icons';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
-import {TouchableNativeFeedback} from 'react-native-gesture-handler';
+import {Switch, TouchableNativeFeedback} from 'react-native-gesture-handler';
 import {openSpotifyPlaylistForMood} from '../helpers/spotifyHelpers';
 import {BreathingType, SoundSuggestionType} from '../helpers/audio';
 import {useStackNavigation} from '../store/combinedStore';
@@ -22,6 +22,9 @@ export interface ItemListEntryData {
   spotifyMood?: EmotionState;
   breathingType?: BreathingType;
   soundSuggestionType?: SoundSuggestionType;
+  isToggle?: boolean;
+  toggleValue?: boolean;
+  onValueChange?: (value: boolean) => void;
 }
 
 const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
@@ -35,6 +38,9 @@ const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
   spotifyMood,
   breathingType,
   soundSuggestionType,
+  isToggle,
+  toggleValue,
+  onValueChange,
 }) => {
   const navigator = useStackNavigation();
   const {width} = useWindowDimensions();
@@ -44,7 +50,11 @@ const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
     <BorderProvider
       width={width}
       onPress={
-        spotifyMood
+        isToggle
+          ? () => {
+              onValueChange(!toggleValue);
+            }
+          : spotifyMood
           ? () => {
               if (onPress) {
                 onPress();
@@ -99,6 +109,17 @@ const ItemListEntry: (props: ItemListEntryData) => JSX.Element = ({
           )}
         </TextContainer>
         {hasChivron ? <ChivronText color={color}>{'>'}</ChivronText> : <></>}
+        {isToggle ? (
+          <Switch
+            trackColor={{false: Colors.NoEmotion, true: `${Colors.Primary}aa`}}
+            thumbColor={Colors.Primary}
+            ios_backgroundColor={Colors.NoEmotion}
+            value={toggleValue}
+            onValueChange={onValueChange}
+          />
+        ) : (
+          <></>
+        )}
       </EntryContainer>
     </BorderProvider>
   );

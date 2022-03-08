@@ -9,6 +9,24 @@ import {useStackNavigation} from '../store/combinedStore';
 import Screens from '../constants/screens';
 import StyledSafeAreaView from '../components/StyledSafeAreaView';
 import {useCombinedStore} from '../store/combinedStore';
+import notifee, {EventType} from '@notifee/react-native';
+
+// Bootstrap sequence function
+async function bootstrap() {
+  const initialNotification = await notifee.getInitialNotification();
+
+  if (initialNotification) {
+    console.log(
+      'Notification caused application to open',
+      initialNotification.notification,
+    );
+    console.log(
+      'Press action used to open the app',
+      initialNotification.pressAction,
+    );
+  }
+  return initialNotification;
+}
 
 const App: () => JSX.Element = () => {
   const {width, height} = useWindowDimensions();
@@ -18,12 +36,19 @@ const App: () => JSX.Element = () => {
   useEffect(() => {
     setTimeout(() => {
       console.log(`Onboarding finished?: ${onboardingFinished}`);
-      navigator.replace(
-        onboardingFinished ? Screens.MirrorScreen : Screens.OnboardingScreen,
-      );
-    }, 2000);
-  }, []);
-
+      bootstrap().then(initialNotification => {
+        if (initialNotification && onboardingFinished) {
+          navigator.replace(Screens.VoiceCheckinScreen);
+        } else {
+          navigator.replace(
+            onboardingFinished
+              ? Screens.MirrorScreen
+              : Screens.OnboardingScreen,
+          );
+        }
+      });
+    });
+  });
   return (
     <StyledSafeAreaView>
       <StatusBar barStyle={'light-content'} />

@@ -21,18 +21,18 @@ const ProfileScreen: () => JSX.Element = () => {
       <ItemListEntry
         hasChivron={true}
         color={Colors.Primary}
-        title="Science and Technlogy"
+        title="Science and Technology"
         onPress={() =>
           navigator.push(Screens.ExplanationScreen, {
             subScreen: 'ScienceAndTechnology',
           })
         }
       />
-      <ItemListEntry
+      {/* <ItemListEntry
         hasChivron={true}
         color={Colors.Primary}
         title="Data Sensitivity"
-      />
+      /> */}
     </ArticleList>
   );
 };

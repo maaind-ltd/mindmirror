@@ -8,6 +8,7 @@ import Personalisation from './Personalisation';
 import FitbitIntegration from './FitbitIntegration';
 import WearableIntegration from './WearableIntegration';
 import ScienceAndTechnology from './ScienceAndTechnology';
+import SpotifyPlaylists from './SpotifyPlaylists';
 
 export interface OnboardingScreensProps {
   component: () => JSX.Element;
@@ -40,5 +41,9 @@ export const PartialScreens: {[name: string]: PartialScreensProps} = {
   ScienceAndTechnology: {
     title: 'Science and Technology',
     component: ScienceAndTechnology,
+  },
+  SpotifyPlaylists: {
+    title: 'Spotify Playlists',
+    component: SpotifyPlaylists,
   },
 };

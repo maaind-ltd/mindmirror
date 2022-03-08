@@ -66,12 +66,12 @@ const moodSlice = createSlice({
         state.currentMood = EmotionStateWithNone.NoEmotion;
       } else {
         console.log(scores);
-        state.currentScore = 
+        state.currentScore =
           scores.reduce((sum, score) => sum + score, 0) / scores.length;
         console.log(`Calculated score: ${state.currentScore}`);
-        if (state.currentScore < 0.3) {
+        if (state.currentScore > 0.5) {
           state.currentMood = EmotionStateWithNone.Mellow;
-        } else if (state.currentScore < 0.42) {
+        } else if (state.currentScore > 0.33) {
           state.currentMood = EmotionStateWithNone.Flow;
         } else {
           state.currentMood = EmotionStateWithNone.GoGoGo;

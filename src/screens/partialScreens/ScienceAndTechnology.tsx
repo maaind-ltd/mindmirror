@@ -70,6 +70,7 @@ const ScienceAndTechnology: () => JSX.Element = () => {
         Curated music playlists on Spotify and other sound experiences are
         designed specifically for each state of mind.
       </FreeFloatingText>
+      <BottomSpacer />
     </ArticleContent>
   );
 };
@@ -87,6 +88,10 @@ const IconContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+`;
+
+const BottomSpacer = styled.View`
+  margin-bottom: 48px;
 `;
 
 export default ScienceAndTechnology;

@@ -10,6 +10,7 @@ const settingsSlice = createSlice({
     avatarType: AvatarType.Cat,
     userToken: generateUid(),
     pairingCode: '',
+    showNotifications: true,
   },
   reducers: {
     setOnboardingFinished: (state, action: PayloadAction<boolean>) => {
@@ -32,6 +33,9 @@ const settingsSlice = createSlice({
     },
     clearPairingCode: state => {
       state.pairingCode = '';
+    },
+    setShowNotifications: (state, action: PayloadAction<boolean>) => {
+      state.showNotifications = action.payload;
     },
   },
 });

@@ -87,7 +87,7 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
               ? `This is a voice check-in to help measure your state of mind.\n\n` +
                 `Press the icon to start.`
               : currentStep === VoiceCheckinStep.Listening
-              ? `Please read the following quote:`
+              ? `Talk about your day and how you are feeling. Or just read the following quote instead:`
               : `Great! Judging by the sound of your voice, you appear to be in a ${currentMood} ` +
                 `state of mind`}
           </ExplanationText>
@@ -139,15 +139,6 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
             )}
           </CheckInButtonContainer>
         </CenterContentContainer>
-        {currentStep === VoiceCheckinStep.Instruction ? (
-          <ExplanationButton onPress={() => setModalVisible(true)}>
-            <ExplanationButtonText>
-              What is a voice check-in?
-            </ExplanationButtonText>
-          </ExplanationButton>
-        ) : (
-          <></>
-        )}
         <BottomContainer>
           {currentStep === VoiceCheckinStep.Instruction ? (
             <NoThanksButton
@@ -168,7 +159,9 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
           )}
           {currentStep === VoiceCheckinStep.Listening ? (
             <CountdownContainer>
-              <CircleGraph value={lastScores.length * 16.67} />
+              <CircleGraph
+                value={5 + Math.min(100, lastScores.length * 16.67)}
+              />
               <StopButton
                 onPress={() => {
                   dispatch(moodSlice.actions.cancelRecording());
@@ -197,6 +190,15 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
             </ResetButton>
           )}
         </BottomContainer>
+        {currentStep === VoiceCheckinStep.Instruction ? (
+          <ExplanationButton onPress={() => setModalVisible(true)}>
+            <ExplanationButtonText>
+              What is a voice check-in?
+            </ExplanationButtonText>
+          </ExplanationButton>
+        ) : (
+          <></>
+        )}
         {currentStep === VoiceCheckinStep.Result ? (
           <BackButton
             onPress={() => {
@@ -298,7 +300,8 @@ const BottomContainer = styled.View`
 `;
 
 const ExplanationButton = styled(Pressable)`
-  text-align: center; ;
+  text-align: center;
+  margin-bottom: 20px;
 `;
 
 const ExplanationButtonText = styled.Text`

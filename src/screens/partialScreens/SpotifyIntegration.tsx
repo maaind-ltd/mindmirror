@@ -84,7 +84,7 @@ const SpotifyIntegration: () => JSX.Element = () => {
       <SpotifyLogoContainer>
         <ImageResources.Spotify
           width={width * 0.6}
-          height={width * 0.6 * 0.3024}
+          height={width * 0.6 * 0.3024 /* aspect ratio for Spotify logo */}
         />
       </SpotifyLogoContainer>
       {!spotifyToken ? (

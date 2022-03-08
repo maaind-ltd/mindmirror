@@ -19,7 +19,7 @@ const Personalisation: () => JSX.Element = () => {
 
   return (
     <ArticleContent>
-      <FreeFloatingText>
+      <FreeFloatingText verticalMargin={true}>
         MindMirrow allows you to track your emotion and stess levels using
         integrated technology and varied suggestions.
       </FreeFloatingText>

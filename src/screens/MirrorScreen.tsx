@@ -1,5 +1,5 @@
-import React from 'react';
-import {StatusBar, Pressable, Linking} from 'react-native';
+import React, {useEffect} from 'react';
+import {StatusBar, Pressable, Linking, NativeModules} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import Avatar from '../components/Avatar';
@@ -13,8 +13,9 @@ import {useAppDispatch, useCombinedStore} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
 import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
+import {isAndroid} from './helpers/accessoryFunctions';
+import notifee, {EventType} from '@notifee/react-native';
 
-import {NativeModules} from 'react-native';
 const {UniqueIdReader} = NativeModules;
 
 const NAVIGATION_TIMEOUT = 600;
@@ -34,6 +35,20 @@ const MirrorScreen: () => JSX.Element = () => {
   const navigator = useStackNavigation();
   const {width} = useWindowDimensions();
 
+  // Subscribe to events
+  useEffect(() => {
+    return notifee.onForegroundEvent(({type, detail}) => {
+      switch (type) {
+        case EventType.DISMISSED:
+          console.log('User dismissed notification', detail.notification);
+          break;
+        case EventType.PRESS:
+          console.log('User pressed notification', detail.notification);
+          navigator.replace(Screens.VoiceCheckinScreen);
+          break;
+      }
+    });
+  }, []);
   return (
     <StyledSafeAreaView>
       <StatusBar barStyle={'light-content'} />

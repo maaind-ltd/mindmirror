@@ -31,7 +31,7 @@ export async function fetchHrvData() {
       console.log(jsonData);
       if (jsonData.latest_calm_score !== undefined) {
         store.dispatch(
-          moodSlice.actions.addHrvScore(jsonData.latest_calm_score),
+          moodSlice.actions.addHrvScore(jsonData.latest_calm_score / 100),
         );
       }
     })

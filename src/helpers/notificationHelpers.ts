@@ -36,19 +36,34 @@ export const setupNotifications = async () => {
   const hasWearable = !!getTypedState().settings.pairingCode;
   notifee.cancelAllNotifications();
 
+  if (!getTypedState().settings.showNotifications) {
+    return;
+  }
+  console.log('Setting up notifications.');
+
   const dates = [
     new Date(Date.now()),
     new Date(Date.now()),
     new Date(Date.now()),
   ];
-  dates[0].setHours(12, 45, 0, 0);
-  dates[1].setHours(14, 0, 0, 0);
+  dates[0].setHours(9, 0, 0, 0);
+  dates[1].setHours(16, 28, 0, 0);
   dates[2].setHours(19, 0, 0, 0);
 
+  const now = Date.now();
+
+  const timestamps = [
+    dates[0].getTime(),
+    dates[1].getTime(),
+    dates[2].getTime(),
+  ].map((timestamp, index) =>
+    timestamp < now ? timestamp + 86400000 /* one day in ms */ : timestamp,
+  );
+
   const triggers = [
-    {...baseTrigger, timestamp: dates[0].getTime()} as TimestampTrigger,
-    {...baseTrigger, timestamp: dates[1].getTime()} as TimestampTrigger,
-    {...baseTrigger, timestamp: dates[2].getTime()} as TimestampTrigger,
+    {...baseTrigger, timestamp: timestamps[0]} as TimestampTrigger,
+    {...baseTrigger, timestamp: timestamps[1]} as TimestampTrigger,
+    {...baseTrigger, timestamp: timestamps[2]} as TimestampTrigger,
   ];
 
   const notificationTexts = [
@@ -75,11 +90,34 @@ export const setupNotifications = async () => {
         body: notificationTexts[i],
         android: {
           channelId,
+          pressAction: {
+            id: 'default',
+          },
+          // smallIcon: 'ic_launcher_round',
         },
       },
       triggers[i],
     );
   }
+
+  await notifee.createTriggerNotification(
+    {
+      title: 'Voice Checkin',
+      body: 'This is how notifications will be displayed',
+      android: {
+        channelId,
+        pressAction: {
+          id: 'default',
+        },
+        // smallIcon: 'ic_launcher_round',
+      },
+    },
+    {
+      type: TriggerType.TIMESTAMP,
+      repeatFrequency: RepeatFrequency.DAILY,
+      timestamp: Date.now() + 1000,
+    },
+  );
 };
 
 // 9am Good morning, would you like to do a voice check in to start your day?

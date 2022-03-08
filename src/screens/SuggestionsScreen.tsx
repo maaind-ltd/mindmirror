@@ -117,7 +117,7 @@ const Suggestions: SuggestionList = {
 };
 
 const SuggestionsScreen: () => JSX.Element = () => {
-  const [isBreathingActive, setBreathingActive] = useState(true);
+  const [isSoundActive, setSoundActive] = useState(true);
 
   const {targetMood} = useCombinedStore(store => store.mood);
   const {width, height} = useWindowDimensions();
@@ -150,20 +150,20 @@ const SuggestionsScreen: () => JSX.Element = () => {
         </TopNavigation>
         <SuggestionTypeSwitcher>
           <SuggestionTypeButton
-            active={isBreathingActive}
-            onPress={() => setBreathingActive(true)}>
-            <SuggestionTypeButtonText>Breathing</SuggestionTypeButtonText>
+            active={isSoundActive}
+            onPress={() => setSoundActive(true)}>
+            <SuggestionTypeButtonText>Sound</SuggestionTypeButtonText>
           </SuggestionTypeButton>
           <SuggestionTypeButton
-            active={!isBreathingActive}
-            onPress={() => setBreathingActive(false)}>
-            <SuggestionTypeButtonText>Sounds</SuggestionTypeButtonText>
+            active={!isSoundActive}
+            onPress={() => setSoundActive(false)}>
+            <SuggestionTypeButtonText>Breathing</SuggestionTypeButtonText>
           </SuggestionTypeButton>
         </SuggestionTypeSwitcher>
         <SuggestionsList>
-          {(isBreathingActive
-            ? Suggestions[targetMood].breathing
-            : Suggestions[targetMood].sound
+          {(isSoundActive
+            ? Suggestions[targetMood].sound
+            : Suggestions[targetMood].breathing
           ).map(data => (
             <SuggestionsListEntry key={data.key} {...data} />
           ))}
