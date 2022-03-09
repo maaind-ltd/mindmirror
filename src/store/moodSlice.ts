@@ -78,16 +78,16 @@ const moodSlice = createSlice({
         }
       }
 
+      const moodText = 
+        state.currentMood === EmotionStateWithNone.NoEmotion
+          ? 'No measured mood'
+          : state.currentMood;
       const sharedJsonString = JSON.stringify({
-        name:
-          state.currentMood === EmotionStateWithNone.NoEmotion
-            ? 'No measured mood'
-            : state.currentMood,
+        name: moodText,
         colors: ColorsRgb[state.currentMood as keyof typeof ColorsRgb],
       });
-      if (isAndroid) {
-        SharedStorage.set(sharedJsonString);
-      }
+      SharedStorage.set(sharedJsonString);
+      
     },
     cancelRecording: state => {
       state.lastScores = [];
@@ -95,16 +95,16 @@ const moodSlice = createSlice({
     },
     setCurrentMood: (state, action: PayloadAction<EmotionStateWithNone>) => {
       state.currentMood = action.payload;
+
+      const moodText = 
+        state.currentMood === EmotionStateWithNone.NoEmotion
+          ? 'No measured mood'
+          : state.currentMood;
       const sharedJsonString = JSON.stringify({
-        name:
-          action.payload === EmotionStateWithNone.NoEmotion
-            ? 'No measured mood'
-            : action.payload,
+        name: moodText,
         colors: ColorsRgb[action.payload as keyof typeof ColorsRgb],
       });
-      if (isAndroid) {
-        SharedStorage.set(sharedJsonString);
-      }
+      SharedStorage.set(sharedJsonString);
     },
     setTargetMood: (state, action: PayloadAction<EmotionState>) => {
       state.targetMood = action.payload;

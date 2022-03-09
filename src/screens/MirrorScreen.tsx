@@ -15,8 +15,7 @@ import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
 import {isAndroid} from './helpers/accessoryFunctions';
 import notifee, {EventType} from '@notifee/react-native';
-
-const {UniqueIdReader} = NativeModules;
+const {SharedStorage} = NativeModules;
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -55,10 +54,11 @@ const MirrorScreen: () => JSX.Element = () => {
       <MirrorContainer color={currentColor}>
         {currentMood !== EmotionStateWithNone.NoEmotion ? (
           <TopTextContainer
-            onPress={() =>
+            onPress={() => {
               dispatch(
                 moodSlice.actions.setCurrentMood(nextEmotion[currentMood]),
-              )
+              );
+            }
             }>
             <ExplanationText>Measured State of Mind</ExplanationText>
             <StateText>{currentMood}</StateText>

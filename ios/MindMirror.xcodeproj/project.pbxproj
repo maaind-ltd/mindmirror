@@ -32,6 +32,8 @@
 		546A5818DAF597EE43F274DE /* libPods-MindMirror-MindMirrorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D400DD3758FD472DEF3A47B /* libPods-MindMirror-MindMirrorTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A050A9276FF1D6D219D35637 /* libPods-MindMirror.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C1F6F1B71B0D1286F43C03 /* libPods-MindMirror.a */; };
+		DBB5C45A27D925ED00DF10B4 /* WidgetKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB5C45927D925ED00DF10B4 /* WidgetKitHelper.swift */; };
+		DBB5C45C27D92A0A00DF10B4 /* SharedStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB5C45727D8FB7700DF10B4 /* SharedStorage.m */; };
 		DBCAEBDB27C6368100927F25 /* RTCUniqueIdModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCAEBDA27C6368100927F25 /* RTCUniqueIdModule.m */; };
 		DBCAEBDC27C6368100927F25 /* RTCUniqueIdModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCAEBDA27C6368100927F25 /* RTCUniqueIdModule.m */; };
 /* End PBXBuildFile section */
@@ -156,6 +158,12 @@
 		69C1F6F1B71B0D1286F43C03 /* libPods-MindMirror.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MindMirror.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MindMirror/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D400DD3758FD472DEF3A47B /* libPods-MindMirror-MindMirrorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MindMirror-MindMirrorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBB5C45627D8FAE800DF10B4 /* SharedStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedStorage.h; sourceTree = "<group>"; };
+		DBB5C45727D8FB7700DF10B4 /* SharedStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedStorage.m; sourceTree = "<group>"; };
+		DBB5C45827D925EC00DF10B4 /* MindMirror-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MindMirror-Bridging-Header.h"; sourceTree = "<group>"; };
+		DBB5C45927D925ED00DF10B4 /* WidgetKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetKitHelper.swift; sourceTree = "<group>"; };
+		DBB5C45F27D92D9300DF10B4 /* MindMirror.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = MindMirror.entitlements; path = MindMirror/MindMirror.entitlements; sourceTree = "<group>"; };
+		DBB5C46027D92DD600DF10B4 /* MindMirrorWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindMirrorWidgetExtension.entitlements; sourceTree = "<group>"; };
 		DBCAEBD927C3EDE800927F25 /* RCTUniqueIdModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTUniqueIdModule.h; sourceTree = "<group>"; };
 		DBCAEBDA27C6368100927F25 /* RTCUniqueIdModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTCUniqueIdModule.m; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -239,6 +247,9 @@
 		13B07FAE1A68108700A75B9A /* MindMirror */ = {
 			isa = PBXGroup;
 			children = (
+				DBB5C45627D8FAE800DF10B4 /* SharedStorage.h */,
+				DBB5C45727D8FB7700DF10B4 /* SharedStorage.m */,
+				DBB5C45F27D92D9300DF10B4 /* MindMirror.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -247,6 +258,8 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				DBCAEBD927C3EDE800927F25 /* RCTUniqueIdModule.h */,
 				DBCAEBDA27C6368100927F25 /* RTCUniqueIdModule.m */,
+				DBB5C45927D925ED00DF10B4 /* WidgetKitHelper.swift */,
+				DBB5C45827D925EC00DF10B4 /* MindMirror-Bridging-Header.h */,
 			);
 			name = MindMirror;
 			sourceTree = "<group>";
@@ -332,6 +345,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				DBB5C46027D92DD600DF10B4 /* MindMirrorWidgetExtension.entitlements */,
 				13B07FAE1A68108700A75B9A /* MindMirror */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MindMirrorTests */,
@@ -526,7 +540,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1320;
 					};
 					43A5916F27B6DF2D0060DB34 = {
 						CreatedOnToolsVersion = 13.1;
@@ -791,6 +805,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBB5C45C27D92A0A00DF10B4 /* SharedStorage.m in Sources */,
+				DBB5C45A27D925ED00DF10B4 /* WidgetKitHelper.swift in Sources */,
 				DBCAEBDB27C6368100927F25 /* RTCUniqueIdModule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
@@ -874,6 +890,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2A6A66B0DE89C3FB0301AA60 /* Pods-MindMirror-MindMirrorTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -902,6 +919,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 253D5BA624884936E76BD422 /* Pods-MindMirror-MindMirrorTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"BUNDLE_LOADER[arch=*]" = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -931,6 +949,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MindMirror/MindMirror.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
@@ -951,6 +970,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp;
 				PRODUCT_NAME = MindMirror;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MindMirror-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -964,6 +984,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MindMirror/MindMirror.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
@@ -983,6 +1004,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp;
 				PRODUCT_NAME = MindMirror;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MindMirror-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -999,6 +1021,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MindMirrorWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1040,6 +1063,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MindMirrorWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 5;
