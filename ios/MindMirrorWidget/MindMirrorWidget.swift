@@ -54,8 +54,8 @@ struct MindMirrorWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             MindMirrorWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("MindMirror Widget")
+        .description("Displays your current mood.")
     }
 }
 
