@@ -78,6 +78,8 @@ export const setupNotifications = async () => {
     ],
   ];
 
+  await notifee.requestPermission();
+
   const channelId = await notifee.createChannel({
     id: 'voice_checkin',
     name: 'Voice Checkin Reminders',
