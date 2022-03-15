@@ -7,13 +7,15 @@ export const FreeFloatingText: (props: {
   children: string; // Text only
   color?: string;
   verticalMargin?: boolean;
-}) => JSX.Element = ({children, color, verticalMargin}) => {
+  center?: boolean;
+}) => JSX.Element = ({children, color, verticalMargin, center}) => {
   const {width} = useWindowDimensions();
   return (
     <TextElement
       screenWidth={width}
       color={color}
-      verticalMargin={verticalMargin}>
+      verticalMargin={verticalMargin}
+      center={center}>
       {children}
     </TextElement>
   );
@@ -26,4 +28,5 @@ export const TextElement = styled.Text`
     `${props.verticalMargin ? props.screenWidth * 0.04 : 0}px ${
       props.screenWidth * 0.08
     }px ${props.verticalMargin ? props.screenWidth * 0.08 : 0}px`};
+  text-align: ${props => (props.center ? 'center' : 'inherit')};
 `;

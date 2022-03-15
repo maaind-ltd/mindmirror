@@ -214,7 +214,6 @@ export const loginOnSpotify = async () => {
   } catch (error) {
     console.log(`authorization failed: ${error}`);
   }
-
 };
 
 const spotifyAuthConfig = {
@@ -226,10 +225,10 @@ const spotifyAuthConfig = {
     'playlist-modify-private',
     'user-library-read',
     'user-library-modify',
-    'user-top-read'
+    'user-top-read',
   ],
   serviceConfiguration: {
     authorizationEndpoint: 'https://accounts.spotify.com/authorize',
-    tokenEndpoint: 'https://accounts.spotify.com/api/token'
-  }
+    tokenEndpoint: 'https://accounts.spotify.com/api/token',
+  },
 };

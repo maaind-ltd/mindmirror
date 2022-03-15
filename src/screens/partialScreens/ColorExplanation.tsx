@@ -16,8 +16,8 @@ const ColorExplanation: () => JSX.Element = () => {
   return (
     <ArticleContent>
       <FreeFloatingText screenWidth={width}>
-        MindMirror offers three different moods for you to achieve, represented
-        by three different colours.
+        MindMirror offers three different moods for you to enjoy, represented by
+        three different colours.
       </FreeFloatingText>
       <MoodBlock>
         <MoodColorBlock color={Colors.Mellow} screenWidth={width} />

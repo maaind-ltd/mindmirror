@@ -22,6 +22,7 @@ import {
   getBreathingText,
 } from '../helpers/breathing';
 import {TopNavigation} from '../components/TopNavigation';
+import {getTimeMsStringRepresentation} from '../helpers/accessoryFunctions';
 
 const REFRESH_RATE_MS = 50;
 
@@ -43,6 +44,8 @@ const BreathingSuggestionScreen: (
     subScreenKey === BreathingType.CLASSIC
       ? 'Classic Breathing'
       : 'Pursed-lip Breathing';
+
+  const {totalExperienceTimeMs} = BreathingTiming[subScreenKey];
 
   useEffect(() => {
     const soundResource =
@@ -110,6 +113,9 @@ const BreathingSuggestionScreen: (
             </BreathingTextContainer>
           </OuterRing>
         </MainContentContainer>
+        <TimeText>
+          {getTimeMsStringRepresentation(totalExperienceTimeMs - time)}
+        </TimeText>
       </BackgroundView>
     </StyledSafeAreaView>
   );
@@ -226,11 +232,11 @@ const BreathingText = styled.Text`
   text-align: center;
 `;
 
-const StateText = styled.Text`
+const TimeText = styled.Text`
   font-size: 24px;
   color: ${Colors.Primary};
   text-align: center;
-  margin-bottom: 4px;
+  margin-bottom: 48px;
 `;
 
 export default BreathingSuggestionScreen;

@@ -15,6 +15,7 @@ import settingsSlice from '../store/settingsSlice';
 import IndicatorDots from '../components/IndicatorDots';
 import {generateUid} from '../helpers/accessoryFunctions';
 import {setupNotifications} from '../helpers/notificationHelpers';
+import {isAndroid} from '../helpers/accessoryFunctions';
 
 const ONBOARDING_PAGES = Object.keys(OnboardingScreens).length;
 
@@ -101,7 +102,7 @@ const NextButton = styled(Pressable)`
   border-radius: 24px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: ${isAndroid ? 24 : 40}px;
 `;
 
 const SpacingElement = styled.View`

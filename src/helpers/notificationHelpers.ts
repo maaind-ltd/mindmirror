@@ -114,7 +114,6 @@ export const setupNotifications = async () => {
     },
     {
       type: TriggerType.TIMESTAMP,
-      repeatFrequency: RepeatFrequency.DAILY,
       timestamp: Date.now() + 1000,
     },
   );

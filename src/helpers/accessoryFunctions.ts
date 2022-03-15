@@ -17,3 +17,9 @@ export function generateUid() {
 }
 
 export const isAndroid = Platform.OS === 'android';
+
+export const getTimeMsStringRepresentation = (time: number) => {
+  const minutes = Math.floor(time / 60 / 1000);
+  const seconds = Math.floor((time - minutes * 60 * 1000) / 1000);
+  return `${minutes}`.padStart(2, '0') + ':' + `${seconds}`.padStart(2, '0');
+};

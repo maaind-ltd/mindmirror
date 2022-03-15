@@ -1,25 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 import Colors from '../../constants/colors';
-import {NativeModules, Pressable, Linking} from 'react-native';
+import {Pressable} from 'react-native';
 import {useCombinedStore} from '../../store/combinedStore';
-import {setupSpotifyIntegration} from '../../helpers/spotifyHelpers';
-import settingsSlice from '../../store/settingsSlice';
-import {useDispatch} from 'react-redux';
-import {TextInput} from 'react-native-gesture-handler';
-import {PairingDeepLink} from '../../constants/urls';
-
-const {UniqueIdReader} = NativeModules;
-
-let intervalId: ReturnType<typeof setInterval> | undefined;
-
-const enum ProcessingState {
-  NOT_STARTED,
-  STARTED,
-  FINISHED,
-  FAILED,
-}
+import ImageResources from '../../constants/imageResources';
+import {
+  FitbitCompanionApp,
+  openFitbitStorePage,
+} from '../../helpers/fitbitHelpers';
 
 const FitbitIntegration: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
@@ -27,20 +16,38 @@ const FitbitIntegration: () => JSX.Element = () => {
 
   return (
     <ArticleContent>
-      <HeaderText screenWidth={width}>Fitbit Integration</HeaderText>
+      <LogoImage source={ImageResources.FitBit} screenWidth={width} />
 
       {!pairingCode ? (
         <>
           <FreeFloatingText screenWidth={width}>
-            You can connect your Fitbit Versa with MindMirror. To do so, please
-            install the MindMirror Fitbit Companion app and click on connect in
-            the settings screen.
+            You can connect your Fitbit Versa with MindMirror.
           </FreeFloatingText>
+          <FreeFloatingText screenWidth={width}>
+            To do so, please install the MindMirror Fitbit Companion app and
+            click on connect in the settings screen.
+          </FreeFloatingText>
+          <ConnectWithFitbitButton
+            screenWidth={width}
+            onPress={() => {
+              openFitbitStorePage(FitbitCompanionApp.Versa_1_2);
+            }}>
+            <FibitButtonText>App for Versa 1 and Versa 2</FibitButtonText>
+          </ConnectWithFitbitButton>
+          <ConnectWithFitbitButton
+            screenWidth={width}
+            onPress={() => {
+              openFitbitStorePage(FitbitCompanionApp.Versa_3);
+            }}>
+            <FibitButtonText>App for Versa 3 and Sense</FibitButtonText>
+          </ConnectWithFitbitButton>
         </>
       ) : (
-        <FreeFloatingText screenWidth={width}>
-          Your Fitbit is now set up.
-        </FreeFloatingText>
+        <CenteringContainer>
+          <FreeFloatingText screenWidth={width}>
+            Your Fitbit is now set up.
+          </FreeFloatingText>
+        </CenteringContainer>
       )}
     </ArticleContent>
   );
@@ -48,6 +55,23 @@ const FitbitIntegration: () => JSX.Element = () => {
 
 const ArticleContent = styled.View`
   flex-grow: 1;
+`;
+
+const CenteringContainer = styled.View`
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const LogoImage = styled.Image`
+  margin: ${props =>
+    `${props.screenWidth * 0.08}px ${props.screenWidth * 0.23}px ${
+      props.screenWidth * 0.08
+    }px`};
+  width: ${props => props.screenWidth * 0.5}px;
+  height: ${props => props.screenWidth * 0.5 * 0.2794 /* Image ratio */}px;
+  text-align: center;
 `;
 
 const HeaderText = styled.Text`
@@ -70,7 +94,7 @@ const FreeFloatingText = styled.Text`
   text-align: center;
 `;
 
-const TestConnectionButton = styled(Pressable)`
+const ConnectWithFitbitButton = styled(Pressable)`
   margin: 36px 0;
   display: flex;
   flex-direction: column;
@@ -82,13 +106,13 @@ const TestConnectionButton = styled(Pressable)`
   background-color: white;
   border-radius: 24px;
   margin-bottom: 24px;
-  border: 1px solid ${Colors.LightGreyAccent};
+  border: 1px solid ${Colors.Primary};
 `;
 
-const TextConnectionButtonText = styled.Text`
-  font-size: 18px;
+const FibitButtonText = styled.Text`
+  font-size: 16px;
   color: ${Colors.Primary};
-  text-align: center;
+  margin-bottom: 2px;
 `;
 
 export default FitbitIntegration;

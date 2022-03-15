@@ -6,6 +6,7 @@ export interface BreathingExperienceTiming {
   breathInHoldTimeMs: number;
   breathOutTimeMs: number;
   breathOutHoldTimeMs: number;
+  totalExperienceTimeMs: number;
 }
 
 export const BreathingTiming = {
@@ -15,6 +16,7 @@ export const BreathingTiming = {
     breathInHoldTimeMs: 4900,
     breathOutTimeMs: 5830,
     breathOutHoldTimeMs: 3670,
+    totalExperienceTimeMs: 167000,
   },
   [BreathingType.CLASSIC]: {
     introTimeMs: 8550,
@@ -22,6 +24,7 @@ export const BreathingTiming = {
     breathInHoldTimeMs: 2500,
     breathOutTimeMs: 3700,
     breathOutHoldTimeMs: 2335,
+    totalExperienceTimeMs: 177000,
   },
 };
 

@@ -88,9 +88,13 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
                 `Press the icon to start.`
               : currentStep === VoiceCheckinStep.Listening
               ? `Talk about your day and how you are feeling. Or just read the following quote instead:`
-              : `Great! Judging by the sound of your voice, you appear to be in a ${currentMood} ` +
-                `state of mind`}
+              : `Great! Judging by the sound of your voice, you mood appear to be:`}
           </ExplanationText>
+          {currentStep === VoiceCheckinStep.Result ? (
+            <MoodText>{currentMood}</MoodText>
+          ) : (
+            <></>
+          )}
         </TopTextContainer>
         <CenterContentContainer width={width}>
           <WigglyLinePlacement width={width}>
@@ -244,7 +248,7 @@ const TopTextContainer = styled(Pressable)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 120px;
+  height: 154px;
   flex-shrink: 0;
   flex-grow: 0;
 `;
@@ -254,6 +258,13 @@ const ExplanationText = styled.Text`
   color: ${Colors.Font};
   padding: 0 24px;
   text-align: center;
+`;
+
+const MoodText = styled.Text`
+  font-size: 24px;
+  color: ${Colors.Font};
+  text-align: center;
+  margin-top: 12px;
 `;
 
 const CenterContentContainer = styled.View`
