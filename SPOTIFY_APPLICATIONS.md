@@ -15,3 +15,7 @@ The App helps people with improving their state of mind with targeted recommenda
 Used to generate a public copy of a master playlist for the user.
 
 Used to generate a private copy of a master playlist for the user.
+
+https://play.google.com/apps/internaltest/4699150226595200310
+
+The app is currently in closed testing, as such we can not easily invite you and for that reason we included a screen cast. If you absolutely need access to the app, please contact us.
