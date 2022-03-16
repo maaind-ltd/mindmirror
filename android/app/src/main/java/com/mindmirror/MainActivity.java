@@ -69,63 +69,7 @@ public class MainActivity extends ReactActivity {
     protected ReactActivityDelegate createReactActivityDelegate() {
         return new MindMirrorActivityDelegate(this, getMainComponentName());
     }
-//
-//    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-//        super.onActivityResult(requestCode, resultCode, intent);
-//
-//        // Check if result comes from the correct activity
-//        if (requestCode == 1337) {
-//            AuthorizationResponse response = AuthorizationClient.getResponse(resultCode, intent);
-//            switch (response.getType()) {
-//                // Response was successful and contains auth token
-//                case TOKEN:
-//                    MainActivity.connectionSuccessful = true;
-//                    MainActivity.spotifyConnectionResult = "Success!";
-//                    // Handle successful response
-//                    ConnectionParams connectionParams =
-//                            new ConnectionParams.Builder(CLIENT_ID)
-//                                    .setRedirectUri(REDIRECT_URI)
-//                                    .showAuthView(true)
-//                                    .build();
-//
-//                    SpotifyAppRemote.connect(this, connectionParams, new Connector.ConnectionListener() {
-//
-//                                @Override
-//                                public void onConnected(SpotifyAppRemote spotifyAppRemote) {
-//                                    mSpotifyAppRemote = spotifyAppRemote;
-//                                    Log.d("MindMirrorSpotify", "Connected! Yay!");
-//
-//                                    MainActivity.spotifyPlaybackResult = "Connected! Yay!";
-//                                    // Now you can start interacting with App Remote
-//
-//                                    mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:37i9dQZF1DX2sUQwD7tbmL");
-//                                }
-//
-//                                @Override
-//                                public void onFailure(Throwable throwable) {
-//                                    Log.e("MindMirrorSpotify", throwable.getMessage(), throwable);
-//
-//                                    MainActivity.spotifyPlaybackResult = throwable.getMessage();
-//
-//                                    // Something went wrong when attempting to connect! Handle errors here
-//                                }
-//                            });
-//                    break;
-//
-//                // Auth flow returned an error
-//                case ERROR:
-//                    MainActivity.connectionSuccessful = false;
-//                    MainActivity.spotifyConnectionResult = "Error!" + response.getError();
-//                    // Handle error response
-//                    break;
-//
-//                // Most likely auth flow was cancelled
-//                default:
-//                    MainActivity.spotifyConnectionResult = "Unknown!";
-//                    // Handle other cases
-//            }
-//        }
-//    }
+
 
     public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -137,37 +81,6 @@ public class MainActivity extends ReactActivity {
             switch (response.getType()) {
                 case TOKEN:
                     MainActivity.spotifyConnectionResult = "Token:" + response.getAccessToken();
-//                    MainActivity.spotifyApiToken = response.getAccessToken();
-                    // Handle successful response
-                    // Handle successful response
-                    ConnectionParams connectionParams =
-                            new ConnectionParams.Builder(CLIENT_ID)
-                                    .setRedirectUri(REDIRECT_URI)
-                                    .showAuthView(true)
-                                    .build();
-
-                    SpotifyAppRemote.connect(this, connectionParams, new Connector.ConnectionListener() {
-
-                        @Override
-                        public void onConnected(SpotifyAppRemote spotifyAppRemote) {
-                            mSpotifyAppRemote = spotifyAppRemote;
-                            Log.d("MindMirrorSpotify", "Connected! Yay!");
-
-                            MainActivity.spotifyPlaybackResult = "Connected! Yay!";
-                            // Now you can start interacting with App Remote
-
-                            mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:37i9dQZF1DX2sUQwD7tbmL");
-                        }
-
-                        @Override
-                        public void onFailure(Throwable throwable) {
-                            Log.e("MindMirrorSpotify", throwable.getMessage(), throwable);
-
-                            MainActivity.spotifyPlaybackResult = throwable.getMessage();
-
-                            // Something went wrong when attempting to connect! Handle errors here
-                        }
-                    });
                     break;
 
                 // Auth flow returned an error

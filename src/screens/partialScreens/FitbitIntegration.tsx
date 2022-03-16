@@ -71,7 +71,6 @@ const LogoImage = styled.Image`
     }px`};
   width: ${props => props.screenWidth * 0.5}px;
   height: ${props => props.screenWidth * 0.5 * 0.2794 /* Image ratio */}px;
-  text-align: center;
 `;
 
 const HeaderText = styled.Text`

@@ -47,7 +47,7 @@ const App: () => JSX.Element = () => {
           );
         }
       });
-    });
+    }, 2000);
   });
   return (
     <StyledSafeAreaView>

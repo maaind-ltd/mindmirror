@@ -24,19 +24,26 @@ export const openSpotifyPlaylistForMood = async (spotifyMood: EmotionState) => {
 
 export const getUserId = (token: string) => {
   const url = 'https://api.spotify.com/v1/me/';
-  const request = fetch(url, {
+  const requestBody = {
     method: 'GET',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-  })
+  };
+  console.log(`Requesting user id with body: ${JSON.stringify(requestBody)}`);
+  const request = fetch(url, requestBody)
     .then(response => {
       if (response.status === 200 && response.ok) {
         return response.json();
+      } else {
+        throw new Error(
+          `Response for get user id was non 200: ${response.status}${
+            response.statusText ? `, ${response.statusText}` : ''
+          }`,
+        );
       }
-      throw new Error(`Failed to parse to json: ${response.body}`);
     })
     .catch(error => {
       console.error(error);
@@ -217,16 +224,9 @@ export const loginOnSpotify = async () => {
 };
 
 const spotifyAuthConfig = {
-  clientId: '00e4806b0bb742a9a187df9ca1ac0a6a',
+  clientId: 'a13ad75909f94e65b948df80a7e9a552',
   redirectUrl: 'com.mindmirror:/callback',
-  scopes: [
-    'playlist-read-private',
-    'playlist-modify-public',
-    'playlist-modify-private',
-    'user-library-read',
-    'user-library-modify',
-    'user-top-read',
-  ],
+  scopes: ['playlist-modify-public', 'playlist-modify-private'],
   serviceConfiguration: {
     authorizationEndpoint: 'https://accounts.spotify.com/authorize',
     tokenEndpoint: 'https://accounts.spotify.com/api/token',

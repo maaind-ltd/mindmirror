@@ -34,7 +34,7 @@ import com.spotify.protocol.types.Track;
 public class UniqueIdReaderModule extends ReactContextBaseJavaModule {
     private static final int REQUEST_CODE = 1337;
     private static final String REDIRECT_URI = "com.mindmirror://callback";
-    private static final String CLIENT_ID = "00e4806b0bb742a9a187df9ca1ac0a6a";
+    private static final String CLIENT_ID = "a13ad75909f94e65b948df80a7e9a552";
     private ReactApplicationContext nativeContext;
     private SpotifyAppRemote mSpotifyAppRemote;
 
@@ -100,8 +100,6 @@ public class UniqueIdReaderModule extends ReactContextBaseJavaModule {
                 new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI);
 
         builder.setScopes(new String[]{
-            "streaming",
-            "app-remote-control",
             "playlist-modify-private",
             "playlist-modify-public"
         });

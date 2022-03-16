@@ -28,5 +28,5 @@ export const TextElement = styled.Text`
     `${props.verticalMargin ? props.screenWidth * 0.04 : 0}px ${
       props.screenWidth * 0.08
     }px ${props.verticalMargin ? props.screenWidth * 0.08 : 0}px`};
-  text-align: ${props => (props.center ? 'center' : 'inherit')};
+  text-align: ${props => (props.center ? 'center' : 'left')};
 `;
