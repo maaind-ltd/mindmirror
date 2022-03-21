@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 export function capAt0to100(input: any): number {
   let result = input;
   if (typeof input === typeof 1) {
@@ -17,6 +19,10 @@ export function generateUid() {
 }
 
 export const isAndroid = Platform.OS === 'android';
+export const majorVersionIOS = parseInt(Platform.Version, 10);
+console.log(`major version is ${majorVersionIOS}.`);
+export const MobileVersionWithNotch = !isAndroid && majorVersionIOS >= 10;
+console.log(`has notch? ${MobileVersionWithNotch}.`);
 
 export const getTimeMsStringRepresentation = (time: number) => {
   const minutes = Math.floor(time / 60 / 1000);

@@ -14,10 +14,10 @@ const AvatarExplanation: () => JSX.Element = () => {
 
   return (
     <ArticleContent>
-      <FreeFloatingText screenWidth={width}>
+      <FirstFreeFloatingText screenWidth={width}>
         The circle around your avatar represents your desired mood.{'\n'}
         Your avatar helps represent your measured mood.
-      </FreeFloatingText>
+      </FirstFreeFloatingText>
 
       <AvatarSectionContainer screenWidth={width} screenHeight={height}>
         <Avatar
@@ -43,6 +43,16 @@ const ArticleContent = styled.View`
   flex-grow: 1;
 `;
 
+const FirstFreeFloatingText = styled.Text`
+  font-size: 18px;
+  color: ${Colors.Primary};
+  margin: ${props =>
+    `0px ${props.screenWidth * 0.08}px ${
+      props.screenWidth * 0.08
+    }px`};
+  text-align: center;
+`;
+
 const FreeFloatingText = styled.Text`
   font-size: 18px;
   color: ${Colors.Primary};
@@ -63,7 +73,7 @@ const AvatarSectionContainer = styled.View`
 `;
 
 const BottomSpaceProvider = styled.View`
-  margin-bottom: 48px;
+  margin-bottom: 36px;
 `;
 
 export default AvatarExplanation;

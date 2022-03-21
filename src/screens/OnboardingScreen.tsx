@@ -13,7 +13,7 @@ import Screens from '../constants/screens';
 import {useAppDispatch} from '../store/combinedStore';
 import settingsSlice from '../store/settingsSlice';
 import IndicatorDots from '../components/IndicatorDots';
-import {generateUid} from '../helpers/accessoryFunctions';
+import {generateUid, MobileVersionWithNotch} from '../helpers/accessoryFunctions';
 import {setupNotifications} from '../helpers/notificationHelpers';
 import {isAndroid} from '../helpers/accessoryFunctions';
 
@@ -40,7 +40,7 @@ const OnboardingScreen: (
       <BackgroundView>
         <ExplanationContent>
           <ScrollView contentInsetAdjustmentBehavior="automatic">
-            <ScreenContentContainer screenHeight={height}>
+            <ScreenContentContainer>
               <ScreenContent />
               <SpacingElement />
               <BottomContent>
@@ -125,7 +125,7 @@ const ScreenContentContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   flex-grow: 1;
-  min-height: ${props => props.screenHeight}px;
+  min-height: 96%;
   padding-top: 8px;
 `;
 
