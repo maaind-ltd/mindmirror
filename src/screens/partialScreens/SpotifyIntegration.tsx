@@ -48,18 +48,21 @@ const SpotifyIntegration: () => JSX.Element = () => {
         UniqueIdReader.getSpotifyToken((text: string, error: string) => {
           if (text.startsWith('Token:')) {
             const token = text.substring('Token:'.length);
-            setupSpotifyIntegration(token, false)
-              .then(() => {
-                setProcessingState(ProcessingState.FINISHED);
-              })
-              .catch(error => {
-                console.error(error);
-                setProcessingState(ProcessingState.FAILED);
-              });
-            clearInterval(intervalId);
+            console.log(`Using spotify token ${token}`);
+            if (token.length) {
+              setupSpotifyIntegration(token, false)
+                .then(() => {
+                  setProcessingState(ProcessingState.FINISHED);
+                })
+                .catch(error => {
+                  console.error(error);
+                  setProcessingState(ProcessingState.FAILED);
+                });
+              clearInterval(intervalId);
+            }
           }
         });
-      }, 1000);
+      }, 100);
     } else {
       loginOnSpotify().then(token => {
         if (token) {

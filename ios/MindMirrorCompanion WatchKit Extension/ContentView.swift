@@ -8,18 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-      ZStack {
-        Rectangle()
-          .fill(.green)
-          .frame(width: 100, height: 100)
-          .cornerRadius(50)
-        Rectangle()
-          .fill(.white)
-          .frame(width: 90, height: 90)
-          .cornerRadius(45)
-      }
-    }
+//    var body: some View {
+//      ZStack {
+//        Rectangle()
+//          .fill(.green)
+//          .frame(width: 100, height: 100)
+//          .cornerRadius(50)
+//        Rectangle()
+//          .fill(.white)
+//          .frame(width: 90, height: 90)
+//          .cornerRadius(45)
+//      }
+//    }
+  
+  var title: String?;
+  var message: String?;
+  
+  var body: some View {
+        VStack {
+
+            Text(title ?? "Unknown Landmark")
+                .font(.headline)
+
+            Divider()
+
+            Text(message ?? "You are within 5 miles of one of your favorite landmarks.")
+                .font(.caption)
+        }
+        .lineLimit(0)
+  }
 }
 
 struct ContentView_Previews: PreviewProvider {
