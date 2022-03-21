@@ -83,7 +83,7 @@ const SpotifyIntegration: () => JSX.Element = () => {
   };
 
   return (
-    <ArticleContent>
+    <ArticleContent screenWidth={width}>
       <SpotifyLogoContainer>
         <ImageResources.Spotify
           width={width * 0.6}
@@ -129,6 +129,7 @@ const SpotifyIntegration: () => JSX.Element = () => {
 
 const ArticleContent = styled.View`
   flex-grow: 1;
+  width: ${props => props.screenWidth}px;
 `;
 
 const TextCenteringContainer = styled.View`

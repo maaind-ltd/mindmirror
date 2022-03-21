@@ -9,25 +9,32 @@ import {getTypedState} from '../store/combinedStore';
 export enum BreathingType {
   PURSEDLIP = 'PURSEDLIP',
   CLASSIC = 'CLASSIC',
+  PANTING = 'PANTING',
 }
 
 export enum SoundSuggestionType {
   FLOW = 'FLOW',
   MELLOW = 'MELLOW',
   GOGOGO = 'GOGOGO',
+  FLOW_BREATHING = 'FLOW_BREATHING',
+  GOGOGO_BREATHING = 'GOGOGO_BREATHING',
 }
 
 export enum SoundSuggestionDurationsSecond {
   FLOW = 160,
   MELLOW = 910,
   GOGOGO = 1800,
+  FLOW_BREATHING = 160,
+  GOGOGO_BREATHING = 51,
 }
 
 export enum SoundResource {
   // tslint:disable: no-var-requires
   BREATHING_PURSEDLIP = require('../audio/breathing_pursedlip.mp3'),
   BREATHING_CLASSIC = require('../audio/breathing_classic.mp3'),
+  BREATHING_PANTING = require('../audio/breathing_panting.mp3'),
   FLOW_SOUND = require('../audio/flow_sound.mp3'),
+  FLOW_BREATHING = require('../audio/flow_breathing.mp3'),
   MELLOW_SOUND = require('../audio/mellow_sound.mp3'),
   GOGOGO_SOUND = require('../audio/gogogo_sound.mp3'),
 }

@@ -62,9 +62,9 @@ const Suggestions: SuggestionList = {
         key: 'breathing-flow',
         icon: 'Breathing',
         title: 'Flow Breathing',
-        description: 'Steady, rythmical breathing',
+        description: 'Breathing to the beat of music',
         meta: '3 minutes',
-        breathingType: BreathingType.CLASSIC,
+        soundSuggestionType: SoundSuggestionType.FLOW_BREATHING,
       },
     ],
     sound: [
@@ -91,9 +91,9 @@ const Suggestions: SuggestionList = {
         key: 'breathing-gogogo',
         icon: 'Breathing',
         title: 'GoGoGo Breathing',
-        description: 'Energizing pursed-lip breathing',
-        meta: '3 minutes',
-        breathingType: BreathingType.PURSEDLIP,
+        description: 'Energizing, fast breathing',
+        soundSuggestionType: SoundSuggestionType.GOGOGO_BREATHING,
+        meta: '50 seconds',
       },
     ],
     sound: [
@@ -171,8 +171,22 @@ const SuggestionsScreen: () => JSX.Element = () => {
         <HelpModal visible={modalVisible} setModalVisible={setModalVisible}>
           <HelpTextContainer>
             <HelpText screenWidth={width}>
-              Suggestions help you get into your target mood.
+              These suggestions are specifically curated to get you into your
+              desired state of mind.
             </HelpText>
+            <HelpText screenWidth={width}>
+              You can read more about them here:
+            </HelpText>
+
+            <LearnMoreButton
+              onPress={() => {
+                setModalVisible(false);
+                navigator.replace(Screens.ExplanationScreen, {
+                  subScreen: 'ScienceAndTechnology',
+                });
+              }}>
+              <LearnMoreButtonText>Science and Technology</LearnMoreButtonText>
+            </LearnMoreButton>
           </HelpTextContainer>
         </HelpModal>
       </BackgroundView>
@@ -288,6 +302,19 @@ const HelpTextContainer = styled.View`
 const HelpText = styled.Text`
   font-size: 18px;
   color: ${Colors.Primary};
+  text-align: center;
+  margin-bottom: 48px;
+`;
+
+const LearnMoreButton = styled(Pressable)`
+  text-align: center;
+  margin: 24px 0 36px;
+`;
+
+const LearnMoreButtonText = styled.Text`
+  font-size: 16px;
+  color: ${Colors.Primary};
+  text-decoration: underline;
 `;
 
 export default SuggestionsScreen;

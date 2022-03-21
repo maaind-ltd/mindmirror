@@ -13,7 +13,6 @@ import {useAppDispatch, useCombinedStore} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
 import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
-import {isAndroid} from './helpers/accessoryFunctions';
 import notifee, {EventType} from '@notifee/react-native';
 const {SharedStorage} = NativeModules;
 
@@ -58,8 +57,7 @@ const MirrorScreen: () => JSX.Element = () => {
               dispatch(
                 moodSlice.actions.setCurrentMood(nextEmotion[currentMood]),
               );
-            }
-            }>
+            }}>
             <ExplanationText>Measured State of Mind</ExplanationText>
             <StateText>{currentMood}</StateText>
           </TopTextContainer>
@@ -71,8 +69,7 @@ const MirrorScreen: () => JSX.Element = () => {
               )
             }>
             <ExplanationText>
-              Currently, there is no data to gauge your mood.{'\n'}Please do a
-              voice check-in.
+              Please do a voice check-in to find out your current state of mind
             </ExplanationText>
           </TopTextContainer>
         )}

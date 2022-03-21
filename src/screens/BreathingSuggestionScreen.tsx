@@ -42,7 +42,9 @@ const BreathingSuggestionScreen: (
   )?.breathingType;
   const title =
     subScreenKey === BreathingType.CLASSIC
-      ? 'Classic Breathing'
+      ? 'Mellow Breathing'
+      : subScreenKey === BreathingType.PANTING
+      ? 'GoGoGo Breathing'
       : 'Pursed-lip Breathing';
 
   const {totalExperienceTimeMs} = BreathingTiming[subScreenKey];
@@ -51,6 +53,8 @@ const BreathingSuggestionScreen: (
     const soundResource =
       subScreenKey === BreathingType.CLASSIC
         ? SoundResource.BREATHING_CLASSIC
+        : subScreenKey === BreathingType.PANTING
+        ? SoundResource.BREATHING_PANTING
         : SoundResource.BREATHING_PURSEDLIP;
     playSound(soundResource).then(() => {
       navigator.pop();
@@ -84,7 +88,7 @@ const BreathingSuggestionScreen: (
           usePrimaryColor={true}
           title={title}
           onPress={() => navigator.pop()}
-          showHelpIcon={true}
+          showHelpIcon={false}
         />
         <MainContentContainer>
           <OuterRing color={targetMood} screenWidth={width}>

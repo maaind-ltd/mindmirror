@@ -41,6 +41,10 @@ const SoundSuggestionScreen: (
       ? 'Flow Track'
       : subScreenKey === SoundSuggestionType.MELLOW
       ? 'Mellow Track'
+      : subScreenKey === SoundSuggestionType.FLOW_BREATHING
+      ? 'Flow Breathing'
+      : subScreenKey === SoundSuggestionType.GOGOGO_BREATHING
+      ? 'GoGoGo Breathing'
       : 'GoGoGo Track';
 
   useEffect(() => {
@@ -49,6 +53,10 @@ const SoundSuggestionScreen: (
         ? SoundResource.FLOW_SOUND
         : subScreenKey === SoundSuggestionType.MELLOW
         ? SoundResource.MELLOW_SOUND
+        : subScreenKey === SoundSuggestionType.FLOW_BREATHING
+        ? SoundResource.FLOW_BREATHING
+        : subScreenKey === SoundSuggestionType.GOGOGO_BREATHING
+        ? SoundResource.BREATHING_PANTING
         : SoundResource.GOGOGO_SOUND;
     playSound(soundResource).then(() => {
       navigator.pop();
@@ -83,7 +91,7 @@ const SoundSuggestionScreen: (
           usePrimaryColor={true}
           title={title}
           onPress={() => navigator.pop()}
-          showHelpIcon={true}
+          showHelpIcon={false}
         />
         <MainContentContainer>
           <OuterRing color={targetMood} screenWidth={width}>

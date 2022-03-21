@@ -26,6 +26,14 @@ export const BreathingTiming = {
     breathOutHoldTimeMs: 2335,
     totalExperienceTimeMs: 177000,
   },
+  [BreathingType.PANTING]: {
+    introTimeMs: 18000,
+    breathInTimeMs: 165,
+    breathInHoldTimeMs: 0,
+    breathOutTimeMs: 165,
+    breathOutHoldTimeMs: 0,
+    totalExperienceTimeMs: 50607,
+  },
 };
 
 /**
