@@ -77,7 +77,6 @@ struct MindMirrorWidgetEntryView : View {
           Image("icon_voicecheckin_border")
             .resizable()
             .frame(width: 76, height: 76)
-            
         }
         Spacer()
         ZStack {
