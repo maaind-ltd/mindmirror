@@ -15,7 +15,7 @@ const FitbitIntegration: () => JSX.Element = () => {
   const pairingCode = useCombinedStore(store => store.settings.pairingCode);
 
   return (
-    <ArticleContent>
+    <ArticleContent screenWidth={width}>
       <LogoImage source={ImageResources.FitBit} screenWidth={width} />
 
       {!pairingCode ? (
@@ -55,6 +55,7 @@ const FitbitIntegration: () => JSX.Element = () => {
 
 const ArticleContent = styled.View`
   flex-grow: 1;
+  width: ${props => props.screenWidth}px;
 `;
 
 const CenteringContainer = styled.View`

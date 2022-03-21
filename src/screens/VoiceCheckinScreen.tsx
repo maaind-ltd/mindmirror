@@ -254,7 +254,7 @@ const TopTextContainer = styled(Pressable)`
 `;
 
 const ExplanationText = styled.Text`
-  font-size: 22px;
+  font-size: 20px;
   color: ${Colors.Font};
   padding: 0 24px;
   text-align: center;
@@ -262,6 +262,7 @@ const ExplanationText = styled.Text`
 
 const MoodText = styled.Text`
   font-size: 24px;
+  font-weight: bold;
   color: ${Colors.Font};
   text-align: center;
   margin-top: 12px;
@@ -381,7 +382,6 @@ const QuoteText = styled.Text`
   color: ${Colors.Font};
   margin: 36px;
   text-align: left;
-  font-weight: 600;
   line-height: 24px;
 `;
 
