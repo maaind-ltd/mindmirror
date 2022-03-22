@@ -112,7 +112,7 @@ const LearnMoreButton = styled(Pressable)`
 `;
 
 const LearnMoreButtonText = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   color: ${Colors.Primary};
   text-decoration: underline;
 `;

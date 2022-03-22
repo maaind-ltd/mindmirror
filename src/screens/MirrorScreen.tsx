@@ -118,7 +118,7 @@ const MirrorContainer = styled.View`
   justify-content: flex-start;
   align-items: center;
   background-color: ${props => props.color};
-  padding: 16px 0;
+  padding: 15px 0;
 `;
 
 const TopTextContainer = styled(Pressable)`
@@ -129,7 +129,7 @@ const TopTextContainer = styled(Pressable)`
 `;
 
 const ExplanationText = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   color: ${Colors.Font};
   text-align: center;
 `;

@@ -59,7 +59,7 @@ const ArticleContent = styled.View`
 `;
 
 const CenterText = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   color: ${Colors.Primary};
   text-align: center;
   margin: ${props =>
@@ -67,7 +67,7 @@ const CenterText = styled.Text`
 `;
 
 const NicknameContainer = styled.View`
-  margin: 0 0 16px 0;
+  margin: 0 0 15px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -75,7 +75,7 @@ const NicknameContainer = styled.View`
 `;
 
 const NicknameText = styled.Text`
-  font-size: 22px;
+  font-size: 20px;
   color: ${Colors.Primary};
   text-align: center;
 `;

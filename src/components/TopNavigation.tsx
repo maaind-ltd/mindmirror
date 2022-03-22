@@ -107,7 +107,7 @@ const StateText = styled.Text`
 `;
 
 const ExplanationText = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   color: ${props => (props.usePrimaryColor ? Colors.Primary : Colors.Font)}
   text-align: center;
 `;

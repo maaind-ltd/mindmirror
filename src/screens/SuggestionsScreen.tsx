@@ -261,7 +261,7 @@ const SuggestionsList = styled.View`
 `;
 
 const ExplanationText = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   color: ${Colors.Font};
   text-align: center;
 `;
@@ -312,7 +312,7 @@ const LearnMoreButton = styled(Pressable)`
 `;
 
 const LearnMoreButtonText = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   color: ${Colors.Primary};
   text-decoration: underline;
 `;

@@ -78,7 +78,7 @@ export default function App(props: any): JSX.Element {
   useEffect(() => {
     const onPairingCodeReceived = ({url}: {url: string}) => {
       if (url.startsWith(PairingDeepLink)) {
-        const pairingCode = url.substring(PairingDeepLink.length + 1);
+        const pairingCode = url.substring(PairingDeepLink.length+1);
         if (pairingCode) {
           console.log(`Received pairing Code ${pairingCode}`);
           store.dispatch(settingsSlice.actions.setPairingCode(pairingCode));

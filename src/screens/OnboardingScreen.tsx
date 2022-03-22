@@ -77,7 +77,7 @@ const OnboardingScreen: (
             <ScrollView
               contentInsetAdjustmentBehavior="automatic"
               showsVerticalScrollIndicator={false}>
-              <ScreenContentContainer screenHeight={height}>
+              <ScreenContentContainer height={height}>
                 <ScreenContent />
                 <SpacingElement />
                 <BottomContent>
@@ -108,6 +108,7 @@ const OnboardingScreen: (
                     </NextButtonText>
                   </NextButton>
                   <IndicatorDots
+
                     vertical={false}
                     numberOfDots={ONBOARDING_PAGES}
                     currentDot={onboardingIndex}
@@ -168,7 +169,7 @@ const ScreenContentContainer = styled.View`
 `;
 
 const BottomContent = styled.View`
-  margin-bottom: 48px;
+  margin-bottom: 20px;
 `;
 
 export default OnboardingScreen;

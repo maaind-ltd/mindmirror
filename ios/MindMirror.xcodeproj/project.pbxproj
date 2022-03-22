@@ -1014,7 +1014,7 @@
 				CODE_SIGN_ENTITLEMENTS = MindMirror/MindMirror.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MindMirror/Info.plist;
@@ -1049,7 +1049,7 @@
 				CODE_SIGN_ENTITLEMENTS = MindMirror/MindMirrorRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				INFOPLIST_FILE = MindMirror/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -1085,7 +1085,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = MindMirrorWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1128,7 +1128,7 @@
 				CODE_SIGN_ENTITLEMENTS = MindMirrorWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1171,7 +1171,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1213,7 +1213,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1250,7 +1250,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "MindMirrorCompanion WatchKit Extension/MindMirrorCompanion WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_ASSET_PATHS = "\"MindMirrorCompanion WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = TC53H5WD49;
@@ -1260,6 +1260,8 @@
 				INFOPLIST_FILE = "MindMirrorCompanion WatchKit Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "MindMirrorCompanion WatchKit Extension";
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = MindMirrorCompanion_WatchKit_Extension.ComplicationController;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Your workout related data will be used to display your saved workouts in MyWorkouts.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1295,7 +1297,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MindMirrorCompanion WatchKit Extension/MindMirrorCompanion WatchKit ExtensionRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"MindMirrorCompanion WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = TC53H5WD49;
@@ -1305,6 +1307,8 @@
 				INFOPLIST_FILE = "MindMirrorCompanion WatchKit Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "MindMirrorCompanion WatchKit Extension";
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = MindMirrorCompanion_WatchKit_Extension.ComplicationController;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Your workout related data will be used to display your saved workouts in MyWorkouts.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

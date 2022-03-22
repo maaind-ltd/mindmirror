@@ -240,7 +240,7 @@ const ScreenContainer = styled(Animated.View)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 16px 0;
+  padding: 15px 0;
 `;
 
 const TopTextContainer = styled(Pressable)`
@@ -320,7 +320,7 @@ const ExplanationButtonText = styled.Text`
   margin-top: 24px;
   text-decoration: underline;
   color: ${Colors.Font};
-  font-size: 16px;
+  font-size: 15px;
 `;
 
 const ResetButton = styled(Pressable)`
@@ -331,7 +331,7 @@ const ResetButton = styled(Pressable)`
 `;
 
 const ResetText = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   text-decoration: underline;
   color: ${Colors.Font};
 `;
@@ -341,11 +341,11 @@ const BackButton = styled(Pressable)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 15px;
 `;
 
 const BackText = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   text-decoration: underline;
   color: ${Colors.Font};
 `;
@@ -378,7 +378,7 @@ const QuoteContainer = styled.View`
 `;
 
 const QuoteText = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   color: ${Colors.Font};
   margin: 36px;
   text-align: left;

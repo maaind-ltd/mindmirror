@@ -52,7 +52,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="mirror.maind" />
+                <data android:scheme="mirror.maaind" />
                 <data android:scheme="https" android:host="www.maaind.com" />
                 <data android:scheme="http" android:host="www.maaind.com" />
             </intent-filter>

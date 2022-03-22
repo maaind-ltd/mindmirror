@@ -109,7 +109,7 @@ const AppText = styled.Text`
 `;
 
 const FooterText = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   text-align: center;
 `;
 
