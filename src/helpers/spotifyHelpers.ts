@@ -4,6 +4,7 @@ import store from '../store/combinedStore';
 import spotifySlice, {MasterPlaylistIds} from '../store/spotifySlice';
 import {getTypedState} from '../store/combinedStore';
 import {authorize} from 'react-native-app-auth';
+import {UrlStorePlaylistIds} from '../constants/urls';
 
 const BASE_SPOTIFY_URL = `https://open.spotify.com/playlist`;
 
@@ -162,6 +163,35 @@ export const setupPlaylist: (
   return newPlaylistId;
 };
 
+export const storePlaylistIds: (options: {
+  mellowPlaylistId: string;
+  flowPlaylistId: string;
+  gogogoPlaylistId: string;
+}) => Promise<void> = async ({
+  mellowPlaylistId,
+  flowPlaylistId,
+  gogogoPlaylistId,
+}) => {
+  const {userToken, pairingCode} = getTypedState().settings;
+
+  const body = JSON.stringify({
+    token: pairingCode || userToken,
+    mellow_playlist_id: mellowPlaylistId,
+    flow_playlist_id: flowPlaylistId,
+    gogogo_playlist_id: gogogoPlaylistId,
+  });
+
+  await fetch(UrlStorePlaylistIds, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body,
+  });
+  console.log(`Playlist ids were stored.`);
+};
+
 export const setupSpotifyIntegration: (
   token: string,
   makePlaylistsPublic: boolean,
@@ -207,6 +237,11 @@ export const setupSpotifyIntegration: (
     console.log(
       `Set these playlist ids: ${mellowPlaylistId}, ${flowPlaylistId}, ${gogogoPlaylistId}.`,
     );
+    await storePlaylistIds({
+      mellowPlaylistId,
+      flowPlaylistId,
+      gogogoPlaylistId,
+    });
     store.dispatch(spotifySlice.actions.setToken(token));
   } else {
     console.error('Failed to receive user data');
