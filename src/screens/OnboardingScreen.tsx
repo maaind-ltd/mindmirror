@@ -70,10 +70,7 @@ const OnboardingScreen: (
                   onboardingIndex: onboardingIndex + 1,
                 });
               }
-            }}
-            // onSwipeableLeftWillOpen={() => console.log('Opening Left')}
-            // onSwipeableRightWillOpen={() => console.log('Opening Right')}
-          >
+            }}>
             <ScrollView
               contentInsetAdjustmentBehavior="automatic"
               showsVerticalScrollIndicator={false}>
@@ -164,7 +161,7 @@ const ScreenContentContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   flex-grow: 1;
-  min-height: 96%;
+  min-height: ${props => (isAndroid ? `${props.screenHeight}px` : `96%`)};
   padding-top: 8px;
 `;
 

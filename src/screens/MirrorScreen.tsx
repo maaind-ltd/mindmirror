@@ -53,6 +53,7 @@ const MirrorScreen: () => JSX.Element = () => {
       <MirrorContainer color={currentColor}>
         {currentMood !== EmotionStateWithNone.NoEmotion ? (
           <TopTextContainer
+            screenWidth={width}
             onPress={() => {
               dispatch(
                 moodSlice.actions.setCurrentMood(nextEmotion[currentMood]),
@@ -63,6 +64,7 @@ const MirrorScreen: () => JSX.Element = () => {
           </TopTextContainer>
         ) : (
           <TopTextContainer
+            screenWidth={width}
             onPress={() =>
               dispatch(
                 moodSlice.actions.setCurrentMood(nextEmotion[currentMood]),
@@ -124,7 +126,8 @@ const MirrorContainer = styled.View`
 const TopTextContainer = styled(Pressable)`
   display: flex;
   flex-direction: column;
-  margin: 24px 0 0 0;
+  margin: 24px ${props => props.screenWidth * 0.1}px 0
+    ${props => props.screenWidth * 0.1}px;
   height: 44px;
 `;
 
