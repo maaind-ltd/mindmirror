@@ -74,7 +74,7 @@ const OnboardingScreen: (
             <ScrollView
               contentInsetAdjustmentBehavior="automatic"
               showsVerticalScrollIndicator={false}>
-              <ScreenContentContainer height={height}>
+              <ScreenContentContainer screenHeight={height}>
                 <ScreenContent />
                 <SpacingElement />
                 <BottomContent>
@@ -105,7 +105,6 @@ const OnboardingScreen: (
                     </NextButtonText>
                   </NextButton>
                   <IndicatorDots
-
                     vertical={false}
                     numberOfDots={ONBOARDING_PAGES}
                     currentDot={onboardingIndex}

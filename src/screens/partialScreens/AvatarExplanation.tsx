@@ -14,10 +14,10 @@ const AvatarExplanation: () => JSX.Element = () => {
 
   return (
     <ArticleContent>
-      <FirstFreeFloatingText screenWidth={width}>
+      <FreeFloatingText screenWidth={width}>
         The circle around your avatar represents your desired mood.{'\n'}
         Your avatar helps represent your measured mood.
-      </FirstFreeFloatingText>
+      </FreeFloatingText>
 
       <AvatarSectionContainer screenWidth={width} screenHeight={height}>
         <Avatar
@@ -43,16 +43,6 @@ const ArticleContent = styled.View`
   flex-grow: 1;
 `;
 
-const FirstFreeFloatingText = styled.Text`
-  font-size: 18px;
-  color: ${Colors.Primary};
-  margin: ${props =>
-    `0px ${props.screenWidth * 0.08}px ${
-      props.screenWidth * 0.08
-    }px`};
-  text-align: center;
-`;
-
 const FreeFloatingText = styled.Text`
   font-size: 18px;
   color: ${Colors.Primary};
@@ -67,7 +57,8 @@ const AvatarSectionContainer = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${props => Math.min(props.screenHeight * 0.4, props.screenWidth * 0.85)}px;
+  height: ${props =>
+    Math.min(props.screenHeight * 0.4, props.screenWidth * 0.85)}px;
   margin-top: -${props => Math.min(props.screenHeight * 0.4, props.screenWidth * 0.85) * 0.2}px;
   margin-bottom: -${props => Math.min(props.screenHeight * 0.4, props.screenWidth * 0.85) * 0.15}px;
 `;
