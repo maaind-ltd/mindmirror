@@ -14,6 +14,7 @@ import SuggestionsListEntry, {
 import Icons from '../constants/icons';
 import {BreathingType, SoundSuggestionType} from '../helpers/audio';
 import {HelpModal} from '../modals/HelpModal';
+import { FullPageContainer } from '../components/FullPageContainer';
 
 interface MoodBasedSuggestionEntries {
   breathing: ItemListEntryData[];
@@ -125,8 +126,7 @@ const SuggestionsScreen: () => JSX.Element = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <StyledSafeAreaView>
-      <StatusBar barStyle={'light-content'} />
+    <FullPageContainer backgroundColor={Colors[targetMood]}>
       <BackgroundView>
         <TopNavigation height={height} color={targetMood}>
           <ArrowBackContainer>
@@ -190,7 +190,7 @@ const SuggestionsScreen: () => JSX.Element = () => {
           </HelpTextContainer>
         </HelpModal>
       </BackgroundView>
-    </StyledSafeAreaView>
+    </FullPageContainer>
   );
 };
 

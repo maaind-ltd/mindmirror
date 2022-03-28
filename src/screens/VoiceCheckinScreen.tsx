@@ -21,6 +21,7 @@ import {
 import CircleGraph from '../components/CircleGraph';
 import {isAndroid} from '../helpers/accessoryFunctions';
 import {VoiceCheckinExplanationModal} from '../modals/VoiceCheckinExplanationModal';
+import { FullPageContainer } from '../components/FullPageContainer';
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -72,8 +73,7 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
 
   return (
-    <StyledSafeAreaView>
-      <StatusBar barStyle={'light-content'} />
+    <FullPageContainer backgroundColor={Colors[currentMood]}>
       <ScreenContainer
         style={{
           backgroundColor: fadeAnim.interpolate({
@@ -230,7 +230,7 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
         visible={modalVisible}
         setModalVisible={setModalVisible}
       />
-    </StyledSafeAreaView>
+    </FullPageContainer>
   );
 };
 

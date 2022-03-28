@@ -17,6 +17,7 @@ import {generateUid} from '../helpers/accessoryFunctions';
 import {setupNotifications} from '../helpers/notificationHelpers';
 import {isAndroid} from '../helpers/accessoryFunctions';
 import _ from 'lodash';
+import { FullPageContainer } from '../components/FullPageContainer';
 
 const ONBOARDING_PAGES = Object.keys(OnboardingScreens).length;
 
@@ -45,8 +46,7 @@ const OnboardingScreen: (
       ?.onboardingIndex || 0;
   const ScreenContent = OnboardingScreens[onboardingIndex];
   return (
-    <StyledSafeAreaView>
-      <StatusBar barStyle={'light-content'} />
+    <FullPageContainer backgroundColor="white">
       <BackgroundView>
         <ExplanationContent>
           <PanGestureHandler
@@ -115,7 +115,7 @@ const OnboardingScreen: (
           </PanGestureHandler>
         </ExplanationContent>
       </BackgroundView>
-    </StyledSafeAreaView>
+    </FullPageContainer>
   );
 };
 

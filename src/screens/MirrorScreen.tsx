@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StatusBar, Pressable, View, SafeAreaView} from 'react-native';
+import {StatusBar, Pressable, View, SafeAreaView, StyleSheet} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import Avatar from '../components/Avatar';
@@ -14,6 +14,7 @@ import moodSlice from '../store/moodSlice';
 import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
 import notifee, {EventType} from '@notifee/react-native';
+import { FullPageContainer } from '../components/FullPageContainer';
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -24,13 +25,6 @@ const nextEmotion = {
   [EmotionStateWithNone.NoEmotion]: EmotionStateWithNone.Mellow,
 };
 
-const MyStatusBar = ({backgroundColor, ...props}) => (
-  <View style={[styles.statusBar, {backgroundColor}]}>
-    <SafeAreaView>
-      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-    </SafeAreaView>
-  </View>
-);
 
 const MirrorScreen: () => JSX.Element = () => {
   const dispatch = useAppDispatch();
@@ -55,10 +49,7 @@ const MirrorScreen: () => JSX.Element = () => {
     });
   }, []);
   return (
-    <View style={styles.container}>
-      <MyStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
-      <View style={styles.appBar} />
-      <View style={styles.content}>
+    <FullPageContainer backgroundColor={currentColor}>
         <MirrorContainer color={currentColor}>
           {currentMood !== EmotionStateWithNone.NoEmotion ? (
             <TopTextContainer
@@ -119,8 +110,7 @@ const MirrorScreen: () => JSX.Element = () => {
             }, NAVIGATION_TIMEOUT);
           }}
         />
-      </View>
-    </View>
+    </FullPageContainer>
   );
 };
 
@@ -205,22 +195,4 @@ const CheckInCircleBackground = styled.View`
 
 export default MirrorScreen;
 
-const STATUSBAR_HEIGHT = StatusBar.currentHeight;
-const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  statusBar: {
-    height: STATUSBAR_HEIGHT,
-  },
-  appBar: {
-    backgroundColor: '#79B45D',
-    height: APPBAR_HEIGHT,
-  },
-  content: {
-    flex: 1,
-    backgroundColor: '#33373B',
-  },
-});
