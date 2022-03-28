@@ -142,6 +142,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MindMirror/main.m; sourceTree = "<group>"; };
 		253D5BA624884936E76BD422 /* Pods-MindMirror-MindMirrorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMirror-MindMirrorTests.release.xcconfig"; path = "Target Support Files/Pods-MindMirror-MindMirrorTests/Pods-MindMirror-MindMirrorTests.release.xcconfig"; sourceTree = "<group>"; };
 		2A6A66B0DE89C3FB0301AA60 /* Pods-MindMirror-MindMirrorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMirror-MindMirrorTests.debug.xcconfig"; path = "Target Support Files/Pods-MindMirror-MindMirrorTests/Pods-MindMirror-MindMirrorTests.debug.xcconfig"; sourceTree = "<group>"; };
+		432E7E9127E9362F00AEB376 /* MindMirrorCompanion WatchKit Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MindMirrorCompanion WatchKit Extension-Bridging-Header.h"; sourceTree = "<group>"; };
 		436F884027E2A1B000970C25 /* MindMirrorRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = MindMirrorRelease.entitlements; path = MindMirror/MindMirrorRelease.entitlements; sourceTree = "<group>"; };
 		436F884127E2A1B000970C25 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		436F884327E2A1C100970C25 /* MindMirrorCompanion WatchKit ExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MindMirrorCompanion WatchKit ExtensionRelease.entitlements"; sourceTree = "<group>"; };
@@ -314,6 +315,7 @@
 				437F949E27E29E3A0088C9FC /* SessionPagingView.swift */,
 				437F949C27E29E3A0088C9FC /* StartView.swift */,
 				437F949F27E29E3A0088C9FC /* SummaryView.swift */,
+				432E7E9127E9362F00AEB376 /* MindMirrorCompanion WatchKit Extension-Bridging-Header.h */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -604,6 +606,7 @@
 					};
 					43E7A38827B720250045879F = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1330;
 					};
 					43E7A3A227B720260045879F = {
 						CreatedOnToolsVersion = 13.1;
@@ -1018,7 +1021,7 @@
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MindMirror/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1052,7 +1055,7 @@
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				INFOPLIST_FILE = MindMirror/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1245,6 +1248,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -1271,12 +1275,14 @@
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MindMirrorCompanion WatchKit Extension/Views/MindMirrorCompanion WatchKit Extension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -1291,6 +1297,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -1317,12 +1324,14 @@
 				);
 				MARKETING_VERSION = 1;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maaind.MindMirrorApp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MindMirrorCompanion WatchKit Extension/Views/MindMirrorCompanion WatchKit Extension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;

@@ -75,9 +75,10 @@ const SpotifyIntegration: () => JSX.Element = () => {
               console.error(error);
               setProcessingState(ProcessingState.FAILED);
             });
+        } else {
+          console.error(`Failed to login. Token was ${token}.`);
+          setProcessingState(ProcessingState.FAILED);
         }
-        console.error(`Failed to login. Token was ${token}.`);
-        setProcessingState(ProcessingState.FAILED);
       });
     }
   };

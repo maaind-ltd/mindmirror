@@ -7,42 +7,102 @@ The start view.
 
 import SwiftUI
 import HealthKit
+import os
+import AVFoundation
+//import RCTLogWrapper
+
+
+//func RCTLogError(_ message: String, _ file: String=#file, _ line: UInt=#line) {
+//    RCTSwiftLog.error(message, file: file, line: line)
+//}
+//
+//func RCTLogWarn(_ message: String, _ file: String=#file, _ line: UInt=#line) {
+//    RCTSwiftLog.warn(message, file: file, line: line)
+//}
+//
+//func RCTLogInfo(_ message: String, _ file: String=#file, _ line: UInt=#line) {
+//    RCTSwiftLog.info(message, file: file, line: line)
+//}
+//
+//func RCTLog(_ message: String, _ file: String=#file, _ line: UInt=#line) {
+//    RCTSwiftLog.log(message, file: file, line: line)
+//}
+//
+//func RCTLogTrace(_ message: String, _ file: String=#file, _ line: UInt=#line) {
+//    RCTSwiftLog.trace(message, file: file, line: line)
+//}
+
+
 
 struct StartView: View {
-    @EnvironmentObject var workoutManager: WorkoutManager
+  
+  @EnvironmentObject var workoutManager: WorkoutManager
 
-    var runningWorkout: HKWorkoutActivityType = .running
-    var hrv: String?;
-    @State private var workoutStarted = false
-
+  var runningWorkout: HKWorkoutActivityType = .running
+  @State var hr: Double = 0.00;
+  @State var stepCount: Double = 0;
+  @State var hrvSDNN: Double = 0;
+  @State var eventCountForSteps = 3;
+  @State var otherEvents = 5;
+  @State var otherEventType = "--";
+  @State private var workoutStarted = true;
+  
+    let healthStore = HKHealthStore()
+  
     var body: some View {
+
+      let _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {
+          (_) in
+//        workoutManager.queryHeartRate()
+        hr = workoutManager.heartRate
+        stepCount = workoutManager.stepCount
+        hrvSDNN = workoutManager.hrvSDNN
+        otherEvents = workoutManager.otherEvents
+        eventCountForSteps = workoutManager.eventCountForSteps
+        otherEventType = workoutManager.otherEventType
+      }
+      
       VStack {
-        Text("HR: \(hrv ?? "---")")
         Divider()
-        Button("Start") {
-          workoutManager.startWorkout(workoutType: runningWorkout)
-//          print("=>  \(workoutManager.$heartRate)")
-          workoutStarted.toggle()
-        }.onAppear {
-          workoutManager.requestAuthorization()
-        }
-//            NavigationLink("Start", destination: SessionPagingView(),
-//                           tag: workoutType, selection: $workoutManager.selectedWorkout)
-//                .padding(EdgeInsets(top: 15, leading: 5, bottom: 15, trailing: 5))
-//        .onAppear {
-//            workoutManager.requestAuthorization()
-//        }.onTapGesture {
-//          workoutStarted.toggle()
-//        }
+        HStack {
+          HStack {
+            Image(systemName: "heart")
+                            .font(.system(size: 30))
+            let hrString = String(format: "%.0f", hr)
+            Text(hrString).fixedSize(horizontal: true, vertical: true)
+          }
+          Divider()
+          HStack {
+            Image(systemName: "figure.walk.circle.fill")
+                            .font(.system(size: 30))
+            let stepCountString = String(format: "%.0f", stepCount)
+            Text(stepCountString).fixedSize(horizontal: true, vertical: true)
+          }
+        }.fixedSize(horizontal: false, vertical: true)
         Divider()
         if workoutStarted {
-          Text("Workout started")
-            .fontWeight(.bold).foregroundColor(.green)
-        } else {
-          Text("No workout started")
-            .fontWeight(.bold).foregroundColor(.red)
+          HStack {
+            Image(systemName: "bolt.heart")
+                            .font(.system(size: 30))
+            let hrvString = String(format: "%.0f", hrvSDNN)
+            Text(hrvString).fixedSize(horizontal: true, vertical: true)
+          }
         }
+        Divider()
+        VStack {
+          let eventCountForStepsString = String(format: "%d", eventCountForSteps)
+          Text(eventCountForStepsString).fixedSize(horizontal: true, vertical: true)
+          Divider()
+          let otherEventsString = String(format: "%d", otherEvents)
+          Text(otherEventsString).fixedSize(horizontal: true, vertical: true)
+          Divider()
+          let otherEventsDescription = String(format: "%d", otherEventType)
+          Text(otherEventsDescription).fixedSize(horizontal: true, vertical: true)
 
+//          Rectangle()
+//            .fill(Color.red)
+//            .frame(width: 300, height: 300)
+        }
       }
     }
 }
