@@ -77,6 +77,7 @@ setCustomText(customTextProps);
 export default function App(props: any): JSX.Element {
   useEffect(() => {
     const onPairingCodeReceived = ({url}: {url: string}) => {
+      console.log("===> url = ", url)
       if (url.startsWith(PairingDeepLink)) {
         const pairingCode = url.substring(PairingDeepLink.length+1);
         if (pairingCode) {
@@ -87,6 +88,7 @@ export default function App(props: any): JSX.Element {
         }
       }
     };
+    console.log("Adding event listener for the pairing request for Fitbit!")
     Linking.addEventListener('url', onPairingCodeReceived);
     return () => {
       Linking.removeListener('url', onPairingCodeReceived);

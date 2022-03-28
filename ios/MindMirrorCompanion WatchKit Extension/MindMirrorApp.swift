@@ -15,16 +15,33 @@ struct MindMirrorApp: App {
    
    */
   @StateObject private var workoutManager = WorkoutManager()
+  @Environment(\.scenePhase) var scenePhase
   
   @SceneBuilder var body: some Scene {
       WindowGroup {
           NavigationView {
-              ContentView()
+              StartView()
           }
           .sheet(isPresented: $workoutManager.showingSummaryView) {
               SummaryView()
           }
           .environmentObject(workoutManager)
+      }.onChange(of: scenePhase) { newScenePhase in
+        switch newScenePhase {
+        case .active:
+          print("App is active")
+          workoutManager.requestAuthorization()
+          workoutManager.startWorkout(workoutType: .running)
+        case .inactive:
+          print("App is inactive")
+//          workoutManager.requestAuthorization()
+//          workoutManager.session?.stopActivity(with: nil)
+        case .background:
+          print("App is in background")
+//          workoutManager.session?.stopActivity(with: nil)
+        @unknown default:
+          print("Oh - interesting: I received an unexpected new value.")
+        }
       }
     WKNotificationScene(controller: NotificationController.self, category: "myCategory")
   }
