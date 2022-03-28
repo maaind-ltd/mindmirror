@@ -8,6 +8,9 @@ const SharedStorage = NativeModules.SharedStorage;
 const HRV_MAX_OLDNESS_MS = 60 * 30 * 1000;
 const VOICE_MAX_OLDNESS_MS = 60 * 30 * 1000;
 
+const MELLOW_THRESHHOLD = 0.43;
+const FLOW_THRESSHOLD = 0.37;
+
 const moodSlice = createSlice({
   name: 'mood',
   initialState: {
@@ -69,16 +72,16 @@ const moodSlice = createSlice({
         state.currentScore =
           scores.reduce((sum, score) => sum + score, 0) / scores.length;
         console.log(`Calculated score: ${state.currentScore}`);
-        if (state.currentScore > 0.5) {
+        if (state.currentScore > MELLOW_THRESHHOLD) {
           state.currentMood = EmotionStateWithNone.Mellow;
-        } else if (state.currentScore > 0.33) {
+        } else if (state.currentScore > FLOW_THRESSHOLD) {
           state.currentMood = EmotionStateWithNone.Flow;
         } else {
           state.currentMood = EmotionStateWithNone.GoGoGo;
         }
       }
 
-      const moodText = 
+      const moodText =
         state.currentMood === EmotionStateWithNone.NoEmotion
           ? 'No measured mood'
           : state.currentMood;
@@ -87,7 +90,6 @@ const moodSlice = createSlice({
         colors: ColorsRgb[state.currentMood as keyof typeof ColorsRgb],
       });
       SharedStorage.set(sharedJsonString);
-      
     },
     cancelRecording: state => {
       state.lastScores = [];
@@ -96,7 +98,7 @@ const moodSlice = createSlice({
     setCurrentMood: (state, action: PayloadAction<EmotionStateWithNone>) => {
       state.currentMood = action.payload;
 
-      const moodText = 
+      const moodText =
         state.currentMood === EmotionStateWithNone.NoEmotion
           ? 'No measured mood'
           : state.currentMood;

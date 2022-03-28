@@ -5,6 +5,14 @@ import moodSlice from '../store/moodSlice';
 import {isAndroid} from './accessoryFunctions';
 const {UniqueIdReader} = NativeModules;
 
+let averagedScores = {
+  calm: [],
+  sad: [],
+  angry: [],
+  neutral: [],
+  happy: [],
+};
+
 /**
  * Triggers a request to the server, uploading the file content as base64 string and receiving a
  * set of scores in return. Dispatches an addScores action if scores were retrieved.
@@ -26,18 +34,59 @@ export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
         // if (data && !err) {
         try {
           const responseBody = JSON.parse(data);
-          console.log('Got body ', responseBody);
           if (
             responseBody &&
             responseBody.contains_speech === 1 &&
             responseBody.calm
           ) {
+            const gogogoFactors =
+              responseBody.happy +
+              responseBody.angry +
+              (1 - responseBody.calm) / 2;
+            const flow = responseBody.neutral;
+            const mellow = (responseBody.calm + responseBody.sad) * 1.4;
+
+            averagedScores.calm.push(responseBody.calm);
+            averagedScores.sad.push(responseBody.sad);
+            averagedScores.angry.push(responseBody.angry);
+            averagedScores.neutral.push(responseBody.neutral);
+            averagedScores.happy.push(responseBody.happy);
+
             store.dispatch(
               moodSlice.actions.addCurrentScore(responseBody.calm),
             );
             if (getTypedState().mood.lastScores.length > 5) {
               store.dispatch(moodSlice.actions.stopRecording());
               store.dispatch(moodSlice.actions.recalculateMood());
+
+              const avgCalm =
+                averagedScores.calm.reduce((sum, val) => sum + val, 0) /
+                averagedScores.calm.length;
+              const avgSad =
+                averagedScores.sad.reduce((sum, val) => sum + val, 0) /
+                averagedScores.sad.length;
+              const avgAngry =
+                averagedScores.angry.reduce((sum, val) => sum + val, 0) /
+                averagedScores.angry.length;
+              const avgNeutral =
+                averagedScores.neutral.reduce((sum, val) => sum + val, 0) /
+                averagedScores.neutral.length;
+              const avgHappy =
+                averagedScores.happy.reduce((sum, val) => sum + val, 0) /
+                averagedScores.happy.length;
+
+              console.log(
+                `Averaged: calm ${avgCalm}, sad ${avgSad}, angry ${avgAngry}, ` +
+                  `neutral ${avgNeutral}, happy ${avgHappy}`,
+              );
+
+              averagedScores = {
+                calm: [],
+                sad: [],
+                angry: [],
+                neutral: [],
+                happy: [],
+              };
             }
           }
         } catch (error) {

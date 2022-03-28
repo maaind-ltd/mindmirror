@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StatusBar, Pressable, Linking, NativeModules} from 'react-native';
+import {StatusBar, Pressable, View, NativeModules} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import Avatar from '../components/Avatar';
@@ -14,7 +14,6 @@ import moodSlice from '../store/moodSlice';
 import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
 import notifee, {EventType} from '@notifee/react-native';
-const {SharedStorage} = NativeModules;
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -49,7 +48,9 @@ const MirrorScreen: () => JSX.Element = () => {
   }, []);
   return (
     <StyledSafeAreaView>
-      <StatusBar barStyle={'light-content'} />
+      <View style={{backgroundColor: 'red'}}>
+        <StatusBar barStyle={'light-content'} />
+      </View>
       <MirrorContainer color={currentColor}>
         {currentMood !== EmotionStateWithNone.NoEmotion ? (
           <TopTextContainer

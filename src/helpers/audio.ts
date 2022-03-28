@@ -151,7 +151,7 @@ let isDeliveringData = false;
  */
 const startRecording = (onDataCallback: (data: string) => void) => {
   const options = {
-    sampleRate: 44100,
+    sampleRate: 48000,
     channels: 1,
     bitsPerSample: 8,
     wavFile: `temp_file_${uniqueId()}.wav`,
@@ -197,7 +197,7 @@ export const stopRecording = async () => {
 
     const audioFile = await AudioRecord.stop();
     // console.log(audioFile);
-    console.log('Audio recording stopped.');
+    // console.log('Audio recording stopped.');
     try {
       const encodedContent = await RNFS.readFile(audioFile, 'base64');
 
@@ -222,7 +222,7 @@ export const stopRecording = async () => {
  * Stops the current audio recording and discards its content.
  */
 export const stopRecordingAndDiscardAudio = async () => {
-  console.log('Stopping audio recording.');
+  // console.log('Stopping audio recording.');
   try {
     if (isCurrentlyRecording) {
       AudioRecord.stop();
@@ -230,6 +230,6 @@ export const stopRecordingAndDiscardAudio = async () => {
   } catch (errorOnStop) {
     console.log(errorOnStop);
   }
-  console.log('audio recording stopped.');
+  // console.log('audio recording stopped.');
   return true;
 };
