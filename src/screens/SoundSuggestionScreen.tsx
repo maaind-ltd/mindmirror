@@ -17,6 +17,7 @@ import {
 } from '../helpers/audio';
 import {useCombinedStore} from '../store/combinedStore';
 import {TopNavigation} from '../components/TopNavigation';
+import {FullPageContainer} from '../components/FullPageContainer';
 const REFRESH_RATE_MS = 1000;
 
 export interface ExplanationScreenProps
@@ -84,8 +85,7 @@ const SoundSuggestionScreen: (
   }, [setTimeLeft]);
 
   return (
-    <StyledSafeAreaView>
-      <StatusBar barStyle={'light-content'} />
+    <FullPageContainer backgroundColor={Colors.Background}>
       <BackgroundView>
         <TopNavigation
           usePrimaryColor={true}
@@ -106,7 +106,7 @@ const SoundSuggestionScreen: (
           </OuterRing>
         </MainContentContainer>
       </BackgroundView>
-    </StyledSafeAreaView>
+    </FullPageContainer>
   );
 };
 

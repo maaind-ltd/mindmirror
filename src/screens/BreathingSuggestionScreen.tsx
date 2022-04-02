@@ -23,6 +23,7 @@ import {
 } from '../helpers/breathing';
 import {TopNavigation} from '../components/TopNavigation';
 import {getTimeMsStringRepresentation} from '../helpers/accessoryFunctions';
+import {FullPageContainer} from '../components/FullPageContainer';
 
 const REFRESH_RATE_MS = 50;
 
@@ -81,8 +82,7 @@ const BreathingSuggestionScreen: (
   }, [setTime]);
 
   return (
-    <StyledSafeAreaView>
-      <StatusBar barStyle={'light-content'} />
+    <FullPageContainer backgroundColor={Colors.Background}>
       <BackgroundView>
         <TopNavigation
           usePrimaryColor={true}
@@ -121,7 +121,7 @@ const BreathingSuggestionScreen: (
           {getTimeMsStringRepresentation(totalExperienceTimeMs - time)}
         </TimeText>
       </BackgroundView>
-    </StyledSafeAreaView>
+    </FullPageContainer>
   );
 };
 

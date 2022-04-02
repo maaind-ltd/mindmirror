@@ -5,7 +5,10 @@
       "namespace": "android_app",
       "package_name": "com.mindmirror",
       "sha256_cert_fingerprints": [
-        "6A:BC:7E:A9:52:EA:0F:2A:C1:FC:C5:70:3A:C7:2B:67:C0:8E:DC:4D:64:7D:91:FA:16:98:DC:52:70:90:17:F4"
+        "6A:BC:7E:A9:52:EA:0F:2A:C1:FC:C5:70:3A:C7:2B:67:C0:8E:DC:4D:64:7D:91:FA:16:98:DC:52:70:90:17:F4",
+        "04:35:08:9B:51:57:DE:77:92:85:EC:6A:F2:61:3B:72:F4:50:F7:12:BF:00:1E:02:C1:3A:61:FC:EB:85:30:0E",
+        "FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C",
+        "E8:AB:2C:E1:F1:57:FE:C7:CD:33:13:A5:A8:F8:3F:03:3B:B3:0F:EE:97:26:72:D0:E8:AC:68:AD:5D:4E:6B:3A"
       ]
     }
   }

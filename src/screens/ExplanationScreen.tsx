@@ -10,6 +10,7 @@ import {PartialScreens} from './partialScreens/index';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useStackNavigation} from '../store/combinedStore';
 import {TopNavigation} from '../components/TopNavigation';
+import {FullPageContainer} from '../components/FullPageContainer';
 
 export interface ExplanationScreenProps
   extends Stack.StackScreenProps<MainStackParams> {}
@@ -25,8 +26,7 @@ const ExplanationScreen: (
   const ScreenContent = PartialScreens[subScreenKey].component;
   const screenTitle = PartialScreens[subScreenKey].title!;
   return (
-    <StyledSafeAreaView>
-      <StatusBar barStyle={'light-content'} />
+    <FullPageContainer backgroundColor="white">
       <BackgroundView>
         <TopNavigation
           usePrimaryColor={true}
@@ -44,7 +44,7 @@ const ExplanationScreen: (
           </ExplanationContent>
         </ExplanationContentBorderProvider>
       </BackgroundView>
-    </StyledSafeAreaView>
+    </FullPageContainer>
   );
 };
 

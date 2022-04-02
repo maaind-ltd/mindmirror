@@ -7,9 +7,9 @@ import {EmotionStateWithNone} from '../constants/emotionState';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 import {useStackNavigation} from '../store/combinedStore';
 import Screens from '../constants/screens';
-import StyledSafeAreaView from '../components/StyledSafeAreaView';
 import {useCombinedStore} from '../store/combinedStore';
 import notifee, {EventType} from '@notifee/react-native';
+import {FullPageContainer} from '../components/FullPageContainer';
 
 // Bootstrap sequence function
 async function bootstrap() {
@@ -50,8 +50,7 @@ const App: () => JSX.Element = () => {
     }, 2000);
   });
   return (
-    <StyledSafeAreaView>
-      <StatusBar barStyle={'light-content'} />
+    <FullPageContainer backgroundColor={Colors.Background}>
       <BackgroundView>
         <AppTextContainer height={height}>
           <AppText>MindMirror</AppText>
@@ -69,7 +68,7 @@ const App: () => JSX.Element = () => {
         </OuterLineContainer>
         <FooterText>powered by{'\n'}Maaind</FooterText>
       </BackgroundView>
-    </StyledSafeAreaView>
+    </FullPageContainer>
   );
 };
 

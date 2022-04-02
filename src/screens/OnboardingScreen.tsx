@@ -17,7 +17,7 @@ import {generateUid} from '../helpers/accessoryFunctions';
 import {setupNotifications} from '../helpers/notificationHelpers';
 import {isAndroid} from '../helpers/accessoryFunctions';
 import _ from 'lodash';
-import { FullPageContainer } from '../components/FullPageContainer';
+import {FullPageContainer} from '../components/FullPageContainer';
 
 const ONBOARDING_PAGES = Object.keys(OnboardingScreens).length;
 
@@ -46,7 +46,7 @@ const OnboardingScreen: (
       ?.onboardingIndex || 0;
   const ScreenContent = OnboardingScreens[onboardingIndex];
   return (
-    <FullPageContainer backgroundColor="white">
+    <FullPageContainer backgroundColor={Colors.Background}>
       <BackgroundView>
         <ExplanationContent>
           <PanGestureHandler

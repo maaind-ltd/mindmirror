@@ -32,6 +32,11 @@ export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
       body,
       (err: any, data: string) => {
         // if (data && !err) {
+        const {isRecording} = getTypedState().mood;
+        if (!isRecording) {
+          return;
+        }
+
         try {
           const responseBody = JSON.parse(data);
           if (
@@ -39,13 +44,6 @@ export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
             responseBody.contains_speech === 1 &&
             responseBody.calm
           ) {
-            const gogogoFactors =
-              responseBody.happy +
-              responseBody.angry +
-              (1 - responseBody.calm) / 2;
-            const flow = responseBody.neutral;
-            const mellow = (responseBody.calm + responseBody.sad) * 1.4;
-
             averagedScores.calm.push(responseBody.calm);
             averagedScores.sad.push(responseBody.sad);
             averagedScores.angry.push(responseBody.angry);
@@ -59,6 +57,7 @@ export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
               store.dispatch(moodSlice.actions.stopRecording());
               store.dispatch(moodSlice.actions.recalculateMood());
 
+              const maxCalm = Math.max(...averagedScores.calm);
               const avgCalm =
                 averagedScores.calm.reduce((sum, val) => sum + val, 0) /
                 averagedScores.calm.length;
@@ -76,7 +75,7 @@ export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
                 averagedScores.happy.length;
 
               console.log(
-                `Averaged: calm ${avgCalm}, sad ${avgSad}, angry ${avgAngry}, ` +
+                `Max calm: ${maxCalm}, Averaged: calm ${avgCalm}, sad ${avgSad}, angry ${avgAngry}, ` +
                   `neutral ${avgNeutral}, happy ${avgHappy}`,
               );
 
@@ -104,6 +103,10 @@ export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
       body,
     })
       .then(response => {
+        const {isRecording} = getTypedState().mood;
+        if (!isRecording) {
+          return;
+        }
         if (response.status === 200 && response.ok) {
           return response.json();
         }
