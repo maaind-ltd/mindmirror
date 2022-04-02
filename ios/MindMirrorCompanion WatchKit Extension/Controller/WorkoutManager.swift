@@ -7,6 +7,7 @@ The workout manager that interfaces with HealthKit.
 
 import Foundation
 import HealthKit
+import WatchConnectivity
 
 class WorkoutManager: NSObject, ObservableObject {
     var selectedWorkout: HKWorkoutActivityType? {
@@ -27,6 +28,8 @@ class WorkoutManager: NSObject, ObservableObject {
     let healthStore = HKHealthStore()
     var session: HKWorkoutSession?
     var builder: HKLiveWorkoutBuilder?
+  
+    var watchkitSession = WCSession.default
 
     // Start the workout.
     func startWorkout(workoutType: HKWorkoutActivityType) {
@@ -57,6 +60,9 @@ class WorkoutManager: NSObject, ObservableObject {
         builder?.beginCollection(withStart: startDate) { (success, error) in
             // The workout has started.
         }
+     
+      watchkitSession.delegate = self
+      watchkitSession.activate()
     }
 
     // Request authorization to access HealthKit.
@@ -120,6 +126,8 @@ class WorkoutManager: NSObject, ObservableObject {
     @Published var otherEvents: Int = 5
     @Published var otherEventType: String = ""
     @Published var workout: HKWorkout?
+    @Published var mood: String = "-"
+    @Published var heartRatesCsv: String = ""
 
     func updateForStatistics(_ statistics: HKStatistics?) {
         guard let statistics = statistics else { return }
@@ -136,6 +144,10 @@ class WorkoutManager: NSObject, ObservableObject {
                     let heartRateUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
                     self.heartRate = statistics.mostRecentQuantity()?.doubleValue(for: heartRateUnit) ?? 30
                     self.averageHeartRate = statistics.averageQuantity()?.doubleValue(for: heartRateUnit) ?? 0
+                    // Store the new heart rate info in the shared storage object
+                    let millis = String(statistics.endDate.timeIntervalSince1970)
+                    self.heartRatesCsv += millis + ":" + String(self.heartRate) + ";"
+              
                     break
                 case HKQuantityType.quantityType(forIdentifier: .stepCount):
                     let stepCountUnit = HKUnit.count()
@@ -214,4 +226,19 @@ extension WorkoutManager: HKLiveWorkoutBuilderDelegate {
             updateForStatistics(statistics)
         }
     }
+}
+
+extension WorkoutManager: WCSessionDelegate {
+  func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {}
+  
+  func session(_: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+    if message["request"] as? String == "heartrates" {
+      replyHandler(["heartrates": self.heartRatesCsv])
+      // Clear the heartrates for the next time it's pulled
+      self.heartRatesCsv = ""
+    } else if message["request"] as? String == "mood" {
+      replyHandler(["status": "received"])
+      self.mood = message["mood"] as? String ?? "Unknown"
+    }
+  }
 }

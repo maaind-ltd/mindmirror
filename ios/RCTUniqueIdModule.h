@@ -9,7 +9,9 @@
 #define RCTUniqueIdModule_h
 
 #import <React/RCTBridgeModule.h>
-@interface RCTUniqueIdModule : NSObject <RCTBridgeModule>
+#import <WatchConnectivity/WatchCOnnectivity.h>
+@interface RCTUniqueIdModule : NSObject <RCTBridgeModule, WCSessionDelegate>
+
 @end
 
 #endif /* RCTUniqueIdModule_h */
