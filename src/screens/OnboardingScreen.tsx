@@ -137,7 +137,7 @@ const NextButton = styled(Pressable)`
   border-radius: 24px;
   justify-content: center;
   align-items: center;
-  margin-bottom: ${isAndroid ? 24 : 48}px;
+  margin-bottom: 24px;
 `;
 
 const SpacingElement = styled.View`
@@ -165,7 +165,7 @@ const ScreenContentContainer = styled.View`
 `;
 
 const BottomContent = styled.View`
-  margin-bottom:  ${props => props.screenHeight < 800 ? `0px` : `20px`};
+  margin-bottom:  ${props => props.screenHeight < 800 ? `0px` : `24px`};
 `;
 
 export default OnboardingScreen;
