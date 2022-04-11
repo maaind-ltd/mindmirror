@@ -11,6 +11,7 @@ const settingsSlice = createSlice({
     userToken: generateUid(),
     pairingCode: '',
     showNotifications: true,
+    activationCode: undefined,
   },
   reducers: {
     setOnboardingFinished: (state, action: PayloadAction<boolean>) => {
@@ -36,6 +37,9 @@ const settingsSlice = createSlice({
     },
     setShowNotifications: (state, action: PayloadAction<boolean>) => {
       state.showNotifications = action.payload;
+    },
+    setActivationCode: (state, action: PayloadAction<string>) => {
+      state.activationCode = action.payload;
     },
   },
 });

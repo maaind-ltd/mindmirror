@@ -31,7 +31,8 @@ const Colors = {
   SpotifyGreen: '#00ac11',
   SpotifyRed: '#ffac11',
   SpotifyBlack: '#0b0008',
-  Warning: '#FF8800',
+  Warning: '#ff8800',
+  Error: '#dd0000',
 };
 
 export const ColorsRgb = {

@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {StatusBar} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StatusBar, Pressable} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import WigglyLineContainer from '../components/WigglyLineContainer';
@@ -10,6 +10,11 @@ import Screens from '../constants/screens';
 import {useCombinedStore} from '../store/combinedStore';
 import notifee, {EventType} from '@notifee/react-native';
 import {FullPageContainer} from '../components/FullPageContainer';
+import {TextInput} from 'react-native-gesture-handler';
+import {HelpModal} from '../modals/HelpModal';
+import settingsSlice from '../store/settingsSlice';
+import {useDispatch} from 'react-redux';
+import {isValidActivationKey} from '../constants/keys';
 
 // Bootstrap sequence function
 async function bootstrap() {
@@ -31,24 +36,34 @@ async function bootstrap() {
 const App: () => JSX.Element = () => {
   const {width, height} = useWindowDimensions();
   const navigator = useStackNavigation();
-  const {onboardingFinished} = useCombinedStore(store => store.settings);
+  const dispatch = useDispatch();
+  const {activationCode, onboardingFinished} = useCombinedStore(
+    store => store.settings,
+  );
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [isCodeValid, setCodeValid] = useState(true);
+
+  const redirect = () => {
+    bootstrap().then(initialNotification => {
+      if (initialNotification && onboardingFinished) {
+        navigator.replace(Screens.VoiceCheckinScreen);
+      } else {
+        navigator.replace(
+          onboardingFinished ? Screens.MirrorScreen : Screens.OnboardingScreen,
+        );
+      }
+    });
+  };
 
   useEffect(() => {
     setTimeout(() => {
-      console.log(`Onboarding finished?: ${onboardingFinished}`);
-      bootstrap().then(initialNotification => {
-        if (initialNotification && onboardingFinished) {
-          navigator.replace(Screens.VoiceCheckinScreen);
-        } else {
-          navigator.replace(
-            onboardingFinished
-              ? Screens.MirrorScreen
-              : Screens.OnboardingScreen,
-          );
-        }
-      });
+      if (!activationCode || !isValidActivationKey(activationCode)) {
+        setModalVisible(true);
+      } else {
+        redirect();
+      }
     }, 2000);
-  });
+  }, []);
   return (
     <FullPageContainer backgroundColor={Colors.Background}>
       <BackgroundView>
@@ -68,6 +83,40 @@ const App: () => JSX.Element = () => {
         </OuterLineContainer>
         <FooterText>powered by{'\n'}Maaind</FooterText>
       </BackgroundView>
+      <HelpModal visible={isModalVisible} setModalVisible={() => undefined}>
+        <InputView>
+          <InputLabel>Activation Code</InputLabel>
+          <StyledTextInput
+            screenWidth={width}
+            isCodeValid={isCodeValid}
+            value={activationCode}
+            onChangeText={newActivationCode => {
+              console.log(`Activation code to set: ${newActivationCode}`);
+              dispatch(
+                settingsSlice.actions.setActivationCode(newActivationCode),
+              );
+              if (newActivationCode.length === 8) {
+                setCodeValid(isValidActivationKey(newActivationCode));
+              }
+            }}
+          />
+          <SaveButton
+            onPress={() => {
+              if (isValidActivationKey(activationCode)) {
+                settingsSlice.actions.setActivationCode(
+                  activationCode.toUpperCase(),
+                );
+                setCodeValid(true);
+                setModalVisible(false);
+                redirect();
+              } else {
+                setCodeValid(false);
+              }
+            }}>
+            <SaveButtonText>Activate</SaveButtonText>
+          </SaveButton>
+        </InputView>
+      </HelpModal>
     </FullPageContainer>
   );
 };
@@ -116,6 +165,58 @@ const OuterLineContainer = styled.View`
   position: relative;
   width: ${props => props.width}px;
   height: ${props => props.height * 0.2}px;
+`;
+
+const SaveButton = styled(Pressable)`
+  margin: 36px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 42px;
+  width: 70%;
+  background-color: white;
+  border-radius: 24px;
+  margin-bottom: 24px;
+  border: 1px solid ${Colors.Primary};
+  background-color: ${Colors.Font};
+`;
+
+const InputView = styled.View`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 24px 0;
+`;
+
+const InputLabel = styled.Text`
+  font-size: 18px;
+  color: ${Colors.Primary};
+  margin-bottom: 2px;
+`;
+
+const SaveButtonText = styled.Text`
+  font-size: 15px;
+  color: ${Colors.Background};
+  margin-bottom: 2px;
+`;
+
+const StyledTextInput = styled(TextInput)`
+  font-size: 24px;
+  color: ${props => (props.isCodeValid ? Colors.Primary : Colors.Error)};
+  text-align: center;
+  width: ${props => props.screenWidth * 0.6}px;
+  border: 1px solid
+    ${props => (props.isCodeValid ? Colors.Primary : Colors.Error)};
+  text-decoration: none;
+  height: 56px;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  margin-top: 12px;
+  margin-bottom: 24px;
 `;
 
 export default App;
