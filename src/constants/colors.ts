@@ -22,6 +22,7 @@ const Colors = {
   NoEmotionBorder: '#A0A0A0',
   NoEmotionBright: '#E0E0E0',
   NoEmotionBlurred: '#F9F9F9',
+  FontLight: '#889988',
   Font: '#566E88',
   FontDark: '#3C4F63',
   LightGreyAccent: '#D6D6D6',
