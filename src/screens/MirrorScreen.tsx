@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StatusBar, Pressable, View, SafeAreaView, StyleSheet} from 'react-native';
+import {StatusBar, Pressable, NativeModules} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import Avatar from '../components/Avatar';
@@ -15,6 +15,9 @@ import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
 import notifee, {EventType} from '@notifee/react-native';
 import { FullPageContainer } from '../components/FullPageContainer';
+
+const SharedStorage = NativeModules.SharedStorage;
+const UniqueIdModule = NativeModules.UniqueIdModule;
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -33,6 +36,27 @@ const MirrorScreen: () => JSX.Element = () => {
   const currentColor = Colors[currentMood];
   const navigator = useStackNavigation();
   const {width} = useWindowDimensions();
+
+  useEffect(() => {
+    try {
+      console.log('Trying to start watch session in android');
+      UniqueIdModule.startWatchSession("").then(async () => {
+        console.log('Started watch session in android');
+      })
+    } catch (err) {
+      console.log(`Failed to start watch session: ${err}`);
+    }
+    const intervalId = setInterval(async () => {
+      try {
+        const hrResult = await UniqueIdModule.getHeartRates("");
+        const heartRates = hrResult.heartrates;
+        console.log(`${Date.now()}: HR is: `+ heartRates);
+      } catch (err) {
+        console.log(`Failed to read HR: ${err}`)
+      }
+    }, 10000);
+    return () => clearInterval(intervalId);
+  });
 
   // Subscribe to events
   useEffect(() => {

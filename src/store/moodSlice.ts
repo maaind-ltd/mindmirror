@@ -4,6 +4,7 @@ import {NativeModules} from 'react-native';
 import {ColorsRgb} from '../constants/colors';
 import {isAndroid} from '../helpers/accessoryFunctions';
 const SharedStorage = NativeModules.SharedStorage;
+const UniqueIdModule = NativeModules.UniqueIdModule;
 
 const HRV_MAX_OLDNESS_MS = 60 * 30 * 1000;
 const VOICE_MAX_OLDNESS_MS = 60 * 30 * 1000;
@@ -90,6 +91,9 @@ const moodSlice = createSlice({
         colors: ColorsRgb[state.currentMood as keyof typeof ColorsRgb],
       });
       SharedStorage.set(sharedJsonString);
+      if (!isAndroid) {
+        UniqueIdModule.setWatchMood(state.currentMood);
+      }
     },
     cancelRecording: state => {
       state.lastScores = [];
@@ -107,6 +111,9 @@ const moodSlice = createSlice({
         colors: ColorsRgb[action.payload as keyof typeof ColorsRgb],
       });
       SharedStorage.set(sharedJsonString);
+      if (!isAndroid) {
+        UniqueIdModule.setWatchMood(state.currentMood);
+      }
     },
     setTargetMood: (state, action: PayloadAction<EmotionState>) => {
       state.targetMood = action.payload;

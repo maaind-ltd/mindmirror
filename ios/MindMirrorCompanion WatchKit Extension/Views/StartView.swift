@@ -37,7 +37,8 @@ import AVFoundation
 struct StartView: View {
   
   @EnvironmentObject var workoutManager: WorkoutManager
-
+  @StateObject var phoneMessaging = PhoneMessaging()
+  
   var runningWorkout: HKWorkoutActivityType = .running
   @State var hr: Double = 0.00;
   @State var stepCount: Double = 0;
@@ -96,8 +97,8 @@ struct StartView: View {
           let otherEventsString = String(format: "%d", otherEvents)
           Text(otherEventsString).fixedSize(horizontal: true, vertical: true)
           Divider()
-          let otherEventsDescription = String(format: "%d", otherEventType)
-          Text(otherEventsDescription).fixedSize(horizontal: true, vertical: true)
+//          let otherEventsDescription = String(format: "%s", phoneMessaging)
+          Text(workoutManager.mood).fixedSize(horizontal: true, vertical: true)
 
 //          Rectangle()
 //            .fill(Color.red)

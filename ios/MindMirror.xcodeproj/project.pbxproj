@@ -42,6 +42,7 @@
 		546A5818DAF597EE43F274DE /* libPods-MindMirror-MindMirrorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D400DD3758FD472DEF3A47B /* libPods-MindMirror-MindMirrorTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A050A9276FF1D6D219D35637 /* libPods-MindMirror.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C1F6F1B71B0D1286F43C03 /* libPods-MindMirror.a */; };
+		DB6FF6A127F83565007C86D8 /* PhoneMessaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6FF6A027F83564007C86D8 /* PhoneMessaging.swift */; };
 		DBB5C45A27D925ED00DF10B4 /* WidgetKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB5C45927D925ED00DF10B4 /* WidgetKitHelper.swift */; };
 		DBB5C45C27D92A0A00DF10B4 /* SharedStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB5C45727D8FB7700DF10B4 /* SharedStorage.m */; };
 		DBCAEBDB27C6368100927F25 /* RTCUniqueIdModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCAEBDA27C6368100927F25 /* RTCUniqueIdModule.m */; };
@@ -182,6 +183,7 @@
 		69C1F6F1B71B0D1286F43C03 /* libPods-MindMirror.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MindMirror.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MindMirror/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D400DD3758FD472DEF3A47B /* libPods-MindMirror-MindMirrorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MindMirror-MindMirrorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB6FF6A027F83564007C86D8 /* PhoneMessaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneMessaging.swift; sourceTree = "<group>"; };
 		DBB5C45627D8FAE800DF10B4 /* SharedStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedStorage.h; sourceTree = "<group>"; };
 		DBB5C45727D8FB7700DF10B4 /* SharedStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedStorage.m; sourceTree = "<group>"; };
 		DBB5C45827D925EC00DF10B4 /* MindMirror-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MindMirror-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				43E7A39D27B720260045879F /* Info.plist */,
 				43E7A39E27B720260045879F /* PushNotificationPayload.apns */,
 				43E7A39A27B720260045879F /* Preview Content */,
+				DB6FF6A027F83564007C86D8 /* PhoneMessaging.swift */,
 			);
 			path = "MindMirrorCompanion WatchKit Extension";
 			sourceTree = "<group>";
@@ -885,6 +888,7 @@
 				437F94A227E29E3A0088C9FC /* ElapsedTimeView.swift in Sources */,
 				43E7A39727B720250045879F /* ComplicationController.swift in Sources */,
 				437F94A127E29E3A0088C9FC /* ControlsView.swift in Sources */,
+				DB6FF6A127F83565007C86D8 /* PhoneMessaging.swift in Sources */,
 				43E7A38F27B720250045879F /* MindMirrorApp.swift in Sources */,
 				437F94A727E29E3A0088C9FC /* ActivityRingsView.swift in Sources */,
 				437F949927E29E130088C9FC /* WorkoutManager.swift in Sources */,

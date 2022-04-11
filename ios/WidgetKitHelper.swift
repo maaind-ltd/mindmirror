@@ -6,6 +6,7 @@
 //
 
 import WidgetKit
+import WatchConnectivity
 
 @available(iOS 14.0, *)
 @objcMembers final class WidgetKitHelper: NSObject {
@@ -16,3 +17,37 @@ import WidgetKit
     #endif
   }
 }
+//
+//@available(iOS 13.0, *)
+//@objcMembers final class ConnectivityRequestHandler: NSObject, ObservableObject {
+//  var session = WCSession.default
+//
+//  override init() {
+//    super.init()
+//    session.delegate = self
+//    session.activate()
+//  }
+//}
+//
+//@available(iOS 13.0, *)
+//extension ConnectivityRequestHandler: WCSessionDelegate {
+//  func sessionDidBecomeInactive(_ session: WCSession) {
+//  }
+//
+//  func sessionDidDeactivate(_ session: WCSession) {
+//  }
+//
+//  func sessionWatchStateDidChange(_ session: WCSession) {
+//  }
+//
+//  func session(_ session:WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+//
+//  }
+//
+//  func session(_: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any])->Void) {
+//    debugPrint("didReceiveMessage: ", message)
+//    if message["request"] as? String == "mood" {
+//      replyHandler(["mood": "mellow"])
+//    }
+//  }
+//}
