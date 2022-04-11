@@ -77,7 +77,7 @@ const OnboardingScreen: (
               <ScreenContentContainer screenHeight={height}>
                 <ScreenContent />
                 <SpacingElement />
-                <BottomContent>
+                <BottomContent screenHeight={height}>
                   <NextButton
                     onPress={() => {
                       if (onboardingIndex === ONBOARDING_PAGES - 1) {
@@ -160,12 +160,12 @@ const ScreenContentContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   flex-grow: 1;
-  min-height: ${props => (isAndroid ? `${props.screenHeight}px` : `96%`)};
+  min-height: ${props => (isAndroid ? `${props.screenHeight}px` : `100%`)};
   padding-top: 8px;
 `;
 
 const BottomContent = styled.View`
-  margin-bottom: 20px;
+  margin-bottom:  ${props => props.screenHeight < 800 ? `0px` : `20px`};
 `;
 
 export default OnboardingScreen;
