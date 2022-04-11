@@ -139,7 +139,7 @@ const EntryContainer = styled.View`
   align-items: center;
   padding: 32px 24px 31px;
   width: 100%;
-  margin: 1px 0px;
+  margin: 0px 0px 1px;
 `;
 
 const IconContainer = styled.View`
