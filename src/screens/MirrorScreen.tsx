@@ -77,9 +77,9 @@ const MirrorScreen: () => JSX.Element = () => {
           timestamps.push(hrReadingSplit[0]);
           heartRateValues.push(hrReadingSplit[1]);
         }
-        console.log("timestamps = ", timestamps);
-        console.log("heartRateValues = ", heartRateValues);
-        console.log("====> ", heartRatesArray)
+        // console.log("timestamps = ", timestamps);
+        // console.log("heartRateValues = ", heartRateValues);
+        // console.log("====> ", heartRatesArray)
 
         let contentString = "";
         for (let i = 0; i < timestamps.length; i++) {
@@ -125,26 +125,32 @@ const MirrorScreen: () => JSX.Element = () => {
             throw new Error(`Response failed: ${response.status}`);
           })
           .then(jsonData => {
-            console.log(jsonData);
-            if (jsonData?.contains_speech === 1) {
-              store.dispatch(moodSlice.actions.addCurrentScore(jsonData.calm));
-              if (getTypedState().mood.lastScores.length > 5) {
-                store.dispatch(moodSlice.actions.stopRecording());
-                store.dispatch(moodSlice.actions.recalculateMood());
-              }
-            }
+            // take first key's value from jsonData
+            // console.log("jsonData = ", jsonData);
+            let calmValue = Object.values(jsonData.predicted_calm_value)[0] as number;
+            
+            //convert calmValue to a number
+            console.log("calmValue ===> ", calmValue);
+            // store.dispatch(moodSlice.actions.addCurrentScore(calmValue));
+            // if (getTypedState().mood.lastScores.length > 5) {
+            // console.log("Trying to recalculate mood")
+              // store.dispatch(moodSlice.actions.stopRecording());
+              /* We need to update the mood but it refreshes and tries to send again */
+            // store.dispatch(moodSlice.actions.recalculateMood());
+            console.log("currentMood = ", currentMood);
+            // }
           })
           .catch(error => {
             if (error.status === 500) {
-              console.log("All good, just a 500")
+              console.log("Backend error, but let's not console.error and blow up the app");
             }
             // console.error(error);
           });
 
-        console.log('Trying to start watch session in android');
-        UniqueIdModule.startWatchSession('').then(async () => {
-          console.log('Started watch session in android');
-        });
+        // console.log('Trying to start watch session in android');
+        // UniqueIdModule.startWatchSession('').then(async () => {
+        //   console.log('Started watch session in android');
+        // });
       } catch (err) {
         console.log(`Failed to start watch session: ${err}`);
       }
