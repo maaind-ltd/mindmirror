@@ -50,11 +50,12 @@ const moodSlice = createSlice({
     },
     recalculateMood: state => {
       const scores: Array<number> = [];
-
+      console.log("hrvScoreTimestamp = ", state.hrvScoreTimestamp);
       if (
         state.currentHrvScore > 0 &&
         state.hrvScoreTimestamp > Date.now() - HRV_MAX_OLDNESS_MS
       ) {
+        console.log("currnetHrvScore = ", state.currentHrvScore);
         scores.push(state.currentHrvScore);
       }
 

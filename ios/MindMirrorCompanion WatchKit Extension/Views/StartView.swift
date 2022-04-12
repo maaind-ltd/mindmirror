@@ -108,11 +108,11 @@ struct StartView: View {
 //function that returns a color based on a string's values
 func getColor(mood: String) -> Color {
   switch mood {
-  case "mellow":
+  case "Mellow":
+    return Color.blue
+  case "Flow":
     return Color.green
-  case "flow":
-    return Color.red
-  case "gogogo":
+  case "GoGoGo":
     return Color.orange
   default:
     return Color.gray

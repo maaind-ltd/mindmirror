@@ -95,7 +95,7 @@ const MirrorScreen: () => JSX.Element = () => {
             heartRateValues.push(hrReadingSplit[1]);
           }
           // console.log("timestamps = ", timestamps);
-          // console.log("heartRateValues = ", heartRateValues);
+          console.log("heartRateValues we're sending to backend = ", heartRateValues);
           // console.log("====> ", heartRatesArray)
 
           let contentString = "";
@@ -148,12 +148,12 @@ const MirrorScreen: () => JSX.Element = () => {
               
               //convert calmValue to a number
               console.log("calmValue ===> ", calmValue);
-              // store.dispatch(moodSlice.actions.addCurrentScore(calmValue));
+              store.dispatch(moodSlice.actions.addHrvScore(calmValue / 100)),
               // if (getTypedState().mood.lastScores.length > 5) {
               // console.log("Trying to recalculate mood")
                 // store.dispatch(moodSlice.actions.stopRecording());
                 /* We need to update the mood but it refreshes and tries to send again */
-              // store.dispatch(moodSlice.actions.recalculateMood());
+              store.dispatch(moodSlice.actions.recalculateMood());
               console.log("currentMood = ", currentMood);
               // }
             })
