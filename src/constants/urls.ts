@@ -4,4 +4,6 @@ export const UrlHrv = 'https://dev.maaind.com:6543/App/get-hrv-from-fitbit/';
 export const UrlStorePlaylistIds =
   'https://dev.maaind.com:6543/App/store-playlist-ids/';
 
+export const UrlReceiveHR = "https://dev.maaind.com:6543/App/receive-hr-from-fitbit/";
+
 export const PairingDeepLink = 'https://www.maaind.com/pair';
