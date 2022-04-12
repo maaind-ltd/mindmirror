@@ -47,6 +47,14 @@ struct StartView: View {
   @State var otherEvents = 5;
   @State var otherEventType = "--";
   @State private var workoutStarted = true;
+  @State var currentTime = "";
+  
+  func updateCurrentTime() {
+    let date = Date()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm"
+    currentTime = formatter.string(from: date)
+  }
   
     let healthStore = HKHealthStore()
   
@@ -61,9 +69,13 @@ struct StartView: View {
         otherEvents = workoutManager.otherEvents
         eventCountForSteps = workoutManager.eventCountForSteps
         otherEventType = workoutManager.otherEventType
+        //get current system time in hours and minutes
+        updateCurrentTime()
       }
-      
+
       VStack {
+        //show current time in big white letters
+        Text(currentTime).font(.system(size: 30, weight: .bold, design: .rounded)).foregroundColor(Color.white)
         Divider()
         HStack {
           HStack {
@@ -81,31 +93,31 @@ struct StartView: View {
           }
         }.fixedSize(horizontal: false, vertical: true)
         Divider()
-        if workoutStarted {
-          HStack {
-            Image(systemName: "bolt.heart")
-                            .font(.system(size: 30))
-            let hrvString = String(format: "%.0f", hrvSDNN)
-            Text(hrvString).fixedSize(horizontal: true, vertical: true)
-          }
-        }
-        Divider()
         VStack {
-          let eventCountForStepsString = String(format: "%d", eventCountForSteps)
-          Text(eventCountForStepsString).fixedSize(horizontal: true, vertical: true)
-          Divider()
           let otherEventsString = String(format: "%d", otherEvents)
           Text(otherEventsString).fixedSize(horizontal: true, vertical: true)
           Divider()
-//          let otherEventsDescription = String(format: "%s", phoneMessaging)
           Text(workoutManager.mood).fixedSize(horizontal: true, vertical: true)
-
-//          Rectangle()
-//            .fill(Color.red)
-//            .frame(width: 300, height: 300)
         }
-      }
+      }.padding(.top, 10).padding()
+        .overlay(
+          RoundedRectangle(cornerRadius: 16)
+            .stroke(getColor(mood: workoutManager.mood), lineWidth: 8))
     }
+}
+
+//function that returns a color based on a string's values
+func getColor(mood: String) -> Color {
+  switch mood {
+  case "mellow":
+    return Color.green
+  case "flow":
+    return Color.red
+  case "gogogo":
+    return Color.orange
+  default:
+    return Color.gray
+  }
 }
 
 struct StartView_Previews: PreviewProvider {

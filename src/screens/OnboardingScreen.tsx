@@ -17,7 +17,7 @@ import {generateUid} from '../helpers/accessoryFunctions';
 import {setupNotifications} from '../helpers/notificationHelpers';
 import {isAndroid} from '../helpers/accessoryFunctions';
 import _ from 'lodash';
-import { FullPageContainer } from '../components/FullPageContainer';
+import {FullPageContainer} from '../components/FullPageContainer';
 
 const ONBOARDING_PAGES = Object.keys(OnboardingScreens).length;
 
@@ -46,7 +46,7 @@ const OnboardingScreen: (
       ?.onboardingIndex || 0;
   const ScreenContent = OnboardingScreens[onboardingIndex];
   return (
-    <FullPageContainer backgroundColor="white">
+    <FullPageContainer backgroundColor={Colors.Background}>
       <BackgroundView>
         <ExplanationContent>
           <PanGestureHandler
@@ -77,7 +77,7 @@ const OnboardingScreen: (
               <ScreenContentContainer screenHeight={height}>
                 <ScreenContent />
                 <SpacingElement />
-                <BottomContent>
+                <BottomContent screenHeight={height}>
                   <NextButton
                     onPress={() => {
                       if (onboardingIndex === ONBOARDING_PAGES - 1) {
@@ -137,7 +137,7 @@ const NextButton = styled(Pressable)`
   border-radius: 24px;
   justify-content: center;
   align-items: center;
-  margin-bottom: ${isAndroid ? 24 : 48}px;
+  margin-bottom: 24px;
 `;
 
 const SpacingElement = styled.View`
@@ -160,12 +160,12 @@ const ScreenContentContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   flex-grow: 1;
-  min-height: ${props => (isAndroid ? `${props.screenHeight}px` : `96%`)};
+  min-height: ${props => (isAndroid ? `${props.screenHeight}px` : `100%`)};
   padding-top: 8px;
 `;
 
 const BottomContent = styled.View`
-  margin-bottom: 20px;
+  margin-bottom:  ${props => props.screenHeight < 800 ? `0px` : `24px`};
 `;
 
 export default OnboardingScreen;

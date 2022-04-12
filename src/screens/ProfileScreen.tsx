@@ -15,6 +15,7 @@ import {useDispatch} from 'react-redux';
 import {TextInput} from 'react-native-gesture-handler';
 import {AvatarSelectionModal} from '../modals/AvatarSelectionModal';
 import {setupNotifications} from '../helpers/notificationHelpers';
+import {FullPageContainer} from '../components/FullPageContainer';
 
 const ProfileScreen: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
@@ -27,8 +28,7 @@ const ProfileScreen: () => JSX.Element = () => {
   const [featureModalVisible, setFeatureModalVisible] = useState(false);
 
   return (
-    <StyledSafeAreaView>
-      <StatusBar barStyle={'light-content'} />
+    <FullPageContainer backgroundColor={Colors.Background}>
       <BackgroundView>
         <TopNavigation>
           <ArrowBackContainer>
@@ -122,7 +122,7 @@ const ProfileScreen: () => JSX.Element = () => {
           </HelpText>
         </HelpTextContainer>
       </HelpModal>
-    </StyledSafeAreaView>
+    </FullPageContainer>
   );
 };
 

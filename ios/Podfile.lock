@@ -374,6 +374,10 @@ PODS:
     - React-Core
   - RNSVG (12.1.1):
     - React
+  - Smartlook (1.8.7)
+  - smartlook-react-native-bridge (1.2.5):
+    - React
+    - Smartlook (~> 1.8.3)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -443,6 +447,7 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSound (from `../node_modules/react-native-sound`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - smartlook-react-native-bridge (from `../node_modules/smartlook-react-native-wrapper`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -461,6 +466,7 @@ SPEC REPOS:
     - fmt
     - libevent
     - OpenSSL-Universal
+    - Smartlook
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -546,6 +552,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-sound"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  smartlook-react-native-bridge:
+    :path: "../node_modules/smartlook-react-native-wrapper"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -605,6 +613,8 @@ SPEC CHECKSUMS:
   RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e
   RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
+  Smartlook: 831b369810ecf87e7560db09af1aabe7b7279570
+  smartlook-react-native-bridge: dfdaca7503e637f3e6cf7fb6d0b849dac7385eca
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

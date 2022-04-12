@@ -34,7 +34,9 @@ allprojects {
         maven {
             url ("$rootDir/../node_modules/@notifee/react-native/android/libs")
         }
-
+        maven {
+            url "https://sdk.smartlook.com/android/release"
+        }
         google()
         maven { url 'https://www.jitpack.io' }
         flatDir {

@@ -1,5 +1,9 @@
 package com.mindmirror;
 
+import android.app.ActivityOptions;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
@@ -127,5 +131,16 @@ public class UniqueIdReaderModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getSpotifyMessage(Callback cb) {
         cb.invoke("connection: " + MainActivity.spotifyConnectionResult + ", playbackresult: " + MainActivity.spotifyPlaybackResult, null);
+    }
+
+    @ReactMethod
+    public void requestOpenByDefaultRights(Callback cb) {
+        Context context = getCurrentActivity();
+        try {
+            Intent intent = new Intent("android.settings.APP_OPEN_BY_DEFAULT_SETTINGS",
+                    Uri.parse("package:" + context.getPackageName()));
+            context.startActivity(intent);
+        } catch (Exception e) {}
+        cb.invoke(null, null);
     }
 }
