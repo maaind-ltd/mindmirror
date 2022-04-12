@@ -9,5 +9,6 @@ export const isValidActivationKey = (activationKey: string) => {
   for (let i = 0; i < upperCaseKey.length; i++) {
     charSum += upperCaseKey.charCodeAt(i);
   }
-  return charSum === 620;
+  console.log("valid = ", charSum);
+  return charSum === 420;
 };

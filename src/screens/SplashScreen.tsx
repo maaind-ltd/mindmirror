@@ -98,6 +98,7 @@ const App: () => JSX.Element = () => {
               if (newActivationCode.length === 8) {
                 setCodeValid(isValidActivationKey(newActivationCode));
               }
+              console.log("newActivationCode.length = ", newActivationCode.length);
             }}
           />
           <SaveButton

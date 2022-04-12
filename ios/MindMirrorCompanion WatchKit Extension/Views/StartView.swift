@@ -75,31 +75,30 @@ struct StartView: View {
 
       VStack {
         //show current time in big white letters
-        Text(currentTime).font(.system(size: 30, weight: .bold, design: .rounded)).foregroundColor(Color.white)
-        Divider()
-        HStack {
-          HStack {
-            Image(systemName: "heart")
-                            .font(.system(size: 30))
-            let hrString = String(format: "%.0f", hr)
-            Text(hrString).fixedSize(horizontal: true, vertical: true)
-          }
-          Divider()
-          HStack {
-            Image(systemName: "figure.walk.circle.fill")
-                            .font(.system(size: 30))
-            let stepCountString = String(format: "%.0f", stepCount)
-            Text(stepCountString).fixedSize(horizontal: true, vertical: true)
-          }
-        }.fixedSize(horizontal: false, vertical: true)
-        Divider()
+        Text(currentTime).font(.system(size: 40, weight: .bold, design: .rounded)).foregroundColor(Color.white)
         VStack {
-          let otherEventsString = String(format: "%d", otherEvents)
-          Text(otherEventsString).fixedSize(horizontal: true, vertical: true)
-          Divider()
-          Text(workoutManager.mood).fixedSize(horizontal: true, vertical: true)
-        }
-      }.padding(.top, 10).padding()
+          //add heart icon in the color based on getColor function which has as its argument the workoutManager.mood, size 40
+          Image(systemName: "heart.fill").foregroundColor(getColor(mood: workoutManager.mood)).font(.system(size: 40, weight: .bold, design: .rounded))
+            let hrString = String(format: "%.0f", hr)
+          Text(hrString).font(.system(size: 20)).foregroundColor(getColor(mood: workoutManager.mood))
+          }
+        // Divider()
+        // HStack {
+        //   HStack {
+        //     Image(systemName: "figure.walk.circle.fill")
+        //                     .font(.system(size: 30))
+        //     let stepCountString = String(format: "%.0f", stepCount)
+        //     Text(stepCountString).fixedSize(horizontal: true, vertical: true)
+        //   }
+        // }.fixedSize(horizontal: false, vertical: true)
+        // Divider()
+        // VStack {
+        //   let otherEventsString = String(format: "%d", otherEvents)
+        //   Text(otherEventsString).fixedSize(horizontal: true, vertical: true)
+        //   Divider()
+        //   Text(workoutManager.mood).fixedSize(horizontal: true, vertical: true)
+        // }
+      }.frame(maxWidth: .infinity, maxHeight: .infinity).padding(.top, 10).padding()
         .overlay(
           RoundedRectangle(cornerRadius: 16)
             .stroke(getColor(mood: workoutManager.mood), lineWidth: 8))
