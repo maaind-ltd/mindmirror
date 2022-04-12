@@ -37,13 +37,14 @@ const MirrorScreen: () => JSX.Element = () => {
   const navigator = useStackNavigation();
   const {width} = useWindowDimensions();
   const {userToken} = getTypedState().settings;
+  const [heartRates, setHeartRates] = React.useState("");
   var randomNonce = 0;
 
   function add_one_make_two_digit(num){
     return ("00" + (num).toString()).slice(-2)
   }
 
-  const generateDateString = async (date) => {
+  const generateDateString = (date) => {
     let date_string = 
     date.getUTCFullYear() + '_' + 
       add_one_make_two_digit(date.getUTCMonth() + 1) + '_' + 
@@ -59,12 +60,18 @@ const MirrorScreen: () => JSX.Element = () => {
   if (!isAndroid) {
     useEffect(() => {
       try {
-        const hrResult = UniqueIdModule.getHeartRates("");
-        const heartRates = hrResult.heartrates;
-        console.log(`${Date.now()}: HR is: `+ heartRates);
+        try {
+          console.log('Trying to start watch session in android');
+          UniqueIdModule.startWatchSession('').then(async () => {
+            console.log('Started watch session in android');
+          });
+        } catch (err) {
+          console.log(`Failed to start watch session: ${err}`);
+        }
         let heartRatesArray = heartRates.split(";");
         let timestamps = [];
         let heartRateValues = [];
+        // We do -1 because the last value is an empty string, we can ignore that one
         for (let i = 0; i < heartRatesArray.length-1; i++) {
           let hrReadingSplit = heartRatesArray[i].split(":");
           timestamps.push(hrReadingSplit[0]);
@@ -72,7 +79,7 @@ const MirrorScreen: () => JSX.Element = () => {
         }
         console.log("timestamps = ", timestamps);
         console.log("heartRateValues = ", heartRateValues);
-        // console.log("====> ", heartRatesArray)
+        console.log("====> ", heartRatesArray)
 
         let contentString = "";
         for (let i = 0; i < timestamps.length; i++) {
@@ -128,7 +135,10 @@ const MirrorScreen: () => JSX.Element = () => {
             }
           })
           .catch(error => {
-            console.error(error);
+            if (error.status === 500) {
+              console.log("All good, just a 500")
+            }
+            // console.error(error);
           });
 
         console.log('Trying to start watch session in android');
@@ -142,6 +152,7 @@ const MirrorScreen: () => JSX.Element = () => {
         try {
           const hrResult = await UniqueIdModule.getHeartRates('');
           const heartRates = hrResult.heartrates;
+          setHeartRates(heartRates);
           console.log(`${Date.now()}: HR is: ` + heartRates);
         } catch (err) {
           console.log(`Failed to read HR: ${err}`);
