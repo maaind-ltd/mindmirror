@@ -58,104 +58,18 @@ const MirrorScreen: () => JSX.Element = () => {
   /* Read HRs every 5 seconds */
 
   if (!isAndroid) {
+
     useEffect(() => {
-      try {
-        try {
-          console.log('Trying to start watch session in android');
-          UniqueIdModule.startWatchSession('').then(async () => {
-            console.log('Started watch session in android');
-          });
-        } catch (err) {
-          console.log(`Failed to start watch session: ${err}`);
-        }
-        let heartRatesArray = heartRates.split(";");
-        let timestamps = [];
-        let heartRateValues = [];
-        // We do -1 because the last value is an empty string, we can ignore that one
-        for (let i = 0; i < heartRatesArray.length-1; i++) {
-          let hrReadingSplit = heartRatesArray[i].split(":");
-          timestamps.push(hrReadingSplit[0]);
-          heartRateValues.push(hrReadingSplit[1]);
-        }
-        // console.log("timestamps = ", timestamps);
-        // console.log("heartRateValues = ", heartRateValues);
-        // console.log("====> ", heartRatesArray)
-
-        let contentString = "";
-        for (let i = 0; i < timestamps.length; i++) {
-          contentString += `${Math.round(timestamps[i]*1000)},${heartRateValues[i]},${Math.round(timestamps[i]*1000)},${randomNonce}.0,1.0,0.0,0.0\n`;
-        }
-
-        // console.log("timestamps[0] = ", timestamps[0]);
-
-        let referenceDate = timestamps[0];
-        let referenceDateRounded = Math.round(timestamps[0])*1000;
-        // console.log("referenceDateRounded = ", referenceDateRounded);
-        let referenceDateAsDate = new Date(referenceDateRounded);
-        // console.log("referenceDateAsDate = ", referenceDateAsDate);
-        let referenceDateFormatted = "" + (generateDateString(referenceDateAsDate)).toString() + "";
-        
-        // console.log("===========> ", referenceDateFormatted);
-        // let escapedContentString = escapeStringContents(contentString);
-
-        let basicJSON = JSON.stringify({
-          fileName: 'hr.fitbit_hr.0._' + referenceDateFormatted + '__n' + timestamps.length + ".csv",
-          content : contentString,
-        })
-
-        // console.log("predictionJSON = ", basicJSON);
-
-        let queryJSON = {}
-        queryJSON['token'] = userToken;
-        let contentPayload = {}
-        contentPayload[referenceDateFormatted] = basicJSON;
-        queryJSON['content'] = contentPayload;
-
-        fetch(UrlReceiveHR, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(queryJSON),
-        }).then(response => {
-            if (response.status === 200 && response.ok) {
-              return response.json();
-            }
-            throw new Error(`Response failed: ${response.status}`);
-          })
-          .then(jsonData => {
-            // take first key's value from jsonData
-            // console.log("jsonData = ", jsonData);
-            let calmValue = Object.values(jsonData.predicted_calm_value)[0] as number;
-            
-            //convert calmValue to a number
-            console.log("calmValue ===> ", calmValue);
-            // store.dispatch(moodSlice.actions.addCurrentScore(calmValue));
-            // if (getTypedState().mood.lastScores.length > 5) {
-            // console.log("Trying to recalculate mood")
-              // store.dispatch(moodSlice.actions.stopRecording());
-              /* We need to update the mood but it refreshes and tries to send again */
-            // store.dispatch(moodSlice.actions.recalculateMood());
-            console.log("currentMood = ", currentMood);
-            // }
-          })
-          .catch(error => {
-            if (error.status === 500) {
-              console.log("Backend error, but let's not console.error and blow up the app");
-            }
-            // console.error(error);
-          });
-
-        // console.log('Trying to start watch session in android');
-        // UniqueIdModule.startWatchSession('').then(async () => {
-        //   console.log('Started watch session in android');
-        // });
-      } catch (err) {
-        console.log(`Failed to start watch session: ${err}`);
-      }
       const intervalId = setInterval(async () => {
         try {
+          try {
+            console.log('Trying to start watch session in android');
+            UniqueIdModule.startWatchSession('').then(async () => {
+              console.log('Started watch session in android');
+            });
+          } catch (err) {
+            console.log(`Failed to start watch session: ${err}`);
+          }
           const hrResult = await UniqueIdModule.getHeartRates('');
           const heartRates = hrResult.heartrates;
           setHeartRates(heartRates);
@@ -166,6 +80,99 @@ const MirrorScreen: () => JSX.Element = () => {
       }, 10000);
       return () => clearInterval(intervalId);
     });
+
+    useEffect(() => {
+      try {
+        //check if heartRates is an empty string
+        if (heartRates !== "") {
+          let heartRatesArray = heartRates.split(";");
+          let timestamps = [];
+          let heartRateValues = [];
+          // We do -1 because the last value is an empty string, we can ignore that one
+          for (let i = 0; i < heartRatesArray.length-1; i++) {
+            let hrReadingSplit = heartRatesArray[i].split(":");
+            timestamps.push(hrReadingSplit[0]);
+            heartRateValues.push(hrReadingSplit[1]);
+          }
+          // console.log("timestamps = ", timestamps);
+          // console.log("heartRateValues = ", heartRateValues);
+          // console.log("====> ", heartRatesArray)
+
+          let contentString = "";
+          for (let i = 0; i < timestamps.length; i++) {
+            contentString += `${Math.round(timestamps[i]*1000)},${heartRateValues[i]},${Math.round(timestamps[i]*1000)},${randomNonce}.0,1.0,0.0,0.0\n`;
+          }
+
+          // console.log("timestamps[0] = ", timestamps[0]);
+
+          let referenceDate = timestamps[0];
+          let referenceDateRounded = Math.round(timestamps[0])*1000;
+          // console.log("referenceDateRounded = ", referenceDateRounded);
+          let referenceDateAsDate = new Date(referenceDateRounded);
+          // console.log("referenceDateAsDate = ", referenceDateAsDate);
+          let referenceDateFormatted = "" + (generateDateString(referenceDateAsDate)).toString() + "";
+          
+          // console.log("===========> ", referenceDateFormatted);
+          // let escapedContentString = escapeStringContents(contentString);
+
+          let basicJSON = JSON.stringify({
+            fileName: 'hr.fitbit_hr.0._' + referenceDateFormatted + '__n' + timestamps.length + ".csv",
+            content : contentString,
+          })
+
+          // console.log("predictionJSON = ", basicJSON);
+
+          let queryJSON = {}
+          queryJSON['token'] = userToken;
+          let contentPayload = {}
+          contentPayload[referenceDateFormatted] = basicJSON;
+          queryJSON['content'] = contentPayload;
+
+          fetch(UrlReceiveHR, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(queryJSON),
+          }).then(response => {
+              if (response.status === 200 && response.ok) {
+                return response.json();
+              }
+              throw new Error(`Response failed: ${response.status}`);
+            })
+            .then(jsonData => {
+              // take first key's value from jsonData
+              // console.log("jsonData = ", jsonData);
+              let calmValue = Object.values(jsonData.predicted_calm_value)[0] as number;
+              
+              //convert calmValue to a number
+              console.log("calmValue ===> ", calmValue);
+              // store.dispatch(moodSlice.actions.addCurrentScore(calmValue));
+              // if (getTypedState().mood.lastScores.length > 5) {
+              // console.log("Trying to recalculate mood")
+                // store.dispatch(moodSlice.actions.stopRecording());
+                /* We need to update the mood but it refreshes and tries to send again */
+              // store.dispatch(moodSlice.actions.recalculateMood());
+              console.log("currentMood = ", currentMood);
+              // }
+            })
+            .catch(error => {
+              if (error.status === 500) {
+                console.log("Backend error, but let's not console.error and blow up the app");
+              }
+              // console.error(error);
+            });
+
+          // console.log('Trying to start watch session in android');
+          // UniqueIdModule.startWatchSession('').then(async () => {
+          //   console.log('Started watch session in android');
+        }
+      } 
+     catch (err) {
+        console.log(`Failed to start watch session: ${err}`);
+      }
+    }, [heartRates]);
   }
 
   // Subscribe to events
