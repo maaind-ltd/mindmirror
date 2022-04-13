@@ -19,6 +19,7 @@
     "react-native": "0.66.4",
     "react-native-app-auth": "^6.4.3",
     "react-native-audio-record": "^0.2.2",
+    "react-native-background-fetch": "^4.1.0",
     "react-native-fs": "^2.18.0",
     "react-native-gesture-handler": "^2.1.1",
     "react-native-global-props": "^1.1.5",

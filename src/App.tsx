@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   CardStyleInterpolators,
@@ -23,14 +23,18 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {BreathingType, SoundSuggestionType} from './helpers/audio';
 import BreathingSuggestionScreen from './screens/BreathingSuggestionScreen';
 import SoundSuggestionScreen from './screens/SoundSuggestionScreen';
-import {Linking, Platform} from 'react-native';
+import {NativeModules, AppState, Linking, Platform} from 'react-native';
 import {PairingDeepLink} from './constants/urls';
 import settingsSlice from './store/settingsSlice';
 import moodSlice from './store/moodSlice';
-import {fetchHrvData} from './helpers/hrvHelpers';
+import {fetchHrvData, updateHeartRatesApple} from './helpers/hrvHelpers';
 import {isAndroid} from './helpers/accessoryFunctions';
 import Smartlook from 'smartlook-react-native-wrapper';
 import {SmartlookKey} from './constants/keys';
+import BackgroundFetch from "react-native-background-fetch";
+const UniqueIdModule = NativeModules.UniqueIdModule;
+
+
 Smartlook.setupAndStartRecording(SmartlookKey);
 
 if (isAndroid) {
@@ -77,8 +81,50 @@ const customTextProps = {
 
 setCustomText(customTextProps);
 
+ // Add a BackgroundFetch event to <FlatList>
+ function addEvent(taskId) {
+  // Simulate a possibly long-running asynchronous task with a Promise.
+  return new Promise<void>(async (resolve, reject) => {
+    updateHeartRatesApple();
+    resolve();
+  });
+}
+
+async function initBackgroundFetch() {
+  // BackgroundFetch event handler.
+  const onEvent = async (taskId) => {
+    console.log('[BackgroundFetch] task: ', taskId);
+    // Do your background work...
+    await addEvent(taskId);
+    // IMPORTANT:  You must signal to the OS that your task is complete.
+    BackgroundFetch.finish(taskId);
+  }
+
+  // Timeout callback is executed when your Task has exceeded its allowed running-time.
+  // You must stop what you're doing immediately BackgroundFetch.finish(taskId)
+  const onTimeout = async (taskId) => {
+    console.warn('[BackgroundFetch] TIMEOUT task: ', taskId);
+    BackgroundFetch.finish(taskId);
+  }
+
+  // Initialize BackgroundFetch only once when component mounts.
+  let status = await BackgroundFetch.configure({minimumFetchInterval: 15}, onEvent, onTimeout);
+
+  console.log('[BackgroundFetch] configure status: ', status);
+}
+
 export default function App(props: any): JSX.Element {
   useEffect(() => {
+    
+    // initialize the background fetch only once on app start
+    initBackgroundFetch();
+
+    // separately call the updateHeartRatesApple every 10 seconds when the app is in the foreground
+
+    const interval = setInterval(() => {
+      updateHeartRatesApple();
+    }, 10000);
+
     const onPairingCodeReceived = ({url}: {url: string}) => {
       console.log('===> url = ', url);
       if (url.startsWith(PairingDeepLink)) {
@@ -94,7 +140,30 @@ export default function App(props: any): JSX.Element {
     console.log('Adding event listener for the pairing request for Fitbit!');
     Linking.addEventListener('url', onPairingCodeReceived);
     return () => {
+      clearInterval(interval);
       Linking.removeListener('url', onPairingCodeReceived);
+    };
+  }, []);
+
+  const appState = useRef(AppState.currentState);
+  const [appStateVisible, setAppStateVisible] = useState(appState.current);
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener("change", nextAppState => {
+      if (
+        appState.current.match(/inactive|background/) &&
+        nextAppState === "active"
+      ) {
+        console.log("App has come to the foreground!");
+      }
+
+      appState.current = nextAppState;
+      setAppStateVisible(appState.current);
+      console.log("AppState", appState.current);
+    });
+
+    return () => {
+      subscription.remove();
     };
   }, []);
 
