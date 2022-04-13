@@ -32,7 +32,16 @@ import AVFoundation
 //    RCTSwiftLog.trace(message, file: file, line: line)
 //}
 
-
+extension UIColor {
+  convenience init(hex: Int) {
+      let components = (
+          R: CGFloat((hex >> 16) & 0xff) / 255,
+          G: CGFloat((hex >> 08) & 0xff) / 255,
+          B: CGFloat((hex >> 00) & 0xff) / 255
+      )
+      self.init(red: components.R, green: components.G, blue: components.B, alpha: 1)
+  }
+}
 
 struct StartView: View {
   
@@ -73,35 +82,24 @@ struct StartView: View {
         updateCurrentTime()
       }
 
-      VStack {
-        //show current time in big white letters
-        Text(currentTime).font(.system(size: 40, weight: .bold, design: .rounded)).foregroundColor(Color.white)
-        VStack {
-          //add heart icon in the color based on getColor function which has as its argument the workoutManager.mood, size 40
-          Image(systemName: "heart.fill").foregroundColor(getColor(mood: workoutManager.mood)).font(.system(size: 40, weight: .bold, design: .rounded))
-            let hrString = String(format: "%.0f", hr)
-          Text(hrString).font(.system(size: 20)).foregroundColor(getColor(mood: workoutManager.mood))
+      ZStack {
+        HStack {
+          VStack {
+            //add heart icon in the color based on getColor function which has as its argument the workoutManager.mood, size 40
+            Image(systemName: "heart.fill").foregroundColor(getColor(mood: workoutManager.mood)).font(.system(size: 25, weight: .bold, design: .rounded))
+              let hrString = String(format: "%.0f", hr)
+            Text(hrString).font(.system(size: 20)).foregroundColor(getColor(mood: workoutManager.mood))
+          }.padding(.trailing, 15)
+          VStack {
+            // show an image of number of steps
+            Image(systemName: "figure.walk.circle").foregroundColor(getColor(mood: workoutManager.mood)).font(.system(size: 25, weight: .bold, design: .rounded))
+            let stepCountString = String(format: "%.0f", stepCount)
+            Text(stepCountString).font(.system(size: 20)).foregroundColor(getColor(mood: workoutManager.mood))
           }
-        // Divider()
-        // HStack {
-        //   HStack {
-        //     Image(systemName: "figure.walk.circle.fill")
-        //                     .font(.system(size: 30))
-        //     let stepCountString = String(format: "%.0f", stepCount)
-        //     Text(stepCountString).fixedSize(horizontal: true, vertical: true)
-        //   }
-        // }.fixedSize(horizontal: false, vertical: true)
-        // Divider()
-        // VStack {
-        //   let otherEventsString = String(format: "%d", otherEvents)
-        //   Text(otherEventsString).fixedSize(horizontal: true, vertical: true)
-        //   Divider()
-        //   Text(workoutManager.mood).fixedSize(horizontal: true, vertical: true)
-        // }
-      }.frame(maxWidth: .infinity, maxHeight: .infinity).padding(.top, 10).padding()
-        .overlay(
-          RoundedRectangle(cornerRadius: 16)
-            .stroke(getColor(mood: workoutManager.mood), lineWidth: 8))
+          
+        }
+        Circle().stroke(getColor(mood: workoutManager.mood), lineWidth: 7)
+      }.frame(idealWidth: 230, idealHeight: 230, alignment: .center).padding(.top, 10)
     }
 }
 
@@ -109,13 +107,13 @@ struct StartView: View {
 func getColor(mood: String) -> Color {
   switch mood {
   case "Mellow":
-    return Color.blue
+    return Color(UIColor(hex: 0x82C5E0))
   case "Flow":
-    return Color.green
+    return Color(UIColor(hex: 0xBFDCBC))
   case "GoGoGo":
-    return Color.orange
+    return Color(UIColor(hex: 0xFFC999))
   default:
-    return Color.gray
+    return Color(UIColor(hex: 0xC0C0C0))
   }
 }
 
