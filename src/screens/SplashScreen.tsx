@@ -14,7 +14,7 @@ import {TextInput} from 'react-native-gesture-handler';
 import {HelpModal} from '../modals/HelpModal';
 import settingsSlice from '../store/settingsSlice';
 import {useDispatch} from 'react-redux';
-import {isValidActivationKey} from '../constants/keys';
+import {isValidActivationKey, useActivationCode} from '../helpers/keys';
 
 // Bootstrap sequence function
 async function bootstrap() {
@@ -42,6 +42,8 @@ const App: () => JSX.Element = () => {
   );
   const [isModalVisible, setModalVisible] = useState(false);
   const [isCodeValid, setCodeValid] = useState(true);
+  const [localActivationCode, setLocalActivationCode] =
+    useState(activationCode);
 
   const redirect = () => {
     bootstrap().then(initialNotification => {
@@ -89,26 +91,30 @@ const App: () => JSX.Element = () => {
           <StyledTextInput
             screenWidth={width}
             isCodeValid={isCodeValid}
-            value={activationCode}
+            value={localActivationCode}
             onChangeText={newActivationCode => {
               console.log(`Activation code to set: ${newActivationCode}`);
-              dispatch(
-                settingsSlice.actions.setActivationCode(newActivationCode),
-              );
+              setLocalActivationCode(newActivationCode);
               if (newActivationCode.length === 8) {
                 setCodeValid(isValidActivationKey(newActivationCode));
               }
             }}
           />
           <SaveButton
-            onPress={() => {
-              if (isValidActivationKey(activationCode)) {
-                settingsSlice.actions.setActivationCode(
-                  activationCode.toUpperCase(),
-                );
-                setCodeValid(true);
-                setModalVisible(false);
-                redirect();
+            onPress={async () => {
+              if (isValidActivationKey(localActivationCode)) {
+                const upperCaseCode = localActivationCode.toUpperCase();
+                const wasAccepted = await useActivationCode(upperCaseCode);
+                if (wasAccepted) {
+                  dispatch(
+                    settingsSlice.actions.setActivationCode(upperCaseCode),
+                  );
+                  setCodeValid(true);
+                  setModalVisible(false);
+                  redirect();
+                } else {
+                  setCodeValid(false);
+                }
               } else {
                 setCodeValid(false);
               }

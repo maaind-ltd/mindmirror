@@ -30,7 +30,7 @@ import moodSlice from './store/moodSlice';
 import {fetchHrvData} from './helpers/hrvHelpers';
 import {isAndroid} from './helpers/accessoryFunctions';
 import Smartlook from 'smartlook-react-native-wrapper';
-import {SmartlookKey} from './constants/keys';
+import {SmartlookKey} from './helpers/keys';
 Smartlook.setupAndStartRecording(SmartlookKey);
 
 if (isAndroid) {
