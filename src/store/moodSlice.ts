@@ -42,20 +42,21 @@ const moodSlice = createSlice({
       state.voiceScoreTimestamp = Date.now();
       state.isRecording = false;
     },
-    addHrvScore: (state, action: PayloadAction<number>) => {
-      if (action.payload >= 0) {
-        state.currentHrvScore = action.payload;
-        state.hrvScoreTimestamp = Date.now();
+    addHrvScore: (state, action: PayloadAction<[number, number]>) => {
+      const [calmScore, timestamp] = action.payload;
+      if (calmScore >= 0) {
+        state.currentHrvScore = calmScore;
+        state.hrvScoreTimestamp = timestamp;
       }
     },
     recalculateMood: state => {
       const scores: Array<number> = [];
-      console.log("hrvScoreTimestamp = ", state.hrvScoreTimestamp);
+      console.log('hrvScoreTimestamp = ', state.hrvScoreTimestamp);
       if (
         state.currentHrvScore > 0 &&
         state.hrvScoreTimestamp > Date.now() - HRV_MAX_OLDNESS_MS
       ) {
-        console.log("currnetHrvScore = ", state.currentHrvScore);
+        console.log('currnetHrvScore = ', state.currentHrvScore);
         scores.push(state.currentHrvScore);
       }
 

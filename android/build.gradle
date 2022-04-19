@@ -37,6 +37,10 @@ allprojects {
         maven {
             url "https://sdk.smartlook.com/android/release"
         }
+        maven {
+            // react-native-background-fetch
+            url("${project(':react-native-background-fetch').projectDir}/libs")
+        }
         google()
         maven { url 'https://www.jitpack.io' }
         flatDir {
