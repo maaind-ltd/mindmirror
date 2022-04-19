@@ -93,7 +93,7 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
                 `Press the icon to start.`
               : currentStep === VoiceCheckinStep.Listening
               ? `Talk about your day and how you are feeling. Or just read the following quote instead:`
-              : `Great! Judging by the sound of your voice, your mood appear to be:`}
+              : `Great! Judging by the sound of your voice, your mood appears to be:`}
           </ExplanationText>
           {currentStep === VoiceCheckinStep.Result ? (
             <MoodText>{currentMood}</MoodText>

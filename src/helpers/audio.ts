@@ -35,7 +35,7 @@ export enum SoundResource {
   BREATHING_PANTING = require('../audio/breathing_panting.mp3'),
   FLOW_SOUND = require('../audio/flow_sound.mp3'),
   FLOW_BREATHING = require('../audio/flow_breathing.mp3'),
-  MELLOW_SOUND = require('../audio/mellow_sound.mp3'),
+  MELLOW_SOUND = require('../audio/mellow_sound.mp3'),  
   GOGOGO_SOUND = require('../audio/gogogo_sound.mp3'),
 }
 
@@ -76,7 +76,6 @@ export const playSound = (sound: SoundResource) => {
         return;
       }
       currentlyPlaying = sound;
-      console.log('Playing sound');
       soundEffect!.play(success => {
         currentlyPlaying = undefined;
         resolve(success);

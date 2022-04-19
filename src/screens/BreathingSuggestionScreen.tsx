@@ -57,6 +57,8 @@ const BreathingSuggestionScreen: (
         : subScreenKey === BreathingType.PANTING
         ? SoundResource.BREATHING_PANTING
         : SoundResource.BREATHING_PURSEDLIP;
+    
+    console.log("Play the sound!");
     playSound(soundResource).then(() => {
       navigator.pop();
     });

@@ -14,13 +14,9 @@ import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
 import notifee, {EventType} from '@notifee/react-native';
 import { UrlReceiveHR } from '../constants/urls';
-<<<<<<< HEAD
 import {FullPageContainer} from '../components/FullPageContainer';
 import {isAndroid} from '../helpers/accessoryFunctions';
-=======
-import {isAndroid} from '../helpers/accessoryFunctions';
 import { updateHeartRatesApple } from '../helpers/hrvHelpers';
->>>>>>> 5fe037a8d44a9fec7a80259b5a41e70637250a79
 
 const SharedStorage = NativeModules.SharedStorage;
 const UniqueIdModule = NativeModules.UniqueIdModule;
