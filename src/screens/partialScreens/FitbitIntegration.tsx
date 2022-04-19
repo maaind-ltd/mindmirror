@@ -2,13 +2,15 @@ import React from 'react';
 import styled from 'styled-components/native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 import Colors from '../../constants/colors';
-import {Pressable} from 'react-native';
+import {NativeModules, Pressable} from 'react-native';
 import {useCombinedStore} from '../../store/combinedStore';
 import ImageResources from '../../constants/imageResources';
 import {
   FitbitCompanionApp,
   openFitbitStorePage,
 } from '../../helpers/fitbitHelpers';
+
+const {UniqueIdReader} = NativeModules;
 
 const FitbitIntegration: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
@@ -31,14 +33,18 @@ const FitbitIntegration: () => JSX.Element = () => {
           <ConnectWithFitbitButton
             screenWidth={width}
             onPress={() => {
-              openFitbitStorePage(FitbitCompanionApp.Versa_1_2);
+              UniqueIdReader.requestOpenByDefaultRights(() => {
+                openFitbitStorePage(FitbitCompanionApp.Versa_1_2);
+              });
             }}>
             <FibitButtonText>App for Versa 1 and Versa 2</FibitButtonText>
           </ConnectWithFitbitButton>
           <ConnectWithFitbitButton
             screenWidth={width}
             onPress={() => {
-              openFitbitStorePage(FitbitCompanionApp.Versa_3);
+              UniqueIdReader.requestOpenByDefaultRights(() => {
+                openFitbitStorePage(FitbitCompanionApp.Versa_3);
+              });
             }}>
             <FibitButtonText>App for Versa 3 and Sense</FibitButtonText>
           </ConnectWithFitbitButton>

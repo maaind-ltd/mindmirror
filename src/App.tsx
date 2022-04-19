@@ -29,6 +29,9 @@ import settingsSlice from './store/settingsSlice';
 import moodSlice from './store/moodSlice';
 import {fetchHrvData} from './helpers/hrvHelpers';
 import {isAndroid} from './helpers/accessoryFunctions';
+import Smartlook from 'smartlook-react-native-wrapper';
+import {SmartlookKey} from './helpers/keys';
+Smartlook.setupAndStartRecording(SmartlookKey);
 
 if (isAndroid) {
   var fontFamily = 'Raleway';
@@ -77,9 +80,9 @@ setCustomText(customTextProps);
 export default function App(props: any): JSX.Element {
   useEffect(() => {
     const onPairingCodeReceived = ({url}: {url: string}) => {
-      console.log("===> url = ", url)
+      console.log('===> url = ', url);
       if (url.startsWith(PairingDeepLink)) {
-        const pairingCode = url.substring(PairingDeepLink.length+1);
+        const pairingCode = url.substring(PairingDeepLink.length + 1);
         if (pairingCode) {
           console.log(`Received pairing Code ${pairingCode}`);
           store.dispatch(settingsSlice.actions.setPairingCode(pairingCode));
@@ -88,7 +91,7 @@ export default function App(props: any): JSX.Element {
         }
       }
     };
-    console.log("Adding event listener for the pairing request for Fitbit!")
+    console.log('Adding event listener for the pairing request for Fitbit!');
     Linking.addEventListener('url', onPairingCodeReceived);
     return () => {
       Linking.removeListener('url', onPairingCodeReceived);

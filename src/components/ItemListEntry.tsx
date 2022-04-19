@@ -132,13 +132,14 @@ const BorderProvider = styled(TouchableNativeFeedback)`
 `;
 
 const EntryContainer = styled.View`
-  background-color: ${Colors.Background};
+  background-color: ${Colors.Background}
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   padding: 32px 24px 31px;
   width: 100%;
+  margin: 0px 0px 1px;
 `;
 
 const IconContainer = styled.View`
@@ -168,7 +169,7 @@ const DescriptionText = styled.Text`
 
 const MetaText = styled.Text`
   font-size: ${props => Math.min(props.screenWidth * 0.035, 14)}px;
-  color: ${Colors.LightGreyAccent};
+  color: ${Colors.FontLight};
   margin-top: 2px;
 `;
 

@@ -14,7 +14,8 @@ import SuggestionsListEntry, {
 import Icons from '../constants/icons';
 import {BreathingType, SoundSuggestionType} from '../helpers/audio';
 import {HelpModal} from '../modals/HelpModal';
-import { FullPageContainer } from '../components/FullPageContainer';
+import {FullPageContainer} from '../components/FullPageContainer';
+import {isAndroid} from '../helpers/accessoryFunctions';
 
 interface MoodBasedSuggestionEntries {
   breathing: ItemListEntryData[];
@@ -208,7 +209,7 @@ const TopNavigation = styled.View`
   flex-direction: row;
   flex-grow: 0;
   flex-shrink: 0;
-  height: 120px;
+  height: 128px;
   border-bottom: 1px solid #999;
   width: 100%;
   background-color: ${props => Colors[props.color]};
@@ -231,6 +232,9 @@ const ArrowBackIcon = styled.View`
 const QuestionIcon = styled.Text`
   padding: 8px;
   border-radius: 24px;
+  display: flex;
+  width: ${isAndroid ? 44 : 24}px;
+  height: ${isAndroid ? 44 : 24}px;
 `;
 
 const QuestionMarkContainer = styled.View`

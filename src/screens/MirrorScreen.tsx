@@ -13,8 +13,9 @@ import moodSlice from '../store/moodSlice';
 import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
 import notifee, {EventType} from '@notifee/react-native';
-import { FullPageContainer } from '../components/FullPageContainer';
 import { UrlReceiveHR } from '../constants/urls';
+import {FullPageContainer} from '../components/FullPageContainer';
+import {isAndroid} from '../helpers/accessoryFunctions';
 
 const SharedStorage = NativeModules.SharedStorage;
 const UniqueIdModule = NativeModules.UniqueIdModule;
@@ -27,7 +28,6 @@ const nextEmotion = {
   [EmotionStateWithNone.GoGoGo]: EmotionStateWithNone.NoEmotion,
   [EmotionStateWithNone.NoEmotion]: EmotionStateWithNone.Mellow,
 };
-
 
 const MirrorScreen: () => JSX.Element = () => {
   const dispatch = useAppDispatch();
@@ -56,95 +56,28 @@ const MirrorScreen: () => JSX.Element = () => {
   }
   /* Read HRs every 5 seconds */
 
-  useEffect(() => {
-    try {
-      console.log('Trying to start watch session in android');
-      UniqueIdModule.startWatchSession("").then(async () => {
-        console.log('Started watch session in android');
-      })
-    } catch (err) {
-      console.log(`Failed to start watch session: ${err}`);
-    }
-    const intervalId = setInterval(async () => {
+  if (!isAndroid) {
+    useEffect(() => {
       try {
-        const hrResult = await UniqueIdModule.getHeartRates("");
-        const heartRates = hrResult.heartrates;
-        console.log(`${Date.now()}: HR is: `+ heartRates);
-        let heartRatesArray = heartRates.split(";");
-        let timestamps = [];
-        let heartRateValues = [];
-        for (let i = 0; i < heartRatesArray.length-1; i++) {
-          let hrReadingSplit = heartRatesArray[i].split(":");
-          timestamps.push(hrReadingSplit[0]);
-          heartRateValues.push(hrReadingSplit[1]);
-        }
-        console.log("timestamps = ", timestamps);
-        console.log("heartRateValues = ", heartRateValues);
-        // console.log("====> ", heartRatesArray)
-
-        let contentString = "";
-        for (let i = 0; i < timestamps.length; i++) {
-          contentString += `${Math.round(timestamps[i]*1000)},${heartRateValues[i]},${Math.round(timestamps[i]*1000)},${randomNonce}.0,1.0,0.0,0.0\n`;
-        }
-
-        // console.log("timestamps[0] = ", timestamps[0]);
-
-        let referenceDate = timestamps[0];
-        let referenceDateRounded = Math.round(timestamps[0])*1000;
-        // console.log("referenceDateRounded = ", referenceDateRounded);
-        let referenceDateAsDate = new Date(referenceDateRounded);
-        // console.log("referenceDateAsDate = ", referenceDateAsDate);
-        let referenceDateFormatted = "" + (await generateDateString(referenceDateAsDate)).toString() + "";
-        
-        // console.log("===========> ", referenceDateFormatted);
-        // let escapedContentString = escapeStringContents(contentString);
-
-        let basicJSON = JSON.stringify({
-          fileName: 'hr.fitbit_hr.0._' + referenceDateFormatted + '__n' + timestamps.length + ".csv",
-          content : contentString,
-        })
-
-        // console.log("predictionJSON = ", basicJSON);
-
-        let queryJSON = {}
-        queryJSON['token'] = userToken;
-        let contentPayload = {}
-        contentPayload[referenceDateFormatted] = basicJSON;
-        queryJSON['content'] = contentPayload;
-
-        fetch(UrlReceiveHR, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(queryJSON),
-        }).then(response => {
-            if (response.status === 200 && response.ok) {
-              return response.json();
-            }
-            throw new Error(`Response failed: ${response.status}`);
-          })
-          .then(jsonData => {
-            console.log(jsonData);
-            if (jsonData?.contains_speech === 1) {
-              store.dispatch(moodSlice.actions.addCurrentScore(jsonData.calm));
-              if (getTypedState().mood.lastScores.length > 5) {
-                store.dispatch(moodSlice.actions.stopRecording());
-                store.dispatch(moodSlice.actions.recalculateMood());
-              }
-            }
-          })
-          .catch(error => {
-            console.error(error);
-          });
-
+        console.log('Trying to start watch session in android');
+        UniqueIdModule.startWatchSession('').then(async () => {
+          console.log('Started watch session in android');
+        });
       } catch (err) {
-        console.log(`Failed to read HR: ${err}`)
+        console.log(`Failed to start watch session: ${err}`);
       }
-    }, 10000);
-    return () => clearInterval(intervalId);
-  });
+      const intervalId = setInterval(async () => {
+        try {
+          const hrResult = await UniqueIdModule.getHeartRates('');
+          const heartRates = hrResult.heartrates;
+          console.log(`${Date.now()}: HR is: ` + heartRates);
+        } catch (err) {
+          console.log(`Failed to read HR: ${err}`);
+        }
+      }, 10000);
+      return () => clearInterval(intervalId);
+    });
+  }
 
   // Subscribe to events
   useEffect(() => {
@@ -163,66 +96,65 @@ const MirrorScreen: () => JSX.Element = () => {
   }, []);
   return (
     <FullPageContainer backgroundColor={currentColor}>
-        <MirrorContainer color={currentColor}>
-          {currentMood !== EmotionStateWithNone.NoEmotion ? (
-            <TopTextContainer
-              screenWidth={width}
-              onPress={() => {
-                dispatch(
-                  moodSlice.actions.setCurrentMood(nextEmotion[currentMood]),
-                );
-              }}>
-              <ExplanationText>Measured State of Mind</ExplanationText>
-              <StateText>{currentMood}</StateText>
-            </TopTextContainer>
-          ) : (
-            <TopTextContainer
-              screenWidth={width}
-              onPress={() =>
-                dispatch(
-                  moodSlice.actions.setCurrentMood(nextEmotion[currentMood]),
-                )
-              }>
-              <ExplanationText>
-                Please do a voice check-in to find out your current state of
-                mind
-              </ExplanationText>
-            </TopTextContainer>
-          )}
-          <AvatarSectionContainer>
-            <WigglyLineContainer baseColor={currentMood} />
-            <Avatar
-              currentMood={currentMood}
-              targetMood={targetMood}
-              avatarType={avatarType}
-              onPress={() => {
-                navigator.push(Screens.ProfileScreen);
-              }}
-            />
-          </AvatarSectionContainer>
-          <CheckInButtonContainer
-            onPress={() => navigator.push(Screens.VoiceCheckinScreen)}>
-            <CheckInButton>
-              <CheckInCircleBorder></CheckInCircleBorder>
-              <CheckInButtonTextContainer color={currentMood}>
-                <CheckInButtonText color={currentMood}>
-                  Check-in
-                </CheckInButtonText>
-              </CheckInButtonTextContainer>
-              <CheckInCircleBackground color={currentMood}>
-                <Icons.VoiceCheckin width="58px" height="58px" />
-              </CheckInCircleBackground>
-            </CheckInButton>
-          </CheckInButtonContainer>
-        </MirrorContainer>
-        <MoodButtonList
-          onPress={emotion => {
-            dispatch(moodSlice.actions.setTargetMood(emotion));
-            setTimeout(() => {
-              navigator.push(Screens.SuggestionsScreen);
-            }, NAVIGATION_TIMEOUT);
-          }}
-        />
+      <MirrorContainer color={currentColor}>
+        {currentMood !== EmotionStateWithNone.NoEmotion ? (
+          <TopTextContainer
+            screenWidth={width}
+            onPress={() => {
+              dispatch(
+                moodSlice.actions.setCurrentMood(nextEmotion[currentMood]),
+              );
+            }}>
+            <ExplanationText>Measured State of Mind</ExplanationText>
+            <StateText>{currentMood}</StateText>
+          </TopTextContainer>
+        ) : (
+          <TopTextContainer
+            screenWidth={width}
+            onPress={() =>
+              dispatch(
+                moodSlice.actions.setCurrentMood(nextEmotion[currentMood]),
+              )
+            }>
+            <ExplanationText>
+              Please do a voice check-in to find out your current state of mind
+            </ExplanationText>
+          </TopTextContainer>
+        )}
+        <AvatarSectionContainer>
+          <WigglyLineContainer baseColor={currentMood} />
+          <Avatar
+            currentMood={currentMood}
+            targetMood={targetMood}
+            avatarType={avatarType}
+            onPress={() => {
+              navigator.push(Screens.ProfileScreen);
+            }}
+          />
+        </AvatarSectionContainer>
+        <CheckInButtonContainer
+          onPress={() => navigator.push(Screens.VoiceCheckinScreen)}>
+          <CheckInButton>
+            <CheckInCircleBorder></CheckInCircleBorder>
+            <CheckInButtonTextContainer color={currentMood}>
+              <CheckInButtonText color={currentMood}>
+                Check-in
+              </CheckInButtonText>
+            </CheckInButtonTextContainer>
+            <CheckInCircleBackground color={currentMood}>
+              <Icons.VoiceCheckin width="58px" height="58px" />
+            </CheckInCircleBackground>
+          </CheckInButton>
+        </CheckInButtonContainer>
+      </MirrorContainer>
+      <MoodButtonList
+        onPress={emotion => {
+          dispatch(moodSlice.actions.setTargetMood(emotion));
+          setTimeout(() => {
+            navigator.push(Screens.SuggestionsScreen);
+          }, NAVIGATION_TIMEOUT);
+        }}
+      />
     </FullPageContainer>
   );
 };
@@ -307,5 +239,3 @@ const CheckInCircleBackground = styled.View`
 `;
 
 export default MirrorScreen;
-
-

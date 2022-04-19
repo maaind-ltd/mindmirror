@@ -86,6 +86,7 @@ const NicknameInput = styled(TextInput)`
   text-align: center;
   width: ${props => props.screenWidth * 0.6}px;
   border: 1px solid ${Colors.Primary};
+  height: 56px;
   border-top-width: 0;
   border-left-width: 0;
   border-right-width: 0;

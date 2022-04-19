@@ -21,7 +21,7 @@ import {
 import CircleGraph from '../components/CircleGraph';
 import {isAndroid} from '../helpers/accessoryFunctions';
 import {VoiceCheckinExplanationModal} from '../modals/VoiceCheckinExplanationModal';
-import { FullPageContainer } from '../components/FullPageContainer';
+import {FullPageContainer} from '../components/FullPageContainer';
 
 const NAVIGATION_TIMEOUT = 600;
 
@@ -73,7 +73,12 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
 
   return (
-    <FullPageContainer backgroundColor={Colors[currentMood]}>
+    <FullPageContainer
+      backgroundColor={
+        currentStep === VoiceCheckinStep.Result
+          ? Colors[currentMood]
+          : Colors.NoEmotion
+      }>
       <ScreenContainer
         style={{
           backgroundColor: fadeAnim.interpolate({
@@ -88,7 +93,7 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
                 `Press the icon to start.`
               : currentStep === VoiceCheckinStep.Listening
               ? `Talk about your day and how you are feeling. Or just read the following quote instead:`
-              : `Great! Judging by the sound of your voice, you mood appear to be:`}
+              : `Great! Judging by the sound of your voice, your mood appear to be:`}
           </ExplanationText>
           {currentStep === VoiceCheckinStep.Result ? (
             <MoodText>{currentMood}</MoodText>
@@ -298,7 +303,12 @@ const CheckInCircleBackground = styled.View`
   width: ${props => props.width * 0.5}px;
   height: ${props => props.width * 0.5}px;
   border-radius: ${props => props.width * 0.5}px;
-  border: 2px solid ${props => Colors[`${props.color}Border`]};
+  /* border: 2px solid ${props => Colors[`${props.color}Border`]}; */
+  border: 2px solid ${Colors.Primary}99;
+  shadow-opacity: 0.4;
+  shadow-radius: 8px;
+  shadow-color: black;
+  elevation: 4;
   background-color: ${props => Colors[`${props.color}Blurred`]};
 `;
 

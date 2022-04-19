@@ -1259,6 +1259,11 @@
     redux-thunk "^2.4.1"
     reselect "^4.1.5"
 
+"@seznam/compose-react-refs@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@seznam/compose-react-refs/-/compose-react-refs-1.0.6.tgz#6ec4e70bdd6e32f8e70b4100f27267cf306bd8df"
+  integrity sha512-izzOXQfeQLonzrIQb8u6LQ8dk+ymz3WXTIXjvOlTXHq6sbzROg3NWU+9TTAOpEoK9Bth24/6F/XrfHJ5yR5n6Q==
+
 "@sideway/address@^4.1.3":
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/@sideway/address/-/address-4.1.3.tgz#d93cce5d45c5daec92ad76db492cc2ee3c64ab27"
@@ -6384,6 +6389,13 @@ slice-ansi@^2.0.0, slice-ansi@^2.1.0:
     ansi-styles "^3.2.0"
     astral-regex "^1.0.0"
     is-fullwidth-code-point "^2.0.0"
+
+smartlook-react-native-wrapper@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/smartlook-react-native-wrapper/-/smartlook-react-native-wrapper-1.2.5.tgz#eae4c886e1c3b45c2fea2ce0325e8a8f919400e0"
+  integrity sha512-kQU2rBp657IsQlQ3dw0obLZETZH4XDfDezsPa0eHyfb3hJJsYqLrHuAHp+/Se5dfpOmg4fzABw8siAHTa7mJjw==
+  dependencies:
+    "@seznam/compose-react-refs" "^1.0.6"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
