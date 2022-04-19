@@ -32,7 +32,16 @@ import AVFoundation
 //    RCTSwiftLog.trace(message, file: file, line: line)
 //}
 
-
+extension UIColor {
+  convenience init(hex: Int) {
+      let components = (
+          R: CGFloat((hex >> 16) & 0xff) / 255,
+          G: CGFloat((hex >> 08) & 0xff) / 255,
+          B: CGFloat((hex >> 00) & 0xff) / 255
+      )
+      self.init(red: components.R, green: components.G, blue: components.B, alpha: 1)
+  }
+}
 
 struct StartView: View {
   
@@ -47,6 +56,14 @@ struct StartView: View {
   @State var otherEvents = 5;
   @State var otherEventType = "--";
   @State private var workoutStarted = true;
+  @State var currentTime = "";
+  
+  func updateCurrentTime() {
+    let date = Date()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm"
+    currentTime = formatter.string(from: date)
+  }
   
     let healthStore = HKHealthStore()
   
@@ -61,51 +78,43 @@ struct StartView: View {
         otherEvents = workoutManager.otherEvents
         eventCountForSteps = workoutManager.eventCountForSteps
         otherEventType = workoutManager.otherEventType
+        //get current system time in hours and minutes
+        updateCurrentTime()
       }
-      
-      VStack {
-        Divider()
-        HStack {
-          HStack {
-            Image(systemName: "heart")
-                            .font(.system(size: 30))
-            let hrString = String(format: "%.0f", hr)
-            Text(hrString).fixedSize(horizontal: true, vertical: true)
-          }
-          Divider()
-          HStack {
-            Image(systemName: "figure.walk.circle.fill")
-                            .font(.system(size: 30))
-            let stepCountString = String(format: "%.0f", stepCount)
-            Text(stepCountString).fixedSize(horizontal: true, vertical: true)
-          }
-        }.fixedSize(horizontal: false, vertical: true)
-        Divider()
-        if workoutStarted {
-          HStack {
-            Image(systemName: "bolt.heart")
-                            .font(.system(size: 30))
-            let hrvString = String(format: "%.0f", hrvSDNN)
-            Text(hrvString).fixedSize(horizontal: true, vertical: true)
-          }
-        }
-        Divider()
-        VStack {
-          let eventCountForStepsString = String(format: "%d", eventCountForSteps)
-          Text(eventCountForStepsString).fixedSize(horizontal: true, vertical: true)
-          Divider()
-          let otherEventsString = String(format: "%d", otherEvents)
-          Text(otherEventsString).fixedSize(horizontal: true, vertical: true)
-          Divider()
-//          let otherEventsDescription = String(format: "%s", phoneMessaging)
-          Text(workoutManager.mood).fixedSize(horizontal: true, vertical: true)
 
-//          Rectangle()
-//            .fill(Color.red)
-//            .frame(width: 300, height: 300)
+      ZStack {
+        HStack {
+          VStack {
+            //add heart icon in the color based on getColor function which has as its argument the workoutManager.mood, size 40
+            Image(systemName: "heart.fill").foregroundColor(getColor(mood: workoutManager.mood)).font(.system(size: 25, weight: .bold, design: .rounded))
+              let hrString = String(format: "%.0f", hr)
+            Text(hrString).font(.system(size: 20)).foregroundColor(getColor(mood: workoutManager.mood))
+          }.padding(.trailing, 15)
+          VStack {
+            // show an image of number of steps
+            Image(systemName: "figure.walk.circle").foregroundColor(getColor(mood: workoutManager.mood)).font(.system(size: 25, weight: .bold, design: .rounded))
+            let stepCountString = String(format: "%.0f", stepCount)
+            Text(stepCountString).font(.system(size: 20)).foregroundColor(getColor(mood: workoutManager.mood))
+          }
+          
         }
-      }
+        Circle().stroke(getColor(mood: workoutManager.mood), lineWidth: 7)
+      }.frame(idealWidth: 230, idealHeight: 230, alignment: .center).padding(.top, 10)
     }
+}
+
+//function that returns a color based on a string's values
+func getColor(mood: String) -> Color {
+  switch mood {
+  case "Mellow":
+    return Color(UIColor(hex: 0x82C5E0))
+  case "Flow":
+    return Color(UIColor(hex: 0xBFDCBC))
+  case "GoGoGo":
+    return Color(UIColor(hex: 0xFFC999))
+  default:
+    return Color(UIColor(hex: 0xC0C0C0))
+  }
 }
 
 struct StartView_Previews: PreviewProvider {

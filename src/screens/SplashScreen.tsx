@@ -14,7 +14,11 @@ import {TextInput} from 'react-native-gesture-handler';
 import {HelpModal} from '../modals/HelpModal';
 import settingsSlice from '../store/settingsSlice';
 import {useDispatch} from 'react-redux';
+<<<<<<< HEAD
 import {isValidActivationKey, useActivationCode} from '../helpers/keys';
+=======
+import {isValidActivationKey} from '../constants/keys';
+>>>>>>> 5fe037a8d44a9fec7a80259b5a41e70637250a79
 
 // Bootstrap sequence function
 async function bootstrap() {
@@ -42,8 +46,11 @@ const App: () => JSX.Element = () => {
   );
   const [isModalVisible, setModalVisible] = useState(false);
   const [isCodeValid, setCodeValid] = useState(true);
+<<<<<<< HEAD
   const [localActivationCode, setLocalActivationCode] =
     useState(activationCode);
+=======
+>>>>>>> 5fe037a8d44a9fec7a80259b5a41e70637250a79
 
   const redirect = () => {
     bootstrap().then(initialNotification => {

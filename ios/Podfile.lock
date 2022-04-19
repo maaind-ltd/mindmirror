@@ -351,6 +351,8 @@ PODS:
     - React-perflogger (= 0.66.4)
   - RNAudioRecord (0.2.2):
     - React
+  - RNBackgroundFetch (4.1.0):
+    - React-Core
   - RNCAsyncStorage (1.16.1):
     - React-Core
   - RNFS (2.18.0):
@@ -374,6 +376,10 @@ PODS:
     - React-Core
   - RNSVG (12.1.1):
     - React
+  - Smartlook (1.8.7)
+  - smartlook-react-native-bridge (1.2.5):
+    - React
+    - Smartlook (~> 1.8.3)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -435,6 +441,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNAudioRecord (from `../node_modules/react-native-audio-record`)
+  - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -443,6 +450,7 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSound (from `../node_modules/react-native-sound`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - smartlook-react-native-bridge (from `../node_modules/smartlook-react-native-wrapper`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -461,6 +469,7 @@ SPEC REPOS:
     - fmt
     - libevent
     - OpenSSL-Universal
+    - Smartlook
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -530,6 +539,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNAudioRecord:
     :path: "../node_modules/react-native-audio-record"
+  RNBackgroundFetch:
+    :path: "../node_modules/react-native-background-fetch"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNFS:
@@ -546,6 +557,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-sound"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  smartlook-react-native-bridge:
+    :path: "../node_modules/smartlook-react-native-wrapper"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -597,6 +610,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: dec32ee6f2e2a26e13e58152271535fadff5455a
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
   RNAudioRecord: 162fee3b8fb628773ec704bf0333823125be2ed7
+  RNBackgroundFetch: 1f47e8f793ad7a1ae7f0e3db5437f4feaf887a03
   RNCAsyncStorage: b49b4e38a1548d03b74b30e558a1d18465b94be7
   RNFS: 3ab21fa6c56d65566d1fb26c2228e2b6132e5e32
   RNGestureHandler: e1ad51d31a580755079d5124d3ab66f0fcaa8311
@@ -605,6 +619,8 @@ SPEC CHECKSUMS:
   RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e
   RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
+  Smartlook: 831b369810ecf87e7560db09af1aabe7b7279570
+  smartlook-react-native-bridge: dfdaca7503e637f3e6cf7fb6d0b849dac7385eca
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

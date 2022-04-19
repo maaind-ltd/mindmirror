@@ -14,8 +14,13 @@ import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
 import notifee, {EventType} from '@notifee/react-native';
 import { UrlReceiveHR } from '../constants/urls';
+<<<<<<< HEAD
 import {FullPageContainer} from '../components/FullPageContainer';
 import {isAndroid} from '../helpers/accessoryFunctions';
+=======
+import {isAndroid} from '../helpers/accessoryFunctions';
+import { updateHeartRatesApple } from '../helpers/hrvHelpers';
+>>>>>>> 5fe037a8d44a9fec7a80259b5a41e70637250a79
 
 const SharedStorage = NativeModules.SharedStorage;
 const UniqueIdModule = NativeModules.UniqueIdModule;
@@ -37,23 +42,8 @@ const MirrorScreen: () => JSX.Element = () => {
   const navigator = useStackNavigation();
   const {width} = useWindowDimensions();
   const {userToken} = getTypedState().settings;
-  var randomNonce = 0;
+  const [heartRates, setHeartRates] = React.useState("");
 
-  function add_one_make_two_digit(num){
-    return ("00" + (num).toString()).slice(-2)
-  }
-
-  const generateDateString = async (date) => {
-    let date_string = 
-    date.getUTCFullYear() + '_' + 
-      add_one_make_two_digit(date.getUTCMonth() + 1) + '_' + 
-      add_one_make_two_digit(date.getUTCDate()) + '_' + 
-      add_one_make_two_digit(date.getUTCHours()) + '_' + 
-      add_one_make_two_digit(date.getUTCMinutes()) + '_' + 
-      add_one_make_two_digit(date.getUTCSeconds()) + '_' + 
-      ("00" + date.getUTCMilliseconds()).slice(-3)
-    return date_string
-  }
   /* Read HRs every 5 seconds */
 
   if (!isAndroid) {
@@ -81,7 +71,6 @@ const MirrorScreen: () => JSX.Element = () => {
 
   // Subscribe to events
   useEffect(() => {
-    randomNonce = Math.floor(Math.random() * 1000000);
     return notifee.onForegroundEvent(({type, detail}) => {
       switch (type) {
         case EventType.DISMISSED:

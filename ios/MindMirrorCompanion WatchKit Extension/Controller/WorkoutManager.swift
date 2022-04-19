@@ -115,6 +115,24 @@ class WorkoutManager: NSObject, ObservableObject {
         showingSummaryView = true
     }
 
+    // function that returns steps over the last 24 hours
+    func getSteps() -> Double {
+        let calendar = Calendar.current
+        let now = Date()
+        let startOfDay = calendar.startOfDay(for: now)
+        let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
+        let query = HKStatisticsQuery(quantityType: HKQuantityType.quantityType(forIdentifier: .stepCount)!,
+                                      quantitySamplePredicate: predicate,
+                                      options: .cumulativeSum) { (query, result, error) in
+                                        if let result = result {
+                                            let steps = result.sumQuantity()
+                                            self.stepCount = steps!.doubleValue(for: HKUnit.count())
+                                        }
+        }
+        healthStore.execute(query)
+        return stepCount
+    }
+
     // MARK: - Workout Metrics
     @Published var averageHeartRate: Double = 0
     @Published var heartRate: Double = 0
@@ -137,22 +155,24 @@ class WorkoutManager: NSObject, ObservableObject {
         DispatchQueue.main.async {
             switch statistics.quantityType {
                 case HKQuantityType.quantityType(forIdentifier: .heartRateVariabilitySDNN):
+                    self.stepCount = self.getSteps()
                     let heartRateUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
                     self.hrvSDNN = statistics.mostRecentQuantity()?.doubleValue(for: heartRateUnit) ?? 42
                     break
                 case HKQuantityType.quantityType(forIdentifier: .heartRate):
+                    self.stepCount = self.getSteps()
                     let heartRateUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
                     self.heartRate = statistics.mostRecentQuantity()?.doubleValue(for: heartRateUnit) ?? 30
                     self.averageHeartRate = statistics.averageQuantity()?.doubleValue(for: heartRateUnit) ?? 0
                     // Store the new heart rate info in the shared storage object
                     let millis = String(statistics.endDate.timeIntervalSince1970)
                     self.heartRatesCsv += millis + ":" + String(self.heartRate) + ";"
-              
                     break
                 case HKQuantityType.quantityType(forIdentifier: .stepCount):
-                    let stepCountUnit = HKUnit.count()
-                    self.stepCount = statistics.mostRecentQuantity()?.doubleValue(for: stepCountUnit) ?? 0
-                    self.distance = statistics.sumQuantity()?.doubleValue(for: stepCountUnit) ?? 0
+                    self.stepCount = self.getSteps()
+                    // let stepCountUnit = HKUnit.count()
+                    // self.stepCount = statistics.mostRecentQuantity()?.doubleValue(for: stepCountUnit) ?? 0
+                    // self.distance = statistics.sumQuantity()?.doubleValue(for: stepCountUnit) ?? 0
                     break
                 case HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning):
                     let distanceUnit = HKUnit.mile().unitDivided(by: HKUnit.meter())
@@ -160,6 +180,7 @@ class WorkoutManager: NSObject, ObservableObject {
                     break
 
                 default:
+                    self.stepCount = self.getSteps()
                     self.otherEventType = statistics.quantityType.description
                     self.otherEvents += 1
                     break
