@@ -72,6 +72,7 @@ struct StartView: View {
       let _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {
           (_) in
 //        workoutManager.queryHeartRate()
+        workoutManager.requestAuthorization()
         hr = workoutManager.heartRate
         stepCount = workoutManager.stepCount
         hrvSDNN = workoutManager.hrvSDNN
