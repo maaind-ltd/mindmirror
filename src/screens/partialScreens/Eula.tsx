@@ -1,67 +1,82 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 import Colors from '../../constants/colors';
 import Pdf from 'react-native-pdf';
-import { StyleSheet, Dimensions, View, Pressable } from 'react-native';
+import {StyleSheet, Dimensions, View, Pressable} from 'react-native';
 import store, {getTypedState} from '../../store/combinedStore';
 import settingsSlice from '../../store/settingsSlice';
-import BouncyCheckbox from "react-native-bouncy-checkbox";
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import {useCombinedStore} from '../../store/combinedStore';
 
 const EulaScreen: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
-  const englishEULA = { uri: 'https://www.maaind.com/mindmirror_eula_english.pdf', cache: true };
-  const dutchEULA = { uri: 'https://www.maaind.com/mindmirror_eula_dutch.pdf', cache: true };
-  const [pdfLanguage, setPdfLanguage] = useState("English");
+  const englishEULA = {
+    uri: 'https://www.maaind.com/mindmirror_eula_english.pdf',
+    cache: true,
+  };
+  const dutchEULA = {
+    uri: 'https://www.maaind.com/mindmirror_eula_dutch.pdf',
+    cache: true,
+  };
+  const [pdfLanguage, setPdfLanguage] = useState('English');
+  const isEulaAccepted = useCombinedStore(
+    store => store.settings.isEulaAccepted,
+  );
 
-  // 
   return (
     <ArticleContent>
-      <WarningText screenWidth={width}>Warning</WarningText>
+      <WarningText screenWidth={width}>Terms and Conditions</WarningText>
       <FreeFloatingText screenWidth={width}>
-        Please read and agree to the following terms and conditions before using this app. You can select between an English version and a Dutch version of the same terms and conditions.
+        Please read and agree to the following terms and conditions before using
+        this app. You can select between an English version and a Dutch version
+        of the same terms and conditions.
       </FreeFloatingText>
-      <NextButton
-          onPress={() => {
-            if(pdfLanguage === "English") {
-              setPdfLanguage("Dutch");
-            } else {
-              setPdfLanguage("English");
-            }
-          }}>
-          <NextButtonText>Switch to {pdfLanguage == "English" ? "Dutch" : "English"}</NextButtonText>
-        </NextButton>
+      <SwitchLanguageButton
+        onPress={() => {
+          if (pdfLanguage === 'English') {
+            setPdfLanguage('Dutch');
+          } else {
+            setPdfLanguage('English');
+          }
+        }}>
+        <SwitchLanguageButtonText>
+          Switch to {pdfLanguage == 'English' ? 'Dutch' : 'English'}
+        </SwitchLanguageButtonText>
+      </SwitchLanguageButton>
+      <View style={styles.container}>
         <Pdf
-          enablePaging={true}
-          source={pdfLanguage == "English" ? englishEULA : dutchEULA}
-          onLoadComplete={(numberOfPages,filePath) => {
-              console.log(`Number of pages: ${numberOfPages}`);
+          source={pdfLanguage == 'English' ? englishEULA : dutchEULA}
+          onLoadComplete={(numberOfPages, filePath) => {
+            console.log(`Number of pages: ${numberOfPages}`);
           }}
-          onPageChanged={(page,numberOfPages) => {
-              console.log(`Current page: ${page}`);
+          onPageChanged={(page, numberOfPages) => {
+            console.log(`Current page: ${page}`);
           }}
-          onError={(error) => {
-              console.log(error);
+          onError={error => {
+            console.log(error);
           }}
-          onPressLink={(uri) => {
-              console.log(`Link pressed: ${uri}`);
+          onPressLink={uri => {
+            console.log(`Link pressed: ${uri}`);
           }}
-          style={styles.pdf}/>
-      <BouncyCheckbox 
+          fitPolicy={0}
+          style={styles.pdf}
+        />
+      </View>
+      <BouncyCheckbox
         text="I agree to these conditions"
         style={{
           alignSelf: 'center',
           marginVertical: 15,
         }}
         textStyle={{
-          textDecorationLine: "none",
+          textDecorationLine: 'none',
         }}
-        onPress={
-          (isChecked: boolean) => {
-            store.dispatch(settingsSlice.actions.setIsEulaAccepted(isChecked));
-          }
-        } />
-
+        isChecked={isEulaAccepted}
+        onPress={(isChecked: boolean) => {
+          store.dispatch(settingsSlice.actions.setIsEulaAccepted(isChecked));
+        }}
+      />
     </ArticleContent>
   );
 };
@@ -70,13 +85,13 @@ const EULAView = styled.View`
   width: 100%;
 `;
 
-const NextButtonText = styled.Text`
+const SwitchLanguageButtonText = styled.Text`
   font-size: 20px;
   color: ${Colors.Background};
   margin-bottom: 2px;
 `;
 
-const NextButton = styled(Pressable)`
+const SwitchLanguageButton = styled(Pressable)`
   display: flex;
   height: 42px;
   width: 70%;
@@ -85,21 +100,22 @@ const NextButton = styled(Pressable)`
   border-radius: 24px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 `;
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-      marginTop: 25,
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginTop: 25,
+    flexGrow: 1,
   },
   pdf: {
-      flex:1,
-      width:Dimensions.get('window').width,
-      height:Dimensions.get('window').height,
-  }
+    flex: 1,
+    flexGrow: 1,
+    width: Dimensions.get('window').width,
+  },
 });
 
 const ArticleContent = styled.View`
@@ -119,11 +135,9 @@ const FreeFloatingText = styled.Text`
 const WarningText = styled.Text`
   font-size: 24px;
   font-weight: bold;
-  color: ${Colors.Warning};
+  color: ${Colors.Primary};
   margin: ${props =>
-    `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px ${
-      props.screenWidth * 0.08
-    }px`};
+    `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px 0px`};
   text-align: center;
 `;
 

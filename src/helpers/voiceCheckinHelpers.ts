@@ -26,7 +26,7 @@ export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
     raw_audio: fileContent,
   });
 
-  if (isAndroid) {
+  if (!isAndroid) {
     UniqueIdReader.performPostRequest(
       UrlVoice,
       body,
@@ -38,7 +38,9 @@ export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
         }
 
         try {
+          console.log(`data: ${data}`);
           const responseBody = JSON.parse(data);
+          console.log(responseBody);
           if (
             responseBody &&
             responseBody.contains_speech === 1 &&

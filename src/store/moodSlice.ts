@@ -9,8 +9,8 @@ const UniqueIdModule = NativeModules.UniqueIdModule;
 const HRV_MAX_OLDNESS_MS = 60 * 30 * 1000;
 const VOICE_MAX_OLDNESS_MS = 60 * 30 * 1000;
 
-const MELLOW_THRESHHOLD = 0.43;
-const FLOW_THRESSHOLD = 0.37;
+const MELLOW_THRESHHOLD = 0.5;
+const FLOW_THRESSHOLD = 0.33;
 
 const moodSlice = createSlice({
   name: 'mood',

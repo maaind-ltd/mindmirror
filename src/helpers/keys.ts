@@ -1,6 +1,6 @@
 import {UrlActivateKey} from '../constants/urls';
 
-export const SmartlookKey = '8cef7d014228632835b14eb23bd97fbc522564ed';
+export const SmartlookKey = 'a41c55c567fd176b450f5dac2c0e70869d10ceab';
 
 export const isValidActivationKey = (activationKey: string) => {
   if (activationKey.length !== 8) {
