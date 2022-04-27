@@ -6,22 +6,20 @@ import Pdf from 'react-native-pdf';
 import { StyleSheet, Dimensions, View, Pressable } from 'react-native';
 import store, {getTypedState} from '../../store/combinedStore';
 import settingsSlice from '../../store/settingsSlice';
-import CheckBox from '@react-native-community/checkbox';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const EulaScreen: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
   const englishEULA = { uri: 'https://www.maaind.com/mindmirror_eula_english.pdf', cache: true };
   const dutchEULA = { uri: 'https://www.maaind.com/mindmirror_eula_dutch.pdf', cache: true };
   const [pdfLanguage, setPdfLanguage] = useState("English");
-  const [acceptedEULA, setAcceptedEULA] = useState(false);
-  // get the dispatch store
 
-  // store.dispatch(settingsSlice.actions.setPairingCode(pairingCode));
+  // 
   return (
     <ArticleContent>
       <WarningText screenWidth={width}>Warning</WarningText>
       <FreeFloatingText screenWidth={width}>
-        Please read and agree to the following terms and conditions before using this app.
+        Please read and agree to the following terms and conditions before using this app. You can select between an English version and a Dutch version of the same terms and conditions.
       </FreeFloatingText>
       <NextButton
           onPress={() => {
@@ -33,34 +31,43 @@ const EulaScreen: () => JSX.Element = () => {
           }}>
           <NextButtonText>Switch to {pdfLanguage == "English" ? "Dutch" : "English"}</NextButtonText>
         </NextButton>
-      <EULAView>
         <Pdf
-            source={pdfLanguage == "English" ? englishEULA : dutchEULA}
-            onLoadComplete={(numberOfPages,filePath) => {
-                console.log(`Number of pages: ${numberOfPages}`);
-            }}
-            onPageChanged={(page,numberOfPages) => {
-                console.log(`Current page: ${page}`);
-            }}
-            onError={(error) => {
-                console.log(error);
-            }}
-            onPressLink={(uri) => {
-                console.log(`Link pressed: ${uri}`);
-            }}
-            style={styles.pdf}/>
-      </EULAView>
-      <CheckBox 
-        onValueChange={(newCheckboxValue) => {setAcceptedEULA(!acceptedEULA)}} 
-        value={acceptedEULA}
-        >
-      </CheckBox>
+          enablePaging={true}
+          source={pdfLanguage == "English" ? englishEULA : dutchEULA}
+          onLoadComplete={(numberOfPages,filePath) => {
+              console.log(`Number of pages: ${numberOfPages}`);
+          }}
+          onPageChanged={(page,numberOfPages) => {
+              console.log(`Current page: ${page}`);
+          }}
+          onError={(error) => {
+              console.log(error);
+          }}
+          onPressLink={(uri) => {
+              console.log(`Link pressed: ${uri}`);
+          }}
+          style={styles.pdf}/>
+      <BouncyCheckbox 
+        text="I agree to these conditions"
+        style={{
+          alignSelf: 'center',
+          marginVertical: 15,
+        }}
+        textStyle={{
+          textDecorationLine: "none",
+        }}
+        onPress={
+          (isChecked: boolean) => {
+            store.dispatch(settingsSlice.actions.setIsEulaAccepted(isChecked));
+          }
+        } />
 
     </ArticleContent>
   );
 };
 // disabled={!scrolledToEnd}>
 const EULAView = styled.View`
+  width: 100%;
 `;
 
 const NextButtonText = styled.Text`
@@ -74,8 +81,7 @@ const NextButton = styled(Pressable)`
   height: 42px;
   width: 70%;
   margin-left: 15%;
-  background-color: ${props =>
-    props.disabled ? Colors.LightGreyAccent : Colors.Primary};
+  background-color: ${Colors.Primary};
   border-radius: 24px;
   justify-content: center;
   align-items: center;
