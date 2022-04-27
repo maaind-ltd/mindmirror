@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StatusBar, Pressable} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
@@ -39,6 +39,9 @@ const OnboardingScreen: (
   const navigator = useStackNavigation();
   const dispatch = useAppDispatch();
   const {height, width} = useWindowDimensions();
+  const isEulaAccepted = useCombinedStore(
+    state => state.settings.isEulaAccepted,
+  );
   const userToken = useCombinedStore(state => state.settings.userToken);
 
   const onboardingIndex =
@@ -65,6 +68,10 @@ const OnboardingScreen: (
                 event.nativeEvent.translationX < width * -0.2 &&
                 onboardingIndex < ONBOARDING_PAGES - 1
               ) {
+                // Don't allow skipping required steps by swiping
+                if (onboardingIndex === 0 && !isEulaAccepted) {
+                  return;
+                }
                 wasSwiped = true;
                 navigator.push(Screens.OnboardingScreen, {
                   onboardingIndex: onboardingIndex + 1,
@@ -80,7 +87,11 @@ const OnboardingScreen: (
                 <BottomContent screenHeight={height}>
                   <NextButton
                     onPress={() => {
+                      if (onboardingIndex === 0 && !isEulaAccepted) {
+                        return;
+                      }
                       if (onboardingIndex === ONBOARDING_PAGES - 1) {
+                        // Don't allow skipping required steps
                         dispatch(
                           settingsSlice.actions.setOnboardingFinished(true),
                         );
@@ -97,12 +108,9 @@ const OnboardingScreen: (
                           onboardingIndex: onboardingIndex + 1,
                         });
                       }
-                    }}>
-                    <NextButtonText>
-                      {onboardingIndex === ONBOARDING_PAGES - 1
-                        ? 'Done'
-                        : 'Continue'}
-                    </NextButtonText>
+                    }}
+                    disabled={onboardingIndex === 0 && !isEulaAccepted}>
+                    <NextButtonText>Continue</NextButtonText>
                   </NextButton>
                   <IndicatorDots
                     vertical={false}
@@ -133,7 +141,8 @@ const NextButton = styled(Pressable)`
   height: 42px;
   width: 70%;
   margin-left: 15%;
-  background-color: ${Colors.Primary};
+  background-color: ${props =>
+    props.disabled ? Colors.LightGreyAccent : Colors.Primary};
   border-radius: 24px;
   justify-content: center;
   align-items: center;
@@ -165,7 +174,7 @@ const ScreenContentContainer = styled.View`
 `;
 
 const BottomContent = styled.View`
-  margin-bottom:  ${props => props.screenHeight < 800 ? `0px` : `24px`};
+  margin-bottom: ${props => (props.screenHeight < 800 ? `0px` : `24px`)};
 `;
 
 export default OnboardingScreen;

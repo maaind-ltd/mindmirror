@@ -12,6 +12,7 @@ const settingsSlice = createSlice({
     pairingCode: '',
     showNotifications: true,
     activationCode: undefined,
+    isEulaAccepted: false,
   },
   reducers: {
     setOnboardingFinished: (state, action: PayloadAction<boolean>) => {
@@ -31,6 +32,9 @@ const settingsSlice = createSlice({
     },
     setPairingCode: (state, action: PayloadAction<string>) => {
       state.pairingCode = action.payload;
+    },
+    setIsEulaAccepted: (state, action: PayloadAction<boolean>) => {
+      state.isEulaAccepted = action.payload;
     },
     clearPairingCode: state => {
       state.pairingCode = '';
