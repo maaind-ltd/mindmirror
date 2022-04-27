@@ -6,17 +6,15 @@ import Pdf from 'react-native-pdf';
 import { StyleSheet, Dimensions, View, Pressable } from 'react-native';
 import store, {getTypedState} from '../../store/combinedStore';
 import settingsSlice from '../../store/settingsSlice';
-import CheckBox from '@react-native-community/checkbox';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const EulaScreen: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
   const englishEULA = { uri: 'https://www.maaind.com/mindmirror_eula_english.pdf', cache: true };
   const dutchEULA = { uri: 'https://www.maaind.com/mindmirror_eula_dutch.pdf', cache: true };
   const [pdfLanguage, setPdfLanguage] = useState("English");
-  const [acceptedEULA, setAcceptedEULA] = useState(false);
-  // get the dispatch store
 
-  // store.dispatch(settingsSlice.actions.setPairingCode(pairingCode));
+  // 
   return (
     <ArticleContent>
       <WarningText screenWidth={width}>Warning</WarningText>
@@ -50,11 +48,20 @@ const EulaScreen: () => JSX.Element = () => {
             }}
             style={styles.pdf}/>
       </EULAView>
-      <CheckBox 
-        onValueChange={(newCheckboxValue) => {setAcceptedEULA(!acceptedEULA)}} 
-        value={acceptedEULA}
-        >
-      </CheckBox>
+      <BouncyCheckbox 
+        text="I agree to these conditions"
+        style={{
+          alignSelf: 'center',
+          marginVertical: 15,
+        }}
+        textStyle={{
+          textDecorationLine: "none",
+        }}
+        onPress={
+          (isChecked: boolean) => {
+            store.dispatch(settingsSlice.actions.setIsEulaAccepted(isChecked));
+          }
+        } />
 
     </ArticleContent>
   );
