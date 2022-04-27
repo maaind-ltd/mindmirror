@@ -3,7 +3,7 @@ import HowToUse from './HowToUse';
 import AvatarExplanation from './AvatarExplanation';
 import ColorExplanation from './ColorExplanation';
 import SpotifyIntegration from './SpotifyIntegration';
-import InternalTesterWarning from './InternalTesterWarning';
+import Eula from './Eula';
 import Personalisation from './Personalisation';
 import FitbitIntegration from './FitbitIntegration';
 import WearableIntegration from './WearableIntegration';
@@ -21,7 +21,7 @@ export interface PartialScreensProps {
 }
 
 export const OnboardingScreens = {
-  0: InternalTesterWarning,
+  0: Eula,
   1: Personalisation,
   2: ColorExplanation,
   3: AvatarExplanation,

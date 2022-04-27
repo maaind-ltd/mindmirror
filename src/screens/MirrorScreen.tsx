@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StatusBar, Pressable, NativeModules} from 'react-native';
+import {Pressable, NativeModules} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import Avatar from '../components/Avatar';
@@ -7,16 +7,13 @@ import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimen
 import WigglyLineContainer from '../components/WigglyLineContainer';
 import {EmotionStateWithNone} from '../constants/emotionState';
 import Screens from '../constants/screens';
-import store, {getTypedState, useAppDispatch, useStackNavigation, useCombinedStore} from '../store/combinedStore';
-import StyledSafeAreaView from '../components/StyledSafeAreaView';
+import {getTypedState, useAppDispatch, useStackNavigation, useCombinedStore} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
 import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
 import notifee, {EventType} from '@notifee/react-native';
-import { UrlReceiveHR } from '../constants/urls';
 import {FullPageContainer} from '../components/FullPageContainer';
 import {isAndroid} from '../helpers/accessoryFunctions';
-import { updateHeartRatesApple } from '../helpers/hrvHelpers';
 
 const SharedStorage = NativeModules.SharedStorage;
 const UniqueIdModule = NativeModules.UniqueIdModule;
@@ -41,7 +38,6 @@ const MirrorScreen: () => JSX.Element = () => {
   const [heartRates, setHeartRates] = React.useState("");
 
   /* Read HRs every 5 seconds */
-
   if (!isAndroid) {
     useEffect(() => {
       try {

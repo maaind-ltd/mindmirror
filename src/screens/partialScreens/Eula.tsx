@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 import Colors from '../../constants/colors';
 
-const InternalTesterWarning: () => JSX.Element = () => {
+const EulaScreen: () => JSX.Element = () => {
   const {width} = useWindowDimensions();
 
   return (
@@ -44,4 +44,4 @@ const WarningText = styled.Text`
   text-align: center;
 `;
 
-export default InternalTesterWarning;
+export default EulaScreen;

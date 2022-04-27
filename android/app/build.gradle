@@ -139,6 +139,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 23
         versionName "1.23"
+
     }
     splits {
         abi {

@@ -30,9 +30,10 @@ import moodSlice from './store/moodSlice';
 import {fetchHrvData, updateHeartRatesApple} from './helpers/hrvHelpers';
 import {isAndroid} from './helpers/accessoryFunctions';
 import Smartlook from 'smartlook-react-native-wrapper';
-import {SmartlookKey} from './constants/keys';
 import BackgroundFetch from "react-native-background-fetch";
+import { SmartlookKey } from './helpers/keys';
 const UniqueIdModule = NativeModules.UniqueIdModule;
+
 
 
 Smartlook.setupAndStartRecording(SmartlookKey);
