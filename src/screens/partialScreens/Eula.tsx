@@ -19,7 +19,7 @@ const EulaScreen: () => JSX.Element = () => {
     <ArticleContent>
       <WarningText screenWidth={width}>Warning</WarningText>
       <FreeFloatingText screenWidth={width}>
-        Please read and agree to the following terms and conditions before using this app.
+        Please read and agree to the following terms and conditions before using this app. You can select between an English version and a Dutch version of the same terms and conditions.
       </FreeFloatingText>
       <NextButton
           onPress={() => {
@@ -31,23 +31,22 @@ const EulaScreen: () => JSX.Element = () => {
           }}>
           <NextButtonText>Switch to {pdfLanguage == "English" ? "Dutch" : "English"}</NextButtonText>
         </NextButton>
-      <EULAView>
         <Pdf
-            source={pdfLanguage == "English" ? englishEULA : dutchEULA}
-            onLoadComplete={(numberOfPages,filePath) => {
-                console.log(`Number of pages: ${numberOfPages}`);
-            }}
-            onPageChanged={(page,numberOfPages) => {
-                console.log(`Current page: ${page}`);
-            }}
-            onError={(error) => {
-                console.log(error);
-            }}
-            onPressLink={(uri) => {
-                console.log(`Link pressed: ${uri}`);
-            }}
-            style={styles.pdf}/>
-      </EULAView>
+          enablePaging={true}
+          source={pdfLanguage == "English" ? englishEULA : dutchEULA}
+          onLoadComplete={(numberOfPages,filePath) => {
+              console.log(`Number of pages: ${numberOfPages}`);
+          }}
+          onPageChanged={(page,numberOfPages) => {
+              console.log(`Current page: ${page}`);
+          }}
+          onError={(error) => {
+              console.log(error);
+          }}
+          onPressLink={(uri) => {
+              console.log(`Link pressed: ${uri}`);
+          }}
+          style={styles.pdf}/>
       <BouncyCheckbox 
         text="I agree to these conditions"
         style={{
@@ -68,6 +67,7 @@ const EulaScreen: () => JSX.Element = () => {
 };
 // disabled={!scrolledToEnd}>
 const EULAView = styled.View`
+  width: 100%;
 `;
 
 const NextButtonText = styled.Text`
@@ -81,8 +81,7 @@ const NextButton = styled(Pressable)`
   height: 42px;
   width: 70%;
   margin-left: 15%;
-  background-color: ${props =>
-    props.disabled ? Colors.LightGreyAccent : Colors.Primary};
+  background-color: ${Colors.Primary};
   border-radius: 24px;
   justify-content: center;
   align-items: center;
