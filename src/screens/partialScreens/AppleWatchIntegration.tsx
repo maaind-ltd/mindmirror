@@ -9,6 +9,7 @@ import settingsSlice from '../../store/settingsSlice';
 import {useDispatch} from 'react-redux';
 import {TextInput} from 'react-native-gesture-handler';
 import {PairingDeepLink} from '../../constants/urls';
+import ImageResources from '../../constants/imageResources';
 
 const {UniqueIdReader} = NativeModules;
 
@@ -27,17 +28,17 @@ const AppleWatchIntegration: () => JSX.Element = () => {
 
   return (
     <ArticleContent>
-      <HeaderText screenWidth={width}>Apple watch Integration</HeaderText>
+      <LogoImage source={ImageResources.AppleWatch} screenWidth={width} />
 
       {!pairingCode ? (
         <>
           <FreeFloatingText screenWidth={width}>
-            If you have Apple Watch, the MindMirror companion app will be
+            If you have an Apple Watch, the MindMirror companion app will be
             automatically downloaded.
           </FreeFloatingText>
           <FreeFloatingText screenWidth={width}>
-            Please make sure give “all permissions” access your Health data when
-            prompted upon opening the app.
+            Please make sure give “all permissions” access to your Health data
+            when prompted upon opening the app.
           </FreeFloatingText>
         </>
       ) : (
@@ -53,14 +54,13 @@ const ArticleContent = styled.View`
   flex-grow: 1;
 `;
 
-const HeaderText = styled.Text`
-  font-size: 24px;
-  color: ${Colors.Primary};
+const LogoImage = styled.Image`
   margin: ${props =>
-    `${props.screenWidth * 0.04}px ${props.screenWidth * 0.08}px ${
+    `${props.screenWidth * 0.08}px ${props.screenWidth * 0.28}px ${
       props.screenWidth * 0.08
     }px`};
-  text-align: center;
+  width: ${props => props.screenWidth * 0.4}px;
+  height: ${props => props.screenWidth * 0.4 * 0.2794 /* Image ratio */}px;
 `;
 
 const FreeFloatingText = styled.Text`
