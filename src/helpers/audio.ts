@@ -166,7 +166,7 @@ const startRecording = (onDataCallback: (data: string) => void) => {
   AudioRecord.start();
 };
 
-let chunkNumberThreshold: number = 199;
+let chunkNumberThreshold: number = 25;
 
 export const startVoiceRecording = () => {
   console.log('Starting voice recording');
