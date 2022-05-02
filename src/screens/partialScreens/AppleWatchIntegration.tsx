@@ -32,9 +32,12 @@ const AppleWatchIntegration: () => JSX.Element = () => {
       {!pairingCode ? (
         <>
           <FreeFloatingText screenWidth={width}>
-            You can connect your Apple watch with MindMirror. To do so, please
-            install the MindMirror Apple watch Companion app and click on
-            connect in the settings screen.
+            If you have Apple Watch, the MindMirror companion app will be
+            automatically downloaded.
+          </FreeFloatingText>
+          <FreeFloatingText screenWidth={width}>
+            Please make sure give “all permissions” access your Health data when
+            prompted upon opening the app.
           </FreeFloatingText>
         </>
       ) : (

@@ -117,8 +117,8 @@ const ProfileScreen: () => JSX.Element = () => {
         setModalVisible={setFeatureModalVisible}>
         <HelpTextContainer>
           <HelpText screenWidth={width}>
-            This will open the App Store page for MindMirror once it is publicy
-            visible.
+            Please contact gezondondernemen@zilverenkruis.nl for any feedback or
+            anything you'd like to be different in the app.
           </HelpText>
         </HelpTextContainer>
       </HelpModal>

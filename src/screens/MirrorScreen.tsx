@@ -7,7 +7,12 @@ import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimen
 import WigglyLineContainer from '../components/WigglyLineContainer';
 import {EmotionStateWithNone} from '../constants/emotionState';
 import Screens from '../constants/screens';
-import {getTypedState, useAppDispatch, useStackNavigation, useCombinedStore} from '../store/combinedStore';
+import {
+  getTypedState,
+  useAppDispatch,
+  useStackNavigation,
+  useCombinedStore,
+} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
 import Icons from '../constants/icons';
 import MoodButtonList from '../components/MoodButtonList';
@@ -35,7 +40,7 @@ const MirrorScreen: () => JSX.Element = () => {
   const navigator = useStackNavigation();
   const {width} = useWindowDimensions();
   const {userToken} = getTypedState().settings;
-  const [heartRates, setHeartRates] = React.useState("");
+  const [heartRates, setHeartRates] = React.useState('');
 
   /* Read HRs every 5 seconds */
   if (!isAndroid) {
@@ -81,7 +86,7 @@ const MirrorScreen: () => JSX.Element = () => {
         {currentMood !== EmotionStateWithNone.NoEmotion ? (
           <TopTextContainer
             screenWidth={width}
-            onPress={() => {
+            onLongPress={() => {
               dispatch(
                 moodSlice.actions.setCurrentMood(nextEmotion[currentMood]),
               );
