@@ -1031,7 +1031,7 @@
 				CODE_SIGN_ENTITLEMENTS = MindMirror/MindMirror.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MindMirror/Info.plist;
@@ -1066,7 +1066,7 @@
 				CODE_SIGN_ENTITLEMENTS = MindMirror/MindMirrorRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				INFOPLIST_FILE = MindMirror/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
@@ -1103,7 +1103,7 @@
 				CODE_SIGN_ENTITLEMENTS = MindMirrorWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1148,7 +1148,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1192,7 +1192,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1234,7 +1234,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = TC53H5WD49;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1272,7 +1272,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "MindMirrorCompanion WatchKit Extension/MindMirrorCompanion WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_ASSET_PATHS = "\"MindMirrorCompanion WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = TC53H5WD49;
@@ -1322,7 +1322,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MindMirrorCompanion WatchKit Extension/MindMirrorCompanion WatchKit ExtensionRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"MindMirrorCompanion WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = TC53H5WD49;
