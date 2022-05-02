@@ -57,7 +57,7 @@ struct StartView: View {
   @State var otherEventType = "--";
   @State private var workoutStarted = true;
   @State var currentTime = "";
-  var permissionsAlreadyAskedFor = false;
+  @State var permissionsAlreadyAskedFor = false;
   
   func updateCurrentTime() {
     let date = Date()
