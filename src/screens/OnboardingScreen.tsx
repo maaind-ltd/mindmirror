@@ -18,6 +18,10 @@ import {setupNotifications} from '../helpers/notificationHelpers';
 import {isAndroid} from '../helpers/accessoryFunctions';
 import _ from 'lodash';
 import {FullPageContainer} from '../components/FullPageContainer';
+import {StyleSheet, Dimensions, View, Text} from 'react-native';
+import Pdf from 'react-native-pdf';
+import AutoHeightWebView from 'react-native-autoheight-webview';
+import WebView from 'react-native-webview';
 
 const ONBOARDING_PAGES = Object.keys(OnboardingScreens).length;
 
@@ -36,6 +40,11 @@ let resetSwipe = _.debounce(
 const OnboardingScreen: (
   props: ExplanationScreenProps,
 ) => JSX.Element = props => {
+  const englishEULA = {
+    uri: 'https://www.maaind.com/mindmirror_eula_english.pdf',
+    cache: true,
+  };
+
   const navigator = useStackNavigation();
   const dispatch = useAppDispatch();
   const {height, width} = useWindowDimensions();
@@ -43,84 +52,98 @@ const OnboardingScreen: (
     state => state.settings.isEulaAccepted,
   );
   const userToken = useCombinedStore(state => state.settings.userToken);
+  const pairingCode = useCombinedStore(state => state.settings.pairingCode);
 
   const onboardingIndex =
     (props.route?.params as OnboardingScreenParams | undefined)
       ?.onboardingIndex || 0;
   const ScreenContent = OnboardingScreens[onboardingIndex];
-  return (
-    <FullPageContainer backgroundColor={Colors.Background}>
-      <BackgroundView>
-        <ExplanationContent>
-          <PanGestureHandler
-            onGestureEvent={event => {
-              resetSwipe();
-              if (wasSwiped) {
+
+  const innerContent = (
+    <ScrollView
+      contentInsetAdjustmentBehavior="automatic"
+      showsVerticalScrollIndicator={false}>
+      <ScreenContentContainer screenHeight={height}>
+        <ScreenContent />
+        {onboardingIndex === 0 ? <></> : <SpacingElement />}
+        <BottomContent screenHeight={height}>
+          <NextButton
+            onPress={() => {
+              if (onboardingIndex === 0 && !isEulaAccepted) {
                 return;
               }
-              if (
-                event.nativeEvent.translationX > width * 0.2 &&
-                onboardingIndex > 0
-              ) {
-                wasSwiped = true;
-                navigator.pop();
-              } else if (
-                event.nativeEvent.translationX < width * -0.2 &&
-                onboardingIndex < ONBOARDING_PAGES - 1
-              ) {
-                // Don't allow skipping required steps by swiping
-                if (onboardingIndex === 0 && !isEulaAccepted) {
-                  return;
+              if (onboardingIndex === ONBOARDING_PAGES - 1) {
+                // Don't allow skipping required steps
+                dispatch(settingsSlice.actions.setOnboardingFinished(true));
+                setupNotifications();
+                if (userToken) {
+                  dispatch(settingsSlice.actions.setUserToken(generateUid()));
                 }
-                wasSwiped = true;
+                console.log(generateUid());
+                navigator.replace(Screens.MirrorScreen);
+              } else {
                 navigator.push(Screens.OnboardingScreen, {
                   onboardingIndex: onboardingIndex + 1,
                 });
               }
-            }}>
-            <ScrollView
-              contentInsetAdjustmentBehavior="automatic"
-              showsVerticalScrollIndicator={false}>
-              <ScreenContentContainer screenHeight={height}>
-                <ScreenContent />
-                <SpacingElement />
-                <BottomContent screenHeight={height}>
-                  <NextButton
-                    onPress={() => {
-                      if (onboardingIndex === 0 && !isEulaAccepted) {
-                        return;
-                      }
-                      if (onboardingIndex === ONBOARDING_PAGES - 1) {
-                        // Don't allow skipping required steps
-                        dispatch(
-                          settingsSlice.actions.setOnboardingFinished(true),
-                        );
-                        setupNotifications();
-                        if (userToken) {
-                          dispatch(
-                            settingsSlice.actions.setUserToken(generateUid()),
-                          );
-                        }
-                        console.log(generateUid());
-                        navigator.replace(Screens.MirrorScreen);
-                      } else {
-                        navigator.push(Screens.OnboardingScreen, {
-                          onboardingIndex: onboardingIndex + 1,
-                        });
-                      }
-                    }}
-                    disabled={onboardingIndex === 0 && !isEulaAccepted}>
-                    <NextButtonText>Continue</NextButtonText>
-                  </NextButton>
-                  <IndicatorDots
-                    vertical={false}
-                    numberOfDots={ONBOARDING_PAGES}
-                    currentDot={onboardingIndex}
-                  />
-                </BottomContent>
-              </ScreenContentContainer>
-            </ScrollView>
-          </PanGestureHandler>
+            }}
+            disabled={onboardingIndex === 0 && !isEulaAccepted}
+            isPrimary={
+              !isAndroid ||
+              onboardingIndex < ONBOARDING_PAGES - 1 ||
+              pairingCode
+            }>
+            <NextButtonText
+              isPrimary={
+                !isAndroid ||
+                onboardingIndex < ONBOARDING_PAGES - 1 ||
+                pairingCode
+              }>
+              Continue
+            </NextButtonText>
+          </NextButton>
+          <IndicatorDots
+            vertical={false}
+            numberOfDots={ONBOARDING_PAGES}
+            currentDot={onboardingIndex}
+          />
+        </BottomContent>
+      </ScreenContentContainer>
+    </ScrollView>
+  );
+
+  return (
+    <FullPageContainer backgroundColor={Colors.Background}>
+      <BackgroundView>
+        <ExplanationContent>
+          {onboardingIndex === 0 ? (
+            innerContent
+          ) : (
+            <PanGestureHandler
+              onGestureEvent={event => {
+                resetSwipe();
+                if (wasSwiped) {
+                  return;
+                }
+                if (
+                  event.nativeEvent.translationX > width * 0.2 &&
+                  onboardingIndex > 0
+                ) {
+                  wasSwiped = true;
+                  navigator.pop();
+                } else if (
+                  event.nativeEvent.translationX < width * -0.2 &&
+                  onboardingIndex < ONBOARDING_PAGES - 1
+                ) {
+                  wasSwiped = true;
+                  navigator.push(Screens.OnboardingScreen, {
+                    onboardingIndex: onboardingIndex + 1,
+                  });
+                }
+              }}>
+              {innerContent}
+            </PanGestureHandler>
+          )}
         </ExplanationContent>
       </BackgroundView>
     </FullPageContainer>
@@ -142,7 +165,13 @@ const NextButton = styled(Pressable)`
   width: 70%;
   margin-left: 15%;
   background-color: ${props =>
-    props.disabled ? Colors.LightGreyAccent : Colors.Primary};
+    props.disabled
+      ? Colors.LightGreyAccent
+      : props.isPrimary
+      ? Colors.Primary
+      : Colors.Background};
+  border: 1px solid ${props =>
+    props.disabled ? Colors.LightGreyAccent : Colors.Primary}
   border-radius: 24px;
   justify-content: center;
   align-items: center;
@@ -155,7 +184,7 @@ const SpacingElement = styled.View`
 
 const NextButtonText = styled.Text`
   font-size: 20px;
-  color: ${Colors.Background};
+  color: ${props => (props.isPrimary ? Colors.Background : Colors.Primary)};
   margin-bottom: 2px;
 `;
 

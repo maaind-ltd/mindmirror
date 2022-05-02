@@ -116,9 +116,12 @@ const ProfileScreen: () => JSX.Element = () => {
         visible={featureModalVisible}
         setModalVisible={setFeatureModalVisible}>
         <HelpTextContainer>
+          <HelpText screenWidth={width}>Please contact</HelpText>
+          <EmailText screenWidth={width}>
+            gezondondernemen@zilverenkruis.nl
+          </EmailText>
           <HelpText screenWidth={width}>
-            This will open the App Store page for MindMirror once it is publicy
-            visible.
+            for any feedback or anything you'd like to be different in the app.
           </HelpText>
         </HelpTextContainer>
       </HelpModal>
@@ -239,6 +242,13 @@ const HelpTextContainer = styled.View`
 const HelpText = styled.Text`
   font-size: 18px;
   color: ${Colors.Primary};
+  text-align: center;
+`;
+
+const EmailText = styled.Text`
+  font-size: 16px;
+  color: ${Colors.Primary};
+  margin: 36px 0;
 `;
 
 export default ProfileScreen;

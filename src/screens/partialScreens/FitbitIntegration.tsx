@@ -46,7 +46,7 @@ const FitbitIntegration: () => JSX.Element = () => {
           <ConnectWithFitbitButton
             screenWidth={width}
             onPress={() => setModalVisible(true)}>
-            <FibitButtonText>Download</FibitButtonText>
+            <ModalButtonText>Download</ModalButtonText>
           </ConnectWithFitbitButton>
           <HelpModal
             visible={modalVisible}
@@ -136,7 +136,7 @@ const ConnectWithFitbitButton = styled(Pressable)`
   height: 42px;
   width: 70%;
   margin-left: 15%;
-  background-color: white;
+  background-color: ${Colors.Primary};
   border-radius: 24px;
   margin-bottom: 24px;
   border: 1px solid ${Colors.Primary};
@@ -150,15 +150,21 @@ const ModalButton = styled(Pressable)`
   align-items: center;
   height: 42px;
   width: 70%;
-  background-color: white;
+  background-color: ${Colors.Primary};
   border-radius: 24px;
   margin-bottom: 24px;
   border: 1px solid ${Colors.Primary};
 `;
 
+const ModalButtonText = styled.Text`
+  font-size: 20px;
+  color: ${Colors.Background};
+  margin-bottom: 2px;
+`;
+
 const FibitButtonText = styled.Text`
   font-size: 15px;
-  color: ${Colors.Primary};
+  color: ${Colors.Background};
   margin-bottom: 2px;
 `;
 

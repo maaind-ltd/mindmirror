@@ -25,7 +25,7 @@ export const NotificationTexts = {
   [NotificationType.NOON]: 'Would you like to check in on your state of mind?',
   [NotificationType.EVENING]: 'Good evening, how are you feeling now?',
   [NotificationType.MORNING_WEARABLE]:
-    'Good morning, you seem to be in a Mellow state, open MM to manage your state of mind”',
+    'Good morning! Open MM to manage your state of mind”',
   [NotificationType.NOON_WEARABLE]:
     'Would you like to check your state of mind?',
   [NotificationType.EVENING_WEARABLE]:
@@ -47,7 +47,7 @@ export const setupNotifications = async () => {
     new Date(Date.now()),
   ];
   dates[0].setHours(9, 0, 0, 0);
-  dates[1].setHours(16, 28, 0, 0);
+  dates[1].setHours(13, 0, 0, 0);
   dates[2].setHours(19, 0, 0, 0);
 
   const now = Date.now();

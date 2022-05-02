@@ -35,7 +35,7 @@ export enum SoundResource {
   BREATHING_PANTING = require('../audio/breathing_panting.mp3'),
   FLOW_SOUND = require('../audio/flow_sound.mp3'),
   FLOW_BREATHING = require('../audio/flow_breathing.mp3'),
-  MELLOW_SOUND = require('../audio/mellow_sound.mp3'),  
+  MELLOW_SOUND = require('../audio/mellow_sound.mp3'),
   GOGOGO_SOUND = require('../audio/gogogo_sound.mp3'),
 }
 
@@ -150,7 +150,7 @@ let isDeliveringData = false;
  */
 const startRecording = (onDataCallback: (data: string) => void) => {
   const options = {
-    sampleRate: 48000,
+    sampleRate: 44100,
     channels: 1,
     bitsPerSample: 8,
     wavFile: `temp_file_${uniqueId()}.wav`,
@@ -166,7 +166,7 @@ const startRecording = (onDataCallback: (data: string) => void) => {
   AudioRecord.start();
 };
 
-let chunkNumberThreshold: number = 25;
+let chunkNumberThreshold: number = 199;
 
 export const startVoiceRecording = () => {
   console.log('Starting voice recording');
