@@ -60,7 +60,7 @@ const LogoImage = styled.Image`
       props.screenWidth * 0.08
     }px`};
   width: ${props => props.screenWidth * 0.4}px;
-  height: ${props => props.screenWidth * 0.4 * 0.2794 /* Image ratio */}px;
+  height: ${props => props.screenWidth * 0.4 * 0.2205 /* Image ratio */}px;
 `;
 
 const FreeFloatingText = styled.Text`

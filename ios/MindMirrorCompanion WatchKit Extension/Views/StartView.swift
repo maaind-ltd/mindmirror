@@ -57,6 +57,7 @@ struct StartView: View {
   @State var otherEventType = "--";
   @State private var workoutStarted = true;
   @State var currentTime = "";
+  @State var permissionsAlreadyAskedFor = false;
   
   func updateCurrentTime() {
     let date = Date()
@@ -71,8 +72,10 @@ struct StartView: View {
 
       let _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {
           (_) in
-//        workoutManager.queryHeartRate()
-        workoutManager.requestAuthorization()
+        if (!permissionsAlreadyAskedFor) {
+          workoutManager.requestAuthorization()
+          permissionsAlreadyAskedFor = true;
+        }
         hr = workoutManager.heartRate
         stepCount = workoutManager.stepCount
         hrvSDNN = workoutManager.hrvSDNN
