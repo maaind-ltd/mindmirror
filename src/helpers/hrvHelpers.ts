@@ -2,6 +2,7 @@ import {NativeModules, Pressable} from 'react-native';
 import {UrlVoice, UrlHrv, UrlReceiveHR} from '../constants/urls';
 import store, {getTypedState} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
+import {isAndroid} from './accessoryFunctions';
 const {UniqueIdReader} = NativeModules;
 const UniqueIdModule = NativeModules.UniqueIdModule;
 
@@ -168,9 +169,12 @@ function getCalmFromHeartRatesAndUpdateStore(heartRates: string) {
 export async function updateHeartRatesApple() {
   try {
     try {
-      console.log('Trying to start watch session in android');
+      if (isAndroid) {
+        return;
+      }
+      console.log('Trying to start watch session in iOS');
       UniqueIdModule.startWatchSession('').then(async () => {
-        console.log('Started watch session in android');
+        console.log('Started watch session in iOS');
       });
     } catch (err) {
       console.log(`Failed to start watch session: ${err}`);

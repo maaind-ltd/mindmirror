@@ -168,9 +168,7 @@ const VoiceCheckinScreen: () => JSX.Element = () => {
           )}
           {currentStep === VoiceCheckinStep.Listening ? (
             <CountdownContainer>
-              <CircleGraph
-                value={5 + Math.min(100, lastScores.length * 16.67)}
-              />
+              <CircleGraph value={5 + Math.min(100, lastScores.length * 25)} />
               <StopButton
                 onPress={() => {
                   dispatch(moodSlice.actions.cancelRecording());

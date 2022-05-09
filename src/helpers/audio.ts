@@ -152,7 +152,7 @@ const startRecording = (onDataCallback: (data: string) => void) => {
   const options = {
     sampleRate: 44100,
     channels: 1,
-    bitsPerSample: 8,
+    bitsPerSample: 16,
     wavFile: `temp_file_${uniqueId()}.wav`,
   };
   AudioRecord.init(options);
@@ -166,7 +166,7 @@ const startRecording = (onDataCallback: (data: string) => void) => {
   AudioRecord.start();
 };
 
-let chunkNumberThreshold: number = 25;
+let chunkNumberThreshold: number = 49;
 
 export const startVoiceRecording = () => {
   console.log('Starting voice recording');

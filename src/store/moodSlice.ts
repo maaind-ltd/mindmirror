@@ -51,12 +51,10 @@ const moodSlice = createSlice({
     },
     recalculateMood: state => {
       const scores: Array<number> = [];
-      console.log('hrvScoreTimestamp = ', state.hrvScoreTimestamp);
       if (
         state.currentHrvScore > 0 &&
         state.hrvScoreTimestamp > Date.now() - HRV_MAX_OLDNESS_MS
       ) {
-        console.log('currnetHrvScore = ', state.currentHrvScore);
         scores.push(state.currentHrvScore);
       }
 
@@ -71,10 +69,9 @@ const moodSlice = createSlice({
         state.currentScore = -1;
         state.currentMood = EmotionStateWithNone.NoEmotion;
       } else {
-        console.log(scores);
         state.currentScore =
           scores.reduce((sum, score) => sum + score, 0) / scores.length;
-        console.log(`Calculated score: ${state.currentScore}`);
+        console.log(`Updating status. Calculated score: ${state.currentScore}`);
         if (state.currentScore > MELLOW_THRESHHOLD) {
           state.currentMood = EmotionStateWithNone.Mellow;
         } else if (state.currentScore > FLOW_THRESSHOLD) {

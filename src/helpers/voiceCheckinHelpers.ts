@@ -26,7 +26,7 @@ export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
     raw_audio: fileContent,
   });
 
-  if (!isAndroid) {
+  if (isAndroid) {
     UniqueIdReader.performPostRequest(
       UrlVoice,
       body,
@@ -55,7 +55,7 @@ export function fetchEmotionScoreForAudioFileContent(fileContent: string) {
             store.dispatch(
               moodSlice.actions.addCurrentScore(responseBody.calm),
             );
-            if (getTypedState().mood.lastScores.length > 5) {
+            if (getTypedState().mood.lastScores.length > 3) {
               store.dispatch(moodSlice.actions.stopRecording());
               store.dispatch(moodSlice.actions.recalculateMood());
 
