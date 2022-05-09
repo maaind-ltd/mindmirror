@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {StatusBar, Pressable, Animated} from 'react-native';
+import {Pressable, Animated} from 'react-native';
 import Colors from '../constants/colors';
 import styled from 'styled-components/native';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
@@ -7,7 +7,6 @@ import WigglyLineContainer from '../components/WigglyLineContainer';
 import {EmotionStateWithNone} from '../constants/emotionState';
 import Screens from '../constants/screens';
 import {useStackNavigation} from '../store/combinedStore';
-import StyledSafeAreaView from '../components/StyledSafeAreaView';
 import Easing from 'react-native/Libraries/Animated/Easing';
 import {useAppDispatch, useCombinedStore} from '../store/combinedStore';
 import moodSlice from '../store/moodSlice';
@@ -27,8 +26,8 @@ const NAVIGATION_TIMEOUT = 600;
 
 const QuoteContent =
   `Moods tend to echo particular emotions, like happiness or sadness, ` +
-  `but they are usually less intense and more persistent - a state of mind that lasts for ` +
-  `an extended period of time.`;
+  `but they are usually less intense and less persistent - a state of mind that lasts for ` +
+  `an short period of time.`;
 
 const enum VoiceCheckinStep {
   Instruction,
