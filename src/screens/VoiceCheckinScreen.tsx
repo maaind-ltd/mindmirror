@@ -27,7 +27,7 @@ const NAVIGATION_TIMEOUT = 600;
 const QuoteContent =
   `Moods tend to echo particular emotions, like happiness or sadness, ` +
   `but they are usually less intense and less persistent - a state of mind that lasts for ` +
-  `an short period of time.`;
+  `a short period of time.`;
 
 const enum VoiceCheckinStep {
   Instruction,

@@ -28,7 +28,7 @@ const FitbitIntegration: () => JSX.Element = () => {
       {!pairingCode ? (
         <>
           <FreeFloatingText center={true} verticalMargin={true}>
-            If you have a Fitbit please follow theses steps:
+            If you have a Fitbit please follow these steps:
           </FreeFloatingText>
           <FreeFloatingText center={false}>
             1. Download MindMirror Fitbit app
